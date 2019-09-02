@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace AnthroCloud
+namespace AnthroCloud.UI
 {
     public class Startup
     {
@@ -32,7 +32,7 @@ namespace AnthroCloud
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World, COT 6931!  DOCKERIZED.");
+                    await context.Response.WriteAsync("Hello World, COT6931!");
                 });
             });
         }

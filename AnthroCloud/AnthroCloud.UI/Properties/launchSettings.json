@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:8524",
-      "sslPort": 44343
+      "applicationUrl": "http://localhost:15804",
+      "sslPort": 44325
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "AnthroCloud": {
+    "AnthroCloud.UI": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
@@ -29,11 +29,11 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
         "ASPNETCORE_URLS": "https://+:443;http://+:80",
-        "ASPNETCORE_HTTPS_PORT": "44344"
+        "ASPNETCORE_HTTPS_PORT": "44326"
       },
-      "httpPort": 10000,
+      "httpPort": 15805,
       "useSSL": true,
-      "sslPort": 44344
+      "sslPort": 44326
     }
   }
 }
