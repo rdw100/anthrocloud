@@ -1,6 +1,6 @@
 using System;
 
-namespace AnthroCloudAPI
+namespace AnthroCloud.Blazor.Data
 {
     public class WeatherForecast
     {

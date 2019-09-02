@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud", "AnthroCloud\AnthroCloud.csproj", "{B6F1B1C4-A88D-4F37-A3B2-A330F784B826}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.UI", "AnthroCloud.UI\AnthroCloud.UI.csproj", "{A4EE5428-E750-412A-9228-654ED6D5193E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloudAPI", "AnthroCloudAPI\AnthroCloudAPI.csproj", "{A9BF7672-CDBF-4229-B926-BE5080678BFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.API", "AnthroCloud.API\AnthroCloud.API.csproj", "{0A3BB53A-9394-4131-A5C0-709DD4880159}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnthroCloud.UI", "AnthroCloud.UI\AnthroCloud.UI.csproj", "{A4EE5428-E750-412A-9228-654ED6D5193E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Business", "AnthroCloud.Business\AnthroCloud.Business.csproj", "{47449260-BC71-4E30-87F9-82F29DBD0D46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnthroCloud.API", "AnthroCloud.API\AnthroCloud.API.csproj", "{0A3BB53A-9394-4131-A5C0-709DD4880159}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Data", "AnthroCloud.Data\AnthroCloud.Data.csproj", "{E0AA1D06-1555-44A3-B6C5-9DE2F5E2A797}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnthroCloud.Business", "AnthroCloud.Business\AnthroCloud.Business.csproj", "{47449260-BC71-4E30-87F9-82F29DBD0D46}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnthroCloud.Data", "AnthroCloud.Data\AnthroCloud.Data.csproj", "{E0AA1D06-1555-44A3-B6C5-9DE2F5E2A797}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnthroCloud.Blazor", "AnthroCloud.Blazor\AnthroCloud.Blazor.csproj", "{81BF5941-16DE-4CDD-B1C6-F4CB77E4C365}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B6F1B1C4-A88D-4F37-A3B2-A330F784B826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6F1B1C4-A88D-4F37-A3B2-A330F784B826}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6F1B1C4-A88D-4F37-A3B2-A330F784B826}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6F1B1C4-A88D-4F37-A3B2-A330F784B826}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A9BF7672-CDBF-4229-B926-BE5080678BFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9BF7672-CDBF-4229-B926-BE5080678BFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9BF7672-CDBF-4229-B926-BE5080678BFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9BF7672-CDBF-4229-B926-BE5080678BFD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4EE5428-E750-412A-9228-654ED6D5193E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4EE5428-E750-412A-9228-654ED6D5193E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4EE5428-E750-412A-9228-654ED6D5193E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +35,10 @@ Global
 		{E0AA1D06-1555-44A3-B6C5-9DE2F5E2A797}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0AA1D06-1555-44A3-B6C5-9DE2F5E2A797}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0AA1D06-1555-44A3-B6C5-9DE2F5E2A797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81BF5941-16DE-4CDD-B1C6-F4CB77E4C365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BF5941-16DE-4CDD-B1C6-F4CB77E4C365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BF5941-16DE-4CDD-B1C6-F4CB77E4C365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BF5941-16DE-4CDD-B1C6-F4CB77E4C365}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
