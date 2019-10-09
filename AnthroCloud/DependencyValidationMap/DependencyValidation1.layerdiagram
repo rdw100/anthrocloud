@@ -56,6 +56,9 @@
         <dependencyFromLayerToLayer Id="81e5630d-05ea-496a-a864-6f8b01deb63b" direction="Forward">
           <layerMoniker Id="a3a9709c-924b-449f-8876-98e3e5a148bc" />
         </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="3ec7af37-589c-46c2-8e48-0de38a71fff1" direction="Forward">
+          <layerMoniker Id="d4ebada1-cb26-4503-996e-cf098f3b63f1" />
+        </dependencyFromLayerToLayer>
       </dependencyToLayers>
       <references>
         <reference Id="e2717f74-2d58-4580-a6b9-21eb65e15a63" name="AnthroCloud.API">

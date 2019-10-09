@@ -6,7 +6,7 @@ namespace AnthroCloud.Business
 {
 
     /// <summary>
-    /// Calculates the age by instatiation using birth and visit dates.
+    /// Calculates the age by instatiation of the Age object using birth and visit dates.
     /// </summary>
     public class Age
     {
@@ -113,6 +113,19 @@ namespace AnthroCloud.Business
             {
                 ageString = string.Format("{0}yr {1}mo ({2}mo)", Years, Months, TotalMonths);
             }
+
+            return ageString;
+        }
+
+        /// <summary>
+        /// Writes string of age in total days.
+        /// </summary>
+        /// <returns>Returns age in total days.</returns>
+        public String ToDaysString()
+        {
+            string ageString;
+
+            ageString = string.Format("{0}", TotalDays);
 
             return ageString;
         }

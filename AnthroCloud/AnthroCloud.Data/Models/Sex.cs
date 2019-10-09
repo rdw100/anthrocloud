@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AnthroCloud.Data
+namespace AnthroCloud.Data.Models
 {
     /// <summary>
     /// Provides ISO/IEC 5218 Information technology codes for the representation 
