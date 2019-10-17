@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AnthroCloud.Data.Models
+namespace AnthroCloud.Entities
 {
-    public partial class WeightForHeight
+    public partial class TsfforAge
     {
+        public short AgeInDays { get; set; }
         public byte Sex { get; set; }
-        public decimal HeightInCm { get; set; }
         public decimal? L { get; set; }
         public decimal? M { get; set; }
         public decimal? S { get; set; }

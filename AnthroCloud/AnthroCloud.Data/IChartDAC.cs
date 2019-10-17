@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AnthroCloud.Data.Models;
+using AnthroCloud.Entities;
 
 namespace AnthroCloud.Data
 {
@@ -54,7 +54,7 @@ namespace AnthroCloud.Data
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of HCFA objects.</returns>
-        public List<HcforAge> ListHcforAge(Sexes sex);
+        public List<HcForAge> ListHcforAge(Sexes sex);
 
         /// <summary>
         /// Defines method to filter and return LHFA data.

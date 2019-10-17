@@ -33,6 +33,8 @@ namespace AnthroCloud.Business
         /// <param name="height">Body height</param>
         public BMI(double weight, double height)
         {
+            Weight = weight;
+            Height = height;
             Calculate(weight, height);
         }
 

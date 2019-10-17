@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AnthroCloud.Data;
+using AnthroCloud.Entities;
 using AnthStat.Statistics;
 
 namespace AnthroCloud.Business

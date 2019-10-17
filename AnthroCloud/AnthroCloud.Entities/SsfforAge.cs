@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AnthroCloud.Data.Models
+namespace AnthroCloud.Entities
 {
-    public partial class TsfforAge
+    public partial class SsfforAge
     {
         public short AgeInDays { get; set; }
         public byte Sex { get; set; }

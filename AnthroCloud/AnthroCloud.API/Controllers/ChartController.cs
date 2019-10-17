@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AnthroCloud.Business;
-using AnthroCloud.Data.Models;
+using AnthroCloud.Entities;
 
 namespace AnthroCloud.API.Controllers
 {
@@ -29,9 +29,9 @@ namespace AnthroCloud.API.Controllers
         // GET: api/Chart/HCFA/1
         [HttpGet("{id}")]
         [Route("HCFA/{id}")]
-        public List<HcforAge> GetAllHCFA(byte id)
+        public List<HcForAge> GetAllHCFA(byte id)
         {
-            List<HcforAge> result = null;
+            List<HcForAge> result = null;
 
             Chart chart = new Chart();
             result = chart.ListHcforAge((Sexes)id);

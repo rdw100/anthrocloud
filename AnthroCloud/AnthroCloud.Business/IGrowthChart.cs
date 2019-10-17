@@ -1,8 +1,7 @@
-﻿using AnthroCloud.Data.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using AnthroCloud.Data;
+using AnthroCloud.Entities;
 
 namespace AnthroCloud.Business
 {
@@ -44,7 +43,7 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Head circumference-for-age used to create a WHO chart. </returns>
-        public List<HcforAge> ListHcforAge(Sexes sex);
+        public List<HcForAge> ListHcforAge(Sexes sex);
 
         /// <summary>
         /// A list of age-based indicator table data for measurement of Length/height-for-age used to create a WHO chart.

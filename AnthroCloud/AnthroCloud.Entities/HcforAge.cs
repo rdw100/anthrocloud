@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AnthroCloud.Data.Models
+namespace AnthroCloud.Entities
 {
-    public partial class MuacforAge
+    public partial class HcForAge
     {
         public short AgeInDays { get; set; }
         public byte Sex { get; set; }
-        public decimal? L { get; set; }
+        public byte? L { get; set; }
         public decimal? M { get; set; }
         public decimal? S { get; set; }
         public decimal? Sd3neg { get; set; }

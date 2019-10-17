@@ -46,6 +46,18 @@
       <Name>AnthroCloud.Data</Name>
       <Project>{e0aa1d06-1555-44a3-b6c5-9de2f5e2a797}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\AnthroCloud.Entities\AnthroCloud.Entities.csproj">
+      <Name>AnthroCloud.Entities</Name>
+      <Project>{2c811542-fc11-4136-97b6-7ea09221b555}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\AnthroCloud.Framework\AnthroCloud.Framework.csproj">
+      <Name>AnthroCloud.Framework</Name>
+      <Project>{19f77f8e-1d99-48bc-be36-e11d61d4bf54}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\AnthroCloud.Tests\AnthroCloud.Tests.csproj">
+      <Name>AnthroCloud.Tests</Name>
+      <Project>{07c241f0-2c8e-49ef-aea9-16baa3e3166f}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\AnthroCloud.UI\AnthroCloud.UI.csproj">
       <Name>AnthroCloud.UI</Name>
       <Project>{a4ee5428-e750-412a-9228-654ed6d5193e}</Project>

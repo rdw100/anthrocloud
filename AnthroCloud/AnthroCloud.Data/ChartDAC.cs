@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AnthroCloud.Data.Models;
+using AnthroCloud.Entities;
 
 namespace AnthroCloud.Data
 {
@@ -76,11 +76,11 @@ namespace AnthroCloud.Data
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of HCFA objects.</returns>
-        public List<HcforAge> ListHcforAge(Sexes sex)
+        public List<HcForAge> ListHcforAge(Sexes sex)
         {
             using var db = new AnthroCloudContext();
 
-            IQueryable<HcforAge> query = db.Set<HcforAge>();
+            IQueryable<HcForAge> query = db.Set<HcForAge>();
 
             query = query.Where(c => c.Sex == (byte)sex);
 

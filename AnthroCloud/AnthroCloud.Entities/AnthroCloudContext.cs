@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace AnthroCloud.Data.Models
+namespace AnthroCloud.Entities
 {
     public partial class AnthroCloudContext : DbContext
     {
@@ -16,7 +16,7 @@ namespace AnthroCloud.Data.Models
         }
 
         public virtual DbSet<BmiforAge> BmiforAge { get; set; }
-        public virtual DbSet<HcforAge> HcforAge { get; set; }
+        public virtual DbSet<HcForAge> HcforAge { get; set; }
         public virtual DbSet<LengthHeightForAge> LengthHeightForAge { get; set; }
         public virtual DbSet<MuacforAge> MuacforAge { get; set; }
         public virtual DbSet<SsfforAge> SsfforAge { get; set; }
@@ -88,7 +88,7 @@ namespace AnthroCloud.Data.Models
                     .HasColumnType("decimal(6, 3)");
             });
 
-            modelBuilder.Entity<HcforAge>(entity =>
+            modelBuilder.Entity<HcForAge>(entity =>
             {
                 entity.HasKey(e => new { e.AgeInDays, e.Sex })
                     .HasName("PK_CompositePK_HCForAge")
