@@ -23,20 +23,6 @@ namespace AnthroCloud.API.Controllers
             return scores;
         }
 
-        //// GET: api/Stats
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET: api/Stats/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
         // POST: api/Stats
         [HttpPost]
         public void Post([FromBody] string value)

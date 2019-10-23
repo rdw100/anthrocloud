@@ -34,7 +34,7 @@ namespace AnthroCloud.Business
             WHO2006 who2006 = new WHO2006();
             double z = 0.0;
 
-            if (who2006.TryCalculateZScore(indicator, measurement, ageInDays, AnthStat.Statistics.Sex.Male, z: ref z))
+            if (who2006.TryCalculateZScore(indicator, measurement, ageInDays, sex, z: ref z))
             {
                 return z;
             }
@@ -57,7 +57,7 @@ namespace AnthroCloud.Business
             double z = 0.0;
             double p = 0.0;
 
-            if (who2006.TryCalculateZScore(indicator, measurement, ageInDays, AnthStat.Statistics.Sex.Male, z: ref z))
+            if (who2006.TryCalculateZScore(indicator, measurement, ageInDays, sex, z: ref z))
             {
                 p = StatisticsHelper.CalculatePercentile(z);
             }

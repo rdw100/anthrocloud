@@ -12,6 +12,7 @@ namespace AnthroCloud.Tests
     /// <summary>
     /// 
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class ChartControllerTests
     {
         [Fact]
@@ -22,12 +23,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllBFA(1) as List<BmiforAge>;
 
-            Assert.Equal(1857, target.Count());
+            Assert.Equal(62, target.Count());
             
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);            
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -39,23 +40,23 @@ namespace AnthroCloud.Tests
             var testBmiforAge = new List<BmiforAge>();
             testBmiforAge.Add(new BmiforAge
             {
-                AgeInDays = 0,
+                Month = 0,
                 Sex = 1,
                 L = -0.3053M,
                 M = 13.4069M,
                 S = 0.09560M,
-                Sd3neg = 10.184M,
-                Sd2neg = 11.133M,
-                Sd1neg = 12.201M,
-                Sd0 = 13.407M,
-                Sd1 = 14.773M,
-                Sd2 = 16.326M,
+                Sd3neg = 10.200M,
+                Sd2neg = 11.100M,
+                Sd1neg = 12.200M,
+                Sd0 = 13.400M,
+                Sd1 = 14.800M,
+                Sd2 = 16.300M,
                 Sd3 = 18.100M,
-                P3 = 11.254M,
-                P15 = 12.160M,
-                P50 = 13.407M,
-                P85 = 14.826M,
-                P97 = 16.130M
+                P3 = 11.300M,
+                P15 = 12.200M,
+                P50 = 13.400M,
+                P85 = 14.800M,
+                P97 = 16.100M
             });
 
             return testBmiforAge;
@@ -69,12 +70,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllBFA(2) as List<BmiforAge>;
 
-            Assert.Equal(1857, target.Count());
+            Assert.Equal(62, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -86,23 +87,23 @@ namespace AnthroCloud.Tests
             var testBmiforAge = new List<BmiforAge>();
             testBmiforAge.Add(new BmiforAge
             {
-                AgeInDays = 0,
+                Month = 0,
                 Sex = 2,
                 L = -0.0631M,
                 M = 13.3363M,
                 S = 0.09272M,
-                Sd3neg = 10.122M,
-                Sd2neg = 11.091M,
-                Sd1neg = 12.159M,
-                Sd0 = 13.336M,
-                Sd1 = 14.636M,
-                Sd2 = 16.071M,
-                Sd3 = 17.657M,
-                P3 = 11.213M,
-                P15 = 12.118M,
-                P50 = 13.336M,
-                P85 = 14.686M,
-                P97 = 15.892M
+                Sd3neg = 10.100M,
+                Sd2neg = 11.100M,
+                Sd1neg = 12.200M,
+                Sd0 = 13.300M,
+                Sd1 = 14.600M,
+                Sd2 = 16.100M,
+                Sd3 = 17.700M,
+                P3 = 11.200M,
+                P15 = 12.100M,
+                P50 = 13.300M,
+                P85 = 14.700M,
+                P97 = 15.900M
             });
 
             return testBmiforAge;
@@ -116,12 +117,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllHCFA(1) as List<HcForAge>;
 
-            Assert.Equal(1857, target.Count());
+            Assert.Equal(61, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -133,23 +134,23 @@ namespace AnthroCloud.Tests
             var testHcforAge = new List<HcForAge>();
             testHcforAge.Add(new HcForAge
             {
-                AgeInDays = 0,
+                Month = 0,
                 Sex = 1,
                 L = 1,
                 M = 34.4618M,
                 S = 0.03686M,
-                Sd3neg = 30.651M,
-                Sd2neg = 31.921M,
-                Sd1neg = 33.192M,
-                Sd0 = 34.462M,
-                Sd1 = 35.732M,
-                Sd2 = 37.002M,
-                Sd3 = 38.273M,
-                P3 = 32.073M,
-                P15 = 33.145M,
-                P50 = 34.462M,
-                P85 = 35.778M,
-                P97 = 36.851M
+                Sd3neg = 30.700M,
+                Sd2neg = 31.900M,
+                Sd1neg = 33.200M,
+                Sd0 = 34.500M,
+                Sd1 = 35.700M,
+                Sd2 = 37.000M,
+                Sd3 = 38.300M,
+                P3 = 32.100M,
+                P15 = 33.100M,
+                P50 = 34.500M,
+                P85 = 35.800M,
+                P97 = 36.900M
             });
 
             return testHcforAge;
@@ -163,12 +164,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllHCFA(2) as List<HcForAge>;
 
-            Assert.Equal(1857, target.Count());
+            Assert.Equal(61, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -180,23 +181,23 @@ namespace AnthroCloud.Tests
             var testHcforAge = new List<HcForAge>();
             testHcforAge.Add(new HcForAge
             {
-                AgeInDays = 0,
+                Month = 0,
                 Sex = 2,
                 L = 1,
                 M = 33.8787M,
                 S = 0.03496M,
-                Sd3neg = 30.326M,
-                Sd2neg = 31.510M,
-                Sd1neg = 32.694M,
-                Sd0 = 33.879M,
-                Sd1 = 35.063M,
-                Sd2 = 36.247M,
-                Sd3 = 37.432M,
-                P3 = 31.651M,
-                P15 = 32.651M,
-                P50 = 33.879M,
-                P85 = 35.106M,
-                P97 = 36.106M
+                Sd3neg = 30.300M,
+                Sd2neg = 31.500M,
+                Sd1neg = 32.700M,
+                Sd0 = 33.900M,
+                Sd1 = 35.100M,
+                Sd2 = 36.200M,
+                Sd3 = 37.400M,
+                P3 = 31.700M,
+                P15 = 32.700M,
+                P50 = 33.900M,
+                P85 = 35.100M,
+                P97 = 36.100M
             });
 
             return testHcforAge;
@@ -210,12 +211,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllLHFA(1) as List<LengthHeightForAge>;
 
-            Assert.Equal(1857, target.Count());
+            Assert.Equal(62, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -227,21 +228,21 @@ namespace AnthroCloud.Tests
             var testLhfaforAge = new List<LengthHeightForAge>();
             testLhfaforAge.Add(new LengthHeightForAge
             {
-                AgeInDays = 0,
+                Month = 0,
                 Sex = 1,
                 L = 1,
                 M = 49.8842M,
                 S = 0.03795M,
-                Sd3neg = 44.205M,
-                Sd2neg = 46.098M,
-                Sd0 = 49.884M,
-                Sd2 = 53.670M,
-                Sd3 = 55.564M,
-                P3 = 46.324M,
-                P15 = 47.922M,
-                P50 = 49.884M,
-                P85 = 51.846M,
-                P97 = 53.445M
+                Sd3neg = 44.200M,
+                Sd2neg = 46.100M,
+                Sd0 = 49.900M,
+                Sd2 = 53.700M,
+                Sd3 = 55.600M,
+                P3 = 46.300M,
+                P15 = 47.900M,
+                P50 = 49.900M,
+                P85 = 51.800M,
+                P97 = 53.400M
             });
 
             return testLhfaforAge;
@@ -255,12 +256,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllLHFA(2) as List<LengthHeightForAge>;
 
-            Assert.Equal(1857, target.Count());
+            Assert.Equal(62, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -272,21 +273,21 @@ namespace AnthroCloud.Tests
             var testLhfaforAge = new List<LengthHeightForAge>();
             testLhfaforAge.Add(new LengthHeightForAge
             {
-                AgeInDays = 0,
+                Month = 0,
                 Sex = 2,
                 L = 1,
                 M = 49.1477M,
                 S = 0.03790M,
-                Sd3neg = 43.560M,
-                Sd2neg = 45.422M,
-                Sd0 = 49.148M,
-                Sd2 = 52.873M,
-                Sd3 = 54.736M,
-                P3 = 45.644M,
-                P15 = 47.217M,
-                P50 = 49.148M,
-                P85 = 51.078M,
-                P97 = 52.651M
+                Sd3neg = 43.600M,
+                Sd2neg = 45.400M,
+                Sd0 = 49.100M,
+                Sd2 = 52.900M,
+                Sd3 = 54.700M,
+                P3 = 45.600M,
+                P15 = 47.200M,
+                P50 = 49.100M,
+                P85 = 51.100M,
+                P97 = 52.700M
             });
 
             return testLhfaforAge;
@@ -300,12 +301,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllMUAC(1) as List<MuacforAge>;
 
-            Assert.Equal(1766, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -317,23 +318,23 @@ namespace AnthroCloud.Tests
             var testMuacforAge = new List<MuacforAge>();
             testMuacforAge.Add(new MuacforAge
             {
-                AgeInDays = 91,
+                Month = 3,
                 Sex = 1,
-                L = 0.3933M,
-                M = 13.4779M,
-                S = 0.07474M,
-                Sd3neg = 10.658M,
-                Sd2neg = 11.554M,
-                Sd1neg = 12.493M,
-                Sd0 = 13.478M,
-                Sd1 = 14.508M,
-                Sd2 = 15.585M,
-                Sd3 = 16.709M,
-                P3 = 11.663M,
-                P15 = 12.458M,
-                P50 = 13.478M,
-                P85 = 14.547M,
-                P97 = 15.454M
+                L = 0.3928M,
+                M = 13.4817M,
+                S = 0.07475M,
+                Sd3neg = 10.700M,
+                Sd2neg = 11.600M,
+                Sd1neg = 12.500M,
+                Sd0 = 13.500M,
+                Sd1 = 14.500M,
+                Sd2 = 15.600M,
+                Sd3 = 16.700M,
+                P3 = 11.700M,
+                P15 = 12.500M,
+                P50 = 13.500M,
+                P85 = 14.600M,
+                P97 = 15.500M
             });
 
             return testMuacforAge;
@@ -347,12 +348,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllMUAC(2) as List<MuacforAge>;
 
-            Assert.Equal(1766, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -364,23 +365,23 @@ namespace AnthroCloud.Tests
             var testMuacforAge = new List<MuacforAge>();
             testMuacforAge.Add(new MuacforAge
             {
-                AgeInDays = 91,
+                Month = 3,
                 Sex = 2,
                 L = -0.1733M,
-                M = 13.0245M,
-                S = 0.08262M,
-                Sd3neg = 10.218M,
-                Sd2neg = 11.066M,
-                Sd1neg = 11.999M,
-                Sd0 = 13.024M,
-                Sd1 = 14.155M,
-                Sd2 = 15.402M,
-                Sd3 = 16.780M,
-                P3 = 11.173M,
-                P15 = 11.963M,
-                P50 = 13.025M,
-                P85 = 14.198M,
-                P97 = 15.247M
+                M = 13.0284M,
+                S = 0.08263M,
+                Sd3neg = 10.200M,
+                Sd2neg = 11.100M,
+                Sd1neg = 12.000M,
+                Sd0 = 13.000M,
+                Sd1 = 14.200M,
+                Sd2 = 15.400M,
+                Sd3 = 16.800M,
+                P3 = 11.200M,
+                P15 = 12.000M,
+                P50 = 13.000M,
+                P85 = 14.200M,
+                P97 = 15.300M
             });
 
             return testMuacforAge;
@@ -394,12 +395,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllSSFA(1) as List<SsfforAge>;
 
-            Assert.Equal(1766, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -411,23 +412,23 @@ namespace AnthroCloud.Tests
             var testSSFforAge = new List<SsfforAge>();
             testSSFforAge.Add(new SsfforAge
             {
-                AgeInDays = 91,
+                Month = 3,
                 Sex = 1,
-                L = -0.3030M,
-                M = 7.6920M,
-                S = 0.17019M,
-                Sd3neg = 4.785M,
-                Sd2neg = 5.564M,
-                Sd1neg = 6.516M,
-                Sd0 = 7.692M,
-                Sd1 = 9.161M,
-                Sd2 = 11.017M,
-                Sd3 = 13.395M,
-                P3 = 5.667M,
-                P15 = 6.478M,
-                P50 = 7.692M,
-                P85 = 9.221M,
-                P97 = 10.771M
+                L = -0.3033M,
+                M = 7.6899M,
+                S = 0.17020M,
+                Sd3neg = 4.800M,
+                Sd2neg = 5.600M,
+                Sd1neg = 6.500M,
+                Sd0 = 7.700M,
+                Sd1 = 9.200M,
+                Sd2 = 11.000M,
+                Sd3 = 13.400M,
+                P3 = 5.700M,
+                P15 = 6.500M,
+                P50 = 7.700M,
+                P85 = 9.200M,
+                P97 = 10.800M
             });
 
             return testSSFforAge;
@@ -441,12 +442,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllSSFA(2) as List<SsfforAge>;
 
-            Assert.Equal(1766, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -458,23 +459,23 @@ namespace AnthroCloud.Tests
             var testSSFforAge = new List<SsfforAge>();
             testSSFforAge.Add(new SsfforAge
             {
-                AgeInDays = 91,
+                Month = 3,
                 Sex = 2,
-                L = -0.2019M,
-                M = 7.7874M,
+                L = -0.2026M,
+                M = 7.7846M,
                 S = 0.18428M,
-                Sd3neg = 4.611M,
-                Sd2neg = 5.458M,
-                Sd1neg = 6.499M,
-                Sd0 = 7.787M,
-                Sd1 = 9.396M,
-                Sd2 = 11.422M,
-                Sd3 = 13.995M,
-                P3 = 5.571M,
-                P15 = 6.457M,
-                P50 = 7.787M,
-                P85 = 9.462M,
-                P97 = 11.154M
+                Sd3neg = 4.600M,
+                Sd2neg = 5.500M,
+                Sd1neg = 6.500M,
+                Sd0 = 7.800M,
+                Sd1 = 9.400M,
+                Sd2 = 11.400M,
+                Sd3 = 14.000M,
+                P3 = 5.600M,
+                P15 = 6.500M,
+                P50 = 7.800M,
+                P85 = 9.500M,
+                P97 = 11.200M
             });
 
             return testSSFforAge;
@@ -488,12 +489,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllTSFA(1) as List<TsfforAge>;
 
-            Assert.Equal(1766, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -505,23 +506,23 @@ namespace AnthroCloud.Tests
             var testTsfforAge = new List<TsfforAge>();
             testTsfforAge.Add(new TsfforAge
             {
-                AgeInDays = 91,
+                Month = 3,
                 Sex = 1,
-                L = 0.0030M,
-                M = 9.7658M,
-                S = 0.16611M,
-                Sd3neg = 5.931M,
-                Sd2neg = 7.004M,
-                Sd1neg = 8.271M,
-                Sd0 = 9.766M,
-                Sd1 = 11.530M,
-                Sd2 = 13.612M,
-                Sd3 = 16.068M,
-                P3 = 7.144M,
-                P15 = 8.221M,
-                P50 = 9.766M,
+                L = 0.0027M,
+                M = 9.7639M,
+                S = 0.16618M,
+                Sd3neg = 5.900M,
+                Sd2neg = 7.000M,
+                Sd1neg = 8.300M,
+                Sd0 = 9.800M,
+                Sd1 = 11.500M,
+                Sd2 = 13.600M,
+                Sd3 = 16.100M,
+                P3 = 7.100M,
+                P15 = 8.200M,
+                P50 = 9.800M,
                 P85 = 11.600M,
-                P97 = 13.345M
+                P97 = 13.300M
             });
 
             return testTsfforAge;
@@ -535,12 +536,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllTSFA(2) as List<TsfforAge>;
 
-            Assert.Equal(1766, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -552,23 +553,23 @@ namespace AnthroCloud.Tests
             var testTsfforAge = new List<TsfforAge>();
             testTsfforAge.Add(new TsfforAge
             {
-                AgeInDays = 91,
+                Month = 3,
                 Sex = 2,
-                L = 0.1882M,
-                M = 9.7533M,
-                S = 0.17525M,
-                Sd3neg = 5.607M,
-                Sd2neg = 6.787M,
-                Sd1neg = 8.161M,
-                Sd0 = 9.753M,
-                Sd1 = 11.589M,
-                Sd2 = 13.695M,
-                Sd3 = 16.102M,
-                P3 = 6.940M,
-                P15 = 8.108M,
-                P50 = 9.753M,
-                P85 = 11.660M,
-                P97 = 13.429M
+                L = 0.1875M,
+                M = 9.7516M,
+                S = 0.17535M,
+                Sd3neg = 5.600M,
+                Sd2neg = 6.800M,
+                Sd1neg = 8.200M,
+                Sd0 = 9.800M,
+                Sd1 = 11.600M,
+                Sd2 = 13.700M,
+                Sd3 = 16.100M,
+                P3 = 6.900M,
+                P15 = 8.100M,
+                P50 = 9.800M,
+                P85 = 11.700M,
+                P97 = 13.400M
             });
 
             return testTsfforAge;
@@ -582,12 +583,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllWFA(1) as List<WeightForAge>;
 
-            Assert.Equal(1857, target.Count());
+            Assert.Equal(61, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -599,21 +600,21 @@ namespace AnthroCloud.Tests
             var testWeightForAge = new List<WeightForAge>();
             testWeightForAge.Add(new WeightForAge
             {
-                AgeInDays = 0,
+                Month = 0,
                 Sex = 1,
                 L = 0.3487M,
                 M = 3.3464M,
                 S = 0.14602M,
-                Sd3neg = 2.080M,
-                Sd2neg = 2.459M,
-                Sd0 = 3.346M,
-                Sd2 = 4.419M,
-                Sd3 = 5.031M,
-                P3 = 2.507M,
-                P15 = 2.865M,
-                P50 = 3.346M,
-                P85 = 3.878M,
-                P97 = 4.350M
+                Sd3neg = 2.100M,
+                Sd2neg = 2.500M,
+                Sd0 = 3.300M,
+                Sd2 = 4.400M,
+                Sd3 = 5.000M,
+                P3 = 2.500M,
+                P15 = 2.900M,
+                P50 = 3.300M,
+                P85 = 3.900M,
+                P97 = 4.300M
             });
 
             return testWeightForAge;
@@ -627,12 +628,12 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllWFA(2) as List<WeightForAge>;
 
-            Assert.Equal(1857, target.Count());
+            Assert.Equal(61, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().AgeInDays, actual.AgeInDays);
+            Assert.Equal(expected.FirstOrDefault().Month, actual.Month);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -644,21 +645,21 @@ namespace AnthroCloud.Tests
             var testWeightForAge = new List<WeightForAge>();
             testWeightForAge.Add(new WeightForAge
             {
-                AgeInDays = 0,
+                Month = 0,
                 Sex = 2,
                 L = 0.3809M,
                 M = 3.2322M,
                 S = 0.14171M,
-                Sd3neg = 2.033M,
-                Sd2neg = 2.395M,
-                Sd0 = 3.232M,
-                Sd2 = 4.230M,
-                Sd3 = 4.793M,
-                P3 = 2.440M,
-                P15 = 2.779M,
-                P50 = 3.232M,
-                P85 = 3.729M,
-                P97 = 4.166M
+                Sd3neg = 2.000M,
+                Sd2neg = 2.400M,
+                Sd0 = 3.200M,
+                Sd2 = 4.200M,
+                Sd3 = 4.800M,
+                P3 = 2.400M,
+                P15 = 2.800M,
+                P50 = 3.200M,
+                P85 = 3.700M,
+                P97 = 4.200M
             });
 
             return testWeightForAge;
@@ -672,7 +673,7 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllWFH(1) as List<WeightForHeight>;
 
-            Assert.Equal(551, target.Count());
+            Assert.Equal(111, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -694,18 +695,18 @@ namespace AnthroCloud.Tests
                 L = -0.3521M,
                 M = 7.4327M,
                 S = 0.08217M,
-                Sd3neg = 5.868M,
-                Sd2neg = 6.335M,
-                Sd1neg = 6.854M,
-                Sd0 = 7.433M,
-                Sd1 = 8.079M,
-                Sd2 = 8.804M,
-                Sd3 = 9.619M,
-                P3 = 6.394M,
-                P15 = 6.834M,
-                P50 = 7.433M,
-                P85 = 8.104M,
-                P97 = 8.713M
+                Sd3neg = 5.900M,
+                Sd2neg = 6.300M,
+                Sd1neg = 6.900M,
+                Sd0 = 7.400M,
+                Sd1 = 8.100M,
+                Sd2 = 8.800M,
+                Sd3 = 9.600M,
+                P3 = 6.400M,
+                P15 = 6.800M,
+                P50 = 7.400M,
+                P85 = 8.100M,
+                P97 = 8.700M
             });
 
             return testWeightForHeight;
@@ -719,7 +720,7 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllWFH(2) as List<WeightForHeight>;
 
-            Assert.Equal(551, target.Count());
+            Assert.Equal(111, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -741,18 +742,18 @@ namespace AnthroCloud.Tests
                 L = -0.3833M,
                 M = 7.2402M,
                 S = 0.09113M,
-                Sd3neg = 5.583M,
-                Sd2neg = 6.071M,
-                Sd1neg = 6.620M,
-                Sd0 = 7.240M,
-                Sd1 = 7.944M,
-                Sd2 = 8.746M,
-                Sd3 = 9.664M,
-                P3 = 6.133M,
-                P15 = 6.599M,
-                P50 = 7.240M,
-                P85 = 7.971M,
-                P97 = 8.645M
+                Sd3neg = 5.600M,
+                Sd2neg = 6.100M,
+                Sd1neg = 6.600M,
+                Sd0 = 7.200M,
+                Sd1 = 7.900M,
+                Sd2 = 8.700M,
+                Sd3 = 9.700M,
+                P3 = 6.100M,
+                P15 = 6.600M,
+                P50 = 7.200M,
+                P85 = 8.000M,
+                P97 = 8.600M
             });
 
             return testWeightForHeight;
@@ -766,7 +767,7 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllWFL(1) as List<WeightForLength>;
 
-            Assert.Equal(651, target.Count());
+            Assert.Equal(131, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -788,18 +789,18 @@ namespace AnthroCloud.Tests
                 L = -0.3521M,
                 M = 2.4410M,
                 S = 0.09182M,
-                Sd3neg = 1.877M,
-                Sd2neg = 2.043M,
-                Sd1neg = 2.230M,
-                Sd0 = 2.441M,
-                Sd1 = 2.680M,
-                Sd2 = 2.951M,
-                Sd3 = 3.261M,
-                P3 = 2.064M,
-                P15 = 2.223M,
-                P50 = 2.441M,
-                P85 = 2.689M,
-                P97 = 2.917M
+                Sd3neg = 1.900M,
+                Sd2neg = 2.000M,
+                Sd1neg = 2.400M,
+                Sd0 = 2.400M,
+                Sd1 = 2.700M,
+                Sd2 = 3.000M,
+                Sd3 = 3.300M,
+                P3 = 2.100M,
+                P15 = 2.200M,
+                P50 = 2.400M,
+                P85 = 2.700M,
+                P97 = 2.900M
             });
 
             return testWeightForLength;
@@ -813,7 +814,7 @@ namespace AnthroCloud.Tests
             var controller = new ChartController();
             var target = controller.GetAllWFL(2) as List<WeightForLength>;
 
-            Assert.Equal(651, target.Count());
+            Assert.Equal(131, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -835,18 +836,18 @@ namespace AnthroCloud.Tests
                 L = -0.3833M,
                 M = 2.4607M,
                 S = 0.09029M,
-                Sd3neg = 1.902M,
-                Sd2neg = 2.066M,
-                Sd1neg = 2.252M,
-                Sd0 = 2.461M,
-                Sd1 = 2.698M,
-                Sd2 = 2.967M,
-                Sd3 = 3.275M,
-                P3 = 2.087M,
-                P15 = 2.245M,
-                P50 = 2.461M,
-                P85 = 2.707M,
-                P97 = 2.933M
+                Sd3neg = 1.900M,
+                Sd2neg = 2.100M,
+                Sd1neg = 2.300M,
+                Sd0 = 2.500M,
+                Sd1 = 2.700M,
+                Sd2 = 3.000M,
+                Sd3 = 3.300M,
+                P3 = 2.100M,
+                P15 = 2.200M,
+                P50 = 2.500M,
+                P85 = 2.700M,
+                P97 = 2.900M
             });
 
             return testWeightForLength;

@@ -16,6 +16,7 @@ namespace AnthroCloud.Tests
     /// * 2 & Over  *   -.7cm  *           *
     /// ************************************
     /// </remarks>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class BMITests
     {
         [Fact]

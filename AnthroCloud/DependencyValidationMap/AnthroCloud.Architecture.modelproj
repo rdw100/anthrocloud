@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{85743c58-b465-42c4-bed2-388f74e80695}</ProjectGuid>
     <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
-    <Name>DependencyValidationMap</Name>
+    <Name>AnthroCloud.Architecture</Name>
     <RootNamespace>DependencyValidationMap</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

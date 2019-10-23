@@ -5,7 +5,7 @@ namespace AnthroCloud.Entities
 {
     public partial class TsfforAge
     {
-        public short AgeInDays { get; set; }
+        public byte Month { get; set; }
         public byte Sex { get; set; }
         public decimal? L { get; set; }
         public decimal? M { get; set; }

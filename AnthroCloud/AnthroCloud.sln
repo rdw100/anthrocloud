@@ -11,13 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Business", "Ant
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Data", "AnthroCloud.Data\AnthroCloud.Data.csproj", "{E0AA1D06-1555-44A3-B6C5-9DE2F5E2A797}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "DependencyValidationMap", "DependencyValidationMap\DependencyValidationMap.modelproj", "{85743C58-B465-42C4-BED2-388F74E80695}"
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "AnthroCloud.Architecture", "DependencyValidationMap\AnthroCloud.Architecture.modelproj", "{85743C58-B465-42C4-BED2-388F74E80695}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Tests", "AnthroCloud.Tests\AnthroCloud.Tests.csproj", "{07C241F0-2C8E-49EF-AEA9-16BAA3E3166F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnthroCloud.Framework", "AnthroCloud.Framework\AnthroCloud.Framework.csproj", "{19F77F8E-1D99-48BC-BE36-E11D61D4BF54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Framework", "AnthroCloud.Framework\AnthroCloud.Framework.csproj", "{19F77F8E-1D99-48BC-BE36-E11D61D4BF54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnthroCloud.Entities", "AnthroCloud.Entities\AnthroCloud.Entities.csproj", "{2C811542-FC11-4136-97B6-7EA09221B555}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Entities", "AnthroCloud.Entities\AnthroCloud.Entities.csproj", "{2C811542-FC11-4136-97B6-7EA09221B555}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

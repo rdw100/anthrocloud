@@ -30,25 +30,11 @@ namespace AnthroCloud.API.Controllers
 
         // GET: api/anthro/bmi/9.00/73.00
         [Route("BMI/{weight}/{height}")]
-        public double GetAge(double weight, double height)
+        public double GetBMI(double weight, double height)
         {
             BMI bmi = new BMI(weight, height);
             return bmi.ToReadableDouble();
         }
-
-        //// GET: api/Anthro
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET: api/Anthro/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
 
         // POST: api/Anthro
         [HttpPost]

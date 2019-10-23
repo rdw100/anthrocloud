@@ -37,7 +37,7 @@ namespace AnthroCloud.Entities
         {
             modelBuilder.Entity<BmiforAge>(entity =>
             {
-                entity.HasKey(e => new { e.AgeInDays, e.Sex })
+                entity.HasKey(e => new { e.Sex, e.Month, e.M})
                     .HasName("PK_CompositePK_BMIForAge")
                     .IsClustered(false);
 
@@ -90,7 +90,7 @@ namespace AnthroCloud.Entities
 
             modelBuilder.Entity<HcForAge>(entity =>
             {
-                entity.HasKey(e => new { e.AgeInDays, e.Sex })
+                entity.HasKey(e => new { e.Sex, e.Month, e.M })
                     .HasName("PK_CompositePK_HCForAge")
                     .IsClustered(false);
 
@@ -141,7 +141,7 @@ namespace AnthroCloud.Entities
 
             modelBuilder.Entity<LengthHeightForAge>(entity =>
             {
-                entity.HasKey(e => new { e.AgeInDays, e.Sex })
+                entity.HasKey(e => new { e.Sex, e.Month, e.M })
                     .HasName("PK_CompositePK_LengthHeightForAge")
                     .IsClustered(false);
 
@@ -182,7 +182,7 @@ namespace AnthroCloud.Entities
 
             modelBuilder.Entity<MuacforAge>(entity =>
             {
-                entity.HasKey(e => new { e.AgeInDays, e.Sex })
+                entity.HasKey(e => new { e.Sex, e.Month, e.M })
                     .HasName("PK_CompositePK_MUACForAge")
                     .IsClustered(false);
 
@@ -235,7 +235,7 @@ namespace AnthroCloud.Entities
 
             modelBuilder.Entity<SsfforAge>(entity =>
             {
-                entity.HasKey(e => new { e.AgeInDays, e.Sex })
+                entity.HasKey(e => new { e.Sex, e.Month, e.M })
                     .HasName("PK_Composite_PK_SSFForAge")
                     .IsClustered(false);
 
@@ -288,7 +288,7 @@ namespace AnthroCloud.Entities
 
             modelBuilder.Entity<TsfforAge>(entity =>
             {
-                entity.HasKey(e => new { e.AgeInDays, e.Sex })
+                entity.HasKey(e => new { e.Sex, e.Month, e.M })
                     .HasName("PK_CompositePK_TSFForAge")
                     .IsClustered(false);
 
@@ -341,7 +341,7 @@ namespace AnthroCloud.Entities
 
             modelBuilder.Entity<WeightForAge>(entity =>
             {
-                entity.HasKey(e => new { e.AgeInDays, e.Sex })
+                entity.HasKey(e => new { e.Sex, e.Month, e.M })
                     .HasName("PK_CompositePK_WeightForAge")
                     .IsClustered(false);
 
