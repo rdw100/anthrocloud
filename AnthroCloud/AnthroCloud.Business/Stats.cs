@@ -50,7 +50,7 @@ namespace AnthroCloud.Business
         /// <param name="ageInDays">The age in total days</param>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns the z-score and percentile for a growth measure using a specified value.</returns>
-        public Tuple<double, double> getScores(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        public Tuple<double, double> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             WHO2006 who2006 = new WHO2006();
 
@@ -67,5 +67,17 @@ namespace AnthroCloud.Business
 
             return Tuple.Create(z, p);
         }
+
+        //public List<Tuple<Indicator, double, double>> GetScoresList(List<Tuple<Indicator, double, double, Sex>> inputs)
+        //{
+        //    List<Tuple<Indicator, double, double>> list = new List<Tuple<Indicator, double, double>>();
+
+        //    foreach (var tuple in inputs)
+        //    {
+        //        list.Add(new Tuple<Indicator, double, double>(tuple.Item1, tuple.Item2, tuple.Item3));
+        //    }
+            
+        //    return list;
+        //}
     }
 }

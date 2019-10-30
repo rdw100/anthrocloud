@@ -1,32 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="f71332aa-4936-439d-abf1-5931eaac9a9a" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
   <layers>
-    <layer Id="a168e025-b879-4f48-9d57-8995fe9f0971" name="AnthroCloud.UI">
-      <description>Presentation</description>
-      <dependencyToLayers>
-        <dependencyFromLayerToLayer Id="289681b3-4e9d-4dba-9874-b2e1fc01827f" direction="Forward">
-          <layerMoniker Id="131ee222-9a4f-4dad-abaf-d8db89662d1f" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="ab26b0e9-9cae-40f9-9595-32298dddd7ba" direction="Forward">
-          <layerMoniker Id="f471a5c1-9a7f-4eb9-a5b0-cb4917fb213f" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="c998bb10-f965-4558-8a1d-00406d31fed6" direction="Forward">
-          <layerMoniker Id="7c7b2b57-3d41-4d48-a2cd-1ecd7f6982d5" />
-        </dependencyFromLayerToLayer>
-      </dependencyToLayers>
-      <references>
-        <reference Id="293084cb-c06f-4504-81cb-117d6843eca7" name="AnthroCloud.UI">
-          <ArtifactNode Label="AnthroCloud.UI" Category="CodeSchema_Project" Id="(Assembly=../AnthroCloud.UI/AnthroCloud.UI.csproj)">
-            <Category Ref="File" />
-          </ArtifactNode>
-          <ExpandedNode Id="(Assembly=AnthroCloud.UI)" Label="AnthroCloud.UI.dll" Category="CodeSchema_Assembly">
-            <Category Ref="FileSystem.Category.FileOfType.dll" />
-            <LinkCategory Ref="Produces" />
-            <LinkCategory Ref="Represents" />
-          </ExpandedNode>
-        </reference>
-      </references>
-    </layer>
     <layer Id="a3a9709c-924b-449f-8876-98e3e5a148bc" name="AnthroCloud.Business">
       <dependencyToLayers>
         <dependencyFromLayerToLayer Id="096869c2-c88d-4a83-b275-3252b85adcbe" direction="Forward">
@@ -117,6 +91,31 @@
             <Category Ref="File" />
           </ArtifactNode>
           <ExpandedNode Id="(Assembly=AnthroCloud.Framework)" Label="AnthroCloud.Framework.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="24d73dd7-ab52-4a37-b3b8-ebc73b666909" name="AnthroCloud.UI.Web">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="01913993-7c64-4006-b200-9e0b0f6bec3c" direction="Forward">
+          <layerMoniker Id="131ee222-9a4f-4dad-abaf-d8db89662d1f" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="9821e99e-31af-464d-82b1-75c70976d063" direction="Forward">
+          <layerMoniker Id="7c7b2b57-3d41-4d48-a2cd-1ecd7f6982d5" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="4c30bce6-2bc3-4290-8624-5efd7e5edf72" direction="Forward">
+          <layerMoniker Id="f471a5c1-9a7f-4eb9-a5b0-cb4917fb213f" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="08c52bd6-4496-468e-b5ee-1cc9faa37be1" name="AnthroCloud.UI.Web">
+          <ArtifactNode Label="AnthroCloud.UI.Web" Category="CodeSchema_Project" Id="(Assembly=../AnthroCloud.UI.Web/AnthroCloud.UI.Web.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=AnthroCloud.UI.Web)" Label="AnthroCloud.UI.Web.dll" Category="CodeSchema_Assembly">
             <Category Ref="FileSystem.Category.FileOfType.dll" />
             <LinkCategory Ref="Produces" />
             <LinkCategory Ref="Represents" />

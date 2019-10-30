@@ -1,0 +1,352 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model FormModel
+@*@namespace FormModel*@
+@* https://getbootstrap.com/docs/4.0/components/forms/#form-groups *@
+@* https://getbootstrap.com/docs/4.0/layout/grid/ *@
+@*<div class="text-center">
+        <i class="fas fa-cloud-meatball"></i><h1 class="display-4">Welcome</h1>
+        <i class="fas fa-chart-line"></i>AnthroCloud
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+@*<form asp-action="Index" asp-controller="Home">
+        <label asp-for="FirstName" for="validationDefault01"></label>
+        <input class="form-control" id="txtFirstName" asp-for="FirstName" name="FirstName" placeholder="Your name goes here" required />
+        <label asp-for="DateOfBirth" for="validationDefault01"></label>
+        <input asp-for="DateOfBirth" class="form-control" id="txtDOB" name="DateOfBirth" placeholder="Enter patient's Date of Birth." required>
+        <input type="submit" />
+    </form>*@
+@*<form method="post" action="Index">*@
+
+<form asp-action="Index" asp-controller="Home" method="post">
+    <div class="form-row">
+        <div class="col-md-6 mb-2">
+            <label asp-for="DateOfBirth" for="validationDefault01">Date of Birth</label>
+            <input asp-for="DateOfBirth" class="form-control" id="txtDOB" name="DateOfBirth" placeholder="Enter patient's Date of Birth." required>
+        </div>
+        <div class="col-md-6 mb-2">
+            <label asp-for="DateOfVisit" for="validationDefault02">Date of Visit</label>
+            <input asp-for="DateOfVisit" type="date" class="form-control" id="txtDOV" name="DateOfVisit" placeholder="Enter patient's Date of Visit" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 mb-2">
+            <h5>Sex</h5>
+            <div class="form-group">
+                <label class="d-block">
+                    <input type="radio" class="ml-2 mr-2" name="gender"> Male
+                </label>
+                <label class="d-block">
+                    <input type="radio" class="ml-2 mr-2" name="gender"> Female
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3 mb-2">
+            <h5>Measurement</h5>
+            <div class="form-group">
+                <label class="d-block">
+                    <input type="radio" class="ml-2 mr-2" name="gender"> Recumbent
+                </label>
+                <label class="d-block">
+                    <input type="radio" class="ml-2 mr-2" name="gender"> Standing
+                </label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @*<h5>&nbsp;</h5>*@
+            <div class="form-group row">                
+                <label class="col-sm-2 col-form-label">Age:</label>
+                <input asp-for="Age" class="form-control col-sm-3" type="text" placeholder="..." readonly />                
+            </div>
+            <div class="form-group row">                
+                <label class="col-sm-2 col-form-label">BMI:</label>
+                <input asp-for="BMI" class="form-control col-sm-3" type="text" placeholder="..." readonly />                
+            </div>
+            @*
+        <label>Age:</label>
+        <input asp-for="Age" class="form-control-plaintext" type="text" placeholder="..." readonly />
+
+        <label class="d-sm-block">
+            <label>BMI:</label>
+            <input asp-for="BMI" class="form-control-plaintext" type="text" placeholder="..." readonly />
+        </label>
+            *@
+
+        </div>
+    </div>
+
+    @*<div class="form-row">
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                <div class="col-sm-6">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                <div class="col-sm-6">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                </div>
+            </div>
+        </div>*@
+
+    @*<div class="form-row">
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-5 col-form-label">Email</label>
+                <div class="col-sm-7">
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-5 col-form-label">Email</label>
+                <div class="col-sm-7">
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+        </div>*@
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="form-group row">
+                <label for="inputState" class="col-sm-5 col-form-label">Weight (kg)</label>
+                <div class="col-sm-7">
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputState" class="col-sm-5 col-form-label">Head Circumference (cm)</label>
+                <div class="col-sm-7">
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputState" class="col-sm-5 col-form-label">MUAC (cm)</label>
+                <div class="col-sm-7">
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="form-group row">
+                <label for="inputState" class="col-sm-5 col-form-label">Length/Height(CM)</label>
+                <div class="col-sm-7">
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputState" class="col-sm-5 col-form-label">Triceps skinfold (mm)</label>
+                <div class="col-sm-7">
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputState" class="col-sm-5 col-form-label">Subscapular skinfold (mm)</label>
+                <div class="col-sm-7">
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            &nbsp;
+        </div>
+        <div class="col-md-1 mb-3">
+            <label for="validationDefault03">Percentile</label>
+        </div>
+        <div class="col-md-1 mb-3">
+            <label for="validationDefault03">Z-Score</label>
+        </div>
+        <div class="col-md-2 mb-3">
+            &nbsp;
+        </div>
+        <div class="col-md-2 mb-3">
+            &nbsp;
+        </div>
+        <div class="col-md-1 mb-3">
+            <label for="validationDefault03">Percentile</label>
+        </div>
+        <div class="col-md-1 mb-3">
+            <label for="validationDefault03">Z-Score</label>
+        </div>
+        <div class="col-md-2 mb-3">
+            &nbsp;
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationDefault03">Weight-for-Length</label>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="WflPercentile" class="form-control" id="validationDefault06" placeholder="" readonly>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="WflZscore" class="form-control" id="validationDefault07" placeholder="" style="background-color: @{ if (Model != null) {@getColor(Model.WflZscore)} }" readonly>
+        </div>
+        <div class="col-md-2 mb-3">
+            <button class="btn btn-outline-secondary"><i class="fa fa-line-chart"></i></button>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="validationDefault03">HC-for-age</label>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="HcaPercentile" class="form-control" id="validationDefault06" placeholder="" readonly>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="HcaZscore" class="form-control" id="validationDefault07" placeholder=""  style="background-color: @{ if (Model != null) {@getColor(Model.HcaZscore)} }" readonly>
+        </div>
+        <div class="col-md-2 mb-3">
+            @*<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>*@
+            <button class="btn btn-outline-secondary"><i class="fa fa-line-chart"></i></button>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationDefault03">Weight-for-Age</label>
+        </div>
+        @functions{
+            //void RenderColorCoding(double zscore)
+            public string getColor(double zscore)
+            {
+                var colorCode = zscore switch
+                {
+                    double n when (n <=  1  && n >= -1) => "Green",
+                    double n when (n <= -1  && n >= -2) || (n <= 2 && n > 1) => "Gold",
+                    double n when (n <  -2  && n >= -3) || (n <= 3 && n > 2) => "Red",
+                    double n when (n >   3  || n <  -3) => "Black",
+                    _ => string.Empty,
+                };
+                return colorCode;
+            }
+        }        
+        @{
+//@color
+//var color = "green";
+//if (Model != null && (Model.wfaZscore > 0))
+//{
+//    if (@Model.wfaZscore > 26)
+//    {
+//        color = "red";
+//    }
+//    else
+//    {
+//        color = "black";
+//    }
+//}
+        }
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="WfaPercentile" class="form-control" id="validationDefault06" placeholder="" readonly>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="WfaZscore" class="form-control" id="validationDefault07" placeholder="" style="background-color: @{ if (Model != null) {@getColor(Model.WfaZscore)} }" readonly>
+        </div>
+        <div class="col-md-2 mb-3">
+            @*<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>*@
+            <button class="btn btn-outline-secondary"><i class="fa fa-line-chart"></i></button>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="validationDefault03">MUAC-for-age</label>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="MuacPercentile" class="form-control" id="validationDefault06" placeholder="" readonly>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="MuacZscore" class="form-control" id="validationDefault07" placeholder="" style="background-color: @{ if (Model != null) {@getColor(Model.MuacZscore)} }" readonly>
+        </div>
+        <div class="col-md-2 mb-3">
+            @*<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>*@
+            <button class="btn btn-outline-secondary"><i class="fa fa-line-chart"></i></button>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationDefault03">Length-for-Age</label>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="LfaPercentile" class="form-control" id="validationDefault06" placeholder="" readonly>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="LfaZscore"class="form-control" id="validationDefault07" placeholder="" style="background-color: @{ if (Model != null) {@getColor(Model.LfaZscore)} }" readonly>
+        </div>
+        <div class="col-md-2 mb-3">
+            @*<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>*@
+            <button class="btn btn-outline-secondary"><i class="fa fa-line-chart"></i></button>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="validationDefault03">TSF-for-age</label>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="TsfPercentile" class="form-control" id="validationDefault06" placeholder="" readonly>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="TsfZscore"class="form-control" id="validationDefault07" placeholder="" style="background-color: @{ if (Model != null) {@getColor(Model.TsfZscore)} }" readonly>
+        </div>
+        <div class="col-md-2 mb-3">
+            @*<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>*@
+            <button class="btn btn-outline-secondary"><i class="fa fa-line-chart"></i></button>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="validationDefault03">BMI-for-Age</label>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="BfaPercentile" class="form-control" id="validationDefault06" placeholder="" readonly>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="BfaZscore" class="form-control" id="validationDefault07" placeholder="" style="background-color: @{ if (Model != null) {@getColor(Model.BfaZscore)} }" readonly>
+        </div>
+        <div class="col-md-2 mb-3">
+            @*<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>*@
+            <button class="btn btn-outline-secondary"><i class="fa fa-line-chart"></i></button>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="validationDefault03">SSF-for-age</label>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="SsfPercentile" class="form-control" id="validationDefault06" placeholder="" readonly>
+        </div>
+        <div class="col-md-1 mb-3">
+            <input type="text" asp-for="SsfZscore" class="form-control" id="validationDefault07" placeholder="" style="background-color: @{ if (Model != null) {@getColor(Model.SsfZscore)} }" readonly>
+        </div>
+        <div class="col-md-2 mb-3">
+            @*<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>*@
+            <button class="btn btn-outline-secondary"><i class="fa fa-line-chart"></i></button>
+        </div>
+    </div>
+    <div class="col-md-12 text-center">
+        <button class="btn btn-primary" type="submit">Calculate</button>
+    </div>
+
+    @*<button class="btn btn-secondary"><i class="fa fa-chart-line"></i></button>
+        <button type="button" class="btn btn-light"><i class="fa fa-chart-line"></i></button>
+        <button class="btn btn-outline-secondary"><i class="fa fa-chart-line"></i></button>*@
+
+</form>

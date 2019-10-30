@@ -58,9 +58,9 @@
       <Name>AnthroCloud.Tests</Name>
       <Project>{07c241f0-2c8e-49ef-aea9-16baa3e3166f}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\AnthroCloud.UI\AnthroCloud.UI.csproj">
-      <Name>AnthroCloud.UI</Name>
-      <Project>{a4ee5428-e750-412a-9228-654ed6d5193e}</Project>
+    <ProjectReference Include="..\AnthroCloud.UI.Web\AnthroCloud.UI.Web.csproj">
+      <Name>AnthroCloud.UI.Web</Name>
+      <Project>{541e8cd4-0f08-43dc-8989-b3bd70b430b8}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />

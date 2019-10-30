@@ -26,7 +26,7 @@ namespace AnthroCloud.Tests
         public void GetScores_PairValues_ShouldReturnYearMonthString(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             var controller = new StatsController();
-            Tuple<double, double> GetScores = controller.GetScores(indicator, measurement, ageInDays, sex);
+            Tuple<double, double> GetScores = controller.GetScore(indicator, measurement, ageInDays, sex);
 
             Assert.InRange(GetScores.Item1, -4, 4);
             Assert.InRange(GetScores.Item2, 0, 100);
@@ -46,7 +46,7 @@ namespace AnthroCloud.Tests
         public void GetScores_ColorCoding_ShouldReturnZscoreSeverity(Indicator indicator, double measurement, double ageInDays, Sex sex, String expectedColor)
         {
             var controller = new StatsController();
-            Tuple<double, double> GetScores = controller.GetScores(indicator, measurement, ageInDays, sex);
+            Tuple<double, double> GetScores = controller.GetScore(indicator, measurement, ageInDays, sex);
 
             string actualColor = GetColorCoding(GetScores.Item1);
             Assert.Equal(expectedColor, actualColor);

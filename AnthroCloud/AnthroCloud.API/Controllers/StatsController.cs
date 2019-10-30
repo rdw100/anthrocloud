@@ -16,12 +16,20 @@ namespace AnthroCloud.API.Controllers
         // GET: api/Stats/WeightForAge/9.00/365/Male
         [HttpGet("{indicator}/{measurement}/{ageInDays}/{sex}")]
         [Route("STATS/{indicator}/{measurement}/{ageInDays}/{sex}")]
-        public Tuple<double, double> GetScores(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        public Tuple<double, double> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             Stats stats = new Stats();
-            Tuple<double, double> scores = stats.getScores(indicator, measurement, ageInDays, sex);
+            Tuple<double, double> scores = stats.GetScore(indicator, measurement, ageInDays, sex);
             return scores;
         }
+
+        //[HttpGet("people/{id}")]
+        //public Tuple<double, double> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        //{
+        //    Stats stats = new Stats();
+        //    Tuple<double, double> scores = stats.GetScore(indicator, measurement, ageInDays, sex);
+        //    return scores;
+        //}
 
         // POST: api/Stats
         [HttpPost]

@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>20</x>
+      <x>0</x>
       <y>70</y>
       <w>180</w>
       <h>340</h>
@@ -12,7 +12,6 @@
     <panel_attributes>WeightForLength
 
 --
-- AgeInDays
 - Sex
 - LengthInCM
 - L 
@@ -47,7 +46,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
+      <x>190</x>
       <y>70</y>
       <w>180</w>
       <h>340</h>
@@ -55,7 +54,6 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
     <panel_attributes>WeightForHeight
 
 --
-- AgeInDays
 - Sex
 - HeightInCM
 - L 
@@ -90,7 +88,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
+      <x>380</x>
       <y>70</y>
       <w>160</w>
       <h>340</h>
@@ -98,7 +96,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
     <panel_attributes>WeightForAge
 
 --
-- AgeInDays
+- Month
 - Sex
 - L 
 - M 
@@ -130,15 +128,15 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
+      <x>550</x>
       <y>70</y>
-      <w>200</w>
+      <w>160</w>
       <h>340</h>
     </coordinates>
     <panel_attributes>LengthHeightForAge
 
 --
-- AgeInDays
+- Month
 - Sex
 - L 
 - M 
@@ -170,15 +168,15 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>20</x>
-      <y>420</y>
+      <x>720</x>
+      <y>70</y>
       <w>140</w>
-      <h>320</h>
+      <h>340</h>
     </coordinates>
     <panel_attributes>BMIForAge
 
 --
-- AgeInDays
+- Month
 - Sex
 - L 
 - M 
@@ -213,10 +211,10 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>420</y>
+      <x>870</x>
+      <y>70</y>
       <w>160</w>
-      <h>320</h>
+      <h>340</h>
     </coordinates>
     <panel_attributes>HCForAge
 
@@ -255,15 +253,15 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>340</x>
-      <y>420</y>
+      <x>1040</x>
+      <y>70</y>
       <w>160</w>
-      <h>320</h>
+      <h>340</h>
     </coordinates>
     <panel_attributes>MUACForAge
 
 --
-- AgeInDays
+- Month
 - Sex
 - L 
 - M 
@@ -297,57 +295,57 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>420</y>
+      <x>1210</x>
+      <y>70</y>
       <w>160</w>
-      <h>320</h>
-    </coordinates>
-    <panel_attributes>SSFForAge
-
---
-- AgeInDays
-- Sex
-- L 
-- M 
-- S 
-- SD3neg
-- SD2neg
-- SD1neg
-- SD0
-- SD1
-- SD2
-- SD3
-- P3
-- P15
-- P50
-- P85
-- P97
-
-customelement=
-// DB Symbol
-drawArc(5,5,26,8,0,180,true) fg=black bg=#222222 //Parameters (x, y, width, height, start, extent, open)
-drawArc(5,5,26,8,180,180,true) fg=black //Parameters (x, y, width, height, start, extent, open)
-drawRectangle(5,9,26,15) lw=0.1 bg=#222222 //Parameters (x, y, width, height)
-drawLine(5,9,5,24)fg=black //Parameters (x1, y1, x2, y2) 
-drawLine(31,9,31,24)fg=black //Parameters (x1, y1, x2, y2) 
-drawArc(5,10,26,8,180,180,true) fg=black //Parameters (x, y, width, height, start, extent, open)
-drawArc(5,15,26,8,180,180,true) fg=black //Parameters (x, y, width, height, start, extent, open)
-drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, height, start, extent, open)
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>510</x>
-      <y>420</y>
-      <w>160</w>
-      <h>320</h>
+      <h>340</h>
     </coordinates>
     <panel_attributes>TSFForAge
  
 --
-- AgeInDays
+- Month
+- Sex
+- L 
+- M 
+- S 
+- SD3neg
+- SD2neg
+- SD1neg
+- SD0
+- SD1
+- SD2
+- SD3
+- P3
+- P15
+- P50
+- P85
+- P97
+
+customelement=
+// DB Symbol
+drawArc(5,5,26,8,0,180,true) fg=black bg=#222222 //Parameters (x, y, width, height, start, extent, open)
+drawArc(5,5,26,8,180,180,true) fg=black //Parameters (x, y, width, height, start, extent, open)
+drawRectangle(5,9,26,15) lw=0.1 bg=#222222 //Parameters (x, y, width, height)
+drawLine(5,9,5,24)fg=black //Parameters (x1, y1, x2, y2) 
+drawLine(31,9,31,24)fg=black //Parameters (x1, y1, x2, y2) 
+drawArc(5,10,26,8,180,180,true) fg=black //Parameters (x, y, width, height, start, extent, open)
+drawArc(5,15,26,8,180,180,true) fg=black //Parameters (x, y, width, height, start, extent, open)
+drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, height, start, extent, open)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1380</x>
+      <y>70</y>
+      <w>160</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>SSFForAge
+
+--
+- Month
 - Sex
 - L 
 - M 

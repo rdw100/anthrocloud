@@ -147,7 +147,7 @@ namespace AnthroCloud.Tests
         public void Stats_SubscapularSkinfoldForAgeTuple_Calculation()
         {
             var stat = new Stats();
-            Tuple<double, double> GetScores = stat.getScores(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
+            Tuple<double, double> GetScores = stat.GetScore(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
 
             Assert.Equal(0.45, GetScores.Item1);
             Assert.Equal(67.4, GetScores.Item2);
@@ -186,7 +186,7 @@ namespace AnthroCloud.Tests
         public void Stats_AllIndicatorTuple_Calculation(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             var stat = new Stats();
-            Tuple<double, double> GetScores = stat.getScores(indicator, measurement, ageInDays, sex);
+            Tuple<double, double> GetScores = stat.GetScore(indicator, measurement, ageInDays, sex);
             
             Assert.InRange(GetScores.Item1, -4, 4);
             Assert.InRange(GetScores.Item2, 0, 100);

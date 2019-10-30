@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>20</x>
+      <x>0</x>
       <y>70</y>
       <w>180</w>
       <h>340</h>
@@ -12,7 +12,6 @@
     <panel_attributes>WeightForLength
 
 --
-- AgeInDays
 - Sex
 - LengthInCM
 - L 
@@ -47,7 +46,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
+      <x>190</x>
       <y>70</y>
       <w>180</w>
       <h>340</h>
@@ -55,7 +54,6 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
     <panel_attributes>WeightForHeight
 
 --
-- AgeInDays
 - Sex
 - HeightInCM
 - L 
@@ -90,7 +88,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>400</x>
+      <x>380</x>
       <y>70</y>
       <w>160</w>
       <h>340</h>
@@ -98,7 +96,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
     <panel_attributes>WeightForAge
 
 --
-- AgeInDays
+- Month
 - Sex
 - L 
 - M 
@@ -130,7 +128,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
+      <x>550</x>
       <y>70</y>
       <w>160</w>
       <h>340</h>
@@ -138,7 +136,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
     <panel_attributes>LengthHeightForAge
 
 --
-- AgeInDays
+- Month
 - Sex
 - L 
 - M 
@@ -170,7 +168,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>740</x>
+      <x>720</x>
       <y>70</y>
       <w>140</w>
       <h>340</h>
@@ -178,7 +176,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
     <panel_attributes>BMIForAge
 
 --
-- AgeInDays
+- Month
 - Sex
 - L 
 - M 
@@ -213,7 +211,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>890</x>
+      <x>870</x>
       <y>70</y>
       <w>160</w>
       <h>340</h>
@@ -255,7 +253,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1060</x>
+      <x>1040</x>
       <y>70</y>
       <w>160</w>
       <h>340</h>
@@ -263,7 +261,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
     <panel_attributes>MUACForAge
 
 --
-- AgeInDays
+- Month
 - Sex
 - L 
 - M 
@@ -297,7 +295,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1230</x>
+      <x>1210</x>
       <y>70</y>
       <w>160</w>
       <h>340</h>
@@ -305,7 +303,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
     <panel_attributes>TSFForAge
  
 --
-- AgeInDays
+- Month
 - Sex
 - L 
 - M 
@@ -339,7 +337,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1400</x>
+      <x>1380</x>
       <y>70</y>
       <w>160</w>
       <h>340</h>
@@ -347,7 +345,7 @@ drawArc(5,20,26,8,180,180,true)fg=black bg=#222222 //Parameters (x, y, width, he
     <panel_attributes>SSFForAge
 
 --
-- AgeInDays
+- Month
 - Sex
 - L 
 - M 
