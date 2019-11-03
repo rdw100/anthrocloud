@@ -28,6 +28,14 @@ namespace AnthroCloud.API.Controllers
             return age.ToDaysString();
         }
 
+        // GET: api/anthro/age/days/2016-12-01T00:00:00/2019-12-31T23:59:59
+        [Route("AGE/YEARS/{birth}/{visit}")]
+        public string GetAgeInYears(DateTime birth, DateTime visit)
+        {
+            Age age = new Age(birth, visit);
+            return age.ToYearsString();
+        }
+
         // GET: api/anthro/bmi/9.00/73.00
         [Route("BMI/{weight}/{height}")]
         public double GetBMI(double weight, double height)

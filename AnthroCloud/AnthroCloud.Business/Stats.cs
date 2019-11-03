@@ -63,7 +63,7 @@ namespace AnthroCloud.Business
             }
 
             z = Math.Round(z, 2);
-            p = Math.Round(p, 2);
+            p = Math.Round(p, 1);
 
             return Tuple.Create(z, p);
         }

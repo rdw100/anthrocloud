@@ -4,7 +4,7 @@ using System.Text;
 using Xunit;
 using AnthroCloud.Business;
 
-namespace AnthroCloud.Framework.Tests
+namespace AnthroCloud.Tests
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class AgeTests

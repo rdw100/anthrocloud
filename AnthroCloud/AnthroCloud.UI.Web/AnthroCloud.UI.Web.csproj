@@ -27,6 +27,11 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.0.96" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2019.3.1023" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AnthroCloud.Entities\AnthroCloud.Entities.csproj" />
   </ItemGroup>
 
 </Project>

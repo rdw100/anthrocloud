@@ -129,5 +129,18 @@ namespace AnthroCloud.Business
 
             return ageString;
         }
+
+        /// <summary>
+        /// Writes string of age in years.
+        /// </summary>
+        /// <returns>Returns age in years.</returns>
+        public String ToYearsString()
+        {
+            string yearString;
+
+            yearString = string.Format("{0}", Years);
+
+            return yearString;
+        }
     }
 }
