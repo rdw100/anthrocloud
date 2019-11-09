@@ -27,6 +27,13 @@ namespace AnthroCloud.UI.Web.Controllers
             return View(new FormViewModel());
         }
 
+        public ActionResult MyHtml()
+        {
+            //var result = new FileResult("~/Views/HtmlPage1.html", "text/html");
+            ;
+            return Redirect("~/Views/LineChart/Chart.html");
+        }
+
         [HttpPost]
         public IActionResult Index(FormViewModel model)
         {

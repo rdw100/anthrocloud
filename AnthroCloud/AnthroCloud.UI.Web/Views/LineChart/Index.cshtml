@@ -1,0 +1,162 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>Google Charts Tutorial</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart', 'line'] });
+    </script>
+    <script>
+        function displayRadioValue() { 
+            var ele = document.getElementsByName('sex'); 
+            var radioValue 
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+                document.getElementById("result").innerHTML
+                        = ele[i].value; 
+            } 
+        } 
+    </script>
+</head>
+<body>
+    <!-- style="width:'600';height:'600';"-->
+    <div id="chart_div">This is a test</div>
+    <script type="text/javascript">
+
+        google.charts.load('current', {
+            packages: ['corechart', 'line']
+        });
+        google.charts.setOnLoadCallback(LoadData);
+
+        // url: 'LineChart/PopulationChart'
+        function LoadData() {
+            $.ajax({
+
+                url: 'LineChart/GetWFLJson',
+                dataType: "json",
+                type: "GET",
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    toastr.error(err.message);
+                },
+                success: function (data) {
+                    PopulationChart(data);
+                    return false;
+                }
+            });
+            return false;
+        }
+        // {label: 'lengthincm', type:'number'}
+        // 'score',
+        function PopulationChart(data) {
+            var dataArray = [
+                ['lengthincm', 'p3']
+                //, 'p15', 'p50', 'p85', 'p97'
+            ];
+
+            //var dataArray = [
+            //    ['Sex', '2020 Population', '2010 Population', '2000 Population', '1990 Population']
+            //];
+
+            // item.score,//item.p97, item.p85, item.p50, item.p15,
+            $.each(data, function (i, item) {
+                dataArray.push([item.lengthincm, item.p3]);
+            });
+
+            //$.each(data, function (i, item) {
+            //    dataArray.push([item.sex, item.populationYear2020, item.populationYear2010, item.populationYear2000, item.populationYear1990]);
+            //});
+
+            var data = google.visualization.arrayToDataTable(dataArray);
+            var options = {
+                title: 'Population of Largest Cities of Odisha ',
+                chartArea: {
+                    width: '50%'
+                },
+                colors: ['#b0120a', '#7b1fa2', '#ffab91', '#d95f02'],
+                hAxis: {
+                    title: 'City',
+                    minValue: 0
+                },
+                vAxis: {
+                    title: 'Total Population'
+                },
+                'width': 550,
+                'height': 400
+            };
+            // Set chart options
+            //var options = {
+            //    'title': 'Length-for-age BOYS',
+            //    hAxis: {
+            //        title: 'Age (months)'
+            //    },
+            //    vAxis: {
+            //        title: 'Length\height (cm)'
+            //    },
+            //    'width': 550,
+            //    'height': 400//,
+            //    //curveType: 'function',
+            //    //legend: 'right'//,
+            //    //pointSize: 0,
+            //    //series: {
+            //    //    0: { pointSize: 15, pointShape: { type: 'circle', sides: 5, dent: 0.8 } },
+            //    //    1: { color: '#e10808' },
+            //    //    2: { color: '#ffd700' },
+            //    //    3: { color: '#0c8d00' },
+            //    //    4: { color: '#ffd700' },
+            //    //    5: { color: '#e10808' }
+            //    //}
+            //};
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+            return false;
+        }
+
+                    //function PopulationChartData(data) {
+                    //    var dataArray = [
+                    //        ['ASex', 'LengthInCm', 'P3', 'P15', 'P50', 'P85', 'P97']
+                    //    ];
+                    //    $.each(data, function (i, item) {
+                    //        dataArray.push([item.ASex, item.LengthInCm, item.P3, item.P15, item.P50, item.P85, item.P97]);
+                    //    });
+                    //    var data = google.visualization.arrayToDataTable(dataArray);
+                    //    data.addColumn('string','ASex');
+                    //    data.addColumn('number', 'LengthInCm');
+                    //        data.addColumn('number', 'P3');
+                    //        data.addColumn('number', 'P15');
+                    //        data.addColumn('number', 'P50');
+                    //        data.addColumn('number', 'P85');
+                    //        data.addColumn('number', 'P97');
+
+                    //    var options = {
+                    //        title: 'Weight For Length ',
+                    //        chartArea: {
+                    //            width: '50%'
+                    //        },
+                    //        colors: ['#b0120a', '#7b1fa2', '#ffab91', '#d95f02'],
+                    //        hAxis: {
+                    //            title: 'ASex'
+                    //        },
+                    //        vAxis: {
+                    //            title: 'Total Population'
+                    //        }
+                    //    };
+                    //    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+                    //    chart.draw(data, options);
+                    //    return false;
+                    //}
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+
+    
+

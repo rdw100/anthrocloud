@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
     <style>
         /*datalist {
           display: grid;
         }*/
     </style>
+    
 </head>
 <body>
     <header>
@@ -23,20 +25,25 @@
                 <div class="navbar-collapse collapse dual-nav w-100">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link pl-0" href="#">Home <span class="sr-only">Home</span></a>
+                            <a class="nav-link pl-0" asp-controller="Home" asp-action="Index">Home <span class="sr-only">Home</span></a>
                         </li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="LineChart" asp-action="Index">Line</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="ColumnChart" asp-action="Index">Column</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="LineChart" asp-action="WFL_P">LineP</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="LineChart" asp-action="WFL_Z">LineZ</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="LineChart" asp-action="BFA_P">BFA_P</a></li>
                         @*<li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="//codeply.com">Codeply</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>*@
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="//codeply.com">Codeply</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>*@
                     </ul>
                 </div>
                 @*<a href="/" class="navbar-brand mx-auto d-block text-center w-100">Brand</a>*@
@@ -45,6 +52,8 @@
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link" href="https://dev.azure.com/rdw28/AnthroCloud"><i class="fa fa-windows" title="Azure Boards"></i></a></li>
                         <li class="nav-item"><a class="nav-link" href="https://github.com/rdw28/AnthroCloud"><i class="fa fa-github" title="GitHub"></i></a></li>
+                        @*<li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="LineChart" asp-action="Privacy">OTHER PRIVACY</a></li>*@
                     </ul>
                 </div>
             </div>
@@ -93,7 +102,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container" >
-            &copy; 2019 - AnthroCloud Pediatric Anthropometry @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+            &copy; 2019 - AnthroCloud Pediatric Anthropometry - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

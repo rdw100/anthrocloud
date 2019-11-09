@@ -772,7 +772,7 @@ namespace AnthroCloud.Tests
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().LengthInCm, actual.LengthInCm);
+            Assert.Equal(expected.FirstOrDefault().Lengthincm, actual.Lengthincm);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -784,7 +784,7 @@ namespace AnthroCloud.Tests
             var testWeightForLength = new List<WeightForLength>();
             testWeightForLength.Add(new WeightForLength
             {
-                LengthInCm = 45.0M,
+                Lengthincm = 45.0M,
                 Sex = 1,
                 L = -0.3521M,
                 M = 2.4410M,
@@ -819,7 +819,7 @@ namespace AnthroCloud.Tests
             var actual = (from l in target select l).FirstOrDefault();
 
             Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
-            Assert.Equal(expected.FirstOrDefault().LengthInCm, actual.LengthInCm);
+            Assert.Equal(expected.FirstOrDefault().Lengthincm, actual.Lengthincm);
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
@@ -831,7 +831,7 @@ namespace AnthroCloud.Tests
             var testWeightForLength = new List<WeightForLength>();
             testWeightForLength.Add(new WeightForLength
             {
-                LengthInCm = 45.0M,
+                Lengthincm = 45.0M,
                 Sex = 2,
                 L = -0.3833M,
                 M = 2.4607M,

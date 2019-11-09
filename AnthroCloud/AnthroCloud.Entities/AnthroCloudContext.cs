@@ -439,11 +439,11 @@ namespace AnthroCloud.Entities
 
             modelBuilder.Entity<WeightForLength>(entity =>
             {
-                entity.HasKey(e => new { e.Sex, e.LengthInCm })
+                entity.HasKey(e => new { e.Sex, e.Lengthincm })
                     .HasName("PK_CompositePK_WeightForLength")
                     .IsClustered(false);
 
-                entity.Property(e => e.LengthInCm)
+                entity.Property(e => e.Lengthincm)
                     .HasColumnName("LengthInCM")
                     .HasColumnType("decimal(4, 1)");
 

@@ -20,5 +20,6 @@ namespace AnthroCloud.Entities
         public decimal? P50 { get; set; }
         public decimal? P85 { get; set; }
         public decimal? P97 { get; set; }
+        public decimal? Score { get; set; }
     }
 }

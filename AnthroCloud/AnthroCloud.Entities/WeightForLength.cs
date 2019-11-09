@@ -6,7 +6,7 @@ namespace AnthroCloud.Entities
     public partial class WeightForLength
     {
         public byte Sex { get; set; }
-        public decimal LengthInCm { get; set; }
+        public decimal Lengthincm { get; set; }
         public decimal? L { get; set; }
         public decimal? M { get; set; }
         public decimal? S { get; set; }
@@ -22,5 +22,6 @@ namespace AnthroCloud.Entities
         public decimal? P50 { get; set; }
         public decimal? P85 { get; set; }
         public decimal? P97 { get; set; }
+        public decimal? Score { get; set; } 
     }
 }
