@@ -9,17 +9,6 @@
     <script type="text/javascript">
         google.charts.load('current', { packages: ['corechart', 'line'] });
     </script>
-    <script>
-        function displayRadioValue() { 
-            var ele = document.getElementsByName('sex'); 
-            var radioValue 
-            for(i = 0; i < ele.length; i++) { 
-                if(ele[i].checked) 
-                document.getElementById("result").innerHTML
-                        = ele[i].value; 
-            } 
-        } 
-    </script>
 </head>
 <body>
     <!-- style="width:'600';height:'600';"-->
@@ -31,11 +20,41 @@
         });
         google.charts.setOnLoadCallback(LoadData);
 
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+        }
+        //https://stackoverflow.com/questions/14762775/ajax-if-condition
         // url: 'LineChart/PopulationChart'
+        // url: 'LineChart/GetWFLJson/' + URLSearchParams(urlString).get('sex'),
         function LoadData() {
+            //var num = this.href.substring(this.href.lastIndexOf('/') + 1);
+            //alert(document.location.href.substring( document.location.href.lastIndexOf( '/' ) ));
+            //var num = document.location.href.substring(document.location.href.lastIndexOf('='));
+            //var url;
+            //if (num == 1) {
+            //    url = ;
+            //} else {
+            //    url ''
+            //}
+            //var num = 1;
+            //var num = location.pathname.split('/').pop();
+            //var integer = parseInt(num, 10);
+            //var url = new URLSearchParams(urlString).get('sex');
+            //alert(url);
+            //var num = 2;
+            //alert(getQueryVariable('sex'));
+            var num = parseInt(getQueryVariable('sex'));
+            //console.log(num);
             $.ajax({
 
-                url: 'LineChart/GetWFLJson',
+                url: 'LineChart/GetWFLJson/' + num,
                 dataType: "json",
                 type: "GET",
                 error: function (xhr, status, error) {
@@ -49,6 +68,7 @@
             });
             return false;
         }
+
         // {label: 'lengthincm', type:'number'}
         // 'score',
         function PopulationChart(data) {
@@ -87,69 +107,13 @@
                 'width': 550,
                 'height': 400
             };
-            // Set chart options
-            //var options = {
-            //    'title': 'Length-for-age BOYS',
-            //    hAxis: {
-            //        title: 'Age (months)'
-            //    },
-            //    vAxis: {
-            //        title: 'Length\height (cm)'
-            //    },
-            //    'width': 550,
-            //    'height': 400//,
-            //    //curveType: 'function',
-            //    //legend: 'right'//,
-            //    //pointSize: 0,
-            //    //series: {
-            //    //    0: { pointSize: 15, pointShape: { type: 'circle', sides: 5, dent: 0.8 } },
-            //    //    1: { color: '#e10808' },
-            //    //    2: { color: '#ffd700' },
-            //    //    3: { color: '#0c8d00' },
-            //    //    4: { color: '#ffd700' },
-            //    //    5: { color: '#e10808' }
-            //    //}
-            //};
+
             var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
             chart.draw(data, options);
             return false;
         }
 
-                    //function PopulationChartData(data) {
-                    //    var dataArray = [
-                    //        ['ASex', 'LengthInCm', 'P3', 'P15', 'P50', 'P85', 'P97']
-                    //    ];
-                    //    $.each(data, function (i, item) {
-                    //        dataArray.push([item.ASex, item.LengthInCm, item.P3, item.P15, item.P50, item.P85, item.P97]);
-                    //    });
-                    //    var data = google.visualization.arrayToDataTable(dataArray);
-                    //    data.addColumn('string','ASex');
-                    //    data.addColumn('number', 'LengthInCm');
-                    //        data.addColumn('number', 'P3');
-                    //        data.addColumn('number', 'P15');
-                    //        data.addColumn('number', 'P50');
-                    //        data.addColumn('number', 'P85');
-                    //        data.addColumn('number', 'P97');
-
-                    //    var options = {
-                    //        title: 'Weight For Length ',
-                    //        chartArea: {
-                    //            width: '50%'
-                    //        },
-                    //        colors: ['#b0120a', '#7b1fa2', '#ffab91', '#d95f02'],
-                    //        hAxis: {
-                    //            title: 'ASex'
-                    //        },
-                    //        vAxis: {
-                    //            title: 'Total Population'
-                    //        }
-                    //    };
-                    //    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-
-                    //    chart.draw(data, options);
-                    //    return false;
-                    //}
     </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

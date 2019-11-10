@@ -7,6 +7,7 @@ using AnthroCloud.Entities;
 using AnthroCloud.UI.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
 
 namespace AnthroCloud.UI.Web.Controllers
@@ -14,24 +15,28 @@ namespace AnthroCloud.UI.Web.Controllers
     public class LineChartController : Controller
     {
         // GET: /<controller>/  
+        [Route("{id}")]
+        [Route("LineChart/{id}")]
+        //[Route("LineChart/sex")]
         public IActionResult Index()
         {
+            //RouteValueDictionary rvd = new RouteValueDictionary();
+            //rvd.Add("sex", (Models.Sexes)id);
+            //string url = "/LineChart/Index?sex" + (Models.Sexes)id;
+            //return Redirect(url);
+            //return RedirectToAction("Index", new { sex = (Models.Sexes)id });
             return View();
         }
-        
+
         //[Route("LineChart")]
-        //[Route("LineChart/Index")]
-        //[Route("LineChart/Index/{ID}")]
         //[Route("LineChart/{ID}")]
         //public IActionResult Index(int id)
         //{
         //    return View(id);
         //}
-
- 
-
+        
         public IActionResult BFA_P()
-        {
+        {            
             return View();
         }
 
@@ -120,105 +125,118 @@ namespace AnthroCloud.UI.Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        public JsonResult GetWFLJson()
+        //[HttpGet("{id}")]
+        //[Route("{id}")]
+        //[Route("GetWFLJson/{id}")]
+        public JsonResult GetWFLJson(byte id)
         {
-            var populationList = GetWFLData();// GetWeightForLength();//PopulateChartData(); 
+            var populationList = GetWFLData(id); 
             return Json(populationList);
         }
 
-        public static List<WeightForLength> GetWFLData()
+        public static List<WeightForLength> GetWFLData(byte id)
         {
             var list = new List<WeightForLength>();
-            list.Add(new WeightForLength { Lengthincm = 45.0M, Score = null, P3 = 2.100M, P15 = 2.200M, P50 = 2.400M, P85 = 2.700M, P97 = 2.900M, Sd3neg = 1.900M, Sd2neg = 2.000M, Sd1neg = 2.200M, Sd0 = 2.400M, Sd1 = 2.700M, Sd2 = 3.000M, Sd3 = 3.300M });
-            list.Add(new WeightForLength { Lengthincm = 50.0M, Score = null, P3 = 2.100M, P15 = 2.300M, P50 = 2.500M, P85 = 2.800M, P97 = 3.000M, Sd3neg = 1.900M, Sd2neg = 2.100M, Sd1neg = 2.300M, Sd0 = 2.500M, Sd1 = 2.800M, Sd2 = 3.100M, Sd3 = 3.400M });
-            list.Add(new WeightForLength { Lengthincm = 55.0M, Score = null, P3 = 2.200M, P15 = 2.400M, P50 = 2.600M, P85 = 2.900M, P97 = 3.100M, Sd3neg = 2.000M, Sd2neg = 2.200M, Sd1neg = 2.400M, Sd0 = 2.600M, Sd1 = 2.900M, Sd2 = 3.100M, Sd3 = 3.500M });
-            list.Add(new WeightForLength { Lengthincm = 60.0M, Score = 2.85M, P3 = 2.300M, P15 = 2.500M, P50 = 2.700M, P85 = 3.000M, P97 = 3.200M, Sd3neg = 2.100M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.700M, Sd1 = 3.000M, Sd2 = 3.200M, Sd3 = 3.600M });
-            list.Add(new WeightForLength { Lengthincm = 65.0M, Score = null, P3 = 2.400M, P15 = 2.500M, P50 = 2.800M, P85 = 3.100M, P97 = 3.300M, Sd3neg = 2.300M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.800M, Sd1 = 3.000M, Sd2 = 3.300M, Sd3 = 3.700M });
+            if (id == 1)
+            {
+                list.Add(new WeightForLength { Lengthincm = 45.0M, Score = null, P3 = 2.100M, P15 = 2.200M, P50 = 2.400M, P85 = 2.700M, P97 = 2.900M, Sd3neg = 1.900M, Sd2neg = 2.000M, Sd1neg = 2.200M, Sd0 = 2.400M, Sd1 = 2.700M, Sd2 = 3.000M, Sd3 = 3.300M });
+                list.Add(new WeightForLength { Lengthincm = 50.0M, Score = null, P3 = 2.100M, P15 = 2.300M, P50 = 2.500M, P85 = 2.800M, P97 = 3.000M, Sd3neg = 1.900M, Sd2neg = 2.100M, Sd1neg = 2.300M, Sd0 = 2.500M, Sd1 = 2.800M, Sd2 = 3.100M, Sd3 = 3.400M });
+                list.Add(new WeightForLength { Lengthincm = 55.0M, Score = null, P3 = 2.200M, P15 = 2.400M, P50 = 2.600M, P85 = 2.900M, P97 = 3.100M, Sd3neg = 2.000M, Sd2neg = 2.200M, Sd1neg = 2.400M, Sd0 = 2.600M, Sd1 = 2.900M, Sd2 = 3.100M, Sd3 = 3.500M });
+                list.Add(new WeightForLength { Lengthincm = 60.0M, Score = 2.85M, P3 = 2.300M, P15 = 2.500M, P50 = 2.700M, P85 = 3.000M, P97 = 3.200M, Sd3neg = 2.100M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.700M, Sd1 = 3.000M, Sd2 = 3.200M, Sd3 = 3.600M });
+                list.Add(new WeightForLength { Lengthincm = 65.0M, Score = null, P3 = 2.400M, P15 = 2.500M, P50 = 2.800M, P85 = 3.100M, P97 = 3.300M, Sd3neg = 2.300M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.800M, Sd1 = 3.000M, Sd2 = 3.300M, Sd3 = 3.700M });
+            }
+            else if (id ==2)
+            {
+                list.Add(new WeightForLength { Lengthincm = 75.0M, Score = null, P3 = 2.100M, P15 = 2.200M, P50 = 2.400M, P85 = 2.700M, P97 = 2.900M, Sd3neg = 1.900M, Sd2neg = 2.000M, Sd1neg = 2.200M, Sd0 = 2.400M, Sd1 = 2.700M, Sd2 = 3.000M, Sd3 = 3.300M });
+                list.Add(new WeightForLength { Lengthincm = 70.0M, Score = null, P3 = 2.100M, P15 = 2.300M, P50 = 2.500M, P85 = 2.800M, P97 = 3.000M, Sd3neg = 1.900M, Sd2neg = 2.100M, Sd1neg = 2.300M, Sd0 = 2.500M, Sd1 = 2.800M, Sd2 = 3.100M, Sd3 = 3.400M });
+                list.Add(new WeightForLength { Lengthincm = 85.0M, Score = null, P3 = 2.200M, P15 = 2.400M, P50 = 2.600M, P85 = 2.900M, P97 = 3.100M, Sd3neg = 2.000M, Sd2neg = 2.200M, Sd1neg = 2.400M, Sd0 = 2.600M, Sd1 = 2.900M, Sd2 = 3.100M, Sd3 = 3.500M });
+                list.Add(new WeightForLength { Lengthincm = 80.0M, Score = 2.85M, P3 = 2.300M, P15 = 2.500M, P50 = 2.700M, P85 = 3.000M, P97 = 3.200M, Sd3neg = 2.100M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.700M, Sd1 = 3.000M, Sd2 = 3.200M, Sd3 = 3.600M });
+                list.Add(new WeightForLength { Lengthincm = 85.0M, Score = null, P3 = 2.400M, P15 = 2.500M, P50 = 2.800M, P85 = 3.100M, P97 = 3.300M, Sd3neg = 2.300M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.800M, Sd1 = 3.000M, Sd2 = 3.300M, Sd3 = 3.700M });
+            }
             return list;
         }
          
-        public JsonResult GetWeightForLengthJson()
+        public JsonResult GetWeightForLengthJson(byte id)
         {
-            var populationList = GetWeightForLengthData();
+            var populationList = GetWeightForLengthData(id);
             var result = Json(populationList);
 
             return result;
         }
 
-        public JsonResult GetBMIForAgeJson()
+        public JsonResult GetBMIForAgeJson(byte id)
         {
-            var populationList = GetBMIForAgeData();
+            var populationList = GetBMIForAgeData(id);
             var result = Json(populationList);
 
             return result;
         }
 
-        public JsonResult GetHCForAgeJson()
+        public JsonResult GetHCForAgeJson(byte id)
         {
-            var populationList = GetHCForAgeData();
+            var populationList = GetHCForAgeData(id);
             var result = Json(populationList);
 
             return result;
         }
 
-        public JsonResult GetLengthHeightForAgeJson()
+        public JsonResult GetLengthHeightForAgeJson(byte id)
         {
-            var populationList = GetLengthHeightForAgeData();
+            var populationList = GetLengthHeightForAgeData(id);
             var result = Json(populationList);
 
             return result;
         }
 
-        public JsonResult GetMUACForAgeJson()
+        public JsonResult GetMUACForAgeJson(byte id)
         {
-            var populationList = GetMUACForAgeData();
+            var populationList = GetMUACForAgeData(id);
             var result = Json(populationList);
 
             return result;
         }
 
-        public JsonResult GetSSFForAgeJson()
+        public JsonResult GetSSFForAgeJson(byte id)
         {
-            var populationList = GetSSFForAgeData();
+            var populationList = GetSSFForAgeData(id);
             var result = Json(populationList);
 
             return result;
         }
 
-        public JsonResult GetTSFForAgeJson()
+        public JsonResult GetTSFForAgeJson(byte id)
         {
-            var populationList = GetTSFForAgeData();
+            var populationList = GetTSFForAgeData(id);
             var result = Json(populationList);
 
             return result;
         }
 
-        public JsonResult GetWeightForAgeJson()
+        public JsonResult GetWeightForAgeJson(byte id)
         {
-            var populationList = GetWeightForAgeData();
+            var populationList = GetWeightForAgeData(id);
             var result = Json(populationList);
 
             return result;
         }
 
-        public JsonResult GetWeightForHeightJson()
+        public JsonResult GetWeightForHeightJson(byte id)
         {
-            var populationList = GetWeightForHeightData();
+            var populationList = GetWeightForHeightData(id);
             var result = Json(populationList);
 
             return result;
         }
 
-        public static List<BmiforAge> GetBMIForAgeData()
+        public static List<BmiforAge> GetBMIForAgeData(byte id)
             {
                 List<BmiforAge> bfaList = new List<BmiforAge>();
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
                     //HTTP GET
-                    string pathBFA = "chart/BFA/2";
-                    var response = client.GetAsync(pathBFA);
+                    string pathBFA = "chart/BFA/" + id;
+                var response = client.GetAsync(pathBFA);
                     response.Wait();
                     var result = response.Result;
                     if (result.IsSuccessStatusCode)
@@ -233,14 +251,14 @@ namespace AnthroCloud.UI.Web.Controllers
                 return bfaList;
             }
 
-        public static List<HcForAge> GetHCForAgeData()
+        public static List<HcForAge> GetHCForAgeData(byte id)
         {
             List<HcForAge> hcaList = new List<HcForAge>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
                 //HTTP GET
-                string pathHCA = "chart/HCFA/2";
+                string pathHCA = "chart/HCFA/" + id;
                 var response = client.GetAsync(pathHCA);
                 response.Wait();
                 var result = response.Result;
@@ -256,14 +274,14 @@ namespace AnthroCloud.UI.Web.Controllers
             return hcaList;
         }
 
-        public static List<LengthHeightForAge> GetLengthHeightForAgeData()
+        public static List<LengthHeightForAge> GetLengthHeightForAgeData(byte id)
         {
             List<LengthHeightForAge> lhfaList = new List<LengthHeightForAge>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
                 //HTTP GET
-                string pathLHFA = "chart/LHFA/2";
+                string pathLHFA = "chart/LHFA/" + id;
                 var response = client.GetAsync(pathLHFA);
                 response.Wait();
                 var result = response.Result;
@@ -279,14 +297,14 @@ namespace AnthroCloud.UI.Web.Controllers
             return lhfaList;
         }
 
-        public static List<MuacforAge> GetMUACForAgeData()
+        public static List<MuacforAge> GetMUACForAgeData(byte id)
         {
             List<MuacforAge> muacList = new List<MuacforAge>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
                 //HTTP GET
-                string pathMUAC = "chart/MUAC/2";
+                string pathMUAC = "chart/MUAC/" + id;
                 var response = client.GetAsync(pathMUAC);
                 response.Wait();
                 var result = response.Result;
@@ -302,14 +320,14 @@ namespace AnthroCloud.UI.Web.Controllers
             return muacList;
         }
 
-        public static List<SsfforAge> GetSSFForAgeData()
+        public static List<SsfforAge> GetSSFForAgeData(byte id)
         {
             List<SsfforAge> ssfList = new List<SsfforAge>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
                 //HTTP GET
-                string pathSSF = "chart/SSFA/2";
+                string pathSSF = "chart/SSFA/" + id;
                 var response = client.GetAsync(pathSSF);
                 response.Wait();
                 var result = response.Result;
@@ -325,14 +343,14 @@ namespace AnthroCloud.UI.Web.Controllers
             return ssfList;
         }
 
-        public static List<TsfforAge> GetTSFForAgeData()
+        public static List<TsfforAge> GetTSFForAgeData(byte id)
         {
             List<TsfforAge> tsfList = new List<TsfforAge>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
                 //HTTP GET
-                string pathTSF = "chart/TSFA/2";
+                string pathTSF = "chart/TSFA/" + id;
                 var response = client.GetAsync(pathTSF);
                 response.Wait();
                 var result = response.Result;
@@ -348,14 +366,14 @@ namespace AnthroCloud.UI.Web.Controllers
             return tsfList;
         }
 
-        public static List<WeightForAge> GetWeightForAgeData()
+        public static List<WeightForAge> GetWeightForAgeData(byte id)
         {
             List<WeightForAge> hcaList = new List<WeightForAge>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
                 //HTTP GET
-                string pathWFA = "chart/WFA/2";
+                string pathWFA = "chart/WFA/" + id;
                 var response = client.GetAsync(pathWFA);
                 response.Wait();
                 var result = response.Result;
@@ -371,14 +389,14 @@ namespace AnthroCloud.UI.Web.Controllers
             return hcaList;
         }        
 
-        public static List<WeightForLength> GetWeightForLengthData()
+        public static List<WeightForLength> GetWeightForLengthData(byte id)
         {
             List<WeightForLength> wflList = new List<WeightForLength>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
                 //HTTP GET
-                string pathWFL = "chart/WFL/2";
+                string pathWFL = "chart/WFL/" + id; //"chart/WFL/2"
                 var response = client.GetAsync(pathWFL);
                 response.Wait();
                 var result = response.Result;
@@ -394,14 +412,14 @@ namespace AnthroCloud.UI.Web.Controllers
             return wflList;
         }
 
-        public static List<WeightForHeight> GetWeightForHeightData()
+        public static List<WeightForHeight> GetWeightForHeightData(byte id)
         {
             List<WeightForHeight> wfhList = new List<WeightForHeight>();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
                 //HTTP GET
-                string pathWFH = "chart/WFL/2";
+                string pathWFH = "chart/WFL/" + id;
                 var response = client.GetAsync(pathWFH);
                 response.Wait();
                 var result = response.Result;

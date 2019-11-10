@@ -24,10 +24,23 @@
     <script type="text/javascript">
         google.charts.setOnLoadCallback(LoadData);
 
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+        }
+
         function LoadData() {
+            var num = parseInt(getQueryVariable('sex'));
+
             $.ajax({
 
-                url: '../LineChart/GetLengthHeightForAgeJson',
+                url: '../LineChart/GetLengthHeightForAgeJson/' + num,
                 dataType: "json",
                 type: "GET",
                 error: function (xhr, status, error) {

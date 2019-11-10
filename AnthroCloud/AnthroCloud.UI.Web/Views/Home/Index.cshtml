@@ -24,7 +24,20 @@
 <script>
     // Popup window function
     function basicPopup(url) {
-        popupWindow = window.open(url, 'popUpWindow', 'height=575,width=575,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no, status=yes');
+        popupWindow = window.open(url, 'popUpWindow', 'height=575,width=575,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=yes,directories=no, status=yes');
+    }
+</script>
+<script>
+    function getRadioValue() {
+        var sex = document.getElementsByName('Sex');
+        var radioValue;
+        var i;
+        for (i = 0; i < sex.length; i++) {
+            if (sex[i].checked) {
+                radioValue =  sex[i].value ;
+            }
+        }
+        return radioValue;
     }
 </script>
 <!-- Added 11/5 11:14AM -->
@@ -43,65 +56,6 @@
 
         new google.visualization.ColumnChart(document.getElementById('mylinechart_div')).draw(data, options);
     }
-
-    //google.charts.setOnLoadCallback(LoadData);
-
-    //function LoadData() {
-    //    $.ajax({
-
-    //        url: 'LineChart/PopulationChart',
-    //        dataType: "json",
-    //        type: "GET",
-    //        error: function (xhr, status, error) {
-    //            var err = eval("(" + xhr.responseText + ")");
-    //            toastr.error(err.message);
-    //        },
-    //        success: function (data) {
-    //            PopulationChart(data);
-    //            return false;
-    //        }
-    //    });
-    //    return false;
-    //}
-
-    //function PopulationChart(data) {
-    //    var dataArray = [
-    //        ['lengthincm', 'p3', 'p15', 'p50', 'p85', 'p97']
-    //    ];
-
-    //    $.each(data, function (i, item) {
-    //        dataArray.push([item.lengthincm, item.p3, item.p15, item.p50, item.p85, item.p97]);
-    //    });
-
-    //    var data = google.visualization.arrayToDataTable(dataArray);
-    //    var options = {
-    //        'title': 'Length-for-age BOYS',
-    //        hAxis: {
-    //            title: 'Age (months)'
-    //        },
-    //        vAxis: {
-    //            title: 'Length\height (cm)'
-    //        },
-    //        'width': 550,
-    //        'height': 400,
-    //        curveType: 'function',
-    //        legend: 'right',
-    //        pointSize: 0,
-    //        series: {
-    //            0: { pointSize: 15, pointShape: { type: 'circle', sides: 5, dent: 0.8 } },
-    //            1: { color: '#000000' },
-    //            2: { color: '#e10808' },
-    //            3: { color: '#0c8d00' },
-    //            4: { color: '#e10808' },
-    //            5: { color: '#000000' }
-    //        }
-    //    };
-    //    var chart = new google.visualization.LineChart(document.getElementById('mylinechart_div'));
-
-    //    chart.draw(data, options);
-    //    return false;
-    //}
-
 </script>
 
 <form asp-action="Index" asp-controller="Home" method="post">
@@ -113,12 +67,8 @@
         <div class="col-md-6 mb-2">
             <label>Date of Visit</label>
             <input asp-for="DateOfVisit" type="date" class="form-control" placeholder="Enter patient's Date of Visit." required />
-            @*<input type="date" value="@Model.DateOfVisit" name="DateOfVisit" class="form-control" placeholder="Enter patient's Date of Visit" required>
-                @Html.TextBoxFor(Model => Model.DateOfVisit, new { @type = "date", @class = "form-control datepicker", @Value = "10/16/2019" })
-                @Html.TextBoxFor(Model => Model.DateOfVisit, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })*@
         </div>
     </div>
-
     <div class="form-row">
         <div class="col-md-4 mb-2">
             <label asp-for="Sex" class="col-form-label">Sex</label>
@@ -198,10 +148,8 @@
     </div>
     <div class="col-md-12 text-center">
         <button class="btn btn-primary" type="submit">Calculate</button>
-        @*<a asp-controller="LineChart" asp-action="Index" onclick="basicPopup(this.href);return false">Line Chart</a>
-        <a asp-controller="LineChart" asp-action="WFL_P" onclick="basicPopup(this.href);return false">P Chart</a>
-        <a asp-controller="LineChart" asp-action="WFL_Z" onclick="basicPopup(this.href);return false">Z Chart</a>
-        <a asp-controller="LineChart" asp-action="BFA_P" onclick="basicPopup(this.href);return false">BFA P Chart</a>*@
+        @*<a asp-controller="LineChart" asp-action="Index" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">Line Chart</a>
+        <a href="/LineChart" onclick="basicPopup(this.href+ '?sex=' + getRadioValue());return false">MYLINK</a>*@
     </div>
 </form>
 <div class="form-row">
@@ -237,14 +185,12 @@
                 <input type="text" asp-for="WflPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="WflZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.WflZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFL_P" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFL_P" onclick="basicPopup(this.href+ '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFL_Z" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFL_Z" onclick="basicPopup(this.href+ '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            @*<button class="btn btn-outline-secondary col-md-1 mr-1"><i class="fa fa-line-chart"></i></button>
-            <button class="btn btn-outline-secondary col-md-1 mr-1"><i class="fa fa-line-chart"></i></button>*@
         </div>
     </div>
     <div class="form-group col-md-6">
@@ -261,10 +207,10 @@
                 <input type="text" asp-for="HcaPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="HcaZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.HcaZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="HCA_P" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="HCA_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="HCA_Z" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="HCA_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -284,10 +230,10 @@
                 <input class="form-control col-md-2 mr-1" type="text" asp-for="WfaPercentile" readonly>
                 <input class="form-control col-md-2 mr-1" type="text" asp-for="WfaZscore" style="background-color: @{ if (Model != null) {@getColor(Model.WfaZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFA_P" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFA_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFA_Z" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFA_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -306,10 +252,10 @@
                 <input class="form-control col-md-2 mr-1" type="text" asp-for="MuacPercentile" readonly>
                 <input class="form-control col-md-2 mr-1" type="text" asp-for="MuacZscore" style="background-color: @{ if (Model != null) {@getColor(Model.MuacZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="MUAC_P" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="MUAC_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="MUAC_Z" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="MUAC_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -329,10 +275,10 @@
                 <input type="text" asp-for="LfaPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="LfaZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.LfaZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="LHFA_P" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="LHFA_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="LHFA_Z" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="LHFA_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -351,10 +297,10 @@
                 <input type="text" asp-for="TsfPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="TsfZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.TsfZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="TSF_P" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="TSF_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="TSF_Z" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="TSF_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -374,10 +320,10 @@
                 <input type="text" asp-for="BfaPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="BfaZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.BfaZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="BFA_P" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="BFA_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="BFA_Z" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="BFA_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -396,50 +342,12 @@
                 <input type="text" asp-for="SsfPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="SsfZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.SsfZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="SSF_P" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="SSF_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="SSF_Z" onclick="basicPopup(this.href);return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="SSF_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            @*
-            <button class="btn btn-outline-secondary col-md-1 mr-1" onclick="drawVisualization('2004',50,35)" data-toggle="modal" data-target="#myModal"><i class="fa fa-line-chart"></i></button>
-            <button class="btn btn-outline-secondary col-md-1 mr-1" onclick="LoadData()" data-toggle="modal" data-target="#myModal"><i class="fa fa-line-chart"></i></button>
-            *@
-        </div>
-    </div>
-</div>
-
-@*<a href="https://www.quackit.com/javascript/examples/sample_popup.cfm" onclick="basicPopup(this.href);return false">Open a popup window</a>
-<a asp-controller="LineChart" asp-action="Index" onclick="basicPopup(this.href + '/1/');return false">Line Chart</a>*@
-@*<a href="Views/LineChart/Chart.html" onclick="basicPopup(this.href);return false">NEW Chart 1</a>
-<a href="/LineChart/Chart.html" onclick="basicPopup(this.href);return false">NEW Chart 2</a>
-<a href="/Views/LineChart/Chart.html" onclick="basicPopup(this.href);return false">NEW Chart 3</a>
-<a href="~Views/LineChart/Chart.html" onclick="basicPopup(this.href);return false">NEW Chart 4</a>*@
-
-<!-- <a class="btn btn-info" asp-area="" asp-controller="LineChart" asp-action="Index" data-toggle="modal" data-target="#myModal" onclick="drawVisualization('2004',50,35)">Click me !</a>-->
-<!--  style="width: 900px; height: 500px;" -->
-<!-- Modal -->
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-
-        <div class="modal-content" style="width: 575px; ">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Modal title</h5>
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="mylinechart_div"></div>@*style="width: 650px; height: 180px;"*@
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
         </div>
     </div>
 </div>
