@@ -36,11 +36,14 @@
         }
 
         function LoadData() {
-            var num = parseInt(getQueryVariable('sex'));
-
+            var s = parseInt(getQueryVariable('s'));
+            var x = parseFloat(getQueryVariable('x'));
+            var y = parseFloat(getQueryVariable('y'));
+            var urlChart = "../LineChart/GetWeightForAgeJson/" + s + "/" + x + "/" + y;
+            
             $.ajax({
 
-                url: '../LineChart/GetWeightForAgeJson/' + num,
+                url: urlChart,
                 dataType: "json",
                 type: "GET",
                 error: function (xhr, status, error) {

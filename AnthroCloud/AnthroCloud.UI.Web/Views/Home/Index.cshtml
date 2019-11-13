@@ -148,8 +148,8 @@
     </div>
     <div class="col-md-12 text-center">
         <button class="btn btn-primary" type="submit">Calculate</button>
-        @*<a asp-controller="LineChart" asp-action="Index" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">Line Chart</a>
-        <a href="/LineChart" onclick="basicPopup(this.href+ '?sex=' + getRadioValue());return false">MYLINK</a>*@
+        <a asp-controller="LineChart" asp-action="Index" onclick="basicPopup(this.href + '?s=' + getRadioValue());return false">Line Chart</a>
+        @*<a href="/LineChart" onclick="basicPopup(this.href+ '?s=' + getRadioValue());return false">MYLINK</a>*@
     </div>
 </form>
 <div class="form-row">
@@ -185,10 +185,10 @@
                 <input type="text" asp-for="WflPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="WflZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.WflZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFL_P" onclick="basicPopup(this.href+ '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFL_P" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @{ @Model.LengthHeight} + '&y=' + @{ @Model.Weight});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFL_Z" onclick="basicPopup(this.href+ '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFL_Z" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @{ @Model.LengthHeight} + '&y=' + @{ @Model.Weight});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -207,10 +207,10 @@
                 <input type="text" asp-for="HcaPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="HcaZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.HcaZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="HCA_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="HCA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.HeadCircumference});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="HCA_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="HCA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.HeadCircumference});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -230,10 +230,10 @@
                 <input class="form-control col-md-2 mr-1" type="text" asp-for="WfaPercentile" readonly>
                 <input class="form-control col-md-2 mr-1" type="text" asp-for="WfaZscore" style="background-color: @{ if (Model != null) {@getColor(Model.WfaZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFA_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.Weight});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFA_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="WFA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.Weight});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -252,10 +252,10 @@
                 <input class="form-control col-md-2 mr-1" type="text" asp-for="MuacPercentile" readonly>
                 <input class="form-control col-md-2 mr-1" type="text" asp-for="MuacZscore" style="background-color: @{ if (Model != null) {@getColor(Model.MuacZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="MUAC_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="MUAC_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.MUAC} );return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="MUAC_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="MUAC_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.MUAC});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -275,10 +275,10 @@
                 <input type="text" asp-for="LfaPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="LfaZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.LfaZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="LHFA_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="LHFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.LengthHeight});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="LHFA_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="LHFA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue()  + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.HeadCircumference});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -297,10 +297,10 @@
                 <input type="text" asp-for="TsfPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="TsfZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.TsfZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="TSF_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="TSF_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.TricepsSkinFold});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="TSF_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="TSF_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.TricepsSkinFold});return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -320,10 +320,10 @@
                 <input type="text" asp-for="BfaPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="BfaZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.BfaZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="BFA_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="BFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.BMI} );return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="BFA_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="BFA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.BMI} );return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>
@@ -342,10 +342,10 @@
                 <input type="text" asp-for="SsfPercentile" class="form-control col-md-2 mr-1" readonly>
                 <input type="text" asp-for="SsfZscore" class="form-control col-md-2 mr-1" style="background-color: @{ if (Model != null) {@getColor(Model.SsfZscore)} }" readonly>
             }
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="SSF_P" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="SSF_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.SubscapularSkinFold} );return false">
                 <i class="fa fa-line-chart"></i>
             </a>
-            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="SSF_Z" onclick="basicPopup(this.href + '?sex=' + getRadioValue());return false">
+            <a class="btn btn-outline-secondary col-md-1 mr-1" asp-controller="LineChart" asp-action="SSF_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.SubscapularSkinFold} );return false">
                 <i class="fa fa-line-chart"></i>
             </a>
         </div>

@@ -73,17 +73,16 @@
         // 'score',
         function PopulationChart(data) {
             var dataArray = [
-                ['lengthincm', 'p3']
-                //, 'p15', 'p50', 'p85', 'p97'
+                ['lengthincm', 'score', 'p3', 'p15', 'p50', 'p85', 'p97']
+                //
             ];
 
             //var dataArray = [
             //    ['Sex', '2020 Population', '2010 Population', '2000 Population', '1990 Population']
             //];
-
-            // item.score,//item.p97, item.p85, item.p50, item.p15,
+              
             $.each(data, function (i, item) {
-                dataArray.push([item.lengthincm, item.p3]);
+                dataArray.push([item.lengthincm, item.score, item.p3, item.p15, item.p50, item.p85, item.p97 ]);
             });
 
             //$.each(data, function (i, item) {
@@ -105,7 +104,20 @@
                     title: 'Total Population'
                 },
                 'width': 550,
-                'height': 400
+                'height': 400,
+                curveType: 'function',
+                legend: 'right',
+                pointSize: 0,
+                series: {
+                    0: { pointSize: 15, lineWidth: 0, pointShape: { type: 'circle', sides: 5, dent: 0.8}, visibleInLegend: false},
+                    1: { color: '#000000' },
+                    2: { color: '#e10808' },
+                    //3: { color: '#ffd700' },
+                    3: { color: '#0c8d00' },
+                    //5: { color: '#ffd700' },
+                    4: { color: '#e10808' },
+                    5: { color: '#000000' }
+                }
             };
 
             var chart = new google.visualization.LineChart(document.getElementById('chart_div'));

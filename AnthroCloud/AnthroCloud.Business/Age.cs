@@ -130,6 +130,15 @@ namespace AnthroCloud.Business
             return ageString;
         }
 
+        public String ToMonthsString()
+        {
+            string ageString;
+
+            ageString = string.Format("{0}", TotalMonths);
+
+            return ageString;
+        }
+
         /// <summary>
         /// Writes string of age in years.
         /// </summary>

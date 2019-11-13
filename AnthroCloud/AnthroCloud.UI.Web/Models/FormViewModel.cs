@@ -18,6 +18,7 @@ namespace AnthroCloud.UI.Web.Models
             Weight = 9.00;
             LengthHeight = 73.00;
             Age = "11mo";
+            AgeInMonths = 12;
             AgeInYears = 0;
             BMI = 16.9;
             HeadCircumference = 45.00;
@@ -76,6 +77,7 @@ namespace AnthroCloud.UI.Web.Models
 
         public string Age { get; set; }
         public string AgeInDays { get; set; }
+        public byte AgeInMonths { get; set; }
 
         public byte AgeInYears { get; set; }
 

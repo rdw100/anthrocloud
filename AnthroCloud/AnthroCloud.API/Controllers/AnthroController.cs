@@ -28,7 +28,15 @@ namespace AnthroCloud.API.Controllers
             return age.ToDaysString();
         }
 
-        // GET: api/anthro/age/days/2016-12-01T00:00:00/2019-12-31T23:59:59
+        // GET: api/anthro/age/months/2016-12-01T00:00:00/2019-12-31T23:59:59
+        [Route("AGE/MONTHS/{birth}/{visit}")]
+        public string GetAgeInMonths(DateTime birth, DateTime visit)
+        {
+            Age age = new Age(birth, visit);
+            return age.ToMonthsString();
+        }
+
+        // GET: api/anthro/age/years/2016-12-01T00:00:00/2019-12-31T23:59:59
         [Route("AGE/YEARS/{birth}/{visit}")]
         public string GetAgeInYears(DateTime birth, DateTime visit)
         {
@@ -42,24 +50,6 @@ namespace AnthroCloud.API.Controllers
         {
             BMI bmi = new BMI(weight, height);
             return bmi.ToReadableDouble();
-        }
-
-        // POST: api/Anthro
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Anthro/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

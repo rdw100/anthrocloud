@@ -29,7 +29,7 @@ namespace AnthroCloud.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-SOKFT0S\\SQLEXPRESS;Initial Catalog=AnthroCloudDB;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Server=tcp:anthrocloudsql.database.windows.net,1433;Initial Catalog=AnthroCloud;Persist Security Info=False;User ID=Rudy;Password=@S4mm3rt1m3;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 
@@ -384,11 +384,11 @@ namespace AnthroCloud.Entities
 
             modelBuilder.Entity<WeightForHeight>(entity =>
             {
-                entity.HasKey(e => new { e.Sex, e.HeightInCm })
+                entity.HasKey(e => new { e.Sex, e.Heightincm })
                     .HasName("PK_CompositePK_WeightForHeight")
                     .IsClustered(false);
 
-                entity.Property(e => e.HeightInCm)
+                entity.Property(e => e.Heightincm)
                     .HasColumnName("HeightInCM")
                     .HasColumnType("decimal(4, 1)");
 

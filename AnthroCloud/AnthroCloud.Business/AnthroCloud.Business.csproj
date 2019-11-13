@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AnthroCloud.Data\AnthroCloud.Data.csproj" />
+    <ProjectReference Include="..\AnthroCloud.Framework\AnthroCloud.Framework.csproj" />
   </ItemGroup>
 
 </Project>

@@ -83,6 +83,20 @@ namespace AnthroCloud.UI.Web.Controllers
 
             model.AgeInDays = resAge;
 
+            //api/anthro/age/months/2016-12-01T00:00:00/2019-12-31T23:59:59
+            string pathAgeInMonths = "anthro/age/months/" + BirthDateString + "/" + VisitDateString; //"anthro/age/2016-12-01T00:00:00/2019-12-31T23:59:59";
+
+            var responseAnthroAgeInMonths = client.GetAsync(pathAgeInMonths).Result;
+            string resAgeInMonths = "";
+            using (HttpContent content = responseAnthroAge.Content)
+            {
+                // ... Read the string.
+                Task<string> result = content.ReadAsStringAsync();
+                resAgeInMonths = result.Result;
+            }
+
+            model.AgeInMonths = Convert.ToByte(resAgeInMonths);
+
             //api/anthro/age/years/2016-12-01T00:00:00/2019-12-31T23:59:59
             string pathAgeInYears = "anthro/age/years/" + BirthDateString + "/" + VisitDateString; //"anthro/age/2016-12-01T00:00:00/2019-12-31T23:59:59";
 

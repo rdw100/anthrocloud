@@ -24,8 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.UI", "AnthroCloud.UI\AnthroCloud.UI.csproj", "{39A00B4C-A855-4E84-8954-A7E9031BB15F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,10 +62,6 @@ Global
 		{541E8CD4-0F08-43DC-8989-B3BD70B430B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{541E8CD4-0F08-43DC-8989-B3BD70B430B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{541E8CD4-0F08-43DC-8989-B3BD70B430B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39A00B4C-A855-4E84-8954-A7E9031BB15F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39A00B4C-A855-4E84-8954-A7E9031BB15F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39A00B4C-A855-4E84-8954-A7E9031BB15F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39A00B4C-A855-4E84-8954-A7E9031BB15F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
