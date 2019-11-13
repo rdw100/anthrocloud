@@ -29,7 +29,7 @@ namespace AnthroCloud.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=tcp:anthrocloudsql.database.windows.net,1433;Initial Catalog=AnthroCloud;Persist Security Info=False;User ID=Rudy;Password=@S4mm3rt1m3;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer("");
             }
         }
 
