@@ -25,5 +25,9 @@ namespace AnthroCloud.Entities
         public decimal P97 { get; set; }
         [NotMapped]
         public decimal? Score { get; set; }
+        [NotMapped]
+        public string Mark { get; set; }
+        [NotMapped]
+        public string Marktext { get; set; }
     }
 }

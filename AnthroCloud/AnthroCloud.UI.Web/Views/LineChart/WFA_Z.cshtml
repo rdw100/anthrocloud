@@ -1,10 +1,10 @@
 ﻿@{
     Layout = null;
 }
-
+@{var chartTitle = Context.Request.Query["s"]; }
 <html>
 <head>
-    <title>Google Charts Tutorial</title>
+    <title>AnthroCloud Charts - Weight-for-age Z-score</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -14,6 +14,25 @@
     </script>
 </head>
 <body>
+    <div class="row" style="height:25px;">
+        <div class="col-8">
+            <h5 class="modal-title">
+                &nbsp;&nbsp;&nbsp;Weight-for-age @{if (chartTitle == "1")
+                    {@Html.Raw("BOYS");
+                }
+                else if (chartTitle == "2")
+                {@Html.Raw("GIRLS");
+            }}
+            </h5>
+            <p style="text-align:left;font-family:Arial;font-size:8px;color:darkgray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World Health Organization (WHO) 2006 Standard.</p>
+        </div>
+        <div class="col-4">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><a href="JavaScript:window.close()">&times;</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+        </div>
+    </div>
+    <hr style="border: 1px solid #d3d3d3;" />
     <div id="chart_div">
         <div class="text-center" style="margin-top:200px;">
             <div class="spinner-border" role="status">
@@ -40,7 +59,7 @@
             var x = parseFloat(getQueryVariable('x'));
             var y = parseFloat(getQueryVariable('y'));
             var urlChart = "../LineChart/GetWeightForAgeJson/" + s + "/" + x + "/" + y;
-            
+
             $.ajax({
 
                 url: urlChart,
@@ -61,14 +80,14 @@
         function LoadChartData(data) {
             var dataArray = [
                 [{ label: 'month', type: 'number' },
-                    { label: 'Score', type: 'number' },
-                    { label: '+3SD', type: 'number' },
-                    { label: '+2SD', type: 'number' },
-                    //{ label: '+1SD', type: 'number' },
-                    { label: 'Median', type: 'number' },
-                    //{ label: '-1SD', type: 'number' },
-                    { label: '-2SD', type: 'number' },
-                    { label: '-3SD', type: 'number' },
+                { label: 'Score', type: 'number' },
+                { label: '+3SD', type: 'number' },
+                { label: '+2SD', type: 'number' },
+                //{ label: '+1SD', type: 'number' },
+                { label: 'Median', type: 'number' },
+                //{ label: '-1SD', type: 'number' },
+                { label: '-2SD', type: 'number' },
+                { label: '-3SD', type: 'number' },
                 ]
             ];
 
@@ -80,20 +99,20 @@
 
             // Set chart options
             var options = {
-                'title': 'Weight-for-age',
+                'title': 'Birth to 5 Years (Z-scores)',
                 hAxis: {
                     title: 'Age (months)'
                 },
                 vAxis: {
                     title: 'Weight (kg)'
                 },
-                'width': 550,
-                'height': 400,
+                'width': 650,
+                'height': 500,
                 curveType: 'function',
                 legend: 'right',
                 pointSize: 0,
                 series: {
-                    0: { pointSize: 15, pointShape: { type: 'circle', sides: 5, dent: 0.8}, visibleInLegend: false, type: 'scatter'},
+                    0: { pointSize: 10, pointShape: { type: 'circle', sides: 5, dent: 0.8 }, visibleInLegend: false, type: 'scatter' },
                     1: { color: '#000000' },
                     2: { color: '#e10808' },
                     //3: { color: '#ffd700' },

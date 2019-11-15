@@ -34,8 +34,19 @@ namespace AnthroCloud.Framework.Drawing
         /// </summary>
         private decimal Y1 { get; set; }
 
+        /// <summary>
+        /// Creates a new object.
+        /// </summary>
         public LinearInterpolation() { }
 
+        /// <summary>
+        /// Creates a new object with parameters.
+        /// </summary>
+        /// <param name="newX">Known new x coordinate in a data point pair.</param>
+        /// <param name="newX0">Coordinate x0 begins straight line to x1.</param>
+        /// <param name="newX1">Coordinate x0 ends straight line from x1.</param>
+        /// <param name="newY0">Coordinate y0 begins straight line to y1.</param>
+        /// <param name="newY1">Coordinate y0 ends straight line from y1.</param>
         public LinearInterpolation(decimal newX, decimal newX0, decimal newX1, decimal newY0, decimal newY1)
         {
             X = newX;

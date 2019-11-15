@@ -88,7 +88,7 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var responseAnthroAgeInMonths = client.GetAsync(pathAgeInMonths).Result;
             string resAgeInMonths = "";
-            using (HttpContent content = responseAnthroAge.Content)
+            using (HttpContent content = responseAnthroAgeInMonths.Content)
             {
                 // ... Read the string.
                 Task<string> result = content.ReadAsStringAsync();

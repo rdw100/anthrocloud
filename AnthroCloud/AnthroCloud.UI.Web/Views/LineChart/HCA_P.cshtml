@@ -1,10 +1,10 @@
 ﻿@{
     Layout = null;
 }
-
+@{var chartTitle = Context.Request.Query["s"]; }
 <html>
 <head>
-    <title>Google Charts Tutorial</title>
+    <title>AnthroCloud Charts - HC-for-age Percentile</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -13,7 +13,24 @@
         google.charts.load('current', { packages: ['corechart', 'line'] });
     </script>
 </head>
-<body>
+<body style="overflow-x:hidden;overflow-y:hidden;">
+    <div class="row" style="height:25px;">
+        <div class="col-8">
+            <h5 class="modal-title">&nbsp;&nbsp;&nbsp;HC-for-age @{if (chartTitle == "1")
+                {@Html.Raw("BOYS");
+            }
+            else if (chartTitle == "2")
+            {@Html.Raw("GIRLS");
+        }} </h5>
+            <p style="text-align:left;font-family:Arial;font-size:8px;color:darkgray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World Health Organization (WHO) 2006 Standard.</p>
+        </div>
+        <div class="col-4">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><a href="JavaScript:window.close()">&times;</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+        </div>
+    </div>
+    <hr style="border: 1px solid #d3d3d3;" />
     <div id="chart_div">
         <div class="text-center" style="margin-top:200px;">
             <div class="spinner-border" role="status">
@@ -64,12 +81,12 @@
             //];
             var dataArray = [
                 [{ label: 'month', type: 'number' },
-                    { label: 'Score', type: 'number' },
-                    { label: '97th', type: 'number' },
-                    { label: '85th', type: 'number' },
-                    { label: '50th', type: 'number' },
-                    { label: '15th', type: 'number' },
-                    { label: '3rd', type: 'number' }
+                { label: 'Score', type: 'number' },
+                { label: '97th', type: 'number' },
+                { label: '85th', type: 'number' },
+                { label: '50th', type: 'number' },
+                { label: '15th', type: 'number' },
+                { label: '3rd', type: 'number' }
                 ]
             ];
 
@@ -81,26 +98,32 @@
 
             // Set chart options
             var options = {
-                'title': 'HC-for-age',
+                'title': 'Birth to 5 Years (Percentile)',
                 hAxis: {
-                    title: 'Age (months)'
+                    title: 'Age (months)',
+                    ticks: [0, 12, 24, 36, 48, 60]
                 },
                 vAxis: {
-                    title: 'Head circumference (cm)'
+                    title: 'Head circumference (cm)',
+                    viewWindow: {
+                        min: 28
+                    },
+                    ticks: [28,30,32,34,36,38,40,42,44,46,48,50,52,54]
                 },
-                'width': 550,
-                'height': 400,
+                'width': 650,
+                'height': 500,
                 curveType: 'function',
                 legend: 'right',
                 pointSize: 0,
                 series: {
-                    0: { pointSize: 15, pointShape: { type: 'circle', sides: 5, dent: 0.8 }, visibleInLegend: false, type: 'scatter' },
+                    0: { pointSize: 10, pointShape: { type: 'circle', sides: 5, dent: 0.8 }, visibleInLegend: false, type: 'scatter' },
                     1: { color: '#e10808' },
                     2: { color: '#ffd700' },
                     3: { color: '#0c8d00' },
                     4: { color: '#ffd700' },
                     5: { color: '#e10808' }
-                }
+                },
+                crosshair: { color: '#000', trigger: 'selection' }
             };
             var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
