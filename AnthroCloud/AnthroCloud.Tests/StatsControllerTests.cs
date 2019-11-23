@@ -7,11 +7,18 @@ using AnthroCloud.Entities;
 using AnthroCloud.API.Controllers;
 using AnthStat.Statistics;
 
-namespace AnthroCloud.Tests
+namespace AnthroCloud.Integration.Tests
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class StatsControllerTests
     {
+        /// <summary>
+        /// Tests InRange comparison theory where percentile and z-score numeric ranges are expected.
+        /// </summary>
+        /// <param name="indicator">The growth indicator</param>
+        /// <param name="measurement">The specified measured value</param>
+        /// <param name="ageInDays">The age in total days</param>
+        /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         [Theory]
         [InlineData(Indicator.ArmCircumferenceForAge, 15.00, 365, Sex.Male)]
         [InlineData(Indicator.BodyMassIndexForAge, 16.89, 365, Sex.Male)]
@@ -23,7 +30,7 @@ namespace AnthroCloud.Tests
         [InlineData(Indicator.WeightForAge, 9.00, 365, Sex.Male)]
         [InlineData(Indicator.WeightForHeight, 14.00, 96.00, Sex.Male)]
         [InlineData(Indicator.WeightForLength, 9.00, 73.00, Sex.Male)]
-        public void GetScores_PairValues_ShouldReturnYearMonthString(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        public void GetScores_PairValues_ShouldReturnTuples(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             var controller = new StatsController();
             Tuple<double, double> GetScores = controller.GetScore(indicator, measurement, ageInDays, sex);
@@ -32,6 +39,14 @@ namespace AnthroCloud.Tests
             Assert.InRange(GetScores.Item2, 0, 100);
         }
 
+        /// <summary>
+        /// Tests equality comparison theory where expected chart line color code is assigned from percentile and z-score numeric range.
+        /// </summary>
+        /// <param name="indicator">The growth indicator</param>
+        /// <param name="measurement">The specified measured value</param>
+        /// <param name="ageInDays">The age in total days</param>
+        /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
+        /// <param name="expectedColor">The chart line color code expected from z-score numeric range </param>
         [Theory]
         [InlineData(Indicator.ArmCircumferenceForAge, 15.50, 365, Sex.Female, "Gold")]
         [InlineData(Indicator.BodyMassIndexForAge, 19.9, 365, Sex.Female, "Red")]
@@ -53,7 +68,7 @@ namespace AnthroCloud.Tests
         }
 
         /// <summary>
-        /// 
+        /// Retrieves the chart line color code expected from z-score numeric range
         /// </summary>
         /// <param name="zscore"></param>
         /// <returns></returns>

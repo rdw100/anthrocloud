@@ -5,173 +5,268 @@ using Xunit;
 using AnthroCloud.Business;
 using AnthStat.Statistics;
 
-namespace AnthroCloud.Tests
+namespace AnthroCloud.Unit.Tests
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class StatsTests
     {
+        /// <summary>
+        /// Tests Weight-for-length z-score calculation.
+        /// </summary>
         [Fact]
-        public void Stats_WeightForLengthPercentile_Calculation()
+        public void Stats_WFL_Zscore_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.WeightForLength, 9.00, 73.00, Sex.Male);
+            double z = stat.CalculateZScore(Indicator.WeightForLength, 9.00, 73.00, Sex.Male);
  
-            Assert.Equal(-0.11587064595388744, p);
+            Assert.Equal(-0.12, Math.Round(z,2));
         }
 
+        /// <summary>
+        /// Tests Weight-for-length percentile calculation.
+        /// </summary>
         [Fact]
-        public void Stats_WeightForLengthZscore_Calculation()
+        public void Stats_WFL_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.WeightForLength, 9.00, 73.00, Sex.Male);
-            double z = stat.CalculatePercentile(p);
+            double z = stat.CalculateZScore(Indicator.WeightForLength, 9.00, 73.00, Sex.Male);
+            double p = stat.CalculatePercentile(z);
 
-            Assert.Equal(45.3877530045168, z);
-        }        
-
-        [Fact]
-        public void Stats_WeightForAgePercentile_Calculation()
-        {
-            var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.WeightForAge, 9.00, 365, Sex.Male);
-
-            Assert.Equal(-0.6330801913570989, p);
+            Assert.Equal(45.4, Math.Round(p,1));
         }
 
+        /// <summary>
+        /// Tests Weight-for-height z-score calculation.
+        /// </summary>
+        /// <remarks>Expected value obtained from child over 2 measured standing.</remarks>
         [Fact]
-        public void Stats_WeightForAgeZscore_Calculation()
+        public void Stats_WFH_Zscore_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.WeightForAge, 9.00, 365, Sex.Male);
-            double z = stat.CalculatePercentile(p);
+            double z = stat.CalculateZScore(Indicator.WeightForHeight, 12.00, 87.00, Sex.Male);
 
-            Assert.Equal(26.334063856829903, z);
+            Assert.Equal(-0.17, Math.Round(z,2));
         }
 
+        /// <summary>
+        /// Tests Weight-for-height percentile calculation.
+        /// </summary>
+        /// <remarks>Expected value obtained from child over 2 measured standing.</remarks>
         [Fact]
-        public void Stats_LenghtForAgePercentile_Calculation()
+        public void Stats_WFH_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
+            double z = stat.CalculateZScore(Indicator.WeightForHeight, 12.00, 87.00, Sex.Male);
+            double p = stat.CalculatePercentile(z);
 
-            Assert.Equal(-1.1528511286434184, p);
+            Assert.Equal(43.3, Math.Round(p,1));
         }
 
+        /// <summary>
+        /// Tests Weight-for-age z-score calculation.
+        /// </summary>
         [Fact]
-        public void Stats_LengthForAgeZscore_Calculation()
+        public void Stats_WFA_Zscore_Calculate() 
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
-            double z = stat.CalculatePercentile(p);
+            double z = stat.CalculateZScore(Indicator.WeightForAge, 9.00, 365, Sex.Male);
 
-            Assert.Equal(12.448574715727684, z);
+            Assert.Equal(-0.63, Math.Round(z, 2));
         }
 
+        /// <summary>
+        /// Tests Weight-for-age percentile calculation.
+        /// </summary>
         [Fact]
-        public void Stats_BMIForAgePercentile_Calculation()
+        public void Stats_WFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.BodyMassIndexForAge, 16.89, 365, Sex.Male);
+            double z = stat.CalculateZScore(Indicator.WeightForAge, 9.00, 365, Sex.Male);
+            double p = stat.CalculatePercentile(z);
 
-            Assert.Equal(0.06723053329109611, p);
+            Assert.Equal(26.3, Math.Round(p, 1));
         }
 
+        /// <summary>
+        /// Tests Length-for-age z-score calculation.
+        /// </summary>
         [Fact]
-        public void Stats_BMIForAgeZscore_Calculation()
+        public void Stats_LFA_Zscore_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.BodyMassIndexForAge, 16.89, 365, Sex.Male);
-            double z = stat.CalculatePercentile(p);
+            double z = stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
 
-            Assert.Equal(52.680091097505944, z);
+            Assert.Equal(-1.15, Math.Round(z, 2));
         }
-
+        /// <summary>
+        /// Tests Length-for-age percentile calculation.
+        /// </summary>
         [Fact]
-        public void Stats_HeadCircumferenceForAgePercentile_Calculation()
+        public void Stats_LFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.HeadCircumferenceForAge, 45.00, 365, Sex.Male);
+            double z = stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
+            double p = stat.CalculatePercentile(z);
 
-            Assert.Equal(-0.8279647089449516, p);
+            Assert.Equal(12.4, Math.Round(p, 1));
         }
 
+        /// <summary>
+        /// Tests Height-for-age z-score calculation.
+        /// </summary>
         [Fact]
-        public void Stats_HeadCircumferenceForAgeZscore_Calculation()
+        public void Stats_HFA_Zscore_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.HeadCircumferenceForAge, 45.00, 365, Sex.Male);
-            double z = stat.CalculatePercentile(p);
+            double z = stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
 
-            Assert.Equal(20.384524323408026, z);
+            Assert.Equal(-1.15, Math.Round(z, 2));
         }
-
+        /// <summary>
+        /// Tests Height-for-age percentile calculation.
+        /// </summary>
         [Fact]
-        public void Stats_ArmCircumferenceForAgePercentile_Calculation()
+        public void Stats_HFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.ArmCircumferenceForAge, 15.00, 365, Sex.Male);
+            double z = stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
+            double p = stat.CalculatePercentile(z);
 
-            Assert.Equal(0.3122386679064194, p);
+            Assert.Equal(12.4, Math.Round(p, 1));
         }
 
+        /// <summary>
+        /// Tests BodyMassIndexForAge z-score calculation.
+        /// </summary>
         [Fact]
-        public void Stats_ArmCircumferenceForAgeZscore_Calculation()
+        public void Stats_BFA_Zscore_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.ArmCircumferenceForAge, 15.00, 365, Sex.Male);
-            double z = stat.CalculatePercentile(p);
+            double z = stat.CalculateZScore(Indicator.BodyMassIndexForAge, 16.89, 365, Sex.Male);
 
-            Assert.Equal(62.25704263560083, z);
+            Assert.Equal(0.07, Math.Round(z, 2));
         }
 
+        /// <summary>
+        /// Tests BodyMassIndexForAge percentile calculation.
+        /// </summary>
         [Fact]
-        public void Stats_TricepsSkinfoldForAgePercentile_Calculation()
+        public void Stats_BFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.TricepsSkinfoldForAge, 8.00, 365, Sex.Male);
+            double z = stat.CalculateZScore(Indicator.BodyMassIndexForAge, 16.89, 365, Sex.Male);
+            double p = stat.CalculatePercentile(z);
 
-            Assert.Equal(-0.06708173943452408, p);
+            Assert.Equal(52.7, Math.Round(p, 1));
         }
 
+        /// <summary>
+        /// Tests HeadCircumferenceForAge z-score calculation.
+        /// </summary>
         [Fact]
-        public void Stats_TricepsSkinfoldForAgeZscore_Calculation()
+        public void Stats_HCFA_Zscore_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.TricepsSkinfoldForAge, 8.00, 365, Sex.Male);
-            double z = stat.CalculatePercentile(p);
+            double z = stat.CalculateZScore(Indicator.HeadCircumferenceForAge, 45.00, 365, Sex.Male);
 
-            Assert.Equal(47.32583154805701, z);
+            Assert.Equal(-0.83, Math.Round(z, 2));
         }
 
+        /// <summary>
+        /// Tests HeadCircumferenceForAge percentile calculation.
+        /// </summary>
         [Fact]
-        public void Stats_SubscapularSkinfoldForAgeTuple_Calculation()
+        public void Stats_HCFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            Tuple<double, double> GetScores = stat.GetScore(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
+            double z = stat.CalculateZScore(Indicator.HeadCircumferenceForAge, 45.00, 365, Sex.Male);
+            double p = stat.CalculatePercentile(z);
 
-            Assert.Equal(0.45, GetScores.Item1);
-            Assert.Equal(67.4, GetScores.Item2);
+            Assert.Equal(20.4, Math.Round(p, 1));
         }
 
+        /// <summary>
+        /// Tests ArmCircumferenceForAge z-score calculation.
+        /// </summary>
         [Fact]
-        public void Stats_SubscapularSkinfoldForAgePercentile_Calculation()
+        public void Stats_MUAC_Zscore_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
+            double z = stat.CalculateZScore(Indicator.ArmCircumferenceForAge, 15.00, 365, Sex.Male);
 
-            Assert.Equal(0.45105402279903917, p);
+            Assert.Equal(0.31, Math.Round(z, 2));
         }
 
+        /// <summary>
+        /// Tests ArmCircumferenceForAge percentile calculation.
+        /// </summary>
         [Fact]
-        public void Stats_SubscapularSkinfoldForAgeZscore_Calculation()
+        public void Stats_MUAC_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double p = stat.CalculateZScore(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
-            double z = stat.CalculatePercentile(p);
+            double z = stat.CalculateZScore(Indicator.ArmCircumferenceForAge, 15.00, 365, Sex.Male);
+            double p = stat.CalculatePercentile(z);
 
-            Assert.Equal(67.40246931726722, z);
+            Assert.Equal(62.3, Math.Round(p, 1));
         }
 
+        /// <summary>
+        /// Tests TricepsSkinfoldForAge z-score calculation.
+        /// </summary>
+        [Fact]
+        public void Stats_TSF_Zscore_Calculate()
+        {
+            var stat = new Stats();
+            double z = stat.CalculateZScore(Indicator.TricepsSkinfoldForAge, 8.00, 365, Sex.Male);
+
+            Assert.Equal(-0.07, Math.Round(z, 2));
+        }
+
+        /// <summary>
+        /// Tests TricepsSkinfoldForAge percentile calculation.
+        /// </summary>
+        [Fact]
+        public void Stats_TSF_Pcentile_Calculate()
+        {
+            var stat = new Stats();
+            double z = stat.CalculateZScore(Indicator.TricepsSkinfoldForAge, 8.00, 365, Sex.Male);
+            double p = stat.CalculatePercentile(z);
+
+            Assert.Equal(47.3, Math.Round(p, 1));
+        }
+
+        /// <summary>
+        /// Tests SubscapularSkinfoldForAge z-score calculation.
+        /// </summary>
+        [Fact]
+        public void Stats_SSF_Zscore_Calculate()
+        {
+            var stat = new Stats();
+            double z = stat.CalculateZScore(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
+
+            Assert.Equal(0.45, Math.Round(z, 2));
+        }
+
+        /// <summary>
+        /// Tests SubscapularSkinfoldForAge percentile calculation.
+        /// </summary>
+        [Fact]
+        public void Stats_SSF_Pcentile_Calculate()
+        {
+            var stat = new Stats();
+            double z = stat.CalculateZScore(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
+            double p = stat.CalculatePercentile(z);
+
+            Assert.Equal(67.4, Math.Round(p, 1));
+        }
+
+        /// <summary>
+        /// Tests percentile and zscore range for all 10 indicators.
+        /// </summary>
+        /// <param name="indicator">The measurement indicator</param>
+        /// <param name="measurement">The measured value</param>
+        /// <param name="ageInDays">The age in days</param>
+        /// <param name="sex">The biological determination</param>
         [Theory]
         [InlineData(Indicator.ArmCircumferenceForAge, 15.00, 365, Sex.Male)]
         [InlineData(Indicator.BodyMassIndexForAge, 16.89, 365, Sex.Male)]
@@ -183,7 +278,7 @@ namespace AnthroCloud.Tests
         [InlineData(Indicator.WeightForAge, 9.00, 365, Sex.Male)]
         [InlineData(Indicator.WeightForHeight, 14.00, 96.00, Sex.Male)]
         [InlineData(Indicator.WeightForLength, 9.00, 73.00, Sex.Male)]
-        public void Stats_AllIndicatorTuple_Calculation(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        public void Stats_All_Tuple(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             var stat = new Stats();
             Tuple<double, double> GetScores = stat.GetScore(indicator, measurement, ageInDays, sex);

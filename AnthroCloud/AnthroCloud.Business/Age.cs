@@ -129,7 +129,10 @@ namespace AnthroCloud.Business
 
             return ageString;
         }
-
+        /// <summary>
+        /// Writes string of age in total months.
+        /// </summary>
+        /// <returns>Returns age in total months.</returns>
         public String ToMonthsString()
         {
             string ageString;

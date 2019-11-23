@@ -67,17 +67,5 @@ namespace AnthroCloud.Business
 
             return Tuple.Create(z, p);
         }
-
-        //public List<Tuple<Indicator, double, double>> GetScoresList(List<Tuple<Indicator, double, double, Sex>> inputs)
-        //{
-        //    List<Tuple<Indicator, double, double>> list = new List<Tuple<Indicator, double, double>>();
-
-        //    foreach (var tuple in inputs)
-        //    {
-        //        list.Add(new Tuple<Indicator, double, double>(tuple.Item1, tuple.Item2, tuple.Item3));
-        //    }
-            
-        //    return list;
-        //}
     }
 }

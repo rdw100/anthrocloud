@@ -6,13 +6,39 @@ using AnthroCloud.Business;
 using AnthroCloud.Entities;
 using AnthroCloud.API.Controllers;
 
-namespace AnthroCloud.Tests
+namespace AnthroCloud.Integration.Tests
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class AnthroControllerTests
     {
         [Fact]
-        public void GetAge_SimpleValues_ShouldReturnYearMonthString()
+        public void Age_Years_ShouldReturnYearsString()
+        {
+            var controller = new AnthroController();
+
+            String expected = "3";
+            DateTime visit = new DateTime(2019, 12, 1);
+            DateTime birth = new DateTime(2016, 12, 1);
+            String actual = controller.GetAgeInYears(birth, visit);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Age_Months_ShouldReturnMonthsString()
+        {
+            var controller = new AnthroController();
+
+            String expected = "36";
+            DateTime visit = new DateTime(2019, 12, 1);
+            DateTime birth = new DateTime(2016, 12, 1);
+            String actual = controller.GetAgeInMonths(birth, visit);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Age_String_ShouldReturnYearMonthString()
         {
             var controller = new AnthroController();
             
@@ -25,7 +51,7 @@ namespace AnthroCloud.Tests
         }
 
         [Fact]
-        public void GetAgeInDays_SimpleValues_ShouldReturnDaysString()
+        public void Age_Days_ShouldReturnDaysString()
         {            
             var controller = new AnthroController();
 
@@ -38,7 +64,7 @@ namespace AnthroCloud.Tests
         }
 
         [Fact]
-        public void GetBMi_SimpleValues_ShouldReturnBMIString()
+        public void BMI_SimpleValues_ShouldReturnBMIString()
         {
             var controller = new AnthroController();
             

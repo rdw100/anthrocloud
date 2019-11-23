@@ -101,10 +101,12 @@
             var options = {
                 'title': 'Birth to 5 Years (Z-scores)',
                 hAxis: {
-                    title: 'Age (months)'
+                    title: 'Age (months)',
+                    ticks: [0, 12, 24, 36, 48, 60]
                 },
                 vAxis: {
-                    title: 'Weight (kg)'
+                    title: 'Weight (kg)',
+                    ticks: [0, 5, 10, 15, 20, 25, 30]
                 },
                 'width': 650,
                 'height': 500,
@@ -115,9 +117,7 @@
                     0: { pointSize: 10, pointShape: { type: 'circle', sides: 5, dent: 0.8 }, visibleInLegend: false, type: 'scatter' },
                     1: { color: '#000000' },
                     2: { color: '#e10808' },
-                    //3: { color: '#ffd700' },
                     3: { color: '#0c8d00' },
-                    //5: { color: '#ffd700' },
                     4: { color: '#e10808' },
                     5: { color: '#000000' }
                 }

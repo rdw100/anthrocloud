@@ -13,6 +13,14 @@ namespace AnthroCloud.API.Controllers
     [ApiController]
     public class StatsController : ControllerBase
     {
+        /// <summary>
+        /// Gets tuple of zscore and percentile calculation for specified measurement indicator given measurement, age, and sex.
+        /// </summary>
+        /// <param name="indicator">The growth indicator</param>
+        /// <param name="measurement">The specified measured value</param>
+        /// <param name="ageInDays">The age in total days</param>
+        /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
+        /// <returns></returns>
         // GET: api/Stats/WeightForAge/9.00/365/Male
         [HttpGet("{indicator}/{measurement}/{ageInDays}/{sex}")]
         [Route("STATS/{indicator}/{measurement}/{ageInDays}/{sex}")]
@@ -21,32 +29,6 @@ namespace AnthroCloud.API.Controllers
             Stats stats = new Stats();
             Tuple<double, double> scores = stats.GetScore(indicator, measurement, ageInDays, sex);
             return scores;
-        }
-
-        //[HttpGet("people/{id}")]
-        //public Tuple<double, double> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
-        //{
-        //    Stats stats = new Stats();
-        //    Tuple<double, double> scores = stats.GetScore(indicator, measurement, ageInDays, sex);
-        //    return scores;
-        //}
-
-        // POST: api/Stats
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Stats/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

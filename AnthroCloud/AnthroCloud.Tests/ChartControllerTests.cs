@@ -7,23 +7,26 @@ using AnthroCloud.Entities;
 using AnthroCloud.API.Controllers;
 using System.Linq;
 
-namespace AnthroCloud.Tests
+namespace AnthroCloud.Integration.Tests
 {
     /// <summary>
-    /// 
+    /// Integration tests controller logic for chart data.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class ChartControllerTests
     {
+        /// <summary>
+        /// Tests chart controller logic for BMI chart data given new data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllBMI_ShouldReturnAllMale()
+        public void GetBMI_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<BmiforAge> expected = GetTestBmiforAge_Male();
 
             var controller = new ChartController();
-            var target = controller.GetAllBFA(1,12,17) as List<BmiforAge>;
+            var target = controller.GetAllBFA(1,12,17.5M) as List<BmiforAge>;
 
-            Assert.Equal(62 + 1, target.Count());
+            Assert.Equal(62, target.Count());
             
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -62,15 +65,18 @@ namespace AnthroCloud.Tests
             return testBmiforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for BMI chart data given new data point (x,y) when female.
+        /// </summary>
         [Fact]
-        public void GetAllBMI_ShouldReturnAllFemale()
+        public void GetBMI_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<BmiforAge> expected = GetTestBmiforAge_Female();
 
             var controller = new ChartController();
             var target = controller.GetAllBFA(2, 12, 17) as List<BmiforAge>;
 
-            Assert.Equal(62 + 1, target.Count());
+            Assert.Equal(62, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -109,15 +115,18 @@ namespace AnthroCloud.Tests
             return testBmiforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for HCFA chart data given new data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllHCFA_ShouldReturnAllMale()
+        public void GetHCFA_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<HcForAge> expected = GetAllHCFA_Male();
 
             var controller = new ChartController();
             var target = controller.GetAllHCFA(1, 12, 73.00M) as List<HcForAge>;
 
-            Assert.Equal(61 + 1, target.Count());
+            Assert.Equal(61, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -156,15 +165,18 @@ namespace AnthroCloud.Tests
             return testHcforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for HCFA chart data given new data point (x,y) when female.
+        /// </summary>
         [Fact]
-        public void GetAllHCFA_ShouldReturnAllFemale()
+        public void GetHCFA_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<HcForAge> expected = GetAllHCFA_Female();
 
             var controller = new ChartController();
             var target = controller.GetAllHCFA(2, 12, 73.00M) as List<HcForAge>;
 
-            Assert.Equal(61 + 1, target.Count());
+            Assert.Equal(61, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -203,15 +215,18 @@ namespace AnthroCloud.Tests
             return testHcforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for LHFA chart data given new data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllLHFA_ShouldReturnAllMale()
+        public void GetLHFA_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<LengthHeightForAge> expected = GetAllLHFA_Male();
 
             var controller = new ChartController();
             var target = controller.GetAllLHFA(1, 12, 73) as List<LengthHeightForAge>;
 
-            Assert.Equal(62 + 1, target.Count());
+            Assert.Equal(62, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -248,15 +263,18 @@ namespace AnthroCloud.Tests
             return testLhfaforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for LHFA chart data given new data point (x,y) when female.
+        /// </summary>
         [Fact]
-        public void GetAllLHFA_ShouldReturnAllFemale()
+        public void GetLHFA_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<LengthHeightForAge> expected = GetAllLHFA_Female();
 
             var controller = new ChartController();
             var target = controller.GetAllLHFA(2, 12, 73) as List<LengthHeightForAge>;
 
-            Assert.Equal(62 + 1, target.Count());
+            Assert.Equal(62, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -293,15 +311,18 @@ namespace AnthroCloud.Tests
             return testLhfaforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for MUAC chart data given new data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllMUAC_ShouldReturnAllMale()
+        public void GetMUAC_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<MuacforAge> expected = GetAllMUAC_Male();
 
             var controller = new ChartController();
             var target = controller.GetAllMUAC(1, 12, 15) as List<MuacforAge>;
 
-            Assert.Equal(58 + 1, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -340,15 +361,18 @@ namespace AnthroCloud.Tests
             return testMuacforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for MUAC chart data given new data point (x,y) when female.
+        /// </summary>
         [Fact]
-        public void GetAllMUAC_ShouldReturnAllFemale()
+        public void GetMUAC_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<MuacforAge> expected = GetAllMUAC_Female();
 
             var controller = new ChartController();
             var target = controller.GetAllMUAC(2, 12, 15) as List<MuacforAge>;
 
-            Assert.Equal(58 + 1, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -387,15 +411,18 @@ namespace AnthroCloud.Tests
             return testMuacforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for SSFA chart data given new data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllSSFA_ShouldReturnAllMale()
+        public void GetSSFA_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<SsfforAge> expected = GetAllSSFA_Male();
 
             var controller = new ChartController();
             var target = controller.GetAllSSFA(1, 12, 7) as List<SsfforAge>;
 
-            Assert.Equal(58 + 1, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -434,15 +461,18 @@ namespace AnthroCloud.Tests
             return testSSFforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for SSFA chart data given new data point (x,y) when female.
+        /// </summary>
         [Fact]
-        public void GetAllSSFA_ShouldReturnAllFemale()
+        public void GetSSFA_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<SsfforAge> expected = GetAllSSFA_Female();
 
             var controller = new ChartController();
             var target = controller.GetAllSSFA(2, 12, 7) as List<SsfforAge>;
 
-            Assert.Equal(58 + 1, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -481,15 +511,18 @@ namespace AnthroCloud.Tests
             return testSSFforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for TSFA chart data given new data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllTSFA_ShouldReturnAllMale()
+        public void GetTSFA_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<TsfforAge> expected = GetAllTSFA_Male();
 
             var controller = new ChartController();
             var target = controller.GetAllTSFA(1, 12, 8) as List<TsfforAge>;
 
-            Assert.Equal(58 + 1, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -528,15 +561,18 @@ namespace AnthroCloud.Tests
             return testTsfforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for TSFA chart data given new data point (x,y) when female.
+        /// </summary>
         [Fact]
-        public void GetAllTSFA_ShouldReturnAllFemale()
+        public void GetTSFA_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<TsfforAge> expected = GetAllTSFA_Female();
 
             var controller = new ChartController();
             var target = controller.GetAllTSFA(2, 12, 8) as List<TsfforAge>;
 
-            Assert.Equal(58 + 1, target.Count());
+            Assert.Equal(58, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -575,15 +611,18 @@ namespace AnthroCloud.Tests
             return testTsfforAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for WFA chart data given new data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllWFA_ShouldReturnAllMale()
+        public void GetWFA_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<WeightForAge> expected = GetAllWFA_Male();
 
             var controller = new ChartController();
             var target = controller.GetAllWFA(1, 12, 9) as List<WeightForAge>;
 
-            Assert.Equal(61 + 1, target.Count());
+            Assert.Equal(61, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -620,15 +659,18 @@ namespace AnthroCloud.Tests
             return testWeightForAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for WFA chart data given new data point (x,y) when female.
+        /// </summary>
         [Fact]
-        public void GetAllWFA_ShouldReturnAllFemale()
+        public void GetWFA_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<WeightForAge> expected = GetAllWFA_Female();
 
             var controller = new ChartController();
             var target = controller.GetAllWFA(2, 12, 9) as List<WeightForAge>;
 
-            Assert.Equal(61 + 1, target.Count());
+            Assert.Equal(61, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -665,15 +707,18 @@ namespace AnthroCloud.Tests
             return testWeightForAge;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for WFH chart data given new data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllWFH_ShouldReturnAllMale()
+        public void GetWFH_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<WeightForHeight> expected = GetAllWFH_Male();
 
             var controller = new ChartController();
             var target = controller.GetAllWFH(1, 73, 9) as List<WeightForHeight>;
 
-            Assert.Equal(111 + 1, target.Count());
+            Assert.Equal(111, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -712,15 +757,70 @@ namespace AnthroCloud.Tests
             return testWeightForHeight;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for WFH chart data given new interpolated data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllWFH_ShouldReturnAllFemale()
+        public void GetWFH_MaleNewXNewY_ShouldReturnInterpolated()
+        {
+            List<WeightForHeight> expected = GetWFH_Male_Interpolated_Row();
+
+            var controller = new ChartController();
+            var target = controller.GetAllWFH(1, 87.70M, 12.35M) as List<WeightForHeight>;
+
+            Assert.Equal(111 + 1, target.Count());
+
+            var actual = (from l in target where l.Score == 12.35M select l).FirstOrDefault();
+
+            Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
+            Assert.Equal(expected.FirstOrDefault().Heightincm, actual.Heightincm);
+            Assert.Equal(expected.FirstOrDefault().M, actual.M);
+            Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
+            Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
+            Assert.Equal(expected.FirstOrDefault().Score, actual.Score);
+            Assert.InRange((decimal)actual.P97, 0, 100);
+        }
+
+        private List<WeightForHeight> GetWFH_Male_Interpolated_Row()
+        {
+            var testWeightForHeight = new List<WeightForHeight>();
+            testWeightForHeight.Add(new WeightForHeight
+            {
+                Sex = 1,
+                Heightincm = 87.70M,
+                Score = 12.35M,
+                L = null,
+                M = null,
+                S = null,
+                Sd3neg = 9.750M,
+                Sd2neg = 10.550M,
+                Sd1neg = 11.400M,
+                Sd0 = 12.350M,
+                Sd1 = 13.400M,
+                Sd2 = 14.600M,
+                Sd3 = 15.900M,
+                P3 = 10.650M,
+                P15 = 11.350M,
+                P50 = 12.350M,
+                P85 = 13.450M,
+                P97 = 14.450M
+            });
+
+            return testWeightForHeight;
+        }
+
+        /// <summary>
+        /// Tests chart controller logic for WFH chart data given new data point (x,y) when female.
+        /// </summary>
+        [Fact]
+        public void GetWFH_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<WeightForHeight> expected = GetAllWFH_Female();
 
             var controller = new ChartController();
             var target = controller.GetAllWFH(2, 73, 9) as List<WeightForHeight>;
 
-            Assert.Equal(111 + 1, target.Count());
+            Assert.Equal(111, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -729,6 +829,7 @@ namespace AnthroCloud.Tests
             Assert.Equal(expected.FirstOrDefault().M, actual.M);
             Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
             Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
+            Assert.Equal(expected.FirstOrDefault().Score, actual.Score);
             Assert.InRange((decimal)actual.P97, 0, 100);
         }
 
@@ -759,8 +860,63 @@ namespace AnthroCloud.Tests
             return testWeightForHeight;
         }
 
+        /// <summary>
+        /// Tests chart controller logic for WFH chart data given new interpolated data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllWFL_ShouldReturnAllMale()
+        public void GetWFH_FemaleNewXNewY_ShouldReturnInterpolated()
+        {
+            List<WeightForHeight> expected = GetWFH_Female_Interpolated_Row();
+
+            var controller = new ChartController();
+            var target = controller.GetAllWFH(1, 87.70M, 12.35M) as List<WeightForHeight>;
+
+            Assert.Equal(111 + 1, target.Count());
+
+            var actual = (from l in target where l.Score == 12.35M select l).FirstOrDefault();
+
+            Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
+            Assert.Equal(expected.FirstOrDefault().Heightincm, actual.Heightincm);
+            Assert.Equal(expected.FirstOrDefault().M, actual.M);
+            Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
+            Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
+            Assert.Equal(expected.FirstOrDefault().Score, actual.Score);
+            Assert.InRange((decimal)actual.P97, 0, 100);
+        }
+
+        private List<WeightForHeight> GetWFH_Female_Interpolated_Row()
+        {
+            var testWeightForHeight = new List<WeightForHeight>();
+            testWeightForHeight.Add(new WeightForHeight
+            {
+                Sex = 1,
+                Heightincm = 87.70M,
+                Score = 12.35M,
+                L = null,
+                M = null,
+                S = null,
+                Sd3neg = 9.750M,
+                Sd2neg = 10.550M,
+                Sd1neg = 11.400M,
+                Sd0 = 12.350M,
+                Sd1 = 13.400M,
+                Sd2 = 14.600M,
+                Sd3 = 15.900M,
+                P3 = 10.650M,
+                P15 = 11.350M,
+                P50 = 12.350M,
+                P85 = 13.450M,
+                P97 = 14.450M
+            });
+
+            return testWeightForHeight;
+        }
+
+        /// <summary>
+        /// Tests chart controller logic for WFL chart data given new data point (x,y) when male.
+        /// </summary>
+        [Fact]
+        public void GetWFL_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<WeightForLength> expected = GetAllWFL_Male();
 
@@ -768,7 +924,7 @@ namespace AnthroCloud.Tests
             var target = controller.GetAllWFL(1, 73.00M, 9.00M) as List<WeightForLength>;
 
             // + 1 represents added interpolated data row for scored line chart
-            Assert.Equal(131 + 1, target.Count());
+            Assert.Equal(131, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -806,16 +962,70 @@ namespace AnthroCloud.Tests
 
             return testWeightForLength;
         }
-
+        /// <summary>
+        /// Tests chart controller logic for WFL chart data given new interpolated data point (x,y) when male.
+        /// </summary>
         [Fact]
-        public void GetAllWFL_ShouldReturnAllFemale()
+        public void GetWFL_MaleNewXNewY_ShouldReturnInterpolated()
+        {
+            List<WeightForLength> expected = GetWFL_Male_Interpolated_Row();
+
+            var controller = new ChartController();
+            var target = controller.GetAllWFL(1, 73.25M, 9.25M) as List<WeightForLength>;
+
+            // + 1 represents added interpolated data row for scored line chart
+            Assert.Equal(131 + 1, target.Count());
+
+            var actual = (from l in target where l.Score == 9.25M select l).FirstOrDefault();
+
+            Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
+            Assert.Equal(expected.FirstOrDefault().Lengthincm, actual.Lengthincm);
+            Assert.Equal(expected.FirstOrDefault().M, actual.M);
+            Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
+            Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
+            Assert.Equal(expected.FirstOrDefault().Score, actual.Score);
+            Assert.InRange((decimal)actual.P97, 0, 100);
+        }
+        private List<WeightForLength> GetWFL_Male_Interpolated_Row()
+        {
+            var testWeightForLength = new List<WeightForLength>();
+            testWeightForLength.Add(new WeightForLength
+            {
+                Lengthincm = 73.25M,
+                Score = 9.25M, 
+                Sex = 1,
+                L = null,
+                M = null,
+                S = null,
+                Sd3neg = 7.200M,
+                Sd2neg = 7.750M,
+                Sd1neg = 8.450M,
+                Sd0 = 9.150M,
+                Sd1 = 9.950M,
+                Sd2 = 10.850M,
+                Sd3 = 16.850M,
+                P3 = 7.850M,
+                P15 = 8.400M,
+                P50 = 9.150M,
+                P85 = 9.950M,
+                P97 = 10.750M
+            });
+
+            return testWeightForLength;
+        }
+
+        /// <summary>
+        /// Tests chart controller logic for WFL chart data given new data point (x,y) when female.
+        /// </summary>
+        [Fact]
+        public void GetWFL_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<WeightForLength> expected = GetAllWFL_Female();
 
             var controller = new ChartController();
             var target = controller.GetAllWFL(2, 73.00M, 9.00M) as List<WeightForLength>;
 
-            Assert.Equal(131 + 1, target.Count());
+            Assert.Equal(131, target.Count());
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -849,6 +1059,58 @@ namespace AnthroCloud.Tests
                 P50 = 2.500M,
                 P85 = 2.700M,
                 P97 = 2.900M
+            });
+
+            return testWeightForLength;
+        }
+
+        /// <summary>
+        /// Tests chart controller logic for WFL chart data given new interpolated data point (x,y) when female.
+        /// </summary>
+        [Fact]
+        public void GetWFL_FemaleNewXNewY_ShouldReturnInterpolated()
+        {
+            List<WeightForLength> expected = GetWFL_Female_Interpolated_Row();
+
+            var controller = new ChartController();
+            var target = controller.GetAllWFL(2, 73.25M, 9.25M) as List<WeightForLength>;
+
+            Assert.Equal(131 + 1, target.Count());
+
+            var actual = (from l in target where l.Score == 9.25M select l).FirstOrDefault();
+
+            Assert.Equal((Sexes)expected.FirstOrDefault().Sex, (Sexes)actual.Sex);
+            Assert.Equal(expected.FirstOrDefault().Lengthincm, actual.Lengthincm);
+            Assert.Equal(expected.FirstOrDefault().M, actual.M);
+            Assert.Equal(expected.FirstOrDefault().Sd0, actual.Sd0);
+            Assert.Equal(expected.FirstOrDefault().P50, actual.P50);
+            Assert.Equal(expected.FirstOrDefault().Score, actual.Score);
+            Assert.InRange((decimal)actual.P97, 0, 100);
+        }
+
+        private List<WeightForLength> GetWFL_Female_Interpolated_Row()
+        {
+            var testWeightForLength = new List<WeightForLength>();
+            testWeightForLength.Add(new WeightForLength
+            {
+                Lengthincm = 73.25M,
+                Sex = 2,
+                Score = 9.25M,
+                L = null,
+                M = null,
+                S = null,
+                Sd3neg = 6.850M,
+                Sd2neg = 7.400M,
+                Sd1neg = 8.050M,
+                Sd0 = 8.850M,
+                Sd1 = 9.650M,
+                Sd2 = 10.650M,
+                Sd3 = 11.750M,
+                P3 = 7.450M,
+                P15 = 8.050M,
+                P50 = 8.850M,
+                P85 = 9.650M,
+                P97 = 10.500M
             });
 
             return testWeightForLength;

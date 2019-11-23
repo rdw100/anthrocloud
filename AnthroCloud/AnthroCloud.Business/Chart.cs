@@ -14,7 +14,7 @@ namespace AnthroCloud.Business
     public class Chart : IGrowthChart
     {
         /// <summary>
-        /// A list of age-based indicator table data for measurement of body mass index by age used to create a WHO chart.
+        /// A list of age-based indicator table data for measurement of body mass index by age used to create a WHO chart.  
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement used to calculate body mass index by age.</returns>
@@ -26,7 +26,7 @@ namespace AnthroCloud.Business
         }
 
         /// <summary>
-        /// A list of age-based indicator table data for measurement of body mass index by age used to create a WHO chart.
+        /// A list of age-based indicator table data for measurement of body mass index by age used to create a WHO chart.  Data point (x,y) is insert if new; otherwise updated.
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement used to calculate body mass index by age.</returns>
@@ -44,7 +44,7 @@ namespace AnthroCloud.Business
 
             decimal existingX = (from n1 in bmiCurves
                                  where n1.Month == newX
-                                 select n1.Month).First();
+                                 select n1.Month).FirstOrDefault();
 
             if (newX != existingX)
             {
@@ -93,7 +93,7 @@ namespace AnthroCloud.Business
                 decimal newSd3 = yDataPoint.CalculateY();
 
                 // Add Score Record with Interpolated Data for Chart
-                bmiCurves.Insert(smallNearElement + 1, new BmiforAge { Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
+                bmiCurves.Insert(smallNearElement + 1, new BmiforAge { Sex = (byte)sex, Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
 
             }
             else if (newX == existingX)
@@ -118,7 +118,7 @@ namespace AnthroCloud.Business
         }
 
         /// <summary>
-        /// A list of age-based indicator table data for measurement of Head circumference-for-age used to create a WHO chart.
+        /// A list of age-based indicator table data for measurement of Head circumference-for-age used to create a WHO chart.  Data point (x,y) is insert if new; otherwise updated.
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Head circumference-for-age used to create a WHO chart. </returns>
@@ -129,7 +129,7 @@ namespace AnthroCloud.Business
 
             decimal existingX = (from n1 in hcfaCurves
                                  where n1.Month == newX
-                                 select n1.Month).First();
+                                 select n1.Month).FirstOrDefault();
 
             if (newX != existingX)
             {            
@@ -178,7 +178,7 @@ namespace AnthroCloud.Business
                 decimal newSd3 = yDataPoint.CalculateY();
 
                 // Add Score Record with Interpolated Data for Chart
-                hcfaCurves.Insert(smallNearElement + 1, new HcForAge { Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
+                hcfaCurves.Insert(smallNearElement + 1, new HcForAge { Sex = (byte)sex, Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
 
             }
             else if (newX == existingX)
@@ -203,7 +203,7 @@ namespace AnthroCloud.Business
         }
 
         /// <summary>
-        /// A list of age-based indicator table data for measurement of Length/height-for-age used to create a WHO chart.
+        /// A list of age-based indicator table data for measurement of Length/height-for-age used to create a WHO chart.  Data point (x,y) is insert if new; otherwise updated.
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Length/height-for-age used to create a WHO chart.</returns>
@@ -221,7 +221,7 @@ namespace AnthroCloud.Business
 
             decimal existingX = (from n1 in lhfaCurves
                                  where n1.Month == newX
-                                 select n1.Month).First();
+                                 select n1.Month).FirstOrDefault();
 
             if (newX != existingX)
             {
@@ -266,7 +266,7 @@ namespace AnthroCloud.Business
                 decimal newSd3 = yDataPoint.CalculateY();
 
                 // Add Score Record with Interpolated Data for Chart
-                lhfaCurves.Insert(smallNearElement + 1, new LengthHeightForAge { Month = newX, Score = newY, Mark = null, Marktext = null, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd0 = newSd0, Sd2 = newSd2, Sd3 = newSd3 });
+                lhfaCurves.Insert(smallNearElement + 1, new LengthHeightForAge { Sex = (byte)sex, Month = newX, Score = newY, Mark = null, Marktext = null, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd0 = newSd0, Sd2 = newSd2, Sd3 = newSd3 });
             }
             else if (newX == existingX)
             {
@@ -290,7 +290,7 @@ namespace AnthroCloud.Business
         }
 
         /// <summary>
-        /// A list of age-based indicator table data for measurement of Arm circumference-for-age used to create a WHO chart.
+        /// A list of age-based indicator table data for measurement of Arm circumference-for-age used to create a WHO chart.  Data point (x,y) is insert if new; otherwise updated.
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Arm circumference-for-age used to create a WHO chart.</returns>
@@ -301,7 +301,7 @@ namespace AnthroCloud.Business
 
             decimal existingX = (from n1 in muacCurves
                                  where n1.Month == newX
-                                 select n1.Month).First();
+                                 select n1.Month).FirstOrDefault();
 
             if (newX != existingX)
             {
@@ -350,7 +350,7 @@ namespace AnthroCloud.Business
                 decimal newSd3 = yDataPoint.CalculateY();
 
                 // Add Score Record with Interpolated Data for Chart
-                muacCurves.Insert(smallNearElement + 1, new MuacforAge { Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
+                muacCurves.Insert(smallNearElement + 1, new MuacforAge { Sex = (byte)sex, Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
             }
             else if (newX == existingX)
             {
@@ -374,7 +374,7 @@ namespace AnthroCloud.Business
         }
 
         /// <summary>
-        /// A list of age-based indicator table data for measurement of Subscapular skinfold-for-age used to create a WHO chart.
+        /// A list of age-based indicator table data for measurement of Subscapular skinfold-for-age used to create a WHO chart.  Data point (x,y) is insert if new; otherwise updated.
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Subscapular skinfold-for-age used to create a WHO chart.</returns>
@@ -385,7 +385,7 @@ namespace AnthroCloud.Business
 
             decimal existingX = (from n1 in ssfCurves
                                  where n1.Month == newX
-                                 select n1.Month).First();
+                                 select n1.Month).FirstOrDefault();
 
             if (newX != existingX)
             {
@@ -435,7 +435,7 @@ namespace AnthroCloud.Business
                 decimal newSd3 = yDataPoint.CalculateY();
 
                 // Add Score Record with Interpolated Data for Chart
-                ssfCurves.Insert(smallNearElement + 1, new SsfforAge { Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
+                ssfCurves.Insert(smallNearElement + 1, new SsfforAge { Sex = (byte)sex, Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
             }
             else if (newX == existingX)
             {
@@ -459,7 +459,7 @@ namespace AnthroCloud.Business
         }
 
         /// <summary>
-        /// A list of age-based indicator table data for measurement of Triceps skinfold-for-age used to create a WHO chart.
+        /// A list of age-based indicator table data for measurement of Triceps skinfold-for-age used to create a WHO chart.  Data point (x,y) is insert if new; otherwise updated.
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Triceps skinfold-for-age used to create a WHO chart.</returns>
@@ -470,7 +470,7 @@ namespace AnthroCloud.Business
 
             decimal existingX = (from n1 in tsfCurves
                                  where n1.Month == newX
-                                 select n1.Month).First();
+                                 select n1.Month).FirstOrDefault();
 
             if (newX != existingX)
             {
@@ -519,7 +519,7 @@ namespace AnthroCloud.Business
                 decimal newSd3 = yDataPoint.CalculateY();
 
                 // Add Score Record with Interpolated Data for Chart
-                tsfCurves.Insert(smallNearElement + 1, new TsfforAge { Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
+                tsfCurves.Insert(smallNearElement + 1, new TsfforAge { Sex = (byte)sex, Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
             }
             else if (newX == existingX)
             {
@@ -543,7 +543,7 @@ namespace AnthroCloud.Business
         }
 
         /// <summary>
-        /// A list of age-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart.
+        /// A list of age-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart.  Data point (x,y) is insert if new; otherwise updated.
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart.</returns>
@@ -554,7 +554,7 @@ namespace AnthroCloud.Business
 
             decimal existingX = (from n1 in wfaCurves
                                  where n1.Month == newX
-                                 select n1.Month).First();
+                                 select n1.Month).FirstOrDefault();
 
             if (newX != existingX)
             {
@@ -599,7 +599,7 @@ namespace AnthroCloud.Business
                 decimal newSd3 = yDataPoint.CalculateY();
 
                 // Add Score Record with Interpolated Data for Chart
-                wfaCurves.Insert(smallNearElement + 1, new WeightForAge { Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd0 = newSd0, Sd2 = newSd2, Sd3 = newSd3 });
+                wfaCurves.Insert(smallNearElement + 1, new WeightForAge { Sex = (byte)sex, Month = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd0 = newSd0, Sd2 = newSd2, Sd3 = newSd3 });
             }
             else if (newX == existingX)
             {
@@ -623,7 +623,7 @@ namespace AnthroCloud.Business
         }
 
         /// <summary>
-        /// A list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (2 to 5 years).
+        /// A list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (2 to 5 years).  Data point (x,y) is insert if new; otherwise updated.
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (2 to 5 years).</returns>
@@ -634,7 +634,7 @@ namespace AnthroCloud.Business
 
             decimal existingX = (from n1 in wfhCurves
                                  where n1.Heightincm == newX
-                                 select n1.Heightincm).First();
+                                 select n1.Heightincm).FirstOrDefault();
 
             if (newX != existingX)
             {
@@ -683,7 +683,7 @@ namespace AnthroCloud.Business
                 decimal newSd3 = yDataPoint.CalculateY();
 
                 // Add Score Record with Interpolated Data for Chart
-                wfhCurves.Insert(smallNearElement + 1, new WeightForHeight { Heightincm = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
+                wfhCurves.Insert(smallNearElement + 1, new WeightForHeight { Sex = (byte)sex, Heightincm = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
             }
             else if (newX == existingX)
             {
@@ -707,7 +707,7 @@ namespace AnthroCloud.Business
         }
 
         /// <summary>
-        /// A list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (Birth to 2 years).
+        /// A list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (Birth to 2 years).  Data point (x,y) is insert if new; otherwise updated.
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (Birth to 2 years).</returns>
@@ -718,7 +718,7 @@ namespace AnthroCloud.Business
 
             decimal existingX = (from n1 in wflCurves
                                  where n1.Lengthincm == newX
-                                 select n1.Lengthincm).First();
+                                 select n1.Lengthincm).FirstOrDefault();
 
             if (newX != existingX)
             {                               
@@ -767,7 +767,7 @@ namespace AnthroCloud.Business
                 decimal newSd3 = yDataPoint.CalculateY();
 
                 // Add Score Record with Interpolated Data for Chart
-                wflCurves.Insert(smallNearElement + 1, new WeightForLength { Lengthincm = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
+                wflCurves.Insert(smallNearElement + 1, new WeightForLength { Sex = (byte)sex, Lengthincm = newX, Score = newY, P3 = newP3, P15 = newP15, P50 = newP50, P85 = newP85, P97 = newP97, Sd3neg = newSd3neg, Sd2neg = newSd2neg, Sd1neg = newSd1neg, Sd0 = newSd0, Sd1 = newSd1, Sd2 = newSd2, Sd3 = newSd3 });
             }
             else if (newX == existingX)
             {
