@@ -12,8 +12,8 @@ namespace AnthroCloud.UI.Web.Models
         public FormViewModel()
         {
             DateTime today = DateTime.Today;
-            DateOfBirth = today.AddYears(-1);//today.AddYears(-1).ToShortDateString();
-            DateOfVisit = DateTime.Today;//"10/31/2019";//today.ToShortDateString();
+            DateOfBirth = today.AddYears(-1);
+            DateOfVisit = DateTime.Today;
             Sex = 2;
             Weight = 9.00;
             LengthHeight = 73.00;
@@ -52,8 +52,6 @@ namespace AnthroCloud.UI.Web.Models
         public byte Sex { get; set; }
 
         public Boolean Oedema { get; set; } 
-
-       // public string[] Sexes = new[] { "Female", "Male" }; 
 
         [DisplayName("Weight (kg)")]
         public double Weight { get; set; }

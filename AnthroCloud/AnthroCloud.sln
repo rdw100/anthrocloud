@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Business", "Ant
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Data", "AnthroCloud.Data\AnthroCloud.Data.csproj", "{E0AA1D06-1555-44A3-B6C5-9DE2F5E2A797}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "AnthroCloud.Architecture", "DependencyValidationMap\AnthroCloud.Architecture.modelproj", "{85743C58-B465-42C4-BED2-388F74E80695}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Tests", "AnthroCloud.Tests\AnthroCloud.Tests.csproj", "{07C241F0-2C8E-49EF-AEA9-16BAA3E3166F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Framework", "AnthroCloud.Framework\AnthroCloud.Framework.csproj", "{19F77F8E-1D99-48BC-BE36-E11D61D4BF54}"
@@ -23,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
 	EndProjectSection
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "AnthroCloud.Architecture", "DependencyValidationMap\AnthroCloud.Architecture.modelproj", "{85743C58-B465-42C4-BED2-388F74E80695}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +42,6 @@ Global
 		{E0AA1D06-1555-44A3-B6C5-9DE2F5E2A797}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0AA1D06-1555-44A3-B6C5-9DE2F5E2A797}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0AA1D06-1555-44A3-B6C5-9DE2F5E2A797}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85743C58-B465-42C4-BED2-388F74E80695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85743C58-B465-42C4-BED2-388F74E80695}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85743C58-B465-42C4-BED2-388F74E80695}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85743C58-B465-42C4-BED2-388F74E80695}.Release|Any CPU.Build.0 = Release|Any CPU
 		{07C241F0-2C8E-49EF-AEA9-16BAA3E3166F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{07C241F0-2C8E-49EF-AEA9-16BAA3E3166F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07C241F0-2C8E-49EF-AEA9-16BAA3E3166F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -62,6 +58,10 @@ Global
 		{541E8CD4-0F08-43DC-8989-B3BD70B430B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{541E8CD4-0F08-43DC-8989-B3BD70B430B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{541E8CD4-0F08-43DC-8989-B3BD70B430B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85743C58-B465-42C4-BED2-388F74E80695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85743C58-B465-42C4-BED2-388F74E80695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85743C58-B465-42C4-BED2-388F74E80695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85743C58-B465-42C4-BED2-388F74E80695}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
