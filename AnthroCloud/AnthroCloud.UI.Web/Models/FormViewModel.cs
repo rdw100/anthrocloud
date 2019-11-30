@@ -47,8 +47,9 @@ namespace AnthroCloud.UI.Web.Models
         [DisplayName("Birth Date")]
         public DateTime DateOfBirth { get; set; }
 
+        [DisplayName("Visit Date")]
         public DateTime DateOfVisit { get; set; }
-
+        
         public byte Sex { get; set; }
 
         public Boolean Oedema { get; set; } 
@@ -72,13 +73,10 @@ namespace AnthroCloud.UI.Web.Models
         public double SubscapularSkinFold { get; set; }
         
         public double BMI { get; set; }
-
         public string Age { get; set; }
         public string AgeInDays { get; set; }
         public byte AgeInMonths { get; set; }
-
         public byte AgeInYears { get; set; }
-
         public double WfhPercentile { get; set; }
         public double WfhZscore { get; set; }
         public double WflPercentile { get; set; }

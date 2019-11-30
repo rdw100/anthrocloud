@@ -54,7 +54,7 @@ namespace AnthroCloud.Business
         /// <returns>Returns BMI rounded to tenths.</returns>
         public double ToReadableDouble()
         {
-            double bmi = Math.Round(Bmi, 1);
+            double bmi = Bmi;// Math.Round(Bmi, 1);
             return bmi;
         }
     }

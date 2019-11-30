@@ -36,7 +36,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AnthroCloud.Business\AnthroCloud.Business.csproj" />
-    <ProjectReference Include="..\AnthroCloud.Data\AnthroCloud.Data.csproj" />
   </ItemGroup>
 
 </Project>

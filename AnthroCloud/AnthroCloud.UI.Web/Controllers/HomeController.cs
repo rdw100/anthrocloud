@@ -43,14 +43,7 @@ namespace AnthroCloud.UI.Web.Controllers
             client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
             
             string BirthDateString = string.Format("{0:yyyy-MM-dd}", model.DateOfBirth);            
-            //IFormatProvider culture = new CultureInfo("en-US", true);
-            //DateTime dateVal1 = DateTime.ParseExact(BirthDateString, "MM/dd/YYYY", culture);
-            //BirthDateString = string.Format("{0:yyyy-MM-dd}", dateVal1);
-
             string VisitDateString = string.Format("{0:yyyy-MM-dd}", model.DateOfVisit); 
-            //DateTime dateVal2 = DateTime.ParseExact(VisitDateString, "MM/dd/YYYY", culture);
-            //VisitDateString = string.Format("{0:yyyy-MM-dd}", dateVal2);
-            //HttpResponseMessage response = await client.GetAsync(path);
 
             string path = "anthro/age/" + BirthDateString + "/" + VisitDateString; 
             
@@ -137,8 +130,8 @@ namespace AnthroCloud.UI.Web.Controllers
             
             var wfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsWFA);            
             
-            model.WfaZscore = wfaTuple.Item1;
-            model.WfaPercentile = wfaTuple.Item2;
+            model.WfaZscore = SetDecimalZero(wfaTuple.Item1);
+            model.WfaPercentile = SetDecimalZero(wfaTuple.Item2);
 
             // GET: api/Stats/ArmCircumferenceForAge/15.00/365/Male
             string pathStatsMUAC = "Stats/ArmCircumferenceForAge/" + model.MUAC + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
@@ -156,8 +149,8 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var muacTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsMUAC);
 
-            model.MuacZscore = muacTuple.Item1;
-            model.MuacPercentile = muacTuple.Item2;
+            model.MuacZscore = SetDecimalZero(muacTuple.Item1);
+            model.MuacPercentile = SetDecimalZero(muacTuple.Item2);
             // GET: api/Stats/BodyMassIndexForAge/16.89/365/Male
             string pathStatsBFA = "Stats/BodyMassIndexForAge/" + model.BMI + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsBFA = client.GetAsync(pathStatsBFA).Result;
@@ -174,8 +167,8 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var bfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsBFA);
 
-            model.BfaZscore = bfaTuple.Item1;
-            model.BfaPercentile = bfaTuple.Item2;
+            model.BfaZscore = SetDecimalZero(bfaTuple.Item1);
+            model.BfaPercentile = SetDecimalZero(bfaTuple.Item2);
             // GET: api/Stats/HeadCircumferenceForAge/45.00/365/Male
             string pathStatsHCA = "Stats/HeadCircumferenceForAge/" + model.HeadCircumference + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsHCA = client.GetAsync(pathStatsHCA).Result;
@@ -192,8 +185,8 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var hcaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsHCA);
 
-            model.HcaZscore = hcaTuple.Item1;
-            model.HcaPercentile = hcaTuple.Item2;
+            model.HcaZscore = SetDecimalZero(hcaTuple.Item1);
+            model.HcaPercentile = SetDecimalZero(hcaTuple.Item2);
             // GET: api/Stats/HeightForAge/96.00/1095/Male
             string pathStatsHFA = "Stats/HeightForAge/" + model.LengthHeight + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsHFA = client.GetAsync(pathStatsHFA).Result;
@@ -210,8 +203,8 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var hfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsHFA);
 
-            model.HfaZscore = hfaTuple.Item1;
-            model.HfaPercentile = hfaTuple.Item2;
+            model.HfaZscore = SetDecimalZero(hfaTuple.Item1);
+            model.HfaPercentile = SetDecimalZero(hfaTuple.Item2);
             // GET: api/Stats/LengthForAge/73.00/365/Sex.Male
             string pathStatsLFA = "Stats/LengthForAge/" + model.LengthHeight + "/" + model.AgeInDays + "/" + (Sexes)model.Sex; 
             var responseStatsLFA = client.GetAsync(pathStatsLFA).Result;
@@ -228,8 +221,8 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var lfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsLFA);
 
-            model.LfaZscore = lfaTuple.Item1;
-            model.LfaPercentile = lfaTuple.Item2;
+            model.LfaZscore = SetDecimalZero(lfaTuple.Item1);
+            model.LfaPercentile = SetDecimalZero(lfaTuple.Item2);
             // GET: api/Stats/SubscapularSkinfoldForAge/7.00/365/Male
             string pathStatsSFA = "Stats/SubscapularSkinfoldForAge/" + model.SubscapularSkinFold + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsSFA = client.GetAsync(pathStatsSFA).Result;
@@ -246,8 +239,8 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var sfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsSFA);
 
-            model.SsfZscore = sfaTuple.Item1;
-            model.SsfPercentile = sfaTuple.Item2;
+            model.SsfZscore = SetDecimalZero(sfaTuple.Item1);
+            model.SsfPercentile = SetDecimalZero(sfaTuple.Item2);
             // GET: api/Stats/TricepsSkinfoldForAge/8.00/365/Male
             string pathStatsTFA = "Stats/TricepsSkinfoldForAge/" + model.TricepsSkinFold + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsTFA = client.GetAsync(pathStatsTFA).Result;
@@ -264,8 +257,15 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var tfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsTFA);
 
-            model.TsfZscore = tfaTuple.Item1;
-            model.TsfPercentile = tfaTuple.Item2;
+
+            //model.TsfZscore = if (tfaTuple.Item1 == 0) { 0.0D; };
+            //if (tfaTuple.Item1 == 0)
+            //{
+            //    model.TsfZscore = 0.0d;
+            //}
+
+            model.TsfZscore = SetDecimalZero(tfaTuple.Item1);
+            model.TsfPercentile = SetDecimalZero(tfaTuple.Item2);
             // GET: api/Stats/WeightForHeight/14.00/96.00/Male
             string pathStatsWFH = "Stats/WeightForHeight/" + model.Weight + "/" + model.LengthHeight + "/" + (Sexes)model.Sex;
             var responseStatsWFH = client.GetAsync(pathStatsWFH).Result;
@@ -282,8 +282,8 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var wfhTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsWFH);
 
-            model.WfhZscore = wfhTuple.Item1;
-            model.WfhPercentile = wfhTuple.Item2;
+            model.WfhZscore = SetDecimalZero(wfhTuple.Item1);
+            model.WfhPercentile = SetDecimalZero(wfhTuple.Item2);
             // GET: api/Stats/WeightForLength/9.00/73.00/Male
             string pathStatsWFL = "Stats/WeightForLength/" + model.Weight + "/" + model.LengthHeight + "/" + (Sexes)model.Sex;
             var responseStatsWFL = client.GetAsync(pathStatsWFL).Result;
@@ -300,16 +300,13 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var wflTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsWFL);
 
-            model.WflZscore = wflTuple.Item1;
-            model.WflPercentile = wflTuple.Item2;
+            model.WflZscore = SetDecimalZero(wflTuple.Item1);
+            model.WflPercentile = SetDecimalZero(wflTuple.Item2);
+
             // Allow model update
             ModelState.Clear();
             
             return View(model);
-            //return View();
-            //return View("Index", newModel);
-            //return View("Views/Home/Index.cshtml", model);
-            //return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
@@ -321,6 +318,16 @@ namespace AnthroCloud.UI.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public double SetDecimalZero( double value)
+        {
+            if (value == 0)
+            {
+                return 0.00d;
+            }
+
+            return value;
         }
     }
 }
