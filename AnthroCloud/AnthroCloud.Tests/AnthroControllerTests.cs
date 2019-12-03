@@ -72,7 +72,7 @@ namespace AnthroCloud.Integration.Tests
             double weight = 9.00;
             double height = 73.00;
             double actual = controller.GetBMI(weight, height);
-
+            actual = Math.Round(actual, 1);
             Assert.Equal(expected, actual);
         }
     }

@@ -42,7 +42,7 @@ namespace AnthroCloud.Business
         public double GetBMI(double weight, double height)
         {
             BMI bmi = new BMI(9.00, 73.00);
-            return bmi.ToReadableDouble();
+            return bmi.Bmi;//.ToReadableDouble();
         }
     }
 }

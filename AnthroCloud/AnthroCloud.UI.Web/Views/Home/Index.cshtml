@@ -241,7 +241,7 @@
             <div class="form-group row mb-0">
                 <label class="col-md-3 mt-1 mr-1">HC-for-age</label>
                 <input id="HcaPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="HcaPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.HcaPercentile; } }" list="tickmarks" disabled />
-                <input type="text" asp-for="HcaPercentile" value="@{ if (Model.HcaPercentile >= 99.9 || Model.HcaPercentile <= .01) { @Html.Raw("NA") } else { @Model.WflPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
+                <input type="text" asp-for="HcaPercentile" value="@{ if (Model.HcaPercentile >= 99.9 || Model.HcaPercentile <= .01) { @Html.Raw("NA") } else { @Model.HcaPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
                 <input type="text" asp-for="HcaZscore" value="@Model.HcaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.HcaZscore)} }" readonly>
                 <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Head Circumference Percentile" asp-controller="LineChart" asp-action="HCA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.HeadCircumference});return false">
                     <i class="fa fa-line-chart"></i>

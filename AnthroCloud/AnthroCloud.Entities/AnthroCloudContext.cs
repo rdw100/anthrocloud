@@ -29,7 +29,7 @@ namespace AnthroCloud.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-SOKFT0S\\SQLEXPRESS;Initial Catalog=AnthroCloudDB;Integrated Security=True");
+                optionsBuilder.UseSqlServer("");
             }
         }
 
