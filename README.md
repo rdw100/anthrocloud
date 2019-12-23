@@ -1,0 +1,2 @@
+# AnthroCloud
+This is source code for a capstone project.  The second semester capstone course research topic is Software Modernization for Cloud-based Pediatric Anthropometry.  The software is called AnthroCloud.  This project will create a modern cloud-based WHO 2006 Child Growth Standard-compliant anthropometric calculator designed to provide a more flexible, maintainable, and portable solution to meet the changing needs of users.
