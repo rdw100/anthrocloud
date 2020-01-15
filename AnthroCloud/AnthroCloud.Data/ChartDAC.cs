@@ -5,6 +5,9 @@ using AnthroCloud.Entities;
 
 namespace AnthroCloud.Data
 {
+    /// <summary>
+    /// Represents the standard operations to be performed by the Chart data access object.
+    /// </summary>
     public class ChartDAC : IChartDAC
     {
         /// <summary>
