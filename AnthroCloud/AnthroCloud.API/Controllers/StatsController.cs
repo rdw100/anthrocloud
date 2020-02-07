@@ -9,6 +9,9 @@ using AnthroCloud.Business;
 
 namespace AnthroCloud.API.Controllers
 {
+    /// <summary>
+    /// Calculates zscore and percentile for given measurements.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class StatsController : ControllerBase
@@ -20,8 +23,8 @@ namespace AnthroCloud.API.Controllers
         /// <param name="measurement">The specified measured value</param>
         /// <param name="ageInDays">The age in total days</param>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
-        /// <returns></returns>
-        // GET: api/Stats/WeightForAge/9.00/365/Male
+        /// <returns>Returns a tuple containing a zscore and percentile cacluation.</returns>
+        /// <example>GET: api/Stats/WeightForAge/9.00/365/Male</example>
         [HttpGet("{indicator}/{measurement}/{ageInDays}/{sex}")]
         [Route("STATS/{indicator}/{measurement}/{ageInDays}/{sex}")]
         public Tuple<double, double> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)

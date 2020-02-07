@@ -8,9 +8,15 @@ using AnthroCloud.API.Controllers;
 
 namespace AnthroCloud.Integration.Tests
 {
+    /// <summary>
+    /// Tests integration controller logic for anthropometric data.
+    /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class AnthroControllerTests
     {
+        /// <summary>
+        /// Tests age in years string.
+        /// </summary>
         [Fact]
         public void Age_Years_ShouldReturnYearsString()
         {
@@ -24,6 +30,9 @@ namespace AnthroCloud.Integration.Tests
             Assert.Equal(expected, actual);
         }
 
+        /// <summary>
+        /// Tests age in total months string.
+        /// </summary>
         [Fact]
         public void Age_Months_ShouldReturnMonthsString()
         {
@@ -37,6 +46,9 @@ namespace AnthroCloud.Integration.Tests
             Assert.Equal(expected, actual);
         }
 
+        /// <summary>
+        /// Tests human readable age string.
+        /// </summary>
         [Fact]
         public void Age_String_ShouldReturnYearMonthString()
         {
@@ -50,6 +62,9 @@ namespace AnthroCloud.Integration.Tests
             Assert.Equal(expected, actual);
         }
 
+        /// <summary>
+        /// Tests age in total days string.
+        /// </summary>
         [Fact]
         public void Age_Days_ShouldReturnDaysString()
         {            
@@ -62,7 +77,10 @@ namespace AnthroCloud.Integration.Tests
 
             Assert.Equal(expected, actual);
         }
-
+        
+        /// <summary>
+        /// Tests BMI string.
+        /// </summary>
         [Fact]
         public void BMI_SimpleValues_ShouldReturnBMIString()
         {
