@@ -17,7 +17,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of WFA objects.</returns>
         public List<WeightForAge> ListWeightForAge(Sexes sex)
         {
-            using var db = new AnthroCloudContext();
+            using var db = new AnthroCloudContextMySql();
 
             IQueryable<WeightForAge> query = db.Set<WeightForAge>();
 
@@ -33,7 +33,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of BFA objects.</returns>
         public List<BmiforAge> ListBmiforAge(Sexes sex)
         {
-            using var db = new AnthroCloudContext();
+            using var db = new AnthroCloudContextMySql();
 
             IQueryable<BmiforAge> query = db.Set<BmiforAge>();
 
@@ -49,7 +49,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of WFL objects.</returns>
         public List<WeightForLength> ListWeightForLength(Sexes sex)
         {
-            using var db = new AnthroCloudContext();
+            using var db = new AnthroCloudContextMySql();
 
             IQueryable<WeightForLength> query = db.Set<WeightForLength>();
 
@@ -65,7 +65,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of WFH objects.</returns>
         public List<WeightForHeight> ListWeightForHeight(Sexes sex)
         {
-            using var db = new AnthroCloudContext();
+            using var db = new AnthroCloudContextMySql();
 
             IQueryable<WeightForHeight> query = db.Set<WeightForHeight>();
 
@@ -81,7 +81,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of HCFA objects.</returns>
         public List<HcForAge> ListHcforAge(Sexes sex)
         {
-            using var db = new AnthroCloudContext();
+            using var db = new AnthroCloudContextMySql();
 
             IQueryable<HcForAge> query = db.Set<HcForAge>();
 
@@ -97,7 +97,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of LHFA objects.</returns>
         public List<LengthHeightForAge> ListLengthHeightForAge(Sexes sex)
         {
-            using var db = new AnthroCloudContext();
+            using var db = new AnthroCloudContextMySql();
 
             IQueryable<LengthHeightForAge> query = db.Set<LengthHeightForAge>();
 
@@ -113,7 +113,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of MUAC objects.</returns>
         public List<MuacforAge> ListMuacforAge(Sexes sex)
         {
-            using var db = new AnthroCloudContext();
+            using var db = new AnthroCloudContextMySql();
 
             IQueryable<MuacforAge> query = db.Set<MuacforAge>();
 
@@ -129,7 +129,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of SSF objects.</returns>
         public List<SsfforAge> ListSsfforAge(Sexes sex)
         {
-            using var db = new AnthroCloudContext();
+            using var db = new AnthroCloudContextMySql();
 
             IQueryable<SsfforAge> query = db.Set<SsfforAge>();
 
@@ -145,7 +145,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of TSF objects.</returns>
         public List<TsfforAge> ListTsfforAge(Sexes sex)
         {
-            using var db = new AnthroCloudContext();
+            using var db = new AnthroCloudContextMySql();
 
             IQueryable<TsfforAge> query = db.Set<TsfforAge>();
 

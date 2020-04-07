@@ -3,13 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UserSecretsId>2cc0f793-e3c6-4ef5-b929-f9bc04c30ccd</UserSecretsId>
-    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <AspNetCoreHostingModel>OutofProcess</AspNetCoreHostingModel>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Controllers\StudentController.cs" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <AdditionalFiles Include="..\DependencyValidationMap\DependencyValidation1.layerdiagram" Link="DependencyValidation1.layerdiagram">
       <Visible>False</Visible>

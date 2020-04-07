@@ -9,12 +9,15 @@ using AnthroCloud.UI.Web.Models;
 using System.Net.Http;
 using System.Globalization;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace AnthroCloud.UI.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
+        private const string baseAddressPath = "http://www.dustywright.me/anthrocloudapi/api/";
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -40,8 +43,12 @@ namespace AnthroCloud.UI.Web.Controllers
             HttpClient client = new HttpClient();
 
             // api / anthro / age / 2016 - 12 - 01T00: 00:00 / 2019-12-31T23:59:59
-            client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
-            
+            // client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
+            client.BaseAddress = new Uri(baseAddressPath);
+            client.DefaultRequestHeaders.Clear();
+            //Define request data format  
+            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
             string BirthDateString = string.Format("{0:yyyy-MM-dd}", model.DateOfBirth);            
             string VisitDateString = string.Format("{0:yyyy-MM-dd}", model.DateOfVisit); 
 

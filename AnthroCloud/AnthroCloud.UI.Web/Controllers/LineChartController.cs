@@ -14,6 +14,8 @@ namespace AnthroCloud.UI.Web.Controllers
 {
     public class LineChartController : Controller
     {
+        private const string baseAddressPath = "http://www.dustywright.me/anthrocloudapi/api/";
+ 
         // GET: /<controller>/  
         [Route("{id}")]
         [Route("LineChart/{id}")]
@@ -205,7 +207,7 @@ namespace AnthroCloud.UI.Web.Controllers
                 List<BmiforAge> bfaList = new List<BmiforAge>();
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
+                    client.BaseAddress = new Uri(baseAddressPath);
                     //HTTP GET
                     string pathBFA = "chart/BFA/" + id + "/" + x + "/" + y; 
                 var response = client.GetAsync(pathBFA);
@@ -228,7 +230,7 @@ namespace AnthroCloud.UI.Web.Controllers
             List<HcForAge> hcaList = new List<HcForAge>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
+                client.BaseAddress = new Uri(baseAddressPath);
                 //HTTP GET
                 string pathHCA = "chart/HCFA/" + id + "/" + x + "/" + y; 
                 var response = client.GetAsync(pathHCA);
@@ -251,7 +253,7 @@ namespace AnthroCloud.UI.Web.Controllers
             List<LengthHeightForAge> lhfaList = new List<LengthHeightForAge>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
+                client.BaseAddress = new Uri(baseAddressPath);
                 //HTTP GET
                 string pathLHFA = "chart/LHFA/" + id + "/" + x + "/" + y;
                 var response = client.GetAsync(pathLHFA);
@@ -274,7 +276,7 @@ namespace AnthroCloud.UI.Web.Controllers
             List<MuacforAge> muacList = new List<MuacforAge>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
+                client.BaseAddress = new Uri(baseAddressPath);
                 //HTTP GET
                 string pathMUAC = "chart/MUAC/" + id + "/" + x + "/" + y;
                 var response = client.GetAsync(pathMUAC);
@@ -297,7 +299,7 @@ namespace AnthroCloud.UI.Web.Controllers
             List<SsfforAge> ssfList = new List<SsfforAge>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
+                client.BaseAddress = new Uri(baseAddressPath);
                 //HTTP GET
                 string pathSSF = "chart/SSFA/" + id + "/" + x + "/" + y;
                 var response = client.GetAsync(pathSSF);
@@ -320,7 +322,7 @@ namespace AnthroCloud.UI.Web.Controllers
             List<TsfforAge> tsfList = new List<TsfforAge>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
+                client.BaseAddress = new Uri(baseAddressPath);
                 //HTTP GET
                 string pathTSF = "chart/TSFA/" + id + "/" + x + "/" + y;
                 var response = client.GetAsync(pathTSF);
@@ -343,7 +345,7 @@ namespace AnthroCloud.UI.Web.Controllers
             List<WeightForAge> hcaList = new List<WeightForAge>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
+                client.BaseAddress = new Uri(baseAddressPath);
                 //HTTP GET
                 string pathWFA = "chart/WFA/" + id + "/" + x + "/" + y;
                 var response = client.GetAsync(pathWFA);
@@ -366,7 +368,7 @@ namespace AnthroCloud.UI.Web.Controllers
             List<WeightForLength> wflList = new List<WeightForLength>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
+                client.BaseAddress = new Uri(baseAddressPath);
                 //HTTP GET
                 string pathWFL = "chart/WFL/" + id + "/" + x + "/" + y; //"chart/WFL/2"
                 var response = client.GetAsync(pathWFL);
@@ -389,7 +391,7 @@ namespace AnthroCloud.UI.Web.Controllers
             List<WeightForHeight> wfhList = new List<WeightForHeight>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
+                client.BaseAddress = new Uri(baseAddressPath);
                 //HTTP GET
                 string pathWFH = "chart/WFH/" + id + "/" + x + "/" + y;
                 var response = client.GetAsync(pathWFH);
