@@ -19,15 +19,8 @@ namespace AnthroCloud.UI.Web.Controllers
         // GET: /<controller>/  
         [Route("{id}")]
         [Route("LineChart/{id}")]
-        //[Route("LineChart/sex")]
-        //[Route("LineChart")]
         public IActionResult Index()
         {
-            //RouteValueDictionary rvd = new RouteValueDictionary();
-            //rvd.Add("sex", (Models.Sexes)id);
-            //string url = "/LineChart/Index?sex" + (Models.Sexes)id;
-            //return Redirect(url);
-            //return RedirectToAction("Index", new { sex = (Models.Sexes)id });
             return View();
         }
         
@@ -409,73 +402,5 @@ namespace AnthroCloud.UI.Web.Controllers
             return wfhList;
         }
 
-        ////[HttpGet("{id}")]
-        ////[Route("{id}")]
-        ////[Route("GetWFLJson/{id}")]
-        //public JsonResult GetWFLJson(byte id)
-        //{
-        //    var populationList = GetWFLData(id);
-        //    return Json(populationList);
-        //}
-
-        //public static List<WeightForLength> GetWFLData(byte id)
-        //{
-        //    var list = new List<WeightForLength>();
-        //    if (id == 1)
-        //    {
-        //        list.Add(new WeightForLength { Lengthincm = 45.0M, Score = null, P3 = 2.100M, P15 = 2.200M, P50 = 2.400M, P85 = 2.700M, P97 = 2.900M, Sd3neg = 1.900M, Sd2neg = 2.000M, Sd1neg = 2.200M, Sd0 = 2.400M, Sd1 = 2.700M, Sd2 = 3.000M, Sd3 = 3.300M });
-        //        list.Add(new WeightForLength { Lengthincm = 50.0M, Score = null, P3 = 2.100M, P15 = 2.300M, P50 = 2.500M, P85 = 2.800M, P97 = 3.000M, Sd3neg = 1.900M, Sd2neg = 2.100M, Sd1neg = 2.300M, Sd0 = 2.500M, Sd1 = 2.800M, Sd2 = 3.100M, Sd3 = 3.400M });
-        //        list.Add(new WeightForLength { Lengthincm = 55.0M, Score = null, P3 = 2.200M, P15 = 2.400M, P50 = 2.600M, P85 = 2.900M, P97 = 3.100M, Sd3neg = 2.000M, Sd2neg = 2.200M, Sd1neg = 2.400M, Sd0 = 2.600M, Sd1 = 2.900M, Sd2 = 3.100M, Sd3 = 3.500M });
-        //        list.Add(new WeightForLength { Lengthincm = 60.0M, Score = null, P3 = 2.300M, P15 = 2.500M, P50 = 2.700M, P85 = 3.000M, P97 = 3.200M, Sd3neg = 2.100M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.700M, Sd1 = 3.000M, Sd2 = 3.200M, Sd3 = 3.600M });
-        //        list.Add(new WeightForLength { Lengthincm = 72.5M, Score = 2.85M, P3 = 2.300M, P15 = 2.500M, P50 = 2.700M, P85 = 3.000M, P97 = 3.200M, Sd3neg = 2.100M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.700M, Sd1 = 3.000M, Sd2 = 3.200M, Sd3 = 3.600M });
-        //        //list.Add(new WeightForLength { Lengthincm = 62.4M, Score = 2.85M, P3 = 2.300M, P15 = 2.500M, P50 = 2.700M, P85 = 3.000M, P97 = 3.200M, Sd3neg = 2.100M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.700M, Sd1 = 3.000M, Sd2 = 3.200M, Sd3 = 3.600M });
-        //        //list.Add(new WeightForLength { Lengthincm = 62.4M, Score = 2.85M, P3 = null, P15 = null, P50 = null, P85 = null, P97 = null, Sd3neg = null, Sd2neg = null, Sd1neg = null, Sd0 = null, Sd1 = null, Sd2 = null, Sd3 = null });
-        //        list.Add(new WeightForLength { Lengthincm = 65.0M, Score = null, P3 = 2.400M, P15 = 2.500M, P50 = 2.800M, P85 = 3.100M, P97 = 3.300M, Sd3neg = 2.300M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.800M, Sd1 = 3.000M, Sd2 = 3.300M, Sd3 = 3.700M });
-        //    }
-        //    else if (id == 2)
-        //    {
-        //        list.Add(new WeightForLength { Lengthincm = 70.0M, Score = null, P3 = 2.100M, P15 = 2.200M, P50 = 2.400M, P85 = 2.700M, P97 = 2.900M, Sd3neg = 1.900M, Sd2neg = 2.000M, Sd1neg = 2.200M, Sd0 = 2.400M, Sd1 = 2.700M, Sd2 = 3.000M, Sd3 = 3.300M });
-        //        list.Add(new WeightForLength { Lengthincm = 75.0M, Score = null, P3 = 2.100M, P15 = 2.300M, P50 = 2.500M, P85 = 2.800M, P97 = 3.000M, Sd3neg = 1.900M, Sd2neg = 2.100M, Sd1neg = 2.300M, Sd0 = 2.500M, Sd1 = 2.800M, Sd2 = 3.100M, Sd3 = 3.400M });
-        //        list.Add(new WeightForLength { Lengthincm = 80.0M, Score = null, P3 = 2.200M, P15 = 2.400M, P50 = 2.600M, P85 = 2.900M, P97 = 3.100M, Sd3neg = 2.000M, Sd2neg = 2.200M, Sd1neg = 2.400M, Sd0 = 2.600M, Sd1 = 2.900M, Sd2 = 3.100M, Sd3 = 3.500M });
-        //        list.Add(new WeightForLength { Lengthincm = 83.7M, Score = 2.85M, P3 = 2.300M, P15 = 2.500M, P50 = 2.700M, P85 = 3.000M, P97 = 3.200M, Sd3neg = 2.100M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.700M, Sd1 = 3.000M, Sd2 = 3.200M, Sd3 = 3.600M });
-        //        //list.Add(new WeightForLength { Lengthincm = 83.7M, Score = 2.85M});
-        //        list.Add(new WeightForLength { Lengthincm = 85.0M, Score = null, P3 = 2.300M, P15 = 2.500M, P50 = 2.700M, P85 = 3.000M, P97 = 3.200M, Sd3neg = 2.100M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.700M, Sd1 = 3.000M, Sd2 = 3.200M, Sd3 = 3.600M });
-        //        list.Add(new WeightForLength { Lengthincm = 90.0M, Score = null, P3 = 2.400M, P15 = 2.500M, P50 = 2.800M, P85 = 3.100M, P97 = 3.300M, Sd3neg = 2.300M, Sd2neg = 2.300M, Sd1neg = 2.500M, Sd0 = 2.800M, Sd1 = 3.000M, Sd2 = 3.300M, Sd3 = 3.700M });
-        //    }
-        //    return list;
-        //}
-
-        //[HttpGet]
-        //public async Task<JsonResult> PopulationMyChartAsync()
-        //{
-        //    List<WeightForLength> wflList = new List<WeightForLength>();
-        //    using (var httpClient = new HttpClient())
-        //    {
-        //        using (var response = await httpClient.GetAsync("https://anthrocloudapi.azurewebsites.net/api/chart/WFL/2"))
-        //        {
-        //            string apiResponse = await response.Content.ReadAsStringAsync();
-        //            wflList = JsonConvert.DeserializeObject<List<WeightForLength>>(apiResponse);
-        //        }
-        //    }
-
-        //    //return View(wflList);
-        //    return Json(wflList);
-        //}
-
-        //[HttpGet]
-        //public JsonResult PopulationMyChart()
-        //{
-        //    HttpClient client = new HttpClient();
-
-        //    client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
-        //    //HttpResponseMessage response = await client.GetAsync(path);
-        //    string path = "chart/WFL/2";
-        //    //HTTP GET
-        //    var responseTask = client.GetAsync(path);
-        //    responseTask.Wait();
-        //    var result = responseTask.Result;
-
-        //    return Json(result);
-        //}
     }
 }
