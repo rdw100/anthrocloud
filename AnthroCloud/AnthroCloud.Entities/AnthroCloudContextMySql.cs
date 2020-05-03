@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 
 namespace AnthroCloud.Entities
 {
     public partial class AnthroCloudContextMySql : DbContext
     {
+        private readonly DbContextOptions<AnthroCloudContextMySql> _options;
+
         public AnthroCloudContextMySql()
         {
         }
@@ -14,6 +19,7 @@ namespace AnthroCloud.Entities
         public AnthroCloudContextMySql(DbContextOptions<AnthroCloudContextMySql> options)
             : base(options)
         {
+            _options = options;
         }
 
         public virtual DbSet<BmiforAge> BmiforAge { get; set; }
@@ -30,7 +36,8 @@ namespace AnthroCloud.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("");
+                string dbConn = "Server=my02.winhost.com;Port=3306;Database=mysql_135290_anthrocloud;User=rudy;Password=AnthroCloud5753!";
+                optionsBuilder.UseMySql(dbConn);
             }
         }
 
