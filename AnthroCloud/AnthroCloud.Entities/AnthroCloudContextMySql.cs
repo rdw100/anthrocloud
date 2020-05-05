@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using System.IO;
+using System.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace AnthroCloud.Entities
 {
@@ -34,11 +33,12 @@ namespace AnthroCloud.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                string dbConn = "Server=my02.winhost.com;Port=3306;Database=mysql_135290_anthrocloud;User=rudy;Password=AnthroCloud5753!";
-                optionsBuilder.UseMySql(dbConn);
-            }
+            //if (!optionsBuilder.IsConfigured)
+            //{
+            //    // optionsBuilder.UseMySql(options => options.UseSqlServer(Configuration.GetConnectionString("AnthroCloudDatabaseMySql")));
+            //    // optionsBuilder.UseMySql(Configuration.GetConnectionString("AnthroCloudDatabaseMySql"));
+            //    // base.OnConfiguring(optionsBuilder);     
+            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

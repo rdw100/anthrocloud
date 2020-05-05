@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AnthroCloud.Business;
 using AnthroCloud.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnthroCloud.API.Controllers
 {
@@ -16,6 +17,17 @@ namespace AnthroCloud.API.Controllers
     [ApiController]
     public class ChartController : ControllerBase
     {
+
+        private AnthroCloudContextMySql _context;
+
+        /// <summary>
+        /// Solely constructs controller with database context.
+        /// </summary>
+        /// <param name="ctx">The database context</param>
+        public ChartController(AnthroCloudContextMySql context)
+        {
+            _context = context;
+        }
 
         /// <summary>
         /// Gets chart data for the Body mass index (BMI) for age indicator.
@@ -33,11 +45,8 @@ namespace AnthroCloud.API.Controllers
         [Route("BFA/{id}/{x}/{y}")]
         public List<BmiforAge> GetAllBFA(byte id, byte x, decimal y)
         {
-            List<BmiforAge> result = null;
-
-            Chart chart = new Chart();
-            result = chart.ListBmiforAge((Sexes)id, x, y);
-
+            Chart chart = new Chart(_context);
+            List<BmiforAge> result = chart.ListBmiforAge((Sexes)id, x, y);
             return result;
         }
 
@@ -54,11 +63,8 @@ namespace AnthroCloud.API.Controllers
         [Route("HCFA/{id}/{x}/{y}")]
         public List<HcForAge> GetAllHCFA(byte id, byte x, decimal y)
         {
-            List<HcForAge> result = null;
-
-            Chart chart = new Chart();
-            result = chart.ListHcforAge((Sexes)id, x, y);
-
+            Chart chart = new Chart(_context);
+            List<HcForAge> result = chart.ListHcforAge((Sexes)id, x, y);
             return result;
         }
 
@@ -75,11 +81,8 @@ namespace AnthroCloud.API.Controllers
         [Route("LHFA/{id}/{x}/{y}")]
         public List<LengthHeightForAge> GetAllLHFA(byte id, byte x, decimal y)
         {
-            List<LengthHeightForAge> result = null;
-
-            Chart chart = new Chart();
-            result = chart.ListLengthHeightForAge((Sexes)id, x, y);
-
+            Chart chart = new Chart(_context);
+            List<LengthHeightForAge> result = chart.ListLengthHeightForAge((Sexes)id, x, y);
             return result;
         }
 
@@ -96,11 +99,8 @@ namespace AnthroCloud.API.Controllers
         [Route("MUAC/{id}/{x}/{y}")]
         public List<MuacforAge> GetAllMUAC(byte id, byte x, decimal y)
         {
-            List<MuacforAge> result = null;
-
-            Chart chart = new Chart();
-            result = chart.ListMuacforAge((Sexes)id, x, y);
-
+            Chart chart = new Chart(_context);
+            List<MuacforAge> result = chart.ListMuacforAge((Sexes)id, x, y);
             return result;
         }
 
@@ -117,11 +117,8 @@ namespace AnthroCloud.API.Controllers
         [Route("SSFA/{id}/{x}/{y}")]
         public List<SsfforAge> GetAllSSFA(byte id, byte x, decimal y)
         {
-            List<SsfforAge> result = null;
-
-            Chart chart = new Chart();
-            result = chart.ListSsfforAge((Sexes)id, x, y);
-
+            Chart chart = new Chart(_context);
+            List<SsfforAge> result = chart.ListSsfforAge((Sexes)id, x, y);
             return result;
         }
 
@@ -138,11 +135,8 @@ namespace AnthroCloud.API.Controllers
         [Route("TSFA/{id}/{x}/{y}")]
         public List<TsfforAge> GetAllTSFA(byte id, byte x, decimal y)
         {
-            List<TsfforAge> result = null;
-
-            Chart chart = new Chart();
-            result = chart.ListTsfforAge((Sexes)id, x, y );
-
+            Chart chart = new Chart(_context);
+            List<TsfforAge> result = chart.ListTsfforAge((Sexes)id, x, y);
             return result;
         }
 
@@ -159,11 +153,8 @@ namespace AnthroCloud.API.Controllers
         [Route("WFA/{id}/{x}/{y}")]
         public List<WeightForAge> GetAllWFA(byte id, byte x, decimal y)
         {
-            List<WeightForAge> result = null;
-
-            Chart chart = new Chart();
-            result = chart.ListWeightForAge((Sexes)id, x, y);
-
+            Chart chart = new Chart(_context);
+            List<WeightForAge> result = chart.ListWeightForAge((Sexes)id, x, y);
             return result;
         }
 
@@ -180,11 +171,8 @@ namespace AnthroCloud.API.Controllers
         [Route("WFH/{id}/{x}/{y}")]
         public List<WeightForHeight> GetAllWFH(byte id, decimal x, decimal y)
         {
-            List<WeightForHeight> result = null;
-
-            Chart chart = new Chart();
-            result = chart.ListWeightForHeight((Sexes)id, x, y);
-
+            Chart chart = new Chart(_context);
+            List<WeightForHeight> result = chart.ListWeightForHeight((Sexes)id, x, y);
             return result;
         }
 
@@ -201,11 +189,8 @@ namespace AnthroCloud.API.Controllers
         [Route("WFL/{id}/{x}/{y}")]
         public List<WeightForLength> GetAllWFL(byte id, decimal x, decimal y)
         {
-            List<WeightForLength> result = null;
-
-            Chart chart = new Chart();
-            result = chart.ListWeightForLength((Sexes)id, x, y);
-
+            Chart chart = new Chart(_context);
+            List<WeightForLength> result = chart.ListWeightForLength((Sexes)id, x, y);
             return result;
         }
     }

@@ -39,4 +39,10 @@
     <ProjectReference Include="..\AnthroCloud.Business\AnthroCloud.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

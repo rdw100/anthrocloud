@@ -6,6 +6,7 @@ using AnthroCloud.Business;
 using AnthroCloud.Entities;
 using AnthroCloud.API.Controllers;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnthroCloud.Integration.Tests
 {
@@ -15,6 +16,13 @@ namespace AnthroCloud.Integration.Tests
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class ChartControllerTests
     {
+        private AnthroCloudContextMySql _context;
+
+        public ChartControllerTests(AnthroCloudContextMySql context)
+        {
+            _context = context;
+        }
+
         /// <summary>
         /// Tests chart controller logic for BMI chart data given new data point (x,y) when male.
         /// </summary>
@@ -23,7 +31,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<BmiforAge> expected = GetTestBmiforAge_Male();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllBFA(1,12,17.5M) as List<BmiforAge>;
 
             Assert.Equal(62, target.Count());
@@ -77,7 +85,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<BmiforAge> expected = GetTestBmiforAge_Female();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllBFA(2, 12, 17) as List<BmiforAge>;
 
             Assert.Equal(62, target.Count());
@@ -131,7 +139,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<HcForAge> expected = GetAllHCFA_Male();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllHCFA(1, 12, 73.00M) as List<HcForAge>;
 
             Assert.Equal(61, target.Count());
@@ -185,7 +193,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<HcForAge> expected = GetAllHCFA_Female();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllHCFA(2, 12, 73.00M) as List<HcForAge>;
 
             Assert.Equal(61, target.Count());
@@ -239,7 +247,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<LengthHeightForAge> expected = GetAllLHFA_Male();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllLHFA(1, 12, 73) as List<LengthHeightForAge>;
 
             Assert.Equal(62, target.Count());
@@ -291,7 +299,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<LengthHeightForAge> expected = GetAllLHFA_Female();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllLHFA(2, 12, 73) as List<LengthHeightForAge>;
 
             Assert.Equal(62, target.Count());
@@ -343,7 +351,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<MuacforAge> expected = GetAllMUAC_Male();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllMUAC(1, 12, 15) as List<MuacforAge>;
 
             Assert.Equal(58, target.Count());
@@ -397,7 +405,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<MuacforAge> expected = GetAllMUAC_Female();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllMUAC(2, 12, 15) as List<MuacforAge>;
 
             Assert.Equal(58, target.Count());
@@ -451,7 +459,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<SsfforAge> expected = GetAllSSFA_Male();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllSSFA(1, 12, 7) as List<SsfforAge>;
 
             Assert.Equal(58, target.Count());
@@ -505,7 +513,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<SsfforAge> expected = GetAllSSFA_Female();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllSSFA(2, 12, 7) as List<SsfforAge>;
 
             Assert.Equal(58, target.Count());
@@ -559,7 +567,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<TsfforAge> expected = GetAllTSFA_Male();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllTSFA(1, 12, 8) as List<TsfforAge>;
 
             Assert.Equal(58, target.Count());
@@ -613,7 +621,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<TsfforAge> expected = GetAllTSFA_Female();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllTSFA(2, 12, 8) as List<TsfforAge>;
 
             Assert.Equal(58, target.Count());
@@ -667,7 +675,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<WeightForAge> expected = GetAllWFA_Male();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllWFA(1, 12, 9) as List<WeightForAge>;
 
             Assert.Equal(61, target.Count());
@@ -719,7 +727,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<WeightForAge> expected = GetAllWFA_Female();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllWFA(2, 12, 9) as List<WeightForAge>;
 
             Assert.Equal(61, target.Count());
@@ -771,7 +779,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<WeightForHeight> expected = GetAllWFH_Male();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllWFH(1, 73, 9) as List<WeightForHeight>;
 
             Assert.Equal(111, target.Count());
@@ -825,7 +833,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<WeightForHeight> expected = GetWFH_Male_Interpolated_Row();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllWFH(1, 87.70M, 12.35M) as List<WeightForHeight>;
 
             Assert.Equal(111 + 1, target.Count());
@@ -881,7 +889,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<WeightForHeight> expected = GetAllWFH_Female();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllWFH(2, 73, 9) as List<WeightForHeight>;
 
             Assert.Equal(111, target.Count());
@@ -936,7 +944,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<WeightForHeight> expected = GetWFH_Female_Interpolated_Row();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllWFH(1, 87.70M, 12.35M) as List<WeightForHeight>;
 
             Assert.Equal(111 + 1, target.Count());
@@ -992,7 +1000,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<WeightForLength> expected = GetAllWFL_Male();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllWFL(1, 73.00M, 9.00M) as List<WeightForLength>;
 
             // + 1 represents added interpolated data row for scored line chart
@@ -1046,7 +1054,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<WeightForLength> expected = GetWFL_Male_Interpolated_Row();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllWFL(1, 73.25M, 9.25M) as List<WeightForLength>;
 
             // + 1 represents added interpolated data row for scored line chart
@@ -1103,7 +1111,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<WeightForLength> expected = GetAllWFL_Female();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllWFL(2, 73.00M, 9.00M) as List<WeightForLength>;
 
             Assert.Equal(131, target.Count());
@@ -1157,7 +1165,7 @@ namespace AnthroCloud.Integration.Tests
         {
             List<WeightForLength> expected = GetWFL_Female_Interpolated_Row();
 
-            var controller = new ChartController();
+            var controller = new ChartController(_context);
             var target = controller.GetAllWFL(2, 73.25M, 9.25M) as List<WeightForLength>;
 
             Assert.Equal(131 + 1, target.Count());
