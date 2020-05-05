@@ -36,8 +36,7 @@ namespace AnthroCloud.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                string dbConn = "Server=my02.winhost.com;Port=3306;Database=mysql_135290_anthrocloud;User=rudy;Password=AnthroCloud5753!";
-                optionsBuilder.UseMySql(dbConn);
+                optionsBuilder.UseMySql();
             }
         }
 
