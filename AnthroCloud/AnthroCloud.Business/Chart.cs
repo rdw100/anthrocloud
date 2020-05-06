@@ -310,7 +310,7 @@ namespace AnthroCloud.Business
         /// <returns>Returns a list of age-based indicator table data for measurement of Arm circumference-for-age used to create a WHO chart.</returns>
         public List<MuacforAge> ListMuacforAge(Sexes sex, byte newX, decimal newY)
         {
-            var chartDAC = new ChartDAC();
+            var chartDAC = new ChartDAC(_context);
             List<MuacforAge> muacCurves = chartDAC.ListMuacforAge(sex);
 
             decimal existingX = (from n1 in muacCurves
@@ -394,7 +394,7 @@ namespace AnthroCloud.Business
         /// <returns>Returns a list of age-based indicator table data for measurement of Subscapular skinfold-for-age used to create a WHO chart.</returns>
         public List<SsfforAge> ListSsfforAge(Sexes sex, byte newX, decimal newY)
         {
-            var chartDAC = new ChartDAC();
+            var chartDAC = new ChartDAC(_context);
             List<SsfforAge> ssfCurves = chartDAC.ListSsfforAge(sex);
 
             decimal existingX = (from n1 in ssfCurves

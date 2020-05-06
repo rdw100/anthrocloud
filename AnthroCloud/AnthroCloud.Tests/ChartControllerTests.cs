@@ -7,6 +7,7 @@ using AnthroCloud.Entities;
 using AnthroCloud.API.Controllers;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using AnthroCloud.Tests;
 
 namespace AnthroCloud.Integration.Tests
 {
@@ -16,13 +17,8 @@ namespace AnthroCloud.Integration.Tests
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class ChartControllerTests
     {
-        private AnthroCloudContextMySql _context;
-
-        public ChartControllerTests(AnthroCloudContextMySql context)
-        {
-            _context = context;
-        }
-
+        private AnthroCloudContextMySql _context = new TestAnthroCloudContext().Context;
+        
         /// <summary>
         /// Tests chart controller logic for BMI chart data given new data point (x,y) when male.
         /// </summary>
