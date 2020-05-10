@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
-using System.Text;
 using AnthroCloud.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
 
 namespace AnthroCloud.Tests
 {
@@ -16,10 +12,15 @@ namespace AnthroCloud.Tests
 #pragma warning disable DV2002 // Unmapped types
     public class TestAnthroCloudContext
 #pragma warning restore DV2002 // Unmapped types
-    {
+    {   
+        private const string STORE = "appsettings.json";
+        private const string APP = "AnthroCloud.API\\";
+        private const string KEY = "ConnectionStrings";
+        private const string VALUE = "AnthroCloudDatabaseMySql";
+        private const string DIR = "..\\..\\..\\..\\";
+
         private static string _connectionString = string.Empty;
-        private const string APP_PATH = "AnthroCloud.API\\";
-        
+
         public AnthroCloudContextMySql Context { get; set; }
 
         public TestAnthroCloudContext()
@@ -29,16 +30,21 @@ namespace AnthroCloud.Tests
 
         private AnthroCloudContextMySql Configure()
         {
+            // Retrieve application settings file
             ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-            String projectPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\")); 
-            String settingsPath = Path.Combine(projectPath + APP_PATH, "appsettings.json");            
+            String projectPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, DIR)); 
+            String settingsPath = Path.Combine(projectPath + APP, STORE);            
             configurationBuilder.AddJsonFile(settingsPath, false);
 
+            // Retrieve setting from key & value
             var root = configurationBuilder.Build();
-            _connectionString = root.GetSection("ConnectionStrings").GetSection("AnthroCloudDatabaseMySql").Value;
+            _connectionString = root.GetSection(KEY).GetSection(VALUE).Value;
 
-            var optionsBuilder = new DbContextOptionsBuilder<AnthroCloudContextMySql>();
+            // Configure context with setting
+            DbContextOptionsBuilder<AnthroCloudContextMySql> optionsBuilder = new DbContextOptionsBuilder<AnthroCloudContextMySql>();
             optionsBuilder.UseMySql(_connectionString);
+
+            // Initialize context with setting
             AnthroCloudContextMySql context = new AnthroCloudContextMySql(optionsBuilder.Options);
 
             return context;
