@@ -338,6 +338,8 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# Project specific
 /AnthroCloud/AnthroCloud.UI.Web/Documentation/STP.pdf
 /AnthroCloud/AnthroCloud.UI.Web/Documentation/SRS.pdf
 /AnthroCloud/AnthroCloud.UI.Web/Documentation/SPMP.pdf
@@ -345,3 +347,6 @@ healthchecksdb
 /AnthroCloud/AnthroCloud.UI.Web/Documentation/RMP.pdf
 /AnthroCloud/AnthroCloud.UI.Web/appsettings.json
 /AnthroCloud/AnthroCloud.API/appsettings.json
+
+# ignore a file type 
+*.json
