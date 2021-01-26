@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AnthroCloud.Business;
 using AnthStat.Statistics;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AnthroCloud.Business;
+using System;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.API.Controllers
 {
@@ -27,10 +24,10 @@ namespace AnthroCloud.API.Controllers
         /// <example>GET: api/Stats/WeightForAge/9.00/365/Male</example>
         [HttpGet("{indicator}/{measurement}/{ageInDays}/{sex}")]
         [Route("STATS/{indicator}/{measurement}/{ageInDays}/{sex}")]
-        public Tuple<double, double> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        public async Task<Tuple<double, double>> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             Stats stats = new Stats();
-            Tuple<double, double> scores = stats.GetScore(indicator, measurement, ageInDays, sex);
+            Tuple<double, double> scores = await stats.GetScore(indicator, measurement, ageInDays, sex);
             return scores;
         }
     }

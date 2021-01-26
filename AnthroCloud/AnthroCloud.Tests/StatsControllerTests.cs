@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using AnthroCloud.Business;
-using AnthroCloud.Entities;
-using AnthroCloud.API.Controllers;
+﻿using AnthroCloud.API.Controllers;
 using AnthStat.Statistics;
+using System;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace AnthroCloud.Integration.Tests
 {
@@ -33,10 +30,10 @@ namespace AnthroCloud.Integration.Tests
         [InlineData(Indicator.WeightForAge, 9.00, 365, Sex.Male)]
         [InlineData(Indicator.WeightForHeight, 14.00, 96.00, Sex.Male)]
         [InlineData(Indicator.WeightForLength, 9.00, 73.00, Sex.Male)]
-        public void GetScores_PairValues_ShouldReturnTuples(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        public async Task GetScores_PairValues_ShouldReturnTuplesAsync(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             var controller = new StatsController();
-            Tuple<double, double> GetScores = controller.GetScore(indicator, measurement, ageInDays, sex);
+            Tuple<double, double> GetScores = await controller.GetScore(indicator, measurement, ageInDays, sex);
 
             Assert.InRange(GetScores.Item1, -4, 4);
             Assert.InRange(GetScores.Item2, 0, 100);
@@ -61,10 +58,10 @@ namespace AnthroCloud.Integration.Tests
         [InlineData(Indicator.WeightForAge, 10.6, 365, Sex.Female, "Gold")]
         [InlineData(Indicator.WeightForHeight, 14.00, 96.00, Sex.Female, "Green")]
         [InlineData(Indicator.WeightForLength, 12.80, 82.20, Sex.Female, "Red")]
-        public void GetScores_ColorCoding_ShouldReturnZscoreSeverity(Indicator indicator, double measurement, double ageInDays, Sex sex, String expectedColor)
+        public async Task GetScores_ColorCoding_ShouldReturnZscoreSeverityAsync(Indicator indicator, double measurement, double ageInDays, Sex sex, String expectedColor)
         {
             var controller = new StatsController();
-            Tuple<double, double> GetScores = controller.GetScore(indicator, measurement, ageInDays, sex);
+            Tuple<double, double> GetScores = await controller.GetScore(indicator, measurement, ageInDays, sex);
 
             string actualColor = GetColorCoding(GetScores.Item1);
             Assert.Equal(expectedColor, actualColor);

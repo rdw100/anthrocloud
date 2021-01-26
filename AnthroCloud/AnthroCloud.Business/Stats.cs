@@ -1,7 +1,6 @@
 ﻿using AnthStat.Statistics;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.Business
 {
@@ -15,9 +14,9 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="zScore"></param>
         /// <returns>Returns the percentile using z-score.</returns>
-        public double CalculatePercentile(double zScore)
+        public async Task<double> CalculatePercentile(double zScore)
         {
-            double p = StatisticsHelper.CalculatePercentile(zScore);
+            double p = await Task.FromResult(StatisticsHelper.CalculatePercentile(zScore));
             return p;
         }
 
@@ -29,12 +28,12 @@ namespace AnthroCloud.Business
         /// <param name="ageInDays">The age in total days</param>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns the z-score for a growth measure using a specified value.</returns>
-        public double CalculateZScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        public async Task<double> CalculateZScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             WHO2006 who2006 = new WHO2006();
             double z = 0.0;
 
-            if (who2006.TryCalculateZScore(indicator, measurement, ageInDays, sex, z: ref z))
+            if (await Task.FromResult(who2006.TryCalculateZScore(indicator, measurement, ageInDays, sex, z: ref z)))
             {
                 return z;
             }
@@ -50,7 +49,7 @@ namespace AnthroCloud.Business
         /// <param name="ageInDays">The age in total days</param>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns the z-score and percentile for a growth measure using a specified value.</returns>
-        public Tuple<double, double> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        public async Task<Tuple<double, double>> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             WHO2006 who2006 = new WHO2006();
 
@@ -59,7 +58,7 @@ namespace AnthroCloud.Business
 
             if (who2006.TryCalculateZScore(indicator, measurement, ageInDays, sex, z: ref z))
             {
-                p = StatisticsHelper.CalculatePercentile(z);
+                p = await Task.FromResult(StatisticsHelper.CalculatePercentile(z));
             }
 
             z = Math.Round(z, 2);

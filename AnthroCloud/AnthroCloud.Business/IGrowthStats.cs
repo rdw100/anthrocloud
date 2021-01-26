@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AnthroCloud.Entities;
-using AnthStat.Statistics;
+﻿using AnthStat.Statistics;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.Business
 {
@@ -16,7 +13,7 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="zScore"></param>
         /// <returns>Returns the percentile using z-score.</returns>
-        public double CalculatePercentile(double zScore);
+        public Task<double> CalculatePercentile(double zScore);
 
         /// <summary>
         /// Calculates the z-score for a growth measure using a specified value.
@@ -26,6 +23,6 @@ namespace AnthroCloud.Business
         /// <param name="ageInDays">The age in total days</param>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns the z-score for a growth measure using a specified value.</returns>
-        public double CalculateZScore(Indicator indicator, double measurement, double age, Sex sex);
+        public Task<double> CalculateZScore(Indicator indicator, double measurement, double age, Sex sex);
     }
 }

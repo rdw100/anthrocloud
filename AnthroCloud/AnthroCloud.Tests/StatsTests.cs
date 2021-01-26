@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using AnthroCloud.Business;
+﻿using AnthroCloud.Business;
 using AnthStat.Statistics;
+using System;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace AnthroCloud.Unit.Tests
 {
@@ -17,10 +16,10 @@ namespace AnthroCloud.Unit.Tests
         /// Tests Weight-for-length z-score calculation.
         /// </summary>
         [Fact]
-        public void Stats_WFL_Zscore_Calculate()
+        public async void Stats_WFL_Zscore_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.WeightForLength, 9.00, 73.00, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.WeightForLength, 9.00, 73.00, Sex.Male);
  
             Assert.Equal(-0.12, Math.Round(z,2));
         }
@@ -29,11 +28,11 @@ namespace AnthroCloud.Unit.Tests
         /// Tests Weight-for-length percentile calculation.
         /// </summary>
         [Fact]
-        public void Stats_WFL_Pcentile_Calculate()
+        public async void Stats_WFL_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.WeightForLength, 9.00, 73.00, Sex.Male);
-            double p = stat.CalculatePercentile(z);
+            double z = await stat.CalculateZScore(Indicator.WeightForLength, 9.00, 73.00, Sex.Male);
+            double p = await stat.CalculatePercentile(z);
 
             Assert.Equal(45.4, Math.Round(p,1));
         }
@@ -43,10 +42,10 @@ namespace AnthroCloud.Unit.Tests
         /// </summary>
         /// <remarks>Expected value obtained from child over 2 measured standing.</remarks>
         [Fact]
-        public void Stats_WFH_Zscore_Calculate()
+        public async void Stats_WFH_Zscore_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.WeightForHeight, 12.00, 87.00, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.WeightForHeight, 12.00, 87.00, Sex.Male);
 
             Assert.Equal(-0.17, Math.Round(z,2));
         }
@@ -56,11 +55,11 @@ namespace AnthroCloud.Unit.Tests
         /// </summary>
         /// <remarks>Expected value obtained from child over 2 measured standing.</remarks>
         [Fact]
-        public void Stats_WFH_Pcentile_Calculate()
+        public async void Stats_WFH_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.WeightForHeight, 12.00, 87.00, Sex.Male);
-            double p = stat.CalculatePercentile(z);
+            double z = await stat.CalculateZScore(Indicator.WeightForHeight, 12.00, 87.00, Sex.Male);
+            double p = await stat.CalculatePercentile(z);
 
             Assert.Equal(43.3, Math.Round(p,1));
         }
@@ -69,10 +68,10 @@ namespace AnthroCloud.Unit.Tests
         /// Tests Weight-for-age z-score calculation.
         /// </summary>
         [Fact]
-        public void Stats_WFA_Zscore_Calculate() 
+        public async void Stats_WFA_Zscore_Calculate() 
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.WeightForAge, 9.00, 365, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.WeightForAge, 9.00, 365, Sex.Male);
 
             Assert.Equal(-0.63, Math.Round(z, 2));
         }
@@ -81,11 +80,11 @@ namespace AnthroCloud.Unit.Tests
         /// Tests Weight-for-age percentile calculation.
         /// </summary>
         [Fact]
-        public void Stats_WFA_Pcentile_Calculate()
+        public async void Stats_WFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.WeightForAge, 9.00, 365, Sex.Male);
-            double p = stat.CalculatePercentile(z);
+            double z = await stat.CalculateZScore(Indicator.WeightForAge, 9.00, 365, Sex.Male);
+            double p = await stat.CalculatePercentile(z);
 
             Assert.Equal(26.3, Math.Round(p, 1));
         }
@@ -94,10 +93,10 @@ namespace AnthroCloud.Unit.Tests
         /// Tests Length-for-age z-score calculation.
         /// </summary>
         [Fact]
-        public void Stats_LFA_Zscore_Calculate()
+        public async void Stats_LFA_Zscore_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
 
             Assert.Equal(-1.15, Math.Round(z, 2));
         }
@@ -105,11 +104,11 @@ namespace AnthroCloud.Unit.Tests
         /// Tests Length-for-age percentile calculation.
         /// </summary>
         [Fact]
-        public void Stats_LFA_Pcentile_Calculate()
+        public async void Stats_LFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
-            double p = stat.CalculatePercentile(z);
+            double z = await stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
+            double p = await stat.CalculatePercentile(z);
 
             Assert.Equal(12.4, Math.Round(p, 1));
         }
@@ -118,10 +117,10 @@ namespace AnthroCloud.Unit.Tests
         /// Tests Height-for-age z-score calculation.
         /// </summary>
         [Fact]
-        public void Stats_HFA_Zscore_Calculate()
+        public async void Stats_HFA_Zscore_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
 
             Assert.Equal(-1.15, Math.Round(z, 2));
         }
@@ -129,11 +128,11 @@ namespace AnthroCloud.Unit.Tests
         /// Tests Height-for-age percentile calculation.
         /// </summary>
         [Fact]
-        public void Stats_HFA_Pcentile_Calculate()
+        public async void Stats_HFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
-            double p = stat.CalculatePercentile(z);
+            double z = await stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
+            double p = await stat.CalculatePercentile(z);
 
             Assert.Equal(12.4, Math.Round(p, 1));
         }
@@ -142,10 +141,10 @@ namespace AnthroCloud.Unit.Tests
         /// Tests BodyMassIndexForAge z-score calculation.
         /// </summary>
         [Fact]
-        public void Stats_BFA_Zscore_Calculate()
+        public async void Stats_BFA_Zscore_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.BodyMassIndexForAge, 16.89, 365, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.BodyMassIndexForAge, 16.89, 365, Sex.Male);
 
             Assert.Equal(0.07, Math.Round(z, 2));
         }
@@ -154,11 +153,11 @@ namespace AnthroCloud.Unit.Tests
         /// Tests BodyMassIndexForAge percentile calculation.
         /// </summary>
         [Fact]
-        public void Stats_BFA_Pcentile_Calculate()
+        public async void Stats_BFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.BodyMassIndexForAge, 16.89, 365, Sex.Male);
-            double p = stat.CalculatePercentile(z);
+            double z = await stat.CalculateZScore(Indicator.BodyMassIndexForAge, 16.89, 365, Sex.Male);
+            double p = await stat.CalculatePercentile(z);
 
             Assert.Equal(52.7, Math.Round(p, 1));
         }
@@ -167,10 +166,10 @@ namespace AnthroCloud.Unit.Tests
         /// Tests HeadCircumferenceForAge z-score calculation.
         /// </summary>
         [Fact]
-        public void Stats_HCFA_Zscore_Calculate()
+        public async void Stats_HCFA_Zscore_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.HeadCircumferenceForAge, 45.00, 365, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.HeadCircumferenceForAge, 45.00, 365, Sex.Male);
 
             Assert.Equal(-0.83, Math.Round(z, 2));
         }
@@ -179,11 +178,11 @@ namespace AnthroCloud.Unit.Tests
         /// Tests HeadCircumferenceForAge percentile calculation.
         /// </summary>
         [Fact]
-        public void Stats_HCFA_Pcentile_Calculate()
+        public async void Stats_HCFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.HeadCircumferenceForAge, 45.00, 365, Sex.Male);
-            double p = stat.CalculatePercentile(z);
+            double z = await stat.CalculateZScore(Indicator.HeadCircumferenceForAge, 45.00, 365, Sex.Male);
+            double p = await stat.CalculatePercentile(z);
 
             Assert.Equal(20.4, Math.Round(p, 1));
         }
@@ -192,10 +191,10 @@ namespace AnthroCloud.Unit.Tests
         /// Tests ArmCircumferenceForAge z-score calculation.
         /// </summary>
         [Fact]
-        public void Stats_MUAC_Zscore_Calculate()
+        public async void Stats_MUAC_Zscore_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.ArmCircumferenceForAge, 15.00, 365, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.ArmCircumferenceForAge, 15.00, 365, Sex.Male);
 
             Assert.Equal(0.31, Math.Round(z, 2));
         }
@@ -204,11 +203,11 @@ namespace AnthroCloud.Unit.Tests
         /// Tests ArmCircumferenceForAge percentile calculation.
         /// </summary>
         [Fact]
-        public void Stats_MUAC_Pcentile_Calculate()
+        public async void Stats_MUAC_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.ArmCircumferenceForAge, 15.00, 365, Sex.Male);
-            double p = stat.CalculatePercentile(z);
+            double z = await stat.CalculateZScore(Indicator.ArmCircumferenceForAge, 15.00, 365, Sex.Male);
+            double p = await stat.CalculatePercentile(z);
 
             Assert.Equal(62.3, Math.Round(p, 1));
         }
@@ -217,10 +216,10 @@ namespace AnthroCloud.Unit.Tests
         /// Tests TricepsSkinfoldForAge z-score calculation.
         /// </summary>
         [Fact]
-        public void Stats_TSF_Zscore_Calculate()
+        public async void Stats_TSF_Zscore_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.TricepsSkinfoldForAge, 8.00, 365, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.TricepsSkinfoldForAge, 8.00, 365, Sex.Male);
 
             Assert.Equal(-0.07, Math.Round(z, 2));
         }
@@ -229,11 +228,11 @@ namespace AnthroCloud.Unit.Tests
         /// Tests TricepsSkinfoldForAge percentile calculation.
         /// </summary>
         [Fact]
-        public void Stats_TSF_Pcentile_Calculate()
+        public async void Stats_TSF_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.TricepsSkinfoldForAge, 8.00, 365, Sex.Male);
-            double p = stat.CalculatePercentile(z);
+            double z = await stat.CalculateZScore(Indicator.TricepsSkinfoldForAge, 8.00, 365, Sex.Male);
+            double p = await stat.CalculatePercentile(z);
 
             Assert.Equal(47.3, Math.Round(p, 1));
         }
@@ -242,10 +241,10 @@ namespace AnthroCloud.Unit.Tests
         /// Tests SubscapularSkinfoldForAge z-score calculation.
         /// </summary>
         [Fact]
-        public void Stats_SSF_Zscore_Calculate()
+        public async void Stats_SSF_Zscore_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
 
             Assert.Equal(0.45, Math.Round(z, 2));
         }
@@ -254,11 +253,11 @@ namespace AnthroCloud.Unit.Tests
         /// Tests SubscapularSkinfoldForAge percentile calculation.
         /// </summary>
         [Fact]
-        public void Stats_SSF_Pcentile_Calculate()
+        public async void Stats_SSF_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = stat.CalculateZScore(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
-            double p = stat.CalculatePercentile(z);
+            double z = await stat.CalculateZScore(Indicator.SubscapularSkinfoldForAge, 7.00, 365, Sex.Male);
+            double p = await stat.CalculatePercentile(z);
 
             Assert.Equal(67.4, Math.Round(p, 1));
         }
@@ -281,10 +280,10 @@ namespace AnthroCloud.Unit.Tests
         [InlineData(Indicator.WeightForAge, 9.00, 365, Sex.Male)]
         [InlineData(Indicator.WeightForHeight, 14.00, 96.00, Sex.Male)]
         [InlineData(Indicator.WeightForLength, 9.00, 73.00, Sex.Male)]
-        public void Stats_All_Tuple(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        public async Task Stats_All_TupleAsync(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             var stat = new Stats();
-            Tuple<double, double> GetScores = stat.GetScore(indicator, measurement, ageInDays, sex);
+            Tuple<double, double> GetScores = await stat.GetScore(indicator, measurement, ageInDays, sex);
             
             Assert.InRange(GetScores.Item1, -4, 4);
             Assert.InRange(GetScores.Item2, 0, 100);
