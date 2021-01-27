@@ -1,17 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AnthroCloud.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using AnthroCloud.Entities;
+using System;
 
 namespace AnthroCloud.API
 {
@@ -27,9 +21,11 @@ namespace AnthroCloud.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            String connection = Configuration.GetConnectionString("AnthroCloudDatabaseMySql");
-            services.AddDbContext<AnthroCloudContextMySql>(options => 
-                options.UseMySql(connection));
+            // String connection = Configuration.GetConnectionString("AnthroCloudDatabaseMySql");
+            // services.AddDbContext<AnthroCloudContextMySql>(options => 
+            //    options.UseMySql(connection));
+            services.AddDbContext<AnthroCloudContextMsSql>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("AnthroCloudContextMsSql")));
             services.AddControllers();
         }
 

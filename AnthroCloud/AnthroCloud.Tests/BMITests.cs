@@ -1,6 +1,6 @@
-using System;
-using Xunit;
 using AnthroCloud.Business;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace AnthroCloud.Unit.Tests
 {
@@ -20,11 +20,12 @@ namespace AnthroCloud.Unit.Tests
     public class BMITests
     {
         [Fact]
-        public void BMI_InstantiateObject_Calculation()
+        public async Task BMI_InstantiateObject_CalculationAsync()
         {
-            var BMI = new BMI(9.00, 73.00);
-            double bmi = 16.9;
-            Assert.Equal(bmi.ToString(), BMI.ToReadableDouble().ToString());
+            BMI bmi = new BMI();
+            _ = await bmi.Calculate(9.00, 73.00);
+            double expected = 16.9;
+            Assert.Equal(expected.ToString(), bmi.ToReadableDouble().ToString());
         }
 
         /// <summary>
@@ -42,10 +43,11 @@ namespace AnthroCloud.Unit.Tests
         [InlineData(9.00, 73.00, 16.9)]
         [InlineData(9.50, 74.00, 17.3)]
         [InlineData(10.00, 76.00, 17.3)]
-        public void BMI_TwoUnderRecumbent_QuotientIncreases(double weight, double height, double value)
+        public async Task BMI_TwoUnderRecumbent_QuotientIncreasesAsync(double weight, double height, double value)
         {
-            var BMI = new BMI(weight, height);
-            Assert.Equal(value, BMI.ToReadableDouble());
+            BMI bmi = new BMI();
+            _ = await bmi.Calculate(weight, height);
+            Assert.Equal(value, bmi.ToReadableDouble());
         }
 
         /// <summary>
@@ -63,11 +65,12 @@ namespace AnthroCloud.Unit.Tests
         [InlineData(9.00, 73.00, 16.6)]
         [InlineData(9.50, 74.00, 17)]
         [InlineData(10.00, 76.00, 17)]
-        public void BMI_TwoUnderStanding_QuotientDecreases(double weight, double height, double value)
+        public async Task BMI_TwoUnderStanding_QuotientDecreasesAsync(double weight, double height, double value)
         {
             height += .7;
-            var BMI = new BMI(weight, height);
-            Assert.Equal(value, BMI.ToReadableDouble());
+            BMI bmi = new BMI();
+            _ = await bmi.Calculate(weight, height);
+            Assert.Equal(value, bmi.ToReadableDouble());
         }
 
         /// <summary>
@@ -84,11 +87,12 @@ namespace AnthroCloud.Unit.Tests
         [InlineData(11.00, 83.70, 16)]
         [InlineData(12.00, 74.00, 22.3)]
         [InlineData(13.00, 76.00, 22.9)]
-        public void BMI_TwoOverRecumbent_QuotientIncreases(double weight, double height, double value)
+        public async Task BMI_TwoOverRecumbent_QuotientIncreasesAsync(double weight, double height, double value)
         {            
             height -= .7;
-            var BMI = new BMI(weight, height);
-            Assert.Equal(value, BMI.ToReadableDouble());
+            BMI bmi = new BMI();
+            _ = await bmi.Calculate(weight, height);
+            Assert.Equal(value, bmi.ToReadableDouble());
         }
 
         /// <summary>
@@ -101,10 +105,11 @@ namespace AnthroCloud.Unit.Tests
         [InlineData(11.00, 83.70, 15.7)]
         [InlineData(12.00, 74.00, 21.9)]
         [InlineData(13.00, 76.00, 22.5)]
-        public void BMI_TwoOverStanding_QuotientDecreases(double weight, double height, double value)
+        public async Task BMI_TwoOverStanding_QuotientDecreasesAsync(double weight, double height, double value)
         {
-            var BMI = new BMI(weight, height);
-            Assert.Equal(value, BMI.ToReadableDouble());
+            BMI bmi = new BMI();
+            _ = await bmi.Calculate(weight, height);
+            Assert.Equal(value, bmi.ToReadableDouble());
         }
     }
 }

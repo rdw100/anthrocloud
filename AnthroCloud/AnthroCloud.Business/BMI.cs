@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.Business
 {
@@ -24,7 +25,9 @@ namespace AnthroCloud.Business
         /// <summary>
         /// Body mass divided by the square of the body height
         /// </summary>
-        public double Bmi { get; private set; }
+        public double Bmi { get; set; }
+
+        public BMI() { }
 
         /// <summary>
         /// Creates a BMI object with calculated body mass index.
@@ -35,17 +38,30 @@ namespace AnthroCloud.Business
         {
             Weight = weight;
             Height = height;
-            Calculate(weight, height);
+            _ = Calculate(weight, height);
         }
 
         /// <summary>
-        /// Caclulates body mass index.
+        /// Gets and sets the calculated BMI property. 
         /// </summary>
         /// <param name="weight">Body weight</param>
         /// <param name="height">Body height</param>
-        private void Calculate(double weight, double height)
+        public async Task<double> Calculate(double weight, double height)
         {
-            Bmi = weight / Math.Pow(height / 100.0, 2);
+            Bmi = await Task.FromResult(CalculateBMI(weight, height));
+            return Bmi;
+        }
+
+        /// <summary>
+        /// Calculates body mass index.
+        /// </summary>
+        /// <param name="weight">The weight.</param>
+        /// <param name="height">The height.</param>
+        /// <returns>Return BMI.</returns>
+        private static double CalculateBMI(double weight, double height)
+        {
+            double bmi = (weight / Math.Pow(height / 100.0, 2));
+            return bmi;
         }
 
         /// <summary>

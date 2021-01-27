@@ -20,7 +20,7 @@ namespace AnthroCloud.API.Controllers
         /// <param name="measurement">The specified measured value</param>
         /// <param name="ageInDays">The age in total days</param>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
-        /// <returns>Returns a tuple containing a zscore and percentile cacluation.</returns>
+        /// <returns>Returns a tuple containing a zscore and percentile calcuation.</returns>
         /// <example>GET: api/Stats/WeightForAge/9.00/365/Male</example>
         [HttpGet("{indicator}/{measurement}/{ageInDays}/{sex}")]
         [Route("STATS/{indicator}/{measurement}/{ageInDays}/{sex}")]
