@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AnthroCloud.Business;
+using System;
 using Xunit;
-using AnthroCloud.Business;
 
 namespace AnthroCloud.Unit.Tests
 {

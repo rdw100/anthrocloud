@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AnthroCloud.API.Controllers;
+using System;
 using Xunit;
-using AnthroCloud.Business;
-using AnthroCloud.Entities;
-using AnthroCloud.API.Controllers;
 
 namespace AnthroCloud.Integration.Tests
 {

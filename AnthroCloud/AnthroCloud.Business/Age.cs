@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.Business
 {
@@ -10,6 +9,8 @@ namespace AnthroCloud.Business
     /// </summary>
     public class Age
     {
+        public Age() { }
+
         /// <summary>
         /// Creates a new instance of the age object setting birth and visit dates.
         /// </summary>
@@ -17,7 +18,7 @@ namespace AnthroCloud.Business
         /// <param name="visit">The date of visit</param>
         public Age(DateTime birth, DateTime visit)
         {
-            Calculate(birth, visit);
+            _ = Calculate(birth, visit);
         }
 
         /// <summary>
@@ -46,11 +47,23 @@ namespace AnthroCloud.Business
         public int TotalMonths { get; private set; }
 
         /// <summary>
+        /// Operation returns a calculated Age object.
+        /// </summary>
+        /// <param name="birth">The date of birth</param>
+        /// <param name="visit">The date of visit</param>
+        /// <returns>Returns a calculated Age object</returns>
+        public async Task<Age> Calculate(DateTime birth, DateTime visit)
+        {
+            await Task.FromResult<Age>(CalculateAge(birth, visit));
+            return this;
+        }
+
+        /// <summary>
         /// Calculates the Year, Month, Day, TotalDays, and Total Months from birth date and visit date.
         /// </summary>
         /// <param name="birth">The date of birth</param>
         /// <param name="visit">The date of visit</param>
-        private void Calculate(DateTime birth, DateTime visit)
+        private Age CalculateAge(DateTime birth, DateTime visit)
         {
             if ((visit.Year - birth.Year) > 0 ||
                 (((visit.Year - birth.Year) == 0) && ((birth.Month < visit.Month) ||
@@ -95,6 +108,8 @@ namespace AnthroCloud.Business
             {
                 throw new ArgumentException("Birthday date must be earlier than current date");
             }
+
+            return this;
         }
 
         /// <summary>
