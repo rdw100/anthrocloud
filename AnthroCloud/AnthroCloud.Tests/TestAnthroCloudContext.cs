@@ -16,19 +16,19 @@ namespace AnthroCloud.Tests
         private const string STORE = "appsettings.json";
         private const string APP = "AnthroCloud.API\\";
         private const string KEY = "ConnectionStrings";
-        private const string VALUE = "AnthroCloudDatabaseMySql";
+        private const string VALUE = "AnthroCloudDatabaseMsSql";
         private const string DIR = "..\\..\\..\\..\\";
 
         private static string _connectionString = string.Empty;
 
-        public AnthroCloudContextMySql Context { get; set; }
+        public AnthroCloudContextMsSql Context { get; set; }
 
         public TestAnthroCloudContext()
         {
             Context = Configure();
         }
 
-        private AnthroCloudContextMySql Configure()
+        private AnthroCloudContextMsSql Configure()
         {
             // Retrieve application settings file
             ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
@@ -41,11 +41,11 @@ namespace AnthroCloud.Tests
             _connectionString = root.GetSection(KEY).GetSection(VALUE).Value;
 
             // Configure context with setting
-            DbContextOptionsBuilder<AnthroCloudContextMySql> optionsBuilder = new DbContextOptionsBuilder<AnthroCloudContextMySql>();
-            optionsBuilder.UseMySql(_connectionString);
+            DbContextOptionsBuilder<AnthroCloudContextMsSql> optionsBuilder = new DbContextOptionsBuilder<AnthroCloudContextMsSql>();
+            optionsBuilder.UseSqlServer(_connectionString);
 
             // Initialize context with setting
-            AnthroCloudContextMySql context = new AnthroCloudContextMySql(optionsBuilder.Options);
+            AnthroCloudContextMsSql context = new AnthroCloudContextMsSql(optionsBuilder.Options);
 
             return context;
         }

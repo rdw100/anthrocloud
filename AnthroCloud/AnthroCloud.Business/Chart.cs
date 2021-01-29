@@ -1,11 +1,9 @@
-﻿using System;
+﻿using AnthroCloud.Data;
+using AnthroCloud.Entities;
+using AnthroCloud.Framework.Drawing;
 using System.Collections.Generic;
 using System.Linq;
-using AnthroCloud.Data;
-using AnthroCloud.Entities;
-using AnthStat.Statistics;
-using AnthroCloud.Framework.Drawing;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.Business
 {
@@ -14,7 +12,7 @@ namespace AnthroCloud.Business
     /// </summary>
     public class Chart : IGrowthChart
     {
-        private AnthroCloudContextMySql _context;
+        private readonly AnthroCloudContextMsSql _context;
 
         public Chart() { }
 
@@ -22,7 +20,7 @@ namespace AnthroCloud.Business
         /// Constructs controller with database context.
         /// </summary>
         /// <param name="context">The database context</param>
-        public Chart(AnthroCloudContextMySql context)
+        public Chart(AnthroCloudContextMsSql context)
         {
             _context = context;
         }
@@ -32,10 +30,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement used to calculate body mass index by age.</returns>
-        public List<BmiforAge> ListBmiforAge(Sexes sex)
+        public async Task<List<BmiforAge>> ListBmiforAge(Sexes sex)
         {
             var chartDAC = new ChartDAC(_context);
-            List<BmiforAge> bmiCurves = chartDAC.ListBmiforAge(sex);
+            List<BmiforAge> bmiCurves = await chartDAC.ListBmiforAge(sex);
             return bmiCurves;
         }
 
@@ -44,10 +42,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement used to calculate body mass index by age.</returns>
-        public List<BmiforAge> ListBmiforAge(Sexes sex, byte newX, decimal newY)
+        public async Task<List<BmiforAge>> ListBmiforAgeAsync(Sexes sex, byte newX, decimal newY)
         {
             var chartDAC = new ChartDAC(_context);
-            List<BmiforAge> bmiCurves = chartDAC.ListBmiforAge(sex);
+            List<BmiforAge> bmiCurves = await chartDAC.ListBmiforAge(sex);
 
             // Update adjacent length-for-age and height-for-age with a vertical 
             // line at 2 years of age to mark the change from length to height; 
@@ -124,10 +122,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <ret
-        public List<HcForAge> ListHcforAge(Sexes sex)
+        public async Task<List<HcForAge>> ListHcforAge(Sexes sex)
         {
             var chartDAC = new ChartDAC(_context);
-            List<HcForAge> hcfaCurves = chartDAC.ListHcforAge(sex);
+            List<HcForAge> hcfaCurves = await chartDAC.ListHcforAge(sex);
             return hcfaCurves;
         }
 
@@ -136,10 +134,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Head circumference-for-age used to create a WHO chart. </returns>
-        public List<HcForAge> ListHcforAge(Sexes sex, byte newX, decimal newY)
+        public async Task<List<HcForAge>> ListHcforAge(Sexes sex, byte newX, decimal newY)
         {
             var chartDAC = new ChartDAC(_context);
-            List<HcForAge> hcfaCurves = chartDAC.ListHcforAge(sex);
+            List<HcForAge> hcfaCurves = await chartDAC.ListHcforAge(sex);
 
             decimal existingX = (from n1 in hcfaCurves
                                  where n1.Month == newX
@@ -209,10 +207,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Length/height-for-age used to create a WHO chart.</returns>
-        public List<LengthHeightForAge> ListLengthHeightForAge(Sexes sex)
+        public async Task<List<LengthHeightForAge>> ListLengthHeightForAge(Sexes sex)
         {
             var chartDAC = new ChartDAC(_context);
-            List<LengthHeightForAge> lhfaCurves = chartDAC.ListLengthHeightForAge(sex);
+            List<LengthHeightForAge> lhfaCurves = await chartDAC.ListLengthHeightForAge(sex);
             return lhfaCurves;
         }
 
@@ -221,10 +219,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Length/height-for-age used to create a WHO chart.</returns>
-        public List<LengthHeightForAge> ListLengthHeightForAge(Sexes sex, byte newX, decimal newY)
+        public async Task<List<LengthHeightForAge>> ListLengthHeightForAge(Sexes sex, byte newX, decimal newY)
         {
             var chartDAC = new ChartDAC(_context);
-            List<LengthHeightForAge> lhfaCurves = chartDAC.ListLengthHeightForAge(sex);
+            List<LengthHeightForAge> lhfaCurves = await chartDAC.ListLengthHeightForAge(sex);
 
             // Update adjacent length-for-age and height-for-age with a vertical 
             // line at 2 years of age to mark the change from length to height; 
@@ -296,10 +294,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Arm circumference-for-age used to create a WHO chart.</returns>
-        public List<MuacforAge> ListMuacforAge(Sexes sex)
+        public async Task<List<MuacforAge>> ListMuacforAge(Sexes sex)
         {
             var chartDAC = new ChartDAC(_context);
-            List<MuacforAge> muacCurves = chartDAC.ListMuacforAge(sex);
+            List<MuacforAge> muacCurves = await chartDAC.ListMuacforAge(sex);
             return muacCurves;
         }
 
@@ -308,10 +306,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Arm circumference-for-age used to create a WHO chart.</returns>
-        public List<MuacforAge> ListMuacforAge(Sexes sex, byte newX, decimal newY)
+        public async Task<List<MuacforAge>> ListMuacforAge(Sexes sex, byte newX, decimal newY)
         {
             var chartDAC = new ChartDAC(_context);
-            List<MuacforAge> muacCurves = chartDAC.ListMuacforAge(sex);
+            List<MuacforAge> muacCurves = await chartDAC.ListMuacforAge(sex);
 
             decimal existingX = (from n1 in muacCurves
                                  where n1.Month == newX
@@ -380,10 +378,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Subscapular skinfold-for-age used to create a WHO chart.</returns>
-        public List<SsfforAge> ListSsfforAge(Sexes sex)
+        public async Task<List<SsfforAge>> ListSsfforAge(Sexes sex)
         {
             var chartDAC = new ChartDAC(_context);
-            List<SsfforAge> ssfCurves = chartDAC.ListSsfforAge(sex);
+            List<SsfforAge> ssfCurves = await chartDAC.ListSsfforAge(sex);
             return ssfCurves;
         }
 
@@ -392,10 +390,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Subscapular skinfold-for-age used to create a WHO chart.</returns>
-        public List<SsfforAge> ListSsfforAge(Sexes sex, byte newX, decimal newY)
+        public async Task<List<SsfforAge>> ListSsfforAge(Sexes sex, byte newX, decimal newY)
         {
             var chartDAC = new ChartDAC(_context);
-            List<SsfforAge> ssfCurves = chartDAC.ListSsfforAge(sex);
+            List<SsfforAge> ssfCurves = await chartDAC.ListSsfforAge(sex);
 
             decimal existingX = (from n1 in ssfCurves
                                  where n1.Month == newX
@@ -465,10 +463,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Triceps skinfold-for-age used to create a WHO chart.</returns>
-        public List<TsfforAge> ListTsfforAge(Sexes sex)
+        public async Task<List<TsfforAge>> ListTsfforAge(Sexes sex)
         {
             var chartDAC = new ChartDAC(_context);
-            List<TsfforAge> tsfCurves = chartDAC.ListTsfforAge(sex);
+            List<TsfforAge> tsfCurves = await chartDAC.ListTsfforAge(sex);
             return tsfCurves;
         }
 
@@ -477,10 +475,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Triceps skinfold-for-age used to create a WHO chart.</returns>
-        public List<TsfforAge> ListTsfforAge(Sexes sex, byte newX, decimal newY)
+        public async Task<List<TsfforAge>> ListTsfforAge(Sexes sex, byte newX, decimal newY)
         {
             var chartDAC = new ChartDAC(_context);
-            List<TsfforAge> tsfCurves = chartDAC.ListTsfforAge(sex);
+            List<TsfforAge> tsfCurves = await chartDAC.ListTsfforAge(sex);
 
             decimal existingX = (from n1 in tsfCurves
                                  where n1.Month == newX
@@ -549,10 +547,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart.</returns>
-        public List<WeightForAge> ListWeightForAge(Sexes sex)
+        public async Task<List<WeightForAge>> ListWeightForAge(Sexes sex)
         {
             var chartDAC = new ChartDAC(_context);
-            List<WeightForAge> wfaCurves = chartDAC.ListWeightForAge(sex);
+            List<WeightForAge> wfaCurves = await chartDAC.ListWeightForAge(sex);
             return wfaCurves;
         }
 
@@ -561,10 +559,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of age-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart.</returns>
-        public List<WeightForAge> ListWeightForAge(Sexes sex, byte newX, decimal newY)
+        public async Task<List<WeightForAge>> ListWeightForAge(Sexes sex, byte newX, decimal newY)
         {
             var chartDAC = new ChartDAC(_context);
-            List<WeightForAge> wfaCurves = chartDAC.ListWeightForAge(sex);
+            List<WeightForAge> wfaCurves = await chartDAC.ListWeightForAge(sex);
 
             decimal existingX = (from n1 in wfaCurves
                                  where n1.Month == newX
@@ -629,10 +627,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (2 to 5 years).</returns>
-        public List<WeightForHeight> ListWeightForHeight(Sexes sex)
+        public async Task<List<WeightForHeight>> ListWeightForHeight(Sexes sex)
         {
             var chartDAC = new ChartDAC(_context);
-            List<WeightForHeight> wfhCurves = chartDAC.ListWeightForHeight(sex);
+            List<WeightForHeight> wfhCurves = await chartDAC.ListWeightForHeight(sex);
             return wfhCurves;
         }
 
@@ -641,10 +639,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (2 to 5 years).</returns>
-        public List<WeightForHeight> ListWeightForHeight(Sexes sex, decimal newX, decimal newY)
+        public async Task<List<WeightForHeight>> ListWeightForHeight(Sexes sex, decimal newX, decimal newY)
         {
             var chartDAC = new ChartDAC(_context);
-            List<WeightForHeight> wfhCurves = chartDAC.ListWeightForHeight(sex);
+            List<WeightForHeight> wfhCurves = await chartDAC.ListWeightForHeight(sex);
 
             decimal existingX = (from n1 in wfhCurves
                                  where n1.Heightincm == newX
@@ -713,10 +711,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (Birth to 2 years).</returns>
-        public List<WeightForLength> ListWeightForLength(Sexes sex)
+        public async Task<List<WeightForLength>> ListWeightForLength(Sexes sex)
         {
             var chartDAC = new ChartDAC(_context);
-            List<WeightForLength> wflCurves = chartDAC.ListWeightForLength(sex);
+            List<WeightForLength> wflCurves = await chartDAC.ListWeightForLength(sex);
             return wflCurves;
         }
 
@@ -725,10 +723,10 @@ namespace AnthroCloud.Business
         /// </summary>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns a list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (Birth to 2 years).</returns>
-        public List<WeightForLength> ListWeightForLength(Sexes sex, decimal newX, decimal newY)
+        public async Task<List<WeightForLength>> ListWeightForLength(Sexes sex, decimal newX, decimal newY)
         {
             var chartDAC = new ChartDAC(_context);
-            List<WeightForLength> wflCurves = chartDAC.ListWeightForLength(sex);
+            List<WeightForLength> wflCurves = await chartDAC.ListWeightForLength(sex);
 
             decimal existingX = (from n1 in wflCurves
                                  where n1.Lengthincm == newX

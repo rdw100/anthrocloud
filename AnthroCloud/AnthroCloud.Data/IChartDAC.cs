@@ -1,7 +1,6 @@
-﻿using System;
+﻿using AnthroCloud.Entities;
 using System.Collections.Generic;
-using System.Text;
-using AnthroCloud.Entities;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.Data
 {
@@ -26,62 +25,62 @@ namespace AnthroCloud.Data
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of WFA objects.</returns>
-        public List<WeightForAge> ListWeightForAge(Sexes sex);
+        public Task<List<WeightForAge>> ListWeightForAge(Sexes sex);
 
         /// <summary>
         /// Defines method to filter and return WFL data.
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of WFL objects.</returns>
-        public List<WeightForLength> ListWeightForLength(Sexes sex);
+        public Task<List<WeightForLength>> ListWeightForLength(Sexes sex);
 
         /// <summary>
         /// Defines method to filter and return WFH data.
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of WFH objects.</returns>
-        public List<WeightForHeight> ListWeightForHeight(Sexes sex);
+        public Task<List<WeightForHeight>> ListWeightForHeight(Sexes sex);
 
         /// <summary>
         /// Defines method to filter and return BFA data.
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of BFA objects.</returns>
-        public List<BmiforAge> ListBmiforAge(Sexes sex);
+        public Task<List<BmiforAge>> ListBmiforAge(Sexes sex);
 
         /// <summary>
         /// Defines method to filter and return HCFA data.
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of HCFA objects.</returns>
-        public List<HcForAge> ListHcforAge(Sexes sex);
+        public Task<List<HcForAge>> ListHcforAge(Sexes sex);
 
         /// <summary>
         /// Defines method to filter and return LHFA data.
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of LHFA objects.</returns>
-        public List<LengthHeightForAge> ListLengthHeightForAge(Sexes sex);
+        public Task<List<LengthHeightForAge>> ListLengthHeightForAge(Sexes sex);
 
         /// <summary>
         /// Defines method to filter and return Muac data.
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of Muac objects.</returns>
-        public List<MuacforAge> ListMuacforAge(Sexes sex);
+        public Task<List<MuacforAge>> ListMuacforAge(Sexes sex);
 
         /// <summary>
         /// Defines method to filter and return SSF data.
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of SSF objects.</returns>
-        public List<SsfforAge> ListSsfforAge(Sexes sex);
+        public Task<List<SsfforAge>> ListSsfforAge(Sexes sex);
 
         /// <summary>
         /// Defines method to filter and return TSF data.
         /// </summary>
         /// <param name="sex">Filters by ISO/IEC 5218 standard (1 = male, 2 = female)</param>
         /// <returns>Returns a strongly typed list of TSF objects.</returns>
-        public List<TsfforAge> ListTsfforAge(Sexes sex);
+        public Task<List<TsfforAge>> ListTsfforAge(Sexes sex);
     }
 }

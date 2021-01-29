@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using AnthroCloud.Business;
+﻿using AnthroCloud.API.Controllers;
 using AnthroCloud.Entities;
-using AnthroCloud.API.Controllers;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using AnthroCloud.Tests;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace AnthroCloud.Integration.Tests
 {
@@ -17,18 +14,18 @@ namespace AnthroCloud.Integration.Tests
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class ChartControllerTests
     {
-        private AnthroCloudContextMySql _context = new TestAnthroCloudContext().Context;
-        
+        private AnthroCloudContextMsSql _context = new TestAnthroCloudContext().Context;
+
         /// <summary>
         /// Tests chart controller logic for BMI chart data given new data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetBMI_MaleNewXNewY_ShouldReturnAllMale()
+        public async Task GetBMI_MaleNewXNewY_ShouldReturnAllMaleAsync()
         {
             List<BmiforAge> expected = GetTestBmiforAge_Male();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllBFA(1,12,17.5M) as List<BmiforAge>;
+            var target = await controller.GetAllBFA(1,12,17.5M) as List<BmiforAge>;
 
             Assert.Equal(62, target.Count());
             
@@ -77,12 +74,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for BMI chart data given new data point (x,y) when female.
         /// </summary>
         [Fact]
-        public void GetBMI_FemaleNewXNewY_ShouldReturnAllFemale()
+        public async Task GetBMI_FemaleNewXNewY_ShouldReturnAllFemaleAsync()
         {
             List<BmiforAge> expected = GetTestBmiforAge_Female();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllBFA(2, 12, 17) as List<BmiforAge>;
+            var target = await controller.GetAllBFA(2, 12, 17) as List<BmiforAge>;
 
             Assert.Equal(62, target.Count());
 
@@ -131,12 +128,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for HCFA chart data given new data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetHCFA_MaleNewXNewY_ShouldReturnAllMale()
+        public async Task GetHCFA_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<HcForAge> expected = GetAllHCFA_Male();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllHCFA(1, 12, 73.00M) as List<HcForAge>;
+            var target = await controller.GetAllHCFA(1, 12, 73.00M) as List<HcForAge>;
 
             Assert.Equal(61, target.Count());
 
@@ -185,12 +182,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for HCFA chart data given new data point (x,y) when female.
         /// </summary>
         [Fact]
-        public void GetHCFA_FemaleNewXNewY_ShouldReturnAllFemale()
+        public async Task GetHCFA_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<HcForAge> expected = GetAllHCFA_Female();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllHCFA(2, 12, 73.00M) as List<HcForAge>;
+            var target = await controller.GetAllHCFA(2, 12, 73.00M) as List<HcForAge>;
 
             Assert.Equal(61, target.Count());
 
@@ -239,12 +236,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for LHFA chart data given new data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetLHFA_MaleNewXNewY_ShouldReturnAllMale()
+        public async Task GetLHFA_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<LengthHeightForAge> expected = GetAllLHFA_Male();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllLHFA(1, 12, 73) as List<LengthHeightForAge>;
+            var target = await controller.GetAllLHFA(1, 12, 73) as List<LengthHeightForAge>;
 
             Assert.Equal(62, target.Count());
 
@@ -291,12 +288,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for LHFA chart data given new data point (x,y) when female.
         /// </summary>
         [Fact]
-        public void GetLHFA_FemaleNewXNewY_ShouldReturnAllFemale()
+        public async Task GetLHFA_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<LengthHeightForAge> expected = GetAllLHFA_Female();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllLHFA(2, 12, 73) as List<LengthHeightForAge>;
+            var target = await controller.GetAllLHFA(2, 12, 73) as List<LengthHeightForAge>;
 
             Assert.Equal(62, target.Count());
 
@@ -343,12 +340,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for MUAC chart data given new data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetMUAC_MaleNewXNewY_ShouldReturnAllMale()
+        public async Task GetMUAC_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<MuacforAge> expected = GetAllMUAC_Male();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllMUAC(1, 12, 15) as List<MuacforAge>;
+            var target = await controller.GetAllMUAC(1, 12, 15) as List<MuacforAge>;
 
             Assert.Equal(58, target.Count());
 
@@ -397,12 +394,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for MUAC chart data given new data point (x,y) when female.
         /// </summary>
         [Fact]
-        public void GetMUAC_FemaleNewXNewY_ShouldReturnAllFemale()
+        public async Task GetMUAC_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<MuacforAge> expected = GetAllMUAC_Female();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllMUAC(2, 12, 15) as List<MuacforAge>;
+            var target = await controller.GetAllMUAC(2, 12, 15) as List<MuacforAge>;
 
             Assert.Equal(58, target.Count());
 
@@ -451,12 +448,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for SSFA chart data given new data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetSSFA_MaleNewXNewY_ShouldReturnAllMale()
+        public async Task GetSSFA_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<SsfforAge> expected = GetAllSSFA_Male();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllSSFA(1, 12, 7) as List<SsfforAge>;
+            var target = await controller.GetAllSSFA(1, 12, 7) as List<SsfforAge>;
 
             Assert.Equal(58, target.Count());
 
@@ -505,12 +502,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for SSFA chart data given new data point (x,y) when female.
         /// </summary>
         [Fact]
-        public void GetSSFA_FemaleNewXNewY_ShouldReturnAllFemale()
+        public async Task GetSSFA_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<SsfforAge> expected = GetAllSSFA_Female();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllSSFA(2, 12, 7) as List<SsfforAge>;
+            var target = await controller.GetAllSSFA(2, 12, 7) as List<SsfforAge>;
 
             Assert.Equal(58, target.Count());
 
@@ -559,12 +556,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for TSFA chart data given new data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetTSFA_MaleNewXNewY_ShouldReturnAllMale()
+        public async Task GetTSFA_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<TsfforAge> expected = GetAllTSFA_Male();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllTSFA(1, 12, 8) as List<TsfforAge>;
+            var target = await controller.GetAllTSFA(1, 12, 8) as List<TsfforAge>;
 
             Assert.Equal(58, target.Count());
 
@@ -613,12 +610,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for TSFA chart data given new data point (x,y) when female.
         /// </summary>
         [Fact]
-        public void GetTSFA_FemaleNewXNewY_ShouldReturnAllFemale()
+        public async Task GetTSFA_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<TsfforAge> expected = GetAllTSFA_Female();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllTSFA(2, 12, 8) as List<TsfforAge>;
+            var target = await controller.GetAllTSFA(2, 12, 8) as List<TsfforAge>;
 
             Assert.Equal(58, target.Count());
 
@@ -667,12 +664,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for WFA chart data given new data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetWFA_MaleNewXNewY_ShouldReturnAllMale()
+        public async Task GetWFA_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<WeightForAge> expected = GetAllWFA_Male();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllWFA(1, 12, 9) as List<WeightForAge>;
+            var target = await controller.GetAllWFA(1, 12, 9) as List<WeightForAge>;
 
             Assert.Equal(61, target.Count());
 
@@ -719,12 +716,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for WFA chart data given new data point (x,y) when female.
         /// </summary>
         [Fact]
-        public void GetWFA_FemaleNewXNewY_ShouldReturnAllFemale()
+        public async Task GetWFA_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<WeightForAge> expected = GetAllWFA_Female();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllWFA(2, 12, 9) as List<WeightForAge>;
+            var target = await controller.GetAllWFA(2, 12, 9) as List<WeightForAge>;
 
             Assert.Equal(61, target.Count());
 
@@ -771,12 +768,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for WFH chart data given new data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetWFH_MaleNewXNewY_ShouldReturnAllMale()
+        public async Task GetWFH_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<WeightForHeight> expected = GetAllWFH_Male();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllWFH(1, 73, 9) as List<WeightForHeight>;
+            var target = await controller.GetAllWFH(1, 73, 9) as List<WeightForHeight>;
 
             Assert.Equal(111, target.Count());
 
@@ -825,12 +822,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for WFH chart data given new interpolated data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetWFH_MaleNewXNewY_ShouldReturnInterpolated()
+        public async Task GetWFH_MaleNewXNewY_ShouldReturnInterpolated()
         {
             List<WeightForHeight> expected = GetWFH_Male_Interpolated_Row();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllWFH(1, 87.70M, 12.35M) as List<WeightForHeight>;
+            var target = await controller.GetAllWFH(1, 87.70M, 12.35M) as List<WeightForHeight>;
 
             Assert.Equal(111 + 1, target.Count());
 
@@ -881,12 +878,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for WFH chart data given new data point (x,y) when female.
         /// </summary>
         [Fact]
-        public void GetWFH_FemaleNewXNewY_ShouldReturnAllFemale()
+        public async Task GetWFH_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<WeightForHeight> expected = GetAllWFH_Female();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllWFH(2, 73, 9) as List<WeightForHeight>;
+            var target = await controller.GetAllWFH(2, 73, 9) as List<WeightForHeight>;
 
             Assert.Equal(111, target.Count());
 
@@ -936,12 +933,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for WFH chart data given new interpolated data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetWFH_FemaleNewXNewY_ShouldReturnInterpolated()
+        public async Task GetWFH_FemaleNewXNewY_ShouldReturnInterpolated()
         {
             List<WeightForHeight> expected = GetWFH_Female_Interpolated_Row();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllWFH(1, 87.70M, 12.35M) as List<WeightForHeight>;
+            var target = await controller.GetAllWFH(1, 87.70M, 12.35M) as List<WeightForHeight>;
 
             Assert.Equal(111 + 1, target.Count());
 
@@ -992,12 +989,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for WFL chart data given new data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetWFL_MaleNewXNewY_ShouldReturnAllMale()
+        public async Task GetWFL_MaleNewXNewY_ShouldReturnAllMale()
         {
             List<WeightForLength> expected = GetAllWFL_Male();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllWFL(1, 73.00M, 9.00M) as List<WeightForLength>;
+            var target = await controller.GetAllWFL(1, 73.00M, 9.00M) as List<WeightForLength>;
 
             // + 1 represents added interpolated data row for scored line chart
             Assert.Equal(131, target.Count());
@@ -1046,12 +1043,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for WFL chart data given new interpolated data point (x,y) when male.
         /// </summary>
         [Fact]
-        public void GetWFL_MaleNewXNewY_ShouldReturnInterpolated()
+        public async Task GetWFL_MaleNewXNewY_ShouldReturnInterpolated()
         {
             List<WeightForLength> expected = GetWFL_Male_Interpolated_Row();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllWFL(1, 73.25M, 9.25M) as List<WeightForLength>;
+            var target = await controller.GetAllWFL(1, 73.25M, 9.25M) as List<WeightForLength>;
 
             // + 1 represents added interpolated data row for scored line chart
             Assert.Equal(131 + 1, target.Count());
@@ -1103,12 +1100,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for WFL chart data given new data point (x,y) when female.
         /// </summary>
         [Fact]
-        public void GetWFL_FemaleNewXNewY_ShouldReturnAllFemale()
+        public async Task GetWFL_FemaleNewXNewY_ShouldReturnAllFemale()
         {
             List<WeightForLength> expected = GetAllWFL_Female();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllWFL(2, 73.00M, 9.00M) as List<WeightForLength>;
+            var target = await controller.GetAllWFL(2, 73.00M, 9.00M) as List<WeightForLength>;
 
             Assert.Equal(131, target.Count());
 
@@ -1157,12 +1154,12 @@ namespace AnthroCloud.Integration.Tests
         /// Tests chart controller logic for WFL chart data given new interpolated data point (x,y) when female.
         /// </summary>
         [Fact]
-        public void GetWFL_FemaleNewXNewY_ShouldReturnInterpolated()
+        public async Task GetWFL_FemaleNewXNewY_ShouldReturnInterpolated()
         {
             List<WeightForLength> expected = GetWFL_Female_Interpolated_Row();
 
             var controller = new ChartController(_context);
-            var target = controller.GetAllWFL(2, 73.25M, 9.25M) as List<WeightForLength>;
+            var target = await controller.GetAllWFL(2, 73.25M, 9.25M) as List<WeightForLength>;
 
             Assert.Equal(131 + 1, target.Count());
 

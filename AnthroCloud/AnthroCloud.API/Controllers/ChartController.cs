@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using AnthroCloud.Business;
+﻿using AnthroCloud.Business;
 using AnthroCloud.Entities;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.API.Controllers
 {
@@ -17,14 +13,13 @@ namespace AnthroCloud.API.Controllers
     [ApiController]
     public class ChartController : ControllerBase
     {
-
-        private AnthroCloudContextMySql _context;
+        private AnthroCloudContextMsSql _context;
 
         /// <summary>
         /// Solely constructs controller with database context.
         /// </summary>
         /// <param name="ctx">The database context</param>
-        public ChartController(AnthroCloudContextMySql context)
+        public ChartController(AnthroCloudContextMsSql context)
         {
             _context = context;
         }
@@ -43,10 +38,10 @@ namespace AnthroCloud.API.Controllers
         [HttpGet("{id}")]
         [Route("BFA/{id}")]
         [Route("BFA/{id}/{x}/{y}")]
-        public List<BmiforAge> GetAllBFA(byte id, byte x, decimal y)
+        public async Task<List<BmiforAge>> GetAllBFA(byte id, byte x, decimal y)
         {
             Chart chart = new Chart(_context);
-            List<BmiforAge> result = chart.ListBmiforAge((Sexes)id, x, y);
+            List<BmiforAge> result = await chart.ListBmiforAgeAsync((Sexes)id, x, y);
             return result;
         }
 
@@ -61,10 +56,10 @@ namespace AnthroCloud.API.Controllers
         [HttpGet("{id}")]
         [Route("HCFA/{id}")]
         [Route("HCFA/{id}/{x}/{y}")]
-        public List<HcForAge> GetAllHCFA(byte id, byte x, decimal y)
+        public async Task<List<HcForAge>> GetAllHCFA(byte id, byte x, decimal y)
         {
             Chart chart = new Chart(_context);
-            List<HcForAge> result = chart.ListHcforAge((Sexes)id, x, y);
+            List<HcForAge> result = await chart.ListHcforAge((Sexes)id, x, y);
             return result;
         }
 
@@ -79,10 +74,10 @@ namespace AnthroCloud.API.Controllers
         [HttpGet("{id}")]
         [Route("LHFA/{id}")]
         [Route("LHFA/{id}/{x}/{y}")]
-        public List<LengthHeightForAge> GetAllLHFA(byte id, byte x, decimal y)
+        public async Task<List<LengthHeightForAge>> GetAllLHFA(byte id, byte x, decimal y)
         {
             Chart chart = new Chart(_context);
-            List<LengthHeightForAge> result = chart.ListLengthHeightForAge((Sexes)id, x, y);
+            List<LengthHeightForAge> result = await chart.ListLengthHeightForAge((Sexes)id, x, y);
             return result;
         }
 
@@ -97,10 +92,10 @@ namespace AnthroCloud.API.Controllers
         [HttpGet("{id}")]
         [Route("MUAC/{id}")]
         [Route("MUAC/{id}/{x}/{y}")]
-        public List<MuacforAge> GetAllMUAC(byte id, byte x, decimal y)
+        public async Task<List<MuacforAge>> GetAllMUAC(byte id, byte x, decimal y)
         {
             Chart chart = new Chart(_context);
-            List<MuacforAge> result = chart.ListMuacforAge((Sexes)id, x, y);
+            List<MuacforAge> result = await chart.ListMuacforAge((Sexes)id, x, y);
             return result;
         }
 
@@ -115,10 +110,10 @@ namespace AnthroCloud.API.Controllers
         [HttpGet("{id}")]
         [Route("SSFA/{id}")]
         [Route("SSFA/{id}/{x}/{y}")]
-        public List<SsfforAge> GetAllSSFA(byte id, byte x, decimal y)
+        public async Task<List<SsfforAge>> GetAllSSFA(byte id, byte x, decimal y)
         {
             Chart chart = new Chart(_context);
-            List<SsfforAge> result = chart.ListSsfforAge((Sexes)id, x, y);
+            List<SsfforAge> result = await chart.ListSsfforAge((Sexes)id, x, y);
             return result;
         }
 
@@ -133,10 +128,10 @@ namespace AnthroCloud.API.Controllers
         [HttpGet("{id}")]
         [Route("TSFA/{id}")]
         [Route("TSFA/{id}/{x}/{y}")]
-        public List<TsfforAge> GetAllTSFA(byte id, byte x, decimal y)
+        public async Task<List<TsfforAge>> GetAllTSFA(byte id, byte x, decimal y)
         {
             Chart chart = new Chart(_context);
-            List<TsfforAge> result = chart.ListTsfforAge((Sexes)id, x, y);
+            List<TsfforAge> result = await chart.ListTsfforAge((Sexes)id, x, y);
             return result;
         }
 
@@ -151,10 +146,10 @@ namespace AnthroCloud.API.Controllers
         [HttpGet("{id}")]
         [Route("WFA/{id}")]
         [Route("WFA/{id}/{x}/{y}")]
-        public List<WeightForAge> GetAllWFA(byte id, byte x, decimal y)
+        public async Task<List<WeightForAge>> GetAllWFA(byte id, byte x, decimal y)
         {
             Chart chart = new Chart(_context);
-            List<WeightForAge> result = chart.ListWeightForAge((Sexes)id, x, y);
+            List<WeightForAge> result = await chart.ListWeightForAge((Sexes)id, x, y);
             return result;
         }
 
@@ -169,10 +164,10 @@ namespace AnthroCloud.API.Controllers
         [HttpGet("{id}")]
         [Route("WFH/{id}")]
         [Route("WFH/{id}/{x}/{y}")]
-        public List<WeightForHeight> GetAllWFH(byte id, decimal x, decimal y)
+        public async Task<List<WeightForHeight>> GetAllWFH(byte id, decimal x, decimal y)
         {
             Chart chart = new Chart(_context);
-            List<WeightForHeight> result = chart.ListWeightForHeight((Sexes)id, x, y);
+            List<WeightForHeight> result = await chart.ListWeightForHeight((Sexes)id, x, y);
             return result;
         }
 
@@ -187,10 +182,10 @@ namespace AnthroCloud.API.Controllers
         [HttpGet("{id}")]
         [Route("WFL/{id}")]
         [Route("WFL/{id}/{x}/{y}")]
-        public List<WeightForLength> GetAllWFL(byte id, decimal x, decimal y)
+        public async Task<List<WeightForLength>> GetAllWFL(byte id, decimal x, decimal y)
         {
             Chart chart = new Chart(_context);
-            List<WeightForLength> result = chart.ListWeightForLength((Sexes)id, x, y);
+            List<WeightForLength> result = await chart.ListWeightForLength((Sexes)id, x, y);
             return result;
         }
     }
