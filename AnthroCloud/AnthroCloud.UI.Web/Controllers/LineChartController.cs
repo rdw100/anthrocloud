@@ -1,26 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using AnthroCloud.Entities;
-using AnthroCloud.UI.Web.Models;
-using Microsoft.AspNetCore.Http;
+﻿using AnthroCloud.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace AnthroCloud.UI.Web.Controllers
 {
     public class LineChartController : Controller
     {
-        private const string baseAddressPath = "http://www.dustywright.me/anthrocloudapi/api/";
- 
+        private static IConfiguration _configuration;
+        private static string baseAddressPath;
+
+        public LineChartController(IConfiguration iConfig)
+        {
+            _configuration = iConfig;
+            baseAddressPath = _configuration.GetValue<string>("ConfigurationSettings:baseApiAddressPath");
+        }
+
         // GET: /<controller>/  
         [Route("{id}")]
         [Route("LineChart/{id}")]
         public IActionResult Index()
-        {
+        {            
             return View();
         }
         
@@ -196,27 +199,27 @@ namespace AnthroCloud.UI.Web.Controllers
         }
 
         public static List<BmiforAge> GetBMIForAgeData(byte id, double x, double y)
+        {
+            List<BmiforAge> bfaList = new List<BmiforAge>();
+            using (var client = new HttpClient())
             {
-                List<BmiforAge> bfaList = new List<BmiforAge>();
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(baseAddressPath);
-                    //HTTP GET
-                    string pathBFA = "chart/BFA/" + id + "/" + x + "/" + y; 
+                client.BaseAddress = new Uri(baseAddressPath);
+                //HTTP GET
+                string pathBFA = "chart/BFA/" + id + "/" + x + "/" + y; 
                 var response = client.GetAsync(pathBFA);
-                    response.Wait();
-                    var result = response.Result;
-                    if (result.IsSuccessStatusCode)
-                    {
-                        var readTask = result.Content.ReadAsAsync<List<BmiforAge>>();
-                        readTask.Wait();
+                response.Wait();
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<List<BmiforAge>>();
+                    readTask.Wait();
 
-                        bfaList = readTask.Result;
-                    }
+                    bfaList = readTask.Result;
                 }
-
-                return bfaList;
             }
+
+            return bfaList;
+        }
 
         public static List<HcForAge> GetHCForAgeData(byte id, double x, double y)
         {
@@ -401,6 +404,5 @@ namespace AnthroCloud.UI.Web.Controllers
 
             return wfhList;
         }
-
     }
 }

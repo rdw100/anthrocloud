@@ -1,39 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AnthroCloud.UI.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using AnthroCloud.UI.Web.Models;
-using System.Net.Http;
-using System.Globalization;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
+using System;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
 
-        private const string baseAddressPath = "http://www.dustywright.me/anthrocloudapi/api/";
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IConfiguration iConfig)
         {
-            _logger = logger;
+            _configuration = iConfig;
         }
 
         public IActionResult Index()
         {
-            //FormViewModel model = new FormViewModel();
             return View(new FormViewModel());
         }
 
         public ActionResult MyHtml()
         {
-            //var result = new FileResult("~/Views/HtmlPage1.html", "text/html");
-            ;
             return Redirect("~/Views/LineChart/Chart.html");
         }
 
@@ -42,23 +33,18 @@ namespace AnthroCloud.UI.Web.Controllers
         {
             HttpClient client = new HttpClient();
 
+            string baseAddressPath = _configuration.GetValue<string>("ConfigurationSettings:baseApiAddressPath");
+
             // api / anthro / age / 2016 - 12 - 01T00: 00:00 / 2019-12-31T23:59:59
-            // client.BaseAddress = new Uri("https://anthrocloudapi.azurewebsites.net/api/");
             client.BaseAddress = new Uri(baseAddressPath);
             client.DefaultRequestHeaders.Clear();
-            //Define request data format  
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             string BirthDateString = string.Format("{0:yyyy-MM-dd}", model.DateOfBirth);            
             string VisitDateString = string.Format("{0:yyyy-MM-dd}", model.DateOfVisit); 
 
             string path = "anthro/age/" + BirthDateString + "/" + VisitDateString; 
             
-            //HTTP GET
-            //"anthro/age/2016-12-01T00:00:00/2019-12-31T23:59:59";
-            //var responseTask = client.GetAsync(path);
-            //responseTask.Wait();
-            //var result = responseTask.Result;
+            //GET: //anthro/age/2016-12-01T00:00:00/2019-12-31T23:59:59
             var response = client.GetAsync(path).Result;
             string res = "";
             using (HttpContent content = response.Content)
@@ -120,14 +106,14 @@ namespace AnthroCloud.UI.Web.Controllers
                 Task<string> result = contentBMI.ReadAsStringAsync();
                 resBMI = result.Result;
             }
+
             model.BMI = Convert.ToDouble(resBMI);
 
             // GET: api/Stats/WeightForAge/9.00/365/Male
             string pathStatsWFA = "Stats/WeightForAge/" + model.Weight + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsWFA = client.GetAsync(pathStatsWFA).Result;
             string resStatsWFA = "";
-            //Tuple<double, double> scores;
-            //string resScores;
+
             using (HttpContent contentStatsWFA = responseStatsWFA.Content)
             {
                 // ... Read the string.
@@ -145,8 +131,6 @@ namespace AnthroCloud.UI.Web.Controllers
             var responseStatsMUAC = client.GetAsync(pathStatsMUAC).Result;
             string resStatsMUAC = "";
 
-            //Tuple<double, double> scores;
-            //string resScores;
             using (HttpContent contentStatsMUAC = responseStatsMUAC.Content)
             {
                 // ... Read the string.
@@ -158,13 +142,12 @@ namespace AnthroCloud.UI.Web.Controllers
 
             model.MuacZscore = SetDecimalZero(muacTuple.Item1);
             model.MuacPercentile = SetDecimalZero(muacTuple.Item2);
+
             // GET: api/Stats/BodyMassIndexForAge/16.89/365/Male
             string pathStatsBFA = "Stats/BodyMassIndexForAge/" + model.BMI + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsBFA = client.GetAsync(pathStatsBFA).Result;
             string resStatsBFA = "";
 
-            //Tuple<double, double> scores;
-            //string resScores;
             using (HttpContent contentStatsBFA = responseStatsBFA.Content)
             {
                 // ... Read the string.
@@ -176,13 +159,12 @@ namespace AnthroCloud.UI.Web.Controllers
 
             model.BfaZscore = SetDecimalZero(bfaTuple.Item1);
             model.BfaPercentile = SetDecimalZero(bfaTuple.Item2);
+
             // GET: api/Stats/HeadCircumferenceForAge/45.00/365/Male
             string pathStatsHCA = "Stats/HeadCircumferenceForAge/" + model.HeadCircumference + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsHCA = client.GetAsync(pathStatsHCA).Result;
             string resStatsHCA = "";
 
-            //Tuple<double, double> scores;
-            //string resScores;
             using (HttpContent contentStatsHCA = responseStatsHCA.Content)
             {
                 // ... Read the string.
@@ -194,13 +176,12 @@ namespace AnthroCloud.UI.Web.Controllers
 
             model.HcaZscore = SetDecimalZero(hcaTuple.Item1);
             model.HcaPercentile = SetDecimalZero(hcaTuple.Item2);
+
             // GET: api/Stats/HeightForAge/96.00/1095/Male
             string pathStatsHFA = "Stats/HeightForAge/" + model.LengthHeight + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsHFA = client.GetAsync(pathStatsHFA).Result;
             string resStatsHFA = "";
 
-            //Tuple<double, double> scores;
-            //string resScores;
             using (HttpContent contentStatsHFA = responseStatsHFA.Content)
             {
                 // ... Read the string.
@@ -212,13 +193,12 @@ namespace AnthroCloud.UI.Web.Controllers
 
             model.HfaZscore = SetDecimalZero(hfaTuple.Item1);
             model.HfaPercentile = SetDecimalZero(hfaTuple.Item2);
+
             // GET: api/Stats/LengthForAge/73.00/365/Sex.Male
             string pathStatsLFA = "Stats/LengthForAge/" + model.LengthHeight + "/" + model.AgeInDays + "/" + (Sexes)model.Sex; 
             var responseStatsLFA = client.GetAsync(pathStatsLFA).Result;
             string resStatsLFA = "";
 
-            //Tuple<double, double> scores;
-            //string resScores;
             using (HttpContent contentStatsLFA = responseStatsLFA.Content)
             {
                 // ... Read the string.
@@ -230,13 +210,12 @@ namespace AnthroCloud.UI.Web.Controllers
 
             model.LfaZscore = SetDecimalZero(lfaTuple.Item1);
             model.LfaPercentile = SetDecimalZero(lfaTuple.Item2);
+
             // GET: api/Stats/SubscapularSkinfoldForAge/7.00/365/Male
             string pathStatsSFA = "Stats/SubscapularSkinfoldForAge/" + model.SubscapularSkinFold + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsSFA = client.GetAsync(pathStatsSFA).Result;
             string resStatsSFA = "";
 
-            //Tuple<double, double> scores;
-            //string resScores;
             using (HttpContent contentStatsSFA = responseStatsSFA.Content)
             {
                 // ... Read the string.
@@ -248,13 +227,12 @@ namespace AnthroCloud.UI.Web.Controllers
 
             model.SsfZscore = SetDecimalZero(sfaTuple.Item1);
             model.SsfPercentile = SetDecimalZero(sfaTuple.Item2);
+
             // GET: api/Stats/TricepsSkinfoldForAge/8.00/365/Male
             string pathStatsTFA = "Stats/TricepsSkinfoldForAge/" + model.TricepsSkinFold + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
             var responseStatsTFA = client.GetAsync(pathStatsTFA).Result;
             string resStatsTFA = "";
 
-            //Tuple<double, double> scores;
-            //string resScores;
             using (HttpContent contentStatsTFA = responseStatsTFA.Content)
             {
                 // ... Read the string.
@@ -264,22 +242,14 @@ namespace AnthroCloud.UI.Web.Controllers
 
             var tfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsTFA);
 
-
-            //model.TsfZscore = if (tfaTuple.Item1 == 0) { 0.0D; };
-            //if (tfaTuple.Item1 == 0)
-            //{
-            //    model.TsfZscore = 0.0d;
-            //}
-
             model.TsfZscore = SetDecimalZero(tfaTuple.Item1);
             model.TsfPercentile = SetDecimalZero(tfaTuple.Item2);
+
             // GET: api/Stats/WeightForHeight/14.00/96.00/Male
             string pathStatsWFH = "Stats/WeightForHeight/" + model.Weight + "/" + model.LengthHeight + "/" + (Sexes)model.Sex;
             var responseStatsWFH = client.GetAsync(pathStatsWFH).Result;
             string resStatsWFH = "";
 
-            //Tuple<double, double> scores;
-            //string resScores;
             using (HttpContent contentStatsWFH = responseStatsWFH.Content)
             {
                 // ... Read the string.
@@ -291,13 +261,12 @@ namespace AnthroCloud.UI.Web.Controllers
 
             model.WfhZscore = SetDecimalZero(wfhTuple.Item1);
             model.WfhPercentile = SetDecimalZero(wfhTuple.Item2);
+
             // GET: api/Stats/WeightForLength/9.00/73.00/Male
             string pathStatsWFL = "Stats/WeightForLength/" + model.Weight + "/" + model.LengthHeight + "/" + (Sexes)model.Sex;
             var responseStatsWFL = client.GetAsync(pathStatsWFL).Result;
             string resStatsWFL = "";
 
-            //Tuple<double, double> scores;
-            //string resScores;
             using (HttpContent contentStatsWFL = responseStatsWFL.Content)
             {
                 // ... Read the string.
@@ -327,7 +296,7 @@ namespace AnthroCloud.UI.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public double SetDecimalZero( double value)
+        public static double SetDecimalZero( double value)
         {
             if (value == 0)
             {
