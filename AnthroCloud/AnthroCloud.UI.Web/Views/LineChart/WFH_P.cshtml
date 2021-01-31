@@ -61,7 +61,7 @@
             var urlChart = "../LineChart/GetWeightForHeightJson/" + s + "/" + x + "/" + y;
 
             $.ajax({
-
+                async: true,
                 url: urlChart,
                 dataType: "json",
                 type: "GET",

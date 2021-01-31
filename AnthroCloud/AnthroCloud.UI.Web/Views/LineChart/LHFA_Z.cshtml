@@ -10,7 +10,6 @@
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        //google.charts.load('current', { packages: ['corechart', 'line'] });
         google.load('visualization', '1', { packages: ['corechart'] });
     </script>
 </head>
@@ -55,7 +54,7 @@
             var urlChart = "../LineChart/GetLengthHeightForAgeJson/" + s + "/" + x + "/" + y;
 
             $.ajax({
-
+                async: true,
                 url: urlChart,
                 dataType: "json",
                 type: "GET",

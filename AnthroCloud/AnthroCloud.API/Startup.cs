@@ -22,11 +22,15 @@ namespace AnthroCloud.API
         public void ConfigureServices(IServiceCollection services)
         {
             // String connection = Configuration.GetConnectionString("AnthroCloudDatabaseMySql");
+
             // services.AddDbContext<AnthroCloudContextMySql>(options => 
             //    options.UseMySql(connection));
-            String connection = Configuration.GetConnectionString("AnthroCloudContextMsSql");
+
+            String connection = Configuration.GetConnectionString("AnthroCloudDatabaseMsSql");
+
             services.AddDbContext<AnthroCloudContextMsSql>(options =>
                 options.UseSqlServer(connection));
+
             services.AddControllers();
         }
 

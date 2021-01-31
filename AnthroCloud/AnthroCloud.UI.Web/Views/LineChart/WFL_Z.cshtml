@@ -12,10 +12,9 @@
     <script type="text/javascript">
         google.charts.load('current', { packages: ['corechart', 'line'] });
     </script>
-
 </head>
 <body style="overflow-x:hidden;overflow-y:hidden;">
-     <div class="row" style="height:25px;">
+    <div class="row" style="height:25px;">
         <div class="col-8">
             <h5 class="modal-title">&nbsp;&nbsp;&nbsp;Weight-for-length @{if (chartTitle == "1"){@Html.Raw("BOYS");}else if (chartTitle == "2"){@Html.Raw("GIRLS");}} </h5>
             <p style="text-align:left;font-family:Arial;font-size:8px;color:darkgray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World Health Organization (WHO) 2006 Standard.</p>
@@ -56,7 +55,7 @@
             var urlChart = "../LineChart/GetWeightForLengthJson/" + s + "/" + x + "/" + y;
 
             $.ajax({
-
+                async: true,
                 url: urlChart,
                 dataType: "json",
                 type: "GET",
