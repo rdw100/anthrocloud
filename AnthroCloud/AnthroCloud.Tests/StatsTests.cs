@@ -120,9 +120,9 @@ namespace AnthroCloud.Unit.Tests
         public async void Stats_HFA_Zscore_Calculate()
         {
             var stat = new Stats();
-            double z = await stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.HeightForAge, 96.8, 1096, Sex.Male);
 
-            Assert.Equal(-1.15, Math.Round(z, 2));
+            Assert.Equal(.19, Math.Round(z, 2));
         }
         /// <summary>
         /// Tests Height-for-age percentile calculation.
@@ -131,10 +131,10 @@ namespace AnthroCloud.Unit.Tests
         public async void Stats_HFA_Pcentile_Calculate()
         {
             var stat = new Stats();
-            double z = await stat.CalculateZScore(Indicator.LengthForAge, 73.00, 365, Sex.Male);
+            double z = await stat.CalculateZScore(Indicator.HeightForAge, 96.8, 1096, Sex.Male);
             double p = await stat.CalculatePercentile(z);
 
-            Assert.Equal(12.4, Math.Round(p, 1));
+            Assert.Equal(57.6, Math.Round(p, 1));
         }
 
         /// <summary>
