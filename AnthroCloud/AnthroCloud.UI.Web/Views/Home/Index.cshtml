@@ -155,7 +155,7 @@
         </div>
         <div class="col-md-6 mb-2">
             <label>BMI:</label>
-            <input asp-for="BMI" value="@{ if (Model.BMI != null) { @Model.BMI.ToString("0.0")}}" class="form-control text-center" type="text" placeholder="..." readonly />
+            <input asp-for="BMI" value="@{ if (Model.BMI >= 0) { @Model.BMI.ToString("0.0")}}" class="form-control text-center" type="text" placeholder="..." readonly />
         </div>
     </div>
     <div class="form-row">
