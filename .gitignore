@@ -350,3 +350,6 @@ healthchecksdb
 
 # ignore a file type 
 *.json
+
+# Include Postman
+!AnthroCloud Web API.postman_collection.json
