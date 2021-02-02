@@ -12,7 +12,7 @@ namespace AnthroCloud.Business
     /// </summary>
     public class Chart : IGrowthChart
     {
-        private readonly AnthroCloudContextMsSql _context;
+        private readonly AnthroCloudContextMySql _context;
 
         public Chart() { }
 
@@ -20,7 +20,7 @@ namespace AnthroCloud.Business
         /// Constructs controller with database context.
         /// </summary>
         /// <param name="context">The database context</param>
-        public Chart(AnthroCloudContextMsSql context)
+        public Chart(AnthroCloudContextMySql context)
         {
             _context = context;
         }

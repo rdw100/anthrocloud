@@ -26,92 +26,110 @@ namespace AnthroCloud.UI.Web.Controllers
         {            
             return View();
         }
-        
+
+        [Route("LineChart/BFA_P")]
         public IActionResult BFA_P()
         {            
             return View();
         }
 
+        [Route("LineChart/HCA_P")]
         public IActionResult HCA_P()
         {
             return View();
         }
 
+        [Route("LineChart/LHFA_P")]
         public IActionResult LHFA_P()
         {
             return View();
         }
 
+        [Route("LineChart/MUAC_P")]
         public IActionResult MUAC_P()
         {
             return View();
         }
 
+        [Route("LineChart/SSF_P")]
         public IActionResult SSF_P()
         {
             return View();
         }
 
+        [Route("LineChart/TSF_P")]
         public IActionResult TSF_P()
         {
             return View();
         }
 
+        [Route("LineChart/WFA_P")]
         public IActionResult WFA_P()
         {
             return View();
         }
 
+        [Route("LineChart/WFH_P")]
         public IActionResult WFH_P()
         {
             return View();
         }
 
+        [Route("LineChart/WFL_P")]
         public IActionResult WFL_P()
         {
             return View();
         }
 
+        [Route("LineChart/BFA_Z")]
         public IActionResult BFA_Z()
         {
             return View();
         }
 
+        [Route("LineChart/HCA_Z")]
         public IActionResult HCA_Z()
         {
             return View();
         }
 
+        [Route("LineChart/LHFA_Z")]
         public IActionResult LHFA_Z()
         {
             return View();
         }
 
+        [Route("LineChart/MUAC_Z")]
         public IActionResult MUAC_Z()
         {
             return View();
         }
 
+        [Route("LineChart/SSF_Z")]
         public IActionResult SSF_Z()
         {
             return View();
         }
 
+        [Route("LineChart/TSF_Z")]
         public IActionResult TSF_Z()
         {
             return View();
         }
 
+        [Route("LineChart/WFA_Z")]
         public IActionResult WFA_Z()
         {
             return View();
         }
 
+        [Route("LineChart/WFH_Z")]
         public IActionResult WFH_Z()
         {
             return View();
         }
 
+        [Route("LineChart/WFL_Z")]
         public IActionResult WFL_Z()
         {
             return View();

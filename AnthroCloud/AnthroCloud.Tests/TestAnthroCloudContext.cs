@@ -3,6 +3,7 @@ using System.IO;
 using AnthroCloud.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace AnthroCloud.Tests
 {
@@ -16,19 +17,19 @@ namespace AnthroCloud.Tests
         private const string STORE = "appsettings.json";
         private const string APP = "AnthroCloud.API\\";
         private const string KEY = "ConnectionStrings";
-        private const string VALUE = "AnthroCloudDatabaseMsSql";
+        private const string VALUE = "AnthroCloudDatabaseMySql";
         private const string DIR = "..\\..\\..\\..\\";
 
         private static string _connectionString = string.Empty;
 
-        public AnthroCloudContextMsSql Context { get; set; }
+        public AnthroCloudContextMySql Context { get; set; }
 
         public TestAnthroCloudContext()
         {
             Context = Configure();
         }
 
-        private AnthroCloudContextMsSql Configure()
+        private AnthroCloudContextMySql Configure()
         {
             // Retrieve application settings file
             ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
@@ -41,11 +42,16 @@ namespace AnthroCloud.Tests
             _connectionString = root.GetSection(KEY).GetSection(VALUE).Value;
 
             // Configure context with setting
-            DbContextOptionsBuilder<AnthroCloudContextMsSql> optionsBuilder = new DbContextOptionsBuilder<AnthroCloudContextMsSql>();
-            optionsBuilder.UseSqlServer(_connectionString);
+            DbContextOptionsBuilder<AnthroCloudContextMySql> optionsBuilder = new DbContextOptionsBuilder<AnthroCloudContextMySql>();
+            optionsBuilder.UseMySql(_connectionString,
+                    new MySqlServerVersion(new Version(5, 7, 29)),
+                    mySqlOptions => mySqlOptions
+                        .CharSetBehavior(CharSetBehavior.NeverAppend)
+                    );
+
 
             // Initialize context with setting
-            AnthroCloudContextMsSql context = new AnthroCloudContextMsSql(optionsBuilder.Options);
+            AnthroCloudContextMySql context = new AnthroCloudContextMySql(optionsBuilder.Options);
 
             return context;
         }
