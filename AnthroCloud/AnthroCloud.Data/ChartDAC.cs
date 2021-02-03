@@ -22,6 +22,9 @@ namespace AnthroCloud.Data
         public ChartDAC(AnthroCloudContextMySql context)
         {
             _context = context;
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            _context.ChangeTracker.AutoDetectChangesEnabled = false;
+            _context.ChangeTracker.LazyLoadingEnabled = false;
         }
 
         /// <summary>
@@ -31,7 +34,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of WFA objects.</returns>
         public async Task<List<WeightForAge>> ListWeightForAge(Sexes sex)
         {
-            IQueryable<WeightForAge> query = _context.Set<WeightForAge>();
+            IQueryable<WeightForAge> query = _context.Set<WeightForAge>().AsNoTracking();
 
             query = query.Where(c => c.Sex == (byte)sex);
 
@@ -45,7 +48,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of BFA objects.</returns>
         public async Task<List<BmiforAge>> ListBmiforAge(Sexes sex)
         {           
-            IQueryable<BmiforAge> query = _context.Set<BmiforAge>();
+            IQueryable<BmiforAge> query = _context.Set<BmiforAge>().AsNoTracking();
 
             query = query.Where(c => c.Sex == (byte)sex);
 
@@ -59,7 +62,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of WFL objects.</returns>
         public async Task<List<WeightForLength>> ListWeightForLength(Sexes sex)
         {
-            IQueryable<WeightForLength> query = _context.Set<WeightForLength>();
+            IQueryable<WeightForLength> query = _context.Set<WeightForLength>().AsNoTracking();
 
             query = query.Where(c => c.Sex == (byte)sex);
 
@@ -73,7 +76,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of WFH objects.</returns>
         public async Task<List<WeightForHeight>> ListWeightForHeight(Sexes sex)
         {
-            IQueryable<WeightForHeight> query = _context.Set<WeightForHeight>();
+            IQueryable<WeightForHeight> query = _context.Set<WeightForHeight>().AsNoTracking();
 
             query = query.Where(c => c.Sex == (byte)sex);
 
@@ -87,7 +90,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of HCFA objects.</returns>
         public async Task<List<HcForAge>> ListHcforAge(Sexes sex)
         {
-            IQueryable<HcForAge> query = _context.Set<HcForAge>();
+            IQueryable<HcForAge> query = _context.Set<HcForAge>().AsNoTracking();
 
             query = query.Where(c => c.Sex == (byte)sex);
 
@@ -101,7 +104,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of LHFA objects.</returns>
         public async Task<List<LengthHeightForAge>> ListLengthHeightForAge(Sexes sex)
         {
-            IQueryable<LengthHeightForAge> query = _context.Set<LengthHeightForAge>();
+            IQueryable<LengthHeightForAge> query = _context.Set<LengthHeightForAge>().AsNoTracking();
 
             query = query.Where(c => c.Sex == (byte)sex);
 
@@ -115,7 +118,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of MUAC objects.</returns>
         public async Task<List<MuacforAge>> ListMuacforAge(Sexes sex)
         {
-            IQueryable<MuacforAge> query = _context.Set<MuacforAge>();
+            IQueryable<MuacforAge> query = _context.Set<MuacforAge>().AsNoTracking();
 
             query = query.Where(c => c.Sex == (byte)sex);
 
@@ -129,7 +132,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of SSF objects.</returns>
         public async Task<List<SsfforAge>> ListSsfforAge(Sexes sex)
         {
-            IQueryable<SsfforAge> query = _context.Set<SsfforAge>();
+            IQueryable<SsfforAge> query = _context.Set<SsfforAge>().AsNoTracking();
 
             query = query.Where(c => c.Sex == (byte)sex);
 
@@ -143,7 +146,7 @@ namespace AnthroCloud.Data
         /// <returns>Returns a strongly typed list of TSF objects.</returns>
         public async Task<List<TsfforAge>> ListTsfforAge(Sexes sex)
         {
-            IQueryable<TsfforAge> query = _context.Set<TsfforAge>();
+            IQueryable<TsfforAge> query = _context.Set<TsfforAge>().AsNoTracking();
 
             query = query.Where(c => c.Sex == (byte)sex);
 
