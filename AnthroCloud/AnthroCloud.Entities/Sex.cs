@@ -13,7 +13,7 @@ namespace AnthroCloud.Entities
     /// Naming Enumerations: DO use a singular type name for an enumeration unless 
     /// its values are bit fields.
     /// </remarks>
-    public enum Sexes
+    public enum Sexes : byte
     {
         Unknown = 0,
         Male = 1,
