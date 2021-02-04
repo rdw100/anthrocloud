@@ -19,9 +19,9 @@
             <h5 class="modal-title">&nbsp;&nbsp;&nbsp;Length/height-for-age @{if (chartTitle == "1"){@Html.Raw("BOYS");}else if (chartTitle == "2"){@Html.Raw("GIRLS");}} </h5>
             <p style="text-align:left;font-family:Arial;font-size:8px;color:darkgray;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World Health Organization (WHO) 2006 Standard.</p>
         </div>
-        <div class="col-4">            
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true"><a href="JavaScript:window.close()">&times;</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="col-4">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="javascript:window.close()" onmouseover='this.style.textDecoration="underline"' onmouseout='this.style.textDecoration="none"' style="margin-right:25px;">
+                <span aria-hidden="true" style="color:blue;">&times;</span>
             </button>
         </div>        
     </div>
