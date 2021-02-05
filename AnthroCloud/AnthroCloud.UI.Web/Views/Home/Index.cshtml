@@ -3,9 +3,6 @@
 }
 
 @model FormViewModel
-@*@namespace FormModel*@
-@* https://getbootstrap.com/docs/4.0/components/forms/#form-groups *@
-@* https://getbootstrap.com/docs/4.0/layout/grid/ *@
 
 @functions{
     public string getColor(double zscore)
@@ -15,7 +12,7 @@
             double n when (n <= 1 && n >= -1) => "#eafaf1", //GREEN
             double n when (n <= -1 && n >= -2) || (n <= 2 && n > 1) => "#fef9e7", //GOLD
             double n when (n < -2 && n >= -3) || (n <= 3 && n > 2) => "#fdedec", //RED
-            double n when (n > 3 || n < -3) => "#aab3bb", //BLACK  ebedef aab3bb
+            double n when (n > 3 || n < -3) => "#aab3bb", //BLACK
             _ => string.Empty,
         };
         return colorCode;
@@ -27,8 +24,13 @@
     function basicPopup(url) {
         popupWindow = window.open(url, 'popUpWindow', 'height=650,width=675,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=yes,directories=no, status=yes');
     }
-</script>
-<script>
+
+    // Calculate button animation
+    function displayBusyIndicator() {
+        document.getElementById("loading").style.display = "inline-block";
+    }
+
+    // Retrieves selected value
     function getRadioValue() {
         var sex = document.getElementsByName('Sex');
         var radioValue;
@@ -40,26 +42,25 @@
         }
         return radioValue;
     }
-</script>@*type="text/javascript"*@
+</script>
+
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 <form asp-action="Index" asp-controller="Home" method="post">
-    @*class="needs-validation" novalidate*@
     <fieldset>
-        @*<legend>Inputs:</legend>*@
         <div class="form-row">
             <div class="col-md-6 mb-2">
                 <label asp-for="DateOfBirth">Date of Birth</label>
-                <input asp-for="DateOfBirth" type="date" class="form-control text-center" required>@*placeholder="Enter patient's Date of Birth."*@
+                <input asp-for="DateOfBirth" type="date" class="form-control text-center" required>
             </div>
             <div class="col-md-6 mb-2">
                 <label>Date of Visit</label>
-                <input asp-for="DateOfVisit" type="date" class="form-control text-center" required />@*placeholder="Enter patient's Date of Visit."*@
+                <input asp-for="DateOfVisit" type="date" class="form-control text-center" required />
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-2">
-                <label class="col-form-label">Sex</label>@*asp-for="Sex"*@
+                <label class="col-form-label">Sex</label>
                 <div class="form-group">
                     <label class="d-block">
                         <input id="SexMale" asp-for="Sex" type="radio" value="1" class="ml-2 mr-2"> Male
@@ -74,21 +75,21 @@
                 <div class="form-group">
                     <label class="d-block">
                         <input type="radio" class="ml-2 mr-2" name="measurement" @{ if (Model.AgeInYears < 2) { @Html.Raw("checked")  } } disabled> Recumbent
-                    </label>@*readonly*@
+                    </label>
                     <label class="d-block">
                         <input type="radio" class="ml-2 mr-2" name="measurement" @{ if (Model.AgeInYears >= 2) { @Html.Raw("checked")  } } disabled> Standing
-                    </label>@*readonly*@
+                    </label>
                 </div>
             </div>
             <div class="col-md-4 mb-2">
-                <label class="col-form-label">Oedema</label>@*asp-for="Oedema"*@
+                <label class="col-form-label">Oedema</label>
                 <div class="form-group">
                     <label class="d-block">
                         <input id="OedemaYes" asp-for="Oedema" type="radio" class="ml-2 mr-2" value="True"> Yes
                     </label>
                     <label class="d-block">
                         <input id="OedemaNo" asp-for="Oedema" type="radio" class="ml-2 mr-2" value="False"> No
-                    </label>@*readonly*@
+                    </label>
                 </div>
             </div>
         </div>
@@ -140,261 +141,244 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 text-center">
-            <button class="btn btn-primary btn-block" type="submit">Calculate</button>
+        <div class="col-md-12 justify-content-center">
+            <button class="btn btn-primary btn-block"
+                    type="submit"
+                    onclick="displayBusyIndicator()">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" id="loading" style="display:none;"></span>
+                Calculate
+            </button>
         </div>
     </fieldset>
 </form>
 
-<fieldset>
-    <legend>Results:</legend>
-    <div class="form-row">
-        <div class="col-md-6 mb-2">
-            <label>Age:</label>
-            <input asp-for="Age" class="form-control text-center" type="text" placeholder="..." readonly />
-        </div>
-        <div class="col-md-6 mb-2">
-            <label>BMI:</label>
-            <input asp-for="BMI" value="@{ if (Model.BMI >= 0) { @Model.BMI.ToString("0.0")}}" class="form-control text-center" type="text" placeholder="..." readonly />
-        </div>
-    </div>
-    <div class="form-row">
-        <!-- Header -->
-        <div class="form-group col-md-6 mb-0">
-            <div class="form-group row mb-0">
-                <label class="text-nowrap text-right col-md-7 mt-1 mr-1" >Percentile</label>
-                <label class="text-nowrap text-left col-md-4 mt-1 mr-1" >Z-score</label>
+    <fieldset>
+        <legend>Results:</legend>
+        <div class="form-row">
+            <div class="col-md-6 mb-2">
+                <label>Age:</label>
+                <input asp-for="Age" class="form-control text-center" type="text" placeholder="..." readonly />
+            </div>
+            <div class="col-md-6 mb-2">
+                <label>BMI:</label>
+                <input asp-for="BMI" value="@{ if (Model.BMI >= 0) { @Model.BMI.ToString("0.0")}}" class="form-control text-center" type="text" placeholder="..." readonly />
             </div>
         </div>
-        <div class="form-group col-md-6 mb-0">
-            <div class="form-group row mb-0">
-                <label class="text-nowrap text-right col-md-7 mt-1 mr-1" >Percentile</label>
-                <label class="text-nowrap text-left col-md-4 mt-1 mr-1" >Z-score</label>
+        <div class="form-row">
+            <!-- Header -->
+            <div class="form-group col-md-6 mb-0">
+                <div class="form-group row mb-0">
+                    <label class="text-nowrap text-right col-md-7 mt-1 mr-1">Percentile</label>
+                    <label class="text-nowrap text-left col-md-4 mt-1 mr-1">Z-score</label>
+                </div>
             </div>
-        </div>
+            <div class="form-group col-md-6 mb-0">
+                <div class="form-group row mb-0">
+                    <label class="text-nowrap text-right col-md-7 mt-1 mr-1">Percentile</label>
+                    <label class="text-nowrap text-left col-md-4 mt-1 mr-1">Z-score</label>
+                </div>
+            </div>
 
-        @if (Model != null && Model.AgeInYears < 2)
-        {
-            <!-- Weight For Length -->
+            @if (Model != null && Model.AgeInYears < 2)
+            {
+                <!-- Weight For Length -->
+                <div class="form-group col-md-6">
+                    <div class="form-group row mb-0">
+                        <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Length</label>
+                        <input id="WflPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WflPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.WflPercentile; } }" list="tickmarks" disabled />
+                        @if (Model != null && Model.Oedema == true)
+                        {
+                            <input type="text" asp-for="WflPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
+                            <input type="text" asp-for="WflZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @{ if (Model != null) {@getColor(Model.WflZscore)} }" readonly>
+                            <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-length Percentile" asp-controller="LineChart" asp-action="WFL_P" onclick="return true">
+                                <i class="fa fa-line-chart"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-length Z-score" asp-controller="LineChart" asp-action="WFL_Z" onclick="return false">
+                                <i class="fa fa-line-chart"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <input type="text" asp-for="WflPercentile" value="@{ if (Model.WflPercentile >= 99.9 || Model.WflPercentile <= .01) { @Html.Raw("NA") } else { @Model.WflPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
+                            <input type="text" asp-for="WflZscore" value="@Model.WflZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.WflZscore)} }" readonly>
+                            <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-length Percentile" asp-controller="LineChart" asp-action="WFL_P" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @{ @Model.LengthHeight} + '&y=' + @{ @Model.Weight});return false">
+                                <i class="fa fa-line-chart"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-length Z-score" asp-controller="LineChart" asp-action="WFL_Z" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @{ @Model.LengthHeight} + '&y=' + @{ @Model.Weight});return false">
+                                <i class="fa fa-line-chart"></i>
+                            </a>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <!-- Weight For Height -->
+                <div class="form-group col-md-6">
+                    <div class="form-group row mb-0">
+                        <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Height</label>
+                        <input id="WfhPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WfhPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.WfhPercentile; } }" list="tickmarks" disabled />
+                        @if (Model != null && Model.Oedema == true)
+                        {
+                            <input type="text" asp-for="WfhPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
+                            <input type="text" asp-for="WfhZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @{ if (Model != null) {@getColor(Model.WfhZscore)} }" readonly>
+                            <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-height Percentile" asp-controller="LineChart" asp-action="WFH_P" onclick="return false">
+                                <i class="fa fa-line-chart"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-height Z-score" asp-controller="LineChart" asp-action="WFH_Z" onclick="return false">
+                                <i class="fa fa-line-chart"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <input type="text" asp-for="WfhPercentile" value="@{ if (Model.WfhPercentile >= 99.9 || Model.WfhPercentile <= .01) { @Html.Raw("NA") } else { @Model.WfhPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
+                            <input type="text" asp-for="WfhZscore" value="@Model.WfhZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.WfhZscore)} }" readonly>
+                            <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-height Percentile" asp-controller="LineChart" asp-action="WFH_P" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @{ @Model.LengthHeight} + '&y=' + @{ @Model.Weight});return false">
+                                <i class="fa fa-line-chart"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-height Z-score" asp-controller="LineChart" asp-action="WFH_Z" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @{ @Model.LengthHeight} + '&y=' + @{ @Model.Weight});return false">
+                                <i class="fa fa-line-chart"></i>
+                            </a>
+                        }
+                    </div>
+                </div>
+            }
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
-                    <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Length</label>
-                    <input id="WflPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WflPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.WflPercentile; } }" list="tickmarks" disabled />
+                    <label class="col-md-3 mt-1 mr-1">HC-for-age</label>
+                    <input id="HcaPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="HcaPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.HcaPercentile; } }" list="tickmarks" disabled />
+                    <input type="text" asp-for="HcaPercentile" value="@{ if (Model.HcaPercentile >= 99.9 || Model.HcaPercentile <= .01) { @Html.Raw("NA") } else { @Model.HcaPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
+                    <input type="text" asp-for="HcaZscore" value="@Model.HcaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.HcaZscore)} }" readonly>
+                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Head Circumference Percentile" asp-controller="LineChart" asp-action="HCA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.HeadCircumference});return false">
+                        <i class="fa fa-line-chart"></i>
+                    </a>
+                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Head Circumference Z-score" asp-controller="LineChart" asp-action="HCA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.HeadCircumference});return false">
+                        <i class="fa fa-line-chart"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Weight For Age -->
+            <div class="form-group col-md-6">
+                <div class="form-group row mb-0">
+                    <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Age</label>
+                    <input id="WfaPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WfaPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.WfaPercentile; } }" list="tickmarks" disabled />
                     @if (Model != null && Model.Oedema == true)
                     {
-                        <input type="text" asp-for="WflPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
-                        <input type="text" asp-for="WflZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @{ if (Model != null) {@getColor(Model.WflZscore)} }" readonly>
-                        <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-length Percentile" asp-controller="LineChart" asp-action="WFL_P" onclick="return true">
+                        <input type="text" asp-for="WfaPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
+                        <input type="text" asp-for="WfaZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @{ if (Model != null) {@getColor(Model.WfaZscore)} }" readonly>
+                        <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-age Percentile" asp-controller="LineChart" asp-action="WFA_P" onclick="return false">
                             <i class="fa fa-line-chart"></i>
                         </a>
-                        <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-length Z-score" asp-controller="LineChart" asp-action="WFL_Z" onclick="return false">
+                        <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-age Z-score" asp-controller="LineChart" asp-action="WFA_Z" onclick="return false">
                             <i class="fa fa-line-chart"></i>
                         </a>
                     }
                     else
                     {
-                        <input type="text" asp-for="WflPercentile" value="@{ if (Model.WflPercentile >= 99.9 || Model.WflPercentile <= .01) { @Html.Raw("NA") } else { @Model.WflPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
-                        <input type="text" asp-for="WflZscore" value="@Model.WflZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.WflZscore)} }" readonly>
-                        <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-length Percentile" asp-controller="LineChart" asp-action="WFL_P" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @{ @Model.LengthHeight} + '&y=' + @{ @Model.Weight});return false">
+                        <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaPercentile" value="@{ if (Model.WfaPercentile >= 99.9 || Model.WfaPercentile <= .01) { @Html.Raw("NA") } else { @Model.WfaPercentile; } }" readonly>
+                        <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaZscore" value="@Model.WfaZscore.ToString("0.00")" style="background-color: @{ if (Model != null) {@getColor(Model.WfaZscore)} }" readonly>
+                        <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-age Percentile" asp-controller="LineChart" asp-action="WFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.Weight});return false">
                             <i class="fa fa-line-chart"></i>
                         </a>
-                        <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-length Z-score" asp-controller="LineChart" asp-action="WFL_Z" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @{ @Model.LengthHeight} + '&y=' + @{ @Model.Weight});return false">
+                        <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-age Z-score" asp-controller="LineChart" asp-action="WFA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.Weight});return false">
                             <i class="fa fa-line-chart"></i>
                         </a>
                     }
                 </div>
             </div>
-        }
-        else
-        {
-            <!-- Weight For Height -->
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
-                    <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Height</label>
-                    <input id="WfhPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WfhPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.WfhPercentile; } }" list="tickmarks" disabled />
+                    <label class="text-nowrap col-md-3 mt-1 mr-1">MUAC-for-age</label>
+                    <input id="MuacPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="MuacPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.MuacPercentile } }" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.MuacPercentile } }" list="tickmarks" disabled />
+                    <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacPercentile" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.MuacPercentile } }" readonly>
+                    <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacZscore" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.MuacZscore.ToString("0.00") } }" style="background-color: @{ if (Model != null) {@getColor(Model.MuacZscore)} }" readonly>
+                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="MUAC Percentile" asp-controller="LineChart" asp-action="MUAC_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.MUAC} );return false">
+                        <i class="fa fa-line-chart"></i>
+                    </a>
+                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="MUAC Z-score" asp-controller="LineChart" asp-action="MUAC_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.MUAC});return false">
+                        <i class="fa fa-line-chart"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Length For Age -->
+            <div class="form-group col-md-6">
+                <div class="form-group row mb-0">
+                    <label class="text-nowrap col-md-3 mt-1 mr-1">Length-for-Age</label>
+                    <input id="LfaPercentileRange" class="form-control-range  col-md-2 mr-1 ml-1" asp-for="LfaPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.LfaPercentile; } }" list="tickmarks" disabled />
+                    <input type="text" asp-for="LfaPercentile" value="@{ if (Model.LfaPercentile >= 99.9 || Model.LfaPercentile <= .01) { @Html.Raw("NA") } else { @Model.LfaPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
+                    <input type="text" asp-for="LfaZscore" value="@Model.LfaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.LfaZscore)} }" readonly>
+                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Length/Height-for-age Percentile" asp-controller="LineChart" asp-action="LHFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.LengthHeight});return false">
+                        <i class="fa fa-line-chart"></i>
+                    </a>
+                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Length/Height-for-age Z-score" asp-controller="LineChart" asp-action="LHFA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue()  + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.LengthHeight});return false">
+                        <i class="fa fa-line-chart"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="form-group row mb-0">
+                    <label class="text-nowrap col-md-3 mt-1 mr-1">TSF-for-age</label>
+                    <input id="TsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="TsfPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.TsfPercentile } }" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.TsfPercentile } }" list="tickmarks" disabled />
+                    <input type="text" asp-for="TsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.TsfPercentile } }" readonly>
+                    <input type="text" asp-for="TsfZscore" class="form-control col-md-2 mr-1 text-center" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.TsfZscore.ToString("0.00"); } }" style="background-color: @{ if (Model != null) {@getColor(Model.TsfZscore)} }" readonly>
+                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Triceps Skinfold Percentile" asp-controller="LineChart" asp-action="TSF_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.TricepsSkinFold});return false">
+                        <i class="fa fa-line-chart"></i>
+                    </a>
+                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Triceps Skinfold Z-score" asp-controller="LineChart" asp-action="TSF_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.TricepsSkinFold});return false">
+                        <i class="fa fa-line-chart"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- BMI For Age -->
+            <datalist id="tickmarks">
+                <option value="0" label="0%"></option>
+                <option value="25">25</option>
+                <option value="50" title="50%" label="50%"></option>
+                <option value="75">75</option>
+                <option value="100" label="100%"></option>
+            </datalist>
+
+            <div class="form-group col-md-6">
+                <div class="form-group row mb-0">
+                    <label class="text-nowrap col-md-3 mt-1 mr-1">BMI-for-Age</label>
+                    <input id="BfaPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="BfaPercentile" type="range" min="0" max="100" step="25" title="@{ if (Model != null) { @Model.BfaPercentile; } }" list="tickmarks" disabled />
                     @if (Model != null && Model.Oedema == true)
                     {
-                        <input type="text" asp-for="WfhPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
-                        <input type="text" asp-for="WfhZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @{ if (Model != null) {@getColor(Model.WfhZscore)} }" readonly>
-                        <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-height Percentile" asp-controller="LineChart" asp-action="WFH_P" onclick="return false">
+                        <input type="text" asp-for="BfaPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
+                        <input type="text" asp-for="BfaZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @{ if (Model != null) {@getColor(Model.BfaZscore)} }" readonly>
+                        <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Percentile" asp-controller="LineChart" asp-action="BFA_P" onclick="return false">
                             <i class="fa fa-line-chart"></i>
                         </a>
-                        <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-height Z-score" asp-controller="LineChart" asp-action="WFH_Z" onclick="return false">
+                        <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Z-score" asp-controller="LineChart" asp-action="BFA_Z" onclick="return false">
                             <i class="fa fa-line-chart"></i>
                         </a>
                     }
                     else
                     {
-                        <input type="text" asp-for="WfhPercentile" value="@{ if (Model.WfhPercentile >= 99.9 || Model.WfhPercentile <= .01) { @Html.Raw("NA") } else { @Model.WfhPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
-                        <input type="text" asp-for="WfhZscore" value="@Model.WfhZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.WfhZscore)} }" readonly>
-                        <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-height Percentile" asp-controller="LineChart" asp-action="WFH_P" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @{ @Model.LengthHeight} + '&y=' + @{ @Model.Weight});return false">
+                        <input type="text" asp-for="BfaPercentile" value="@{ if (Model.BfaPercentile >= 99.9 || Model.BfaPercentile <= .01) { @Html.Raw("NA") } else { @Model.BfaPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
+                        <input type="text" asp-for="BfaZscore" value="@Model.BfaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.BfaZscore)} }" list="tickmarks" readonly>
+                        <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Percentile" asp-controller="LineChart" asp-action="BFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.BMI} );return false">
                             <i class="fa fa-line-chart"></i>
                         </a>
-                        <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-height Z-score" asp-controller="LineChart" asp-action="WFH_Z" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @{ @Model.LengthHeight} + '&y=' + @{ @Model.Weight});return false">
+                        <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Z-score" asp-controller="LineChart" asp-action="BFA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.BMI} );return false">
                             <i class="fa fa-line-chart"></i>
                         </a>
                     }
                 </div>
             </div>
-        }
-        <div class="form-group col-md-6">
-            <div class="form-group row mb-0">
-                <label class="col-md-3 mt-1 mr-1">HC-for-age</label>
-                <input id="HcaPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="HcaPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.HcaPercentile; } }" list="tickmarks" disabled />
-                <input type="text" asp-for="HcaPercentile" value="@{ if (Model.HcaPercentile >= 99.9 || Model.HcaPercentile <= .01) { @Html.Raw("NA") } else { @Model.HcaPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
-                <input type="text" asp-for="HcaZscore" value="@Model.HcaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.HcaZscore)} }" readonly>
-                <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Head Circumference Percentile" asp-controller="LineChart" asp-action="HCA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.HeadCircumference});return false">
-                    <i class="fa fa-line-chart"></i>
-                </a>
-                <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Head Circumference Z-score" asp-controller="LineChart" asp-action="HCA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.HeadCircumference});return false">
-                    <i class="fa fa-line-chart"></i>
-                </a>
+            <div class="form-group col-md-6">
+                <div class="form-group row mb-0">
+                    <label class="text-nowrap col-md-3 mt-1 mr-1">SSF-for-age</label>
+                    <input id="SsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="SsfPercentile" type="range" min="0" max="100" step="25" title="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.SsfPercentile } }" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.SsfPercentile } }" list="tickmarks" disabled />
+                    <input type="text" asp-for="SsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.SsfPercentile } }" readonly>
+                    <input type="text" asp-for="SsfZscore" class="form-control col-md-2 mr-1 text-center" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.SsfZscore.ToString("0.00") } }" style="background-color: @{ if (Model != null) {@getColor(Model.SsfZscore)} }" readonly>
+                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Subscapular Skinfold Percentile" asp-controller="LineChart" asp-action="SSF_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.SubscapularSkinFold} );return false">
+                        <i class="fa fa-line-chart"></i>
+                    </a>
+                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Subscapular Skinfold Z-score" asp-controller="LineChart" asp-action="SSF_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.SubscapularSkinFold} );return false">
+                        <i class="fa fa-line-chart"></i>
+                    </a>
+                </div>
             </div>
         </div>
-        <!-- Weight For Age -->
-        <div class="form-group col-md-6">
-            <div class="form-group row mb-0">
-                <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Age</label>
-                <input id="WfaPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WfaPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.WfaPercentile; } }" list="tickmarks" disabled />
-                @if (Model != null && Model.Oedema == true)
-                {
-                    <input type="text" asp-for="WfaPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
-                    <input type="text" asp-for="WfaZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @{ if (Model != null) {@getColor(Model.WfaZscore)} }" readonly>
-                    <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-age Percentile" asp-controller="LineChart" asp-action="WFA_P" onclick="return false">
-                        <i class="fa fa-line-chart"></i>
-                    </a>
-                    <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-age Z-score" asp-controller="LineChart" asp-action="WFA_Z" onclick="return false">
-                        <i class="fa fa-line-chart"></i>
-                    </a>
-                }
-                else
-                {
-                    <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaPercentile" value="@{ if (Model.WfaPercentile >= 99.9 || Model.WfaPercentile <= .01) { @Html.Raw("NA") } else { @Model.WfaPercentile; } }" readonly>
-                    <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaZscore" value="@Model.WfaZscore.ToString("0.00")" style="background-color: @{ if (Model != null) {@getColor(Model.WfaZscore)} }" readonly>
-                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-age Percentile" asp-controller="LineChart" asp-action="WFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.Weight});return false">
-                        <i class="fa fa-line-chart"></i>
-                    </a>
-                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-age Z-score" asp-controller="LineChart" asp-action="WFA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.Weight});return false">
-                        <i class="fa fa-line-chart"></i>
-                    </a>
-                }
-            </div>
-        </div>
-        <div class="form-group col-md-6">
-            <div class="form-group row mb-0">
-                <label class="text-nowrap col-md-3 mt-1 mr-1">MUAC-for-age</label>
-                <input id="MuacPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="MuacPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.MuacPercentile } }" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.MuacPercentile } }" list="tickmarks" disabled />
-                <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacPercentile" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.MuacPercentile } }" readonly>
-                <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacZscore" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.MuacZscore.ToString("0.00") } }" style="background-color: @{ if (Model != null) {@getColor(Model.MuacZscore)} }" readonly>
-                <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="MUAC Percentile" asp-controller="LineChart" asp-action="MUAC_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.MUAC} );return false">
-                    <i class="fa fa-line-chart"></i>
-                </a>
-                <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="MUAC Z-score" asp-controller="LineChart" asp-action="MUAC_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.MUAC});return false">
-                    <i class="fa fa-line-chart"></i>
-                </a>
-            </div>
-        </div>
-        <!-- Length For Age -->
-        <div class="form-group col-md-6">
-            <div class="form-group row mb-0">
-                <label class="text-nowrap col-md-3 mt-1 mr-1">Length-for-Age</label>
-                <input id="LfaPercentileRange" class="form-control-range  col-md-2 mr-1 ml-1" asp-for="LfaPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model != null) { @Model.LfaPercentile; } }" list="tickmarks" disabled />
-                <input type="text" asp-for="LfaPercentile" value="@{ if (Model.LfaPercentile >= 99.9 || Model.LfaPercentile <= .01) { @Html.Raw("NA") } else { @Model.LfaPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
-                <input type="text" asp-for="LfaZscore" value="@Model.LfaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.LfaZscore)} }" readonly>
-                <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Length/Height-for-age Percentile" asp-controller="LineChart" asp-action="LHFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.LengthHeight});return false">
-                    <i class="fa fa-line-chart"></i>
-                </a>
-                <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Length/Height-for-age Z-score" asp-controller="LineChart" asp-action="LHFA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue()  + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.LengthHeight});return false">
-                    <i class="fa fa-line-chart"></i>
-                </a>
-            </div>
-        </div>
-        <div class="form-group col-md-6">
-            <div class="form-group row mb-0">
-                <label class="text-nowrap col-md-3 mt-1 mr-1">TSF-for-age</label>
-                <input id="TsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="TsfPercentile" type="range" min="0" max="100" step=".1" title="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.TsfPercentile } }" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.TsfPercentile } }" list="tickmarks" disabled />
-                <input type="text" asp-for="TsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.TsfPercentile } }" readonly>
-                <input type="text" asp-for="TsfZscore" class="form-control col-md-2 mr-1 text-center" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.TsfZscore.ToString("0.00"); } }" style="background-color: @{ if (Model != null) {@getColor(Model.TsfZscore)} }" readonly>
-                <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Triceps Skinfold Percentile" asp-controller="LineChart" asp-action="TSF_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.TricepsSkinFold});return false">
-                    <i class="fa fa-line-chart"></i>
-                </a>
-                <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Triceps Skinfold Z-score" asp-controller="LineChart" asp-action="TSF_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.TricepsSkinFold});return false">
-                    <i class="fa fa-line-chart"></i>
-                </a>
-            </div>
-        </div>
-        <!-- BMI For Age -->
-        <datalist id="tickmarks">
-            <option value="0" label="0%"></option>
-            <option value="25">25</option>
-            <option value="50" title="50%" label="50%"></option>
-            <option value="75">75</option>
-            <option value="100" label="100%"></option>
-        </datalist>
-
-        <div class="form-group col-md-6">
-            <div class="form-group row mb-0">
-                <label class="text-nowrap col-md-3 mt-1 mr-1">BMI-for-Age</label>
-                <input id="BfaPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="BfaPercentile" type="range" min="0" max="100" step="25" title="@{ if (Model != null) { @Model.BfaPercentile; } }" list="tickmarks" disabled />
-                @if (Model != null && Model.Oedema == true)
-                {
-                    <input type="text" asp-for="BfaPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
-                    <input type="text" asp-for="BfaZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @{ if (Model != null) {@getColor(Model.BfaZscore)} }" readonly>
-                    <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Percentile" asp-controller="LineChart" asp-action="BFA_P" onclick="return false">
-                        <i class="fa fa-line-chart"></i>
-                    </a>
-                    <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Z-score" asp-controller="LineChart" asp-action="BFA_Z" onclick="return false">
-                        <i class="fa fa-line-chart"></i>
-                    </a>
-                }
-                else
-                {
-                    <input type="text" asp-for="BfaPercentile" value="@{ if (Model.BfaPercentile >= 99.9 || Model.BfaPercentile <= .01) { @Html.Raw("NA") } else { @Model.BfaPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
-                    <input type="text" asp-for="BfaZscore" value="@Model.BfaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.BfaZscore)} }" list="tickmarks" readonly>
-                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Percentile" asp-controller="LineChart" asp-action="BFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.BMI} );return false">
-                        <i class="fa fa-line-chart"></i>
-                    </a>
-                    <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Z-score" asp-controller="LineChart" asp-action="BFA_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.BMI} );return false">
-                        <i class="fa fa-line-chart"></i>
-                    </a>
-                }
-            </div>
-        </div>
-        <div class="form-group col-md-6">
-            <div class="form-group row mb-0">
-                <label class="text-nowrap col-md-3 mt-1 mr-1">SSF-for-age</label>
-                <input id="SsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="SsfPercentile" type="range" min="0" max="100" step="25" title="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.SsfPercentile } }" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("50")  } else {@Model.SsfPercentile } }" list="tickmarks" disabled />
-                <input type="text" asp-for="SsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.SsfPercentile } }" readonly>
-                <input type="text" asp-for="SsfZscore" class="form-control col-md-2 mr-1 text-center" value="@{ if (Model.AgeInYears < 1 && Model.AgeInMonths < 3) { @Html.Raw("NA")  } else {@Model.SsfZscore.ToString("0.00") } }" style="background-color: @{ if (Model != null) {@getColor(Model.SsfZscore)} }" readonly>
-                <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Subscapular Skinfold Percentile" asp-controller="LineChart" asp-action="SSF_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.SubscapularSkinFold} );return false">
-                    <i class="fa fa-line-chart"></i>
-                </a>
-                <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Subscapular Skinfold Z-score" asp-controller="LineChart" asp-action="SSF_Z" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.SubscapularSkinFold} );return false">
-                    <i class="fa fa-line-chart"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</fieldset>
-
-<script>
-
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    //(function () {
-    //    'use strict';
-    //    window.addEventListener('load', function () {
-    //        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    //        var forms = document.getElementsByClassName('needs-validation');
-    //        // Loop over them and prevent submission
-    //        var validation = Array.prototype.filter.call(forms, function (form) {
-    //            form.addEventListener('submit', function (event) {
-    //                if (form.checkValidity() === false) {
-    //                    event.preventDefault();
-    //                    event.stopPropagation();
-    //                }
-    //                form.classList.add('was-validated');
-    //            }, false);
-    //        });
-    //    }, false);
-    //})();
-</script>
+    </fieldset>
