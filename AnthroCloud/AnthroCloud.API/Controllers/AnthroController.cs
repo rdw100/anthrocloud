@@ -84,5 +84,20 @@ namespace AnthroCloud.API.Controllers
             BMI bmi = new BMI(weight, height);
             return bmi.Bmi;// bmi.ToReadableDouble();
         }
+
+        /// <summary>
+        /// Gets body mass divided by the square of the body height asynchronously
+        /// </summary>
+        /// <param name="weight">Body weight</param>
+        /// <param name="height">Body height</param>
+        /// <returns>Returns body mass divided by the square of the body height</returns>
+        /// <example>GET: api/anthro/bmi/9.00/73.00</example>
+        [Route("BMIAsync/{weight}/{height}")]
+        public async Task<double> GetBMIAsync(double weight, double height)
+        {
+            BMI bmi = new BMI();
+            _ = await bmi.Calculate(weight, height);
+            return bmi.ToReadableDouble();
+        }
     }
 }

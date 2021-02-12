@@ -1,0 +1,33 @@
+﻿@inherits AnthroCloud.UI.Blazor.Components.AnthroBase
+
+<h1>AnthroComponent</h1>
+
+<p>Enter weight and height.  Press the button below to calculate BMI.</p>
+
+<label class="col-sm-5 col-form-label">Weight (kg)</label>
+<input asp-for="Weight"
+       class="form-control text-center"
+       type="number"
+       MIN=".9" MAX="58" STEP=".1"
+       placeholder="Weight"
+       required
+       data-error-msg="Must be 0 and 1"
+       @bind="@Weight" />
+
+<label class="col-sm-5 col-form-label">Length/Height (cm)</label>
+<input asp-for="LengthHeight"
+       class="form-control text-center"
+       type="number"
+       MIN="45.0" MAX="120.0" STEP=".1"
+       placeholder="Weight"
+       required
+       data-error-msg="Must be 0 and 1"
+       @bind="@Height" />
+
+<div class="alert alert-secondary mt-4" role="alert">
+    <p> The BMI for a weight of @Weight kg and Length/height of @Height cm is @BMI.</p>
+</div>
+
+<button class="btn btn-primary" @onclick="CalculateBMI">
+    Calculate BMI
+</button>

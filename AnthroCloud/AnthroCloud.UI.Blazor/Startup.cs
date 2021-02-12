@@ -1,4 +1,5 @@
 using AnthroCloud.UI.Blazor.Data;
+using AnthroCloud.UI.Blazor.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,11 @@ namespace AnthroCloud.UI.Blazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddHttpClient<IAnthroService, AnthroService>(client => 
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/api/");
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
