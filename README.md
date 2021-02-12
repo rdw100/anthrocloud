@@ -46,4 +46,4 @@ The AnthroCloud RESTful API is designed to support retrieval operations.  The RE
  
  ### Demo
  The animated gif below demonstrates application execution. 
- ![Application Execution](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/4uSBzTMAjj.gif?raw=true)
+ ![Application Execution](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/toQO8tLp8W.gif?raw=true)
