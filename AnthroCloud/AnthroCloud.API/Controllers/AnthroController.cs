@@ -86,7 +86,22 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Gets body mass divided by the square of the body height asynchronously
+        /// Gets a human readable string in either Months or Year-Month (TotalMonths) format asynchronously.
+        /// </summary>
+        /// <param name="birth">Birth date</param>
+        /// <param name="visit">Visit date</param>
+        /// <returns>Returns a human readable string in either Months or Year-Month (TotalMonths) format.</returns>
+        /// <example>GET: api/anthro/age/2016-12-01T00:00:00/2019-12-31T23:59:59</example>
+        [Route("AGEAsync/{birth}/{visit}")]
+        public async Task<string> GetAgeAsync(DateTime birth, DateTime visit)
+        {
+            Age age = new Age(birth, visit);
+            _ = await age.Calculate(birth, visit);
+            return age.ToReadableString();
+        }
+
+        /// <summary>
+        /// Gets body mass divided by the square of the body height asynchronously.
         /// </summary>
         /// <param name="weight">Body weight</param>
         /// <param name="height">Body height</param>

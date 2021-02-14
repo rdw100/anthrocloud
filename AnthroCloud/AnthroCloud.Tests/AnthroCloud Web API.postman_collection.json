@@ -30,7 +30,45 @@
 			"response": []
 		},
 		{
-			"name": "https://localhost:5001/api/anthro/age/years/2016-12-01T00:00:00/2019-12-01T23:59:59",
+			"name": "https://localhost:5001/api/anthro/age/2016-12-01T00:00:00/2019-12-01T23:59:59",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/anthro/age/years/2016-12-01T00:00:00/2019-12-01T23:59:59",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"anthro",
+						"age",
+						"years",
+						"2016-12-01T00:00:00",
+						"2019-12-01T23:59:59"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:5001/api/anthro/age/years/2016-12-01T00:00:00/2019-12-01T23:59:59 Copy",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},

@@ -5,10 +5,10 @@
 <p>Enter weight and height.  Press the button below to calculate BMI.</p>
 
 <label asp-for="DateOfBirth">Date of Birth</label>
-<input asp-for="DateOfBirth" type="date" class="form-control text-center" required>
+<input asp-for="DateOfBirth" type="date" @bind="Birth" class="form-control text-center" required>
 
 <label>Date of Visit</label>
-<input asp-for="DateOfVisit" type="date" class="form-control text-center" required />
+<input asp-for="DateOfVisit" type="date" @bind="Visit" class="form-control text-center" required />
 
 <div class="form-row">
     <div class="col-md-4 mb-2">
@@ -81,21 +81,22 @@
        required>
 
 <label for="validationDefault05" class="col-sm-5 col-form-label">Triceps skinfold (mm)</label>
-<input asp-for="TricepsSkinFold" 
-       class="form-control text-center" 
-       type="number" 
-       MIN="1.8" MAX="40.0" STEP=".1" 
+<input asp-for="TricepsSkinFold"
+       class="form-control text-center"
+       type="number"
+       MIN="1.8" MAX="40.0" STEP=".1"
        required>
 
 <label for="validationDefault06" class="col-sm-5 col-form-label">Subscapular skinfold (mm)</label>
-<input asp-for="SubscapularSkinFold" 
-       class="form-control text-center" 
-       type="number" 
-       MIN="1.8" MAX="40.0" STEP=".1" 
+<input asp-for="SubscapularSkinFold"
+       class="form-control text-center"
+       type="number"
+       MIN="1.8" MAX="40.0" STEP=".1"
        required>
 
 <div class="alert alert-secondary mt-4" role="alert">
     <p> The BMI for a weight of @Weight kg and Length/height of @Height cm is @BMI.</p>
+    <p> The age is @Age.</p>
 </div>
 
 <button class="btn btn-primary" @onclick="CalculateBMI">
