@@ -1,8 +1,8 @@
-﻿@inherits AnthroCloud.UI.Blazor.Components.AnthroBase
+﻿@inherits AnthroBase
 
 <h1>AnthroComponent</h1>
 
-<p>Enter weight and height.  Press the button below to calculate BMI.</p>
+<h5>Enter weight and height.  Press the button below to calculate BMI.</h5>
 
 <label asp-for="DateOfBirth">Date of Birth</label>
 <input asp-for="DateOfBirth" type="date" @bind="Birth" class="form-control text-center" required>
@@ -99,8 +99,4 @@
     <p> The age is @Age.</p>
 </div>
 
-<button class="btn btn-primary" @onclick="CalculateBMI">
-    Calculate BMI
-</button>
-
-
+<button class="btn btn-primary" @onclick="CalculateBMI">Calculate BMI</button>
