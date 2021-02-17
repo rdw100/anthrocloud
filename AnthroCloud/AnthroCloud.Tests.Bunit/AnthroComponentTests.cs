@@ -28,45 +28,25 @@ namespace AnthroCloud.Tests.Bunit
             Assert.Equal(73, cut.Instance.Height);
         }
 
-        //[Fact]
-        //public void AnthroComponent_CalculateBMI_Matches()
-        //{
-        //    // Arrange
-        //    using var ctx = new TestContext();
+        [Fact]
+        public void AnthroComponent_CalculateBMI_Matches()
+        {
+            // Arrange
+            using var ctx = new TestContext();
 
-        //    ctx.Services.AddHttpClient<IAnthroService, AnthroService>(client =>
-        //    {
-        //        client.BaseAddress = new Uri("https://localhost:5001/api/");
-        //    });
+            ctx.Services.AddHttpClient<IAnthroService, AnthroService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/api/");
+            });
+                        
+            var component = ctx.RenderComponent<Anthro>();
 
-        //    // Act
-        //    var component = ctx.RenderComponent<AnthroCloud.UI.Blazor.Components.Anthro>();
-        //    component.Find("button").Click();
+            // Act
+            component.Find("button").Click();
 
-        //    // Assert
-        //    Assert.Equal(16.9, component.Instance.BMI);
-        //}
-
-        //[Fact]
-        //public void AnthroComponent_CalculateBMI_Matches()
-        //{
-        //    // Arrange
-        //    using var ctx = new TestContext();
-        //    ctx.Services.AddHttpClient<IAnthroService, AnthroService>(client =>
-        //    {
-        //        client.BaseAddress = new Uri("https://localhost:5001/api/");
-        //    });
-        //    var cut = ctx.RenderComponent<Anthro>();
-        //    var paraElm = cut.Find("p");
-
-        //    // Act
-        //    cut.Find("button").Click();
-        //    var paraElmText = paraElm.TextContent;
-
-        //    // Assert
-        //    //paraElmText.MarkupMatches("Current count: 1");
-        //    paraElmText.MarkupMatches("The BMI for a weight of 9 kg and Length/height of 73 cm is 1 16.9.");            
-        //}
+            // Assert
+            component.WaitForAssertion(() => component.Find("p").MarkupMatches("<p>The BMI for a weight of 9 kg and Length/height of 73 cm is 16.9.</p>"), TimeSpan.FromSeconds(1));
+        }
 
         [Fact]
         public void CounterComponent_MultiClick_Matches()
