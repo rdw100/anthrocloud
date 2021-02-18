@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+﻿using AnthroCloud.Business;
 using AnthroCloud.UI.Blazor.Services;
+using Microsoft.AspNetCore.Components;
 using System;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Components
 {
@@ -12,8 +13,10 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public double BMI { get; set; }
 
-        public string Age { get; set; }
+        public string AgeString { get; set; }
 
+        public Age Age { get; set; }
+                        
         [Parameter]
         public double Weight { get; set; } = 9.00;
 
@@ -30,7 +33,9 @@ namespace AnthroCloud.UI.Blazor.Components
         {
             string BirthDateString = string.Format("{0:yyyy-MM-dd}", Birth);
             string VisitDateString = string.Format("{0:yyyy-MM-dd}", Visit);
-            Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+
+            Age = await AnthroService.GetAge(BirthDateString, VisitDateString);            
+            AgeString = Age.ToReadableString();
 
             BMI = await AnthroService.GetBMI(Weight, Height);
             return BMI;

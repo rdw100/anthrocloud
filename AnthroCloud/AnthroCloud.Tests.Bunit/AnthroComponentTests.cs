@@ -38,14 +38,14 @@ namespace AnthroCloud.Tests.Bunit
             {
                 client.BaseAddress = new Uri("https://localhost:5001/api/");
             });
-                        
+
             var component = ctx.RenderComponent<Anthro>();
 
             // Act
             component.Find("button").Click();
 
             // Assert
-            component.WaitForAssertion(() => component.Find("p").MarkupMatches("<p>The BMI for a weight of 9 kg and Length/height of 73 cm is 16.9.</p>"), TimeSpan.FromSeconds(1));
+            component.WaitForAssertion(() => component.Find("p").MarkupMatches("<p>The BMI for a weight of 9 kg and Length/height of 73 cm is 16.9.</p>"), TimeSpan.FromSeconds(5));
         }
 
         [Fact]

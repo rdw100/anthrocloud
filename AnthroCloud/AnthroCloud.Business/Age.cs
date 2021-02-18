@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AnthroCloud.Business
 {
-
     /// <summary>
     /// Calculates the age by instatiation of the Age object using birth and visit dates.
     /// </summary>
@@ -24,27 +24,32 @@ namespace AnthroCloud.Business
         /// <summary>
         /// Age in years.
         /// </summary>
-        public int Years { get; private set; }
+        [JsonPropertyName("years")]
+        public int Years { get; set; }
 
         /// <summary>
         /// Age in remaining months.
         /// </summary>
-        public int Months { get; private set; }
+        [JsonPropertyName("months")]
+        public int Months { get; set; }
 
         /// <summary>
         /// Age in remaining days.
         /// </summary>
-        public int Days { get; private set; }
+        [JsonPropertyName("days")]
+        public int Days { get; set; }
 
         /// <summary>
         /// Age in total days.
         /// </summary>
-        public int TotalDays { get; private set; }
+        [JsonPropertyName("totalDays")]
+        public int TotalDays { get; set; }
 
         /// <summary>
         /// Age in total months.
         /// </summary>
-        public int TotalMonths { get; private set; }
+        [JsonPropertyName("totalMonths")]
+        public int TotalMonths { get; set; }
 
         /// <summary>
         /// Operation returns a calculated Age object.
@@ -116,7 +121,7 @@ namespace AnthroCloud.Business
         /// Writes a human readable string in either Months or Year-Month (TotalMonths) format.
         /// </summary>
         /// <returns>Returns a string in either Months or Year-Month (TotalMonths) format.</returns>
-        public String ToReadableString()
+        public string ToReadableString()
         {
             string ageString;
 
@@ -136,7 +141,7 @@ namespace AnthroCloud.Business
         /// Writes string of age in total days.
         /// </summary>
         /// <returns>Returns age in total days.</returns>
-        public String ToDaysString()
+        public string ToDaysString()
         {
             string ageString;
 
@@ -148,7 +153,7 @@ namespace AnthroCloud.Business
         /// Writes string of age in total months.
         /// </summary>
         /// <returns>Returns age in total months.</returns>
-        public String ToMonthsString()
+        public string ToMonthsString()
         {
             string ageString;
 
@@ -161,7 +166,7 @@ namespace AnthroCloud.Business
         /// Writes string of age in years.
         /// </summary>
         /// <returns>Returns age in years.</returns>
-        public String ToYearsString()
+         public string ToYearsString()
         {
             string yearString;
 

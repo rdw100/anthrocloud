@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using AnthroCloud.Business;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Services
 {
     public interface IAnthroService
     {
         Task<double> GetBMI(double weight, double height);
-        Task<string> GetAge(string birth, string visit);
+        Task<Age> GetAge(string birth, string visit);
     }
 }
