@@ -1,7 +1,9 @@
 ﻿using AnthroCloud.Business;
+using AnthroCloud.Entities;
 using AnthroCloud.UI.Blazor.Services;
 using Microsoft.AspNetCore.Components;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Components
@@ -14,9 +16,13 @@ namespace AnthroCloud.UI.Blazor.Components
         public double BMI { get; set; }
 
         public string AgeString { get; set; }
+        
+        public double WfaZscore { get; set; }
+
+        public double WfaPercentile { get; set; }
 
         public Age Age { get; set; }
-                        
+        
         [Parameter]
         public double Weight { get; set; } = 9.00;
 
@@ -29,6 +35,24 @@ namespace AnthroCloud.UI.Blazor.Components
         [Parameter]
         public DateTime Visit { get; set; } = DateTime.Today;
 
+        [Parameter]
+        public Sexes Sex { get; set; }
+
+        [Parameter]
+        public Boolean Oedema { get; set; }
+
+        [Parameter]
+        public double HeadCircumference { get; set; }
+
+        [Parameter]
+        public double MUAC { get; set; }
+
+        [Parameter]
+        public double TricepsSkinFold { get; set; }
+
+        [Parameter]
+        public double SubscapularSkinFold { get; set; }
+
         public async Task<double> CalculateBMI()
         {
             string BirthDateString = string.Format("{0:yyyy-MM-dd}", Birth);
@@ -37,8 +61,25 @@ namespace AnthroCloud.UI.Blazor.Components
             Age = await AnthroService.GetAge(BirthDateString, VisitDateString);            
             AgeString = Age.ToReadableString();
 
+            Tuple<double, double> wfaTuple = await AnthroService.GetWFA(Weight, Age.ToDaysString(), Sex);
+
+            WfaZscore = wfaTuple.Item1; //SetDecimalZero(wfaTuple.Item1);
+            WfaPercentile = wfaTuple.Item2; //SetDecimalZero(wfaTuple.Item2);
+
+            //Task<Tuple<double, double>> GetWFA(double weight, string ageInDays, Sexes sex)
+
             BMI = await AnthroService.GetBMI(Weight, Height);
             return BMI;
+        }
+
+        public static double SetDecimalZero(double value)
+        {
+            if (value == 0)
+            {
+                return 0.00d;
+            }
+
+            return value;
         }
     }
 }

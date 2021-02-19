@@ -26,7 +26,7 @@ Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "AnthroCloud.Architecture", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.UI.Blazor", "AnthroCloud.UI.Blazor\AnthroCloud.UI.Blazor.csproj", "{86ED19C5-9C08-47A7-A960-A3D23DCD05C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnthroCloud.Tests.Bunit", "AnthroCloud.Tests.Bunit\AnthroCloud.Tests.Bunit.csproj", "{2B3741C6-DDA9-4E70-AB81-6727ED30DA40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Tests.Bunit", "AnthroCloud.Tests.Bunit\AnthroCloud.Tests.Bunit.csproj", "{2B3741C6-DDA9-4E70-AB81-6727ED30DA40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
