@@ -1,0 +1,46 @@
+﻿@inherits PersonComponentBase
+
+@*https://docs.microsoft.com/en-us/aspnet/core/blazor/forms-validation?view=aspnetcore-5.0#radio-buttons*@
+@*https://kunzleigh.com/microsofts-blazor-and-the-editform-component/*@
+@*https://blazor-university.com/forms/handling-form-submission/*@
+@*https://coderethinked.com/data-binding-in-blazor/*@
+<h3>PersonComponent</h3>
+@if (LastSubmitResult != null)
+{
+    <h2>
+        Last submit status: @LastSubmitResult
+    </h2>
+}
+<EditForm Model=@Person OnValidSubmit=@ValidFormSubmitted OnInvalidSubmit=@InvalidFormSubmitted>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <InputText @bind-Value=Person.Name class="form-control" id="Name" />
+        <ValidationMessage For="() => Person.Name" />
+        <label for="LastName">@Person.LastName</label>
+    </div>
+    <div class="form-group">
+        <label for="Age">Age</label>
+        <InputNumber @bind-Value=Person.Age class="form-control" id="Age" />
+        <ValidationMessage For=@(() => Person.Age) />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save" />
+</EditForm>
+
+@*@code {
+    Person Person = new Person();
+    string LastSubmitResult;
+
+    void ValidFormSubmitted(EditContext editContext)
+    {
+        Person.LastName = "Smith";
+
+        LastSubmitResult = "OnValidSubmit was executed";
+    }
+
+    void InvalidFormSubmitted(EditContext editContext)
+    {
+        LastSubmitResult = "OnInvalidSubmit was executed";
+    }
+}*@

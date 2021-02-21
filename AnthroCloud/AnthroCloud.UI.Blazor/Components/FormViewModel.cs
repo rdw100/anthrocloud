@@ -18,6 +18,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
         [Required]
         [DisplayName("Weight (kg)")]
+        [Range(.9, 58, ErrorMessage = "Weight must be between .9 and 58.")]
         public double Weight { get; set; } = 9.00;
 
         [Required]
