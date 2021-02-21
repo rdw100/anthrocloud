@@ -3,7 +3,7 @@
 
 <h3>AnthroForm</h3>
 
-<EditForm Model="@formModel" OnValidSubmit="@HandleValidSubmitAsync">
+<EditForm EditContext="@editContext" OnValidSubmit="@HandleValidSubmitAsync">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <p>
@@ -24,15 +24,35 @@
             <InputRadio Name="sex" Value="Sexes.Female" />Female<br>
         </InputRadioGroup>
     </p>
+    <p>
+        <label class="col-sm-5 col-form-label">Weight (kg)</label>
+        <input asp-for="Weight"
+               class="form-control text-center"
+               type="number"
+               MIN=".9" MAX="58" STEP=".1"
+               placeholder="Weight"
+               required
+               data-error-msg="Must be 0 and 1"
+               @bind-value="@formModel.Weight" />
 
-    <button type="submit">Submit</button>
+            <label class="col-sm-5 col-form-label">Length/Height (cm)</label>
+            <input asp-for="LengthHeight"
+                   class="form-control text-center"
+                   type="number"
+                   MIN="45.0" MAX="120.0" STEP=".1"
+                   placeholder="Weight"
+                   required
+                   data-error-msg="Must be 0 and 1"
+                   @bind-value="@formModel.Height" />
+        </p>
+        <button type="submit">Submit</button>
 
-    <div class="alert alert-info mt-4" role="alert">
-        @*<p> The BMI for a weight of @formModel.Weight kg and Length/height of @formModel.Height cm is @formModel.BMI.</p>*@
-        <p> The age is @formModel.AgeString .</p>
-        @*<p> The WFA Zscore is @formModel.WfaZscore.</p>
-            <p> The WFA Percentile is @formModel.WfaPercentile.</p>*@
-    </div>
+        <div class="alert alert-info mt-4" role="alert">
+            <p> The BMI for a weight of @formModel.Weight kg and Length/height of @formModel.Height cm is @formModel.BMI.</p>
+            <p> The age is @formModel.AgeString .</p>
+            <p> The WFA Zscore is @formModel.WfaZscore.</p>
+            <p> The WFA Percentile is @formModel.WfaPercentile.</p>
+        </div>
 
-</EditForm>
+    </EditForm>
 

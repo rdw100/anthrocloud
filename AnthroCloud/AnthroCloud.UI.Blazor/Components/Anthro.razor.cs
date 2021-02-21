@@ -66,8 +66,6 @@ namespace AnthroCloud.UI.Blazor.Components
             WfaZscore = wfaTuple.Item1; //SetDecimalZero(wfaTuple.Item1);
             WfaPercentile = wfaTuple.Item2; //SetDecimalZero(wfaTuple.Item2);
 
-            //Task<Tuple<double, double>> GetWFA(double weight, string ageInDays, Sexes sex)
-
             BMI = await AnthroService.GetBMI(Weight, Height);
             return BMI;
         }

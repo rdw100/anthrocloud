@@ -47,44 +47,11 @@ namespace AnthroCloud.UI.Blazor.Services
                 <Age>(responseStream);
         }
 
+        // GET: https://localhost:5001/api/Stats/WeightForAge/9.00/365/Male
         public async Task<Tuple<double, double>> GetWFA(double weight, string ageInDays, Sexes sex)
         {
-            // GET: api/Stats/WeightForAge/9.00/365/Male
-            string pathStatsWFA = "Stats/WeightForAge/" + weight + "/" + ageInDays + "/" + sex;
-            var responseStatsWFA = httpClient.GetAsync(pathStatsWFA).Result;
-            using var responseStream = await responseStatsWFA.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync
-                <Tuple<double, double>>(responseStream);
-
-            //using (HttpContent contentStatsWFA = responseStatsWFA.Content.ReadAsStreamAsync())
-            //{
-            //    // ... Read the string.
-            //    Task<string> result = contentStatsWFA.ReadAsStringAsync();
-            //    resStatsWFA = result.Result;
-            //} 
-
-            // var wfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsWFA);
-
-            // model.WfaZscore = SetDecimalZero(wfaTuple.Item1);
-            // model.WfaPercentile = SetDecimalZero(wfaTuple.Item2);
-
-            //return wfaTuple;
-            //// GET: api/Stats/WeightForAge/9.00/365/Male
-            //string pathStatsWFA = "Stats/WeightForAge/" + model.Weight + "/" + model.AgeInDays + "/" + (Sexes)model.Sex;
-            //var responseStatsWFA = client.GetAsync(pathStatsWFA).Result;
-            //string resStatsWFA = "";
-
-            //using (HttpContent contentStatsWFA = responseStatsWFA.Content)
-            //{
-            //    // ... Read the string.
-            //    Task<string> result = contentStatsWFA.ReadAsStringAsync();
-            //    resStatsWFA = result.Result;
-            //}
-
-            //var wfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsWFA);
-
-            //model.WfaZscore = SetDecimalZero(wfaTuple.Item1);
-            //model.WfaPercentile = SetDecimalZero(wfaTuple.Item2);
+            var result = Tuple.Create(1.1, 2.2);
+            return result;
         }
     }
 

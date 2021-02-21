@@ -1,6 +1,8 @@
 ﻿using AnthroCloud.UI.Blazor.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using System;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Components
 {
@@ -9,24 +11,37 @@ namespace AnthroCloud.UI.Blazor.Components
         [Inject]
         public IAnthroService AnthroService { get; set; }
 
+        protected EditContext editContext;
+
         public FormViewModel formModel = new FormViewModel();
 
-        public async void HandleValidSubmitAsync(EditContext editContext)
+        protected override void OnInitialized()
         {
-            string BirthDateString = string.Format("{0:yyyy-MM-dd}", formModel.DateOfBirth);
-            string VisitDateString = string.Format("{0:yyyy-MM-dd}", formModel.DateOfVisit);
+            editContext = new EditContext(formModel);
+        }
 
-            formModel.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
-            formModel.AgeString = formModel.Age.ToReadableString().ToString();
+        protected async Task HandleValidSubmitAsync()
+        {
+            var isValid = editContext.Validate();
+            if (isValid)
+            {
+                string BirthDateString = string.Format("{0:yyyy-MM-dd}", formModel.DateOfBirth);
+                string VisitDateString = string.Format("{0:yyyy-MM-dd}", formModel.DateOfVisit);
 
-            //Tuple<double, double> wfaTuple = await AnthroService.GetWFA(formModel.Weight, formModel.Age.ToDaysString(), formModel.Sex);
+                formModel.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+                formModel.AgeString = formModel.Age.ToReadableString().ToString();
 
-            //formModel.WfaZscore = wfaTuple.Item1; //SetDecimalZero(wfaTuple.Item1);
-            //formModel.WfaPercentile = wfaTuple.Item2; //SetDecimalZero(wfaTuple.Item2);
+                Tuple<double, double> wfaTuple = await AnthroService.GetWFA(formModel.Weight, formModel.Age.TotalDays.ToString(), formModel.Sex);
 
-            //Task<Tuple<double, double>> GetWFA(double weight, string ageInDays, Sexes sex)
+                formModel.WfaZscore = wfaTuple.Item1;
+                formModel.WfaPercentile = wfaTuple.Item2;
 
-            //formModel.BMI = await AnthroService.GetBMI(formModel.Weight, formModel.Height);
+                formModel.BMI = await AnthroService.GetBMI(formModel.Weight, formModel.Height);                    
+            }
+            else
+            {
+                    
+            }
         }
     }
 }

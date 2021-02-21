@@ -34,6 +34,10 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public double BMI { get; set; }
 
+        public double WfaZscore { get; set; }
+
+        public double WfaPercentile { get; set; }
+
         //[Required]
         //[StringLength(10, ErrorMessage = "Name is too long.")]
         //public string Name { get; set; }
