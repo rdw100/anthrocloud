@@ -11,6 +11,9 @@ namespace AnthroCloud.UI.Blazor.Components
         [Inject]
         public IAnthroService AnthroService { get; set; }
 
+        [Inject]
+        public IAnthroStatsService AnthroStatsService { get; set; }
+
         protected EditContext editContext;
 
         public FormViewModel formModel = new FormViewModel();
@@ -31,7 +34,7 @@ namespace AnthroCloud.UI.Blazor.Components
                 formModel.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
                 formModel.AgeString = formModel.Age.ToReadableString().ToString();
 
-                Tuple<double, double> wfaTuple = await AnthroService.GetWFA(formModel.Weight, formModel.Age.TotalDays.ToString(), formModel.Sex);
+                Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(formModel.Weight, formModel.Age.TotalDays.ToString(), formModel.Sex);
 
                 formModel.WfaZscore = wfaTuple.Item1;
                 formModel.WfaPercentile = wfaTuple.Item2;

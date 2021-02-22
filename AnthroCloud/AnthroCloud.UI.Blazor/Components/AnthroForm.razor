@@ -6,53 +6,146 @@
 <EditForm EditContext="@editContext" OnValidSubmit="@HandleValidSubmitAsync">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <p>
-        <label>
-            Date of Birth
-            <InputDate @bind-Value="formModel.DateOfBirth" />
-        </label>
-        <label>
-            Date of Visit
-            <InputDate @bind-Value="formModel.DateOfVisit" />
-        </label>
-    </p>
-    <p>
-        <InputRadioGroup Name="sex" @bind-Value="formModel.Sex">
-            Sex:
-            <br>
-            <InputRadio Name="sex" Value="Sexes.Male" />Male<br>
-            <InputRadio Name="sex" Value="Sexes.Female" />Female<br>
-        </InputRadioGroup>
-    </p>
-    <p>
-        <label class="col-sm-5 col-form-label">Weight (kg)</label>
-        <input asp-for="Weight"
-               class="form-control text-center"
-               type="number"
-               MIN=".9" MAX="58" STEP=".1"
-               placeholder="Weight"
-               required
-               data-error-msg="Must be 0 and 1"
-               @bind-value="@formModel.Weight" />
 
-            <label class="col-sm-5 col-form-label">Length/Height (cm)</label>
-            <input asp-for="LengthHeight"
-                   class="form-control text-center"
-                   type="number"
-                   MIN="45.0" MAX="120.0" STEP=".1"
-                   placeholder="Weight"
-                   required
-                   data-error-msg="Must be 0 and 1"
-                   @bind-value="@formModel.Height" />
-        </p>
-        <button type="submit">Submit</button>
-
-        <div class="alert alert-info mt-4" role="alert">
-            <p> The BMI for a weight of @formModel.Weight kg and Length/height of @formModel.Height cm is @formModel.BMI.</p>
-            <p> The age is @formModel.AgeString .</p>
-            <p> The WFA Zscore is @formModel.WfaZscore.</p>
-            <p> The WFA Percentile is @formModel.WfaPercentile.</p>
+    <fieldset>
+        <div class="form-row">
+            <div class="col-md-6 mb-2">
+                <label>
+                    Date of Birth
+                    <InputDate @bind-Value="formModel.DateOfBirth" DisplayName="Date of Birth" />
+                </label>
+                @*<label asp-for="DateOfBirth">Date of Birth</label>
+                 <input asp-for="DateOfBirth" type="date" class="form-control text-center" required>*@
+            </div>
+            <div class="col-md-6 mb-2">
+                <label>
+                    Date of Visit
+                    <InputDate @bind-Value="formModel.DateOfVisit" DisplayName="Date of Visit" />
+                </label>
+                @*<label>Date of Visit</label>
+                <input asp-for="DateOfVisit" type="date" class="form-control text-center" required />*@
+            </div>
         </div>
+        <div class="form-row">
+            <div class="col-md-4 mb-2">
+                <InputRadioGroup Name="sex" @bind-Value="formModel.Sex">
+                    Sex:
+                    <br>
+                    <InputRadio Name="sex" Value="Sexes.Male" />Male<br>
+                    <InputRadio Name="sex" Value="Sexes.Female" />Female<br>
+                </InputRadioGroup>
+                @*<label class="col-form-label">Sex</label>
+                <div class="form-group">
+                    <label class="d-block">
+                        <input id="SexMale" asp-for="Sex" type="radio" value="1" class="ml-2 mr-2"> Male
+                    </label>
+                    <label class="d-block">
+                        <input id="SexFemale" asp-for="Sex" type="radio" value="2" class="ml-2 mr-2"> Female
+                    </label>
+                </div>*@
+            </div>
+            <div class="col-md-4 mb-2">
+                <label class="col-form-label">Standing</label>
+                <div class="form-group">
+                    <label class="d-block">
+                        @*<input type="radio" class="ml-2 mr-2" name="measurement" @{ if (Model.AgeInYears < 2) { @Html.Raw("checked")  } } disabled> Recumbent*@
+                    </label>
+                    <label class="d-block">
+                        @*<input type="radio" class="ml-2 mr-2" name="measurement" @{ if (Model.AgeInYears>= 2) { @Html.Raw("checked")  } } disabled> Standing*@
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <label class="col-form-label">Oedema</label>
+                <div class="form-group">
+                    <label class="d-block">
+                        <input id="OedemaYes" asp-for="Oedema" type="radio" class="ml-2 mr-2" value="True"> Yes
+                    </label>
+                    <label class="d-block">
+                        <input id="OedemaNo" asp-for="Oedema" type="radio" class="ml-2 mr-2" value="False"> No
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-5 col-form-label">Weight (kg)</label>
+                    <div class="col-sm-7">
+                        <input asp-for="Weight"
+                               class="form-control text-center"
+                               type="number"
+                               MIN=".9" MAX="58" STEP=".1"
+                               placeholder="Weight (kg)"
+                               required
+                               data-error-msg="Must be .9 and 58"
+                               @bind-value="@formModel.Weight" />
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a unique and valid username.
+                    </div>
+                    <div class="invalid-tooltip">
+                        Please choose a unique and valid username.
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="validationDefault02" class="col-sm-5 col-form-label">Head Circumference (cm)</label>
+                    <div class="col-sm-7">
+                        <input asp-for="HeadCircumference" @bind-value="@formModel.HeadCircumference" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>@*SIZE="6"*@
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="validationDefault03" class="col-sm-5 col-form-label">MUAC (cm)</label>
+                    <div class="col-sm-7">
+                        <input asp-for="MUAC" @bind-value="@formModel.MUAC" class="form-control text-center" type="number" MIN="6.0" MAX="35.0" STEP=".1" id="validationDefault03" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-5 col-form-label">Length/Height (cm)</label>
+                    <div class="col-sm-7">
+                        <input asp-for="LengthHeight"
+                               class="form-control text-center"
+                               type="number"
+                               MIN="45.0" MAX="120.0" STEP=".1"
+                               placeholder="Length/Height (cm)"
+                               required
+                               data-error-msg="Must be 45.0 and 120.0"
+                               @bind-value="@formModel.Height" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="validationDefault05" class="col-sm-5 col-form-label">Triceps skinfold (mm)</label>
+                    <div class="col-sm-7">
+                        <input asp-for="TricepsSkinFold" @bind-value="formModel.TricepsSkinFold" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault05" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="validationDefault06" class="col-sm-5 col-form-label">Subscapular skinfold (mm)</label>
+                    <div class="col-sm-7">
+                        <input asp-for="SubscapularSkinFold" @bind-value="formModel.SubscapularSkinFold" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault06" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 justify-content-center">
+            <button type="submit">Submit</button>
+            @*<button class="btn btn-primary btn-block"
+                type="submit"
+                onclick="displayBusyIndicator()">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" id="loading" style="display:none;"></span>
+                Calculate
+            </button>*@
+        </div>
+    </fieldset>
 
-    </EditForm>
+    <div class="alert alert-info mt-4" role="alert">
+        <p> The BMI for a weight of @formModel.Weight kg and Length/height of @formModel.Height cm is @formModel.BMI.</p>
+        <p> The age is @formModel.AgeString .</p>
+        <p> The WFA Zscore is @formModel.WfaZscore.</p>
+        <p> The WFA Percentile is @formModel.WfaPercentile.</p>
+    </div>
+
+</EditForm>
 

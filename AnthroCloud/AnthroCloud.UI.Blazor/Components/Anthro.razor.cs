@@ -13,6 +13,9 @@ namespace AnthroCloud.UI.Blazor.Components
         [Inject]
         public IAnthroService AnthroService { get; set; }
 
+        [Inject]
+        public IAnthroStatsService AnthroStatsService { get; set; }
+
         public double BMI { get; set; }
 
         public string AgeString { get; set; }
@@ -61,7 +64,7 @@ namespace AnthroCloud.UI.Blazor.Components
             Age = await AnthroService.GetAge(BirthDateString, VisitDateString);            
             AgeString = Age.ToReadableString();
 
-            Tuple<double, double> wfaTuple = await AnthroService.GetWFA(Weight, Age.ToDaysString(), Sex);
+            Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(Weight, Age.ToDaysString(), Sex);
 
             WfaZscore = wfaTuple.Item1; //SetDecimalZero(wfaTuple.Item1);
             WfaPercentile = wfaTuple.Item2; //SetDecimalZero(wfaTuple.Item2);

@@ -38,6 +38,11 @@ namespace AnthroCloud.UI.Blazor
                 client.BaseAddress = new Uri(baseAddressPath);
             });
 
+            services.AddHttpClient<IAnthroStatsService, AnthroStatsService>(client =>
+            {
+                client.BaseAddress = new Uri(baseAddressPath);
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
