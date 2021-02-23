@@ -15,7 +15,7 @@ namespace AnthroCloud.UI.Blazor.Components
             DateOfVisit = DateTime.Today;
             // Sex = 2;
             Weight = 9.00;
-            Height = 73.00;
+            LengthHeight = 73.00;
             AgeString = "11mo";
             AgeInMonths = 12;
             AgeInYears = 0;
@@ -24,8 +24,8 @@ namespace AnthroCloud.UI.Blazor.Components
             MUAC = 15.00;
             TricepsSkinFold = 8.00;
             SubscapularSkinFold = 7.00;
-            //WflPercentile = 61.4;
-            //WflZscore = 0.29;
+            WflPercentile = 61.4;
+            WflZscore = 0.29;
             //WfaPercentile = 51.9;
             //WfaZscore = 0.05;
             //LfaPercentile = 34.8;
@@ -59,7 +59,7 @@ namespace AnthroCloud.UI.Blazor.Components
         [Required]
         [DisplayName("Length/height (cm)")]
         [Range(45.0, 120.0, ErrorMessage = "Weight must be between 45.0 and 120.0.")]
-        public double Height { get; set; } = 73.00;
+        public double LengthHeight { get; set; } = 73.00;
 
         [Required, EnumDataType(typeof(Sexes))]
         public Sexes Sex { get; set; } = Sexes.Female;
@@ -80,6 +80,24 @@ namespace AnthroCloud.UI.Blazor.Components
         public double MUAC { get; set; } = 15.00;
         public double TricepsSkinFold { get; set; } = 8.00;
         public double SubscapularSkinFold { get; set; } = 7.00;
+        public double MuacPercentile { get; set; } //= 74.3;
+        public double MuacZscore { get; set; } //= 0.65;
+        public double WflPercentile { get; set; } //= 61.4;
+        public double WflZscore { get; set; } //= 0.29;
+        public double WfhPercentile { get; set; }
+        public double WfhZscore { get; set; }
+        public double TsfPercentile { get; set; } //= 49.9;
+        public double TsfZscore { get; set; } //= 0.00;
+        public double SsfPercentile { get; set; } //= 65.0;
+        public double SsfZscore { get; set; } //= 0.38;
+        public double LfaPercentile { get; set; } //= 34.8;
+        public double LfaZscore { get; set; } //= -0.39;
+        public double BfaPercentile { get; set; } //= 64.1;
+        public double BfaZscore { get; set; } //= 0.36;
+        public double HcaPercentile { get; set; } //= 53.1;
+        public double HcaZscore { get; set; } //= 0.08;
+        public double HfaPercentile { get; set; } //= 53.1;
+        public double HfaZscore { get; set; } //= 0.08;
         //[Required]
         //[StringLength(10, ErrorMessage = "Name is too long.")]
         //public string Name { get; set; }
