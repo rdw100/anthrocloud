@@ -64,22 +64,26 @@ namespace AnthroCloud.UI.Blazor.Components
         [Required, EnumDataType(typeof(Sexes))]
         public Sexes Sex { get; set; } = Sexes.Female;
 
+        [Required]
+        [DisplayName("Head Circumference (cm)")]
+        public double HeadCircumference { get; set; } = 45.00;
+        [Required]
+        [DisplayName("MUAC (cm)")]
+        public double MUAC { get; set; } = 15.00;
+        [Required]
+        [DisplayName("Triceps skinfold (mm)")]
+        public double TricepsSkinFold { get; set; } = 8.00;
+        [Required]
+        [DisplayName("Subscapular skinfold (mm)")]
+        public double SubscapularSkinFold { get; set; } = 7.00;
         public Age Age { get; set; } //Todo: Move Age to Entities
 
         public string AgeString { get; set; } = "11mo";
-
         public byte AgeInMonths { get; set; } = 12;
-
         public byte AgeInYears { get; set; } = 0;
-
         public double BMI { get; set; } = 16.9;
-
         public double WfaPercentile { get; set; } = 51.9;
         public double WfaZscore { get; set; } = 0.05;
-        public double HeadCircumference { get; set; } = 45.00;
-        public double MUAC { get; set; } = 15.00;
-        public double TricepsSkinFold { get; set; } = 8.00;
-        public double SubscapularSkinFold { get; set; } = 7.00;
         public double MuacPercentile { get; set; } = 74.3;
         public double MuacZscore { get; set; } = 0.65;
         public double WflPercentile { get; set; } = 61.4;
