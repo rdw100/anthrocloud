@@ -98,7 +98,7 @@
                 <div class="form-group row">
                     <label for="validationDefault01" class="col-sm-5 col-form-label">Weight (kg)</label>
                     <div class="col-sm-7">
-                        <INPUT asp-for="Weight" class="form-control text-center" type="number" MIN=".9" MAX="58" STEP=".1" id="validationDefault01" placeholder="Weight" required data-error-msg="Must be 0 and 1">@*SIZE="6"*@
+                        <INPUT asp-for="Weight" class="form-control text-center" type="number" MIN=".9" MAX="58" STEP=".1" id="validationDefault01" placeholder="Weight" required data-error-msg="Must be 0 and 1">
                     </div>
                     <div class="invalid-feedback">
                         Please choose a unique and valid username.
@@ -110,13 +110,13 @@
                 <div class="form-group row">
                     <label for="validationDefault02" class="col-sm-5 col-form-label">Head Circumference (cm)</label>
                     <div class="col-sm-7">
-                        <INPUT asp-for="HeadCircumference" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>@*SIZE="6"*@
+                        <INPUT asp-for="HeadCircumference" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="validationDefault03" class="col-sm-5 col-form-label">MUAC (cm)</label>
                     <div class="col-sm-7">
-                        <INPUT asp-for="MUAC" class="form-control text-center" type="number" MIN="6.0" MAX="35.0" STEP=".1" id="validationDefault03" required>@*SIZE="6"*@
+                        <INPUT asp-for="MUAC" class="form-control text-center" type="number" MIN="6.0" MAX="35.0" STEP=".1" id="validationDefault03" required>
                     </div>
                 </div>
             </div>
@@ -124,19 +124,19 @@
                 <div class="form-group row">
                     <label for="validationDefault04" class="col-sm-5 col-form-label">Length/Height(CM)</label>
                     <div class="col-sm-7">
-                        <INPUT asp-for="LengthHeight" class="form-control text-center" type="number" MIN="45.0" MAX="120.0" STEP=".1" id="validationDefault04" required>@*SIZE="6"*@
+                        <INPUT asp-for="LengthHeight" class="form-control text-center" type="number" MIN="45.0" MAX="120.0" STEP=".1" id="validationDefault04" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="validationDefault05" class="col-sm-5 col-form-label">Triceps skinfold (mm)</label>
                     <div class="col-sm-7">
-                        <INPUT asp-for="TricepsSkinFold" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault05" required>@*SIZE="6"*@
+                        <INPUT asp-for="TricepsSkinFold" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault05" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="validationDefault06" class="col-sm-5 col-form-label">Subscapular skinfold (mm)</label>
                     <div class="col-sm-7">
-                        <INPUT asp-for="SubscapularSkinFold" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault06" required>@*SIZE="6"*@
+                        <INPUT asp-for="SubscapularSkinFold" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault06" required>
                     </div>
                 </div>
             </div>
@@ -356,7 +356,7 @@
                     else
                     {
                         <input type="text" asp-for="BfaPercentile" value="@{ if (Model.BfaPercentile >= 99.9 || Model.BfaPercentile <= .01) { @Html.Raw("NA") } else { @Model.BfaPercentile; } }" class="form-control col-md-2 mr-1 text-center" readonly>
-                        <input type="text" asp-for="BfaZscore" value="@Model.BfaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.BfaZscore)} }" list="tickmarks" readonly>
+                        <input type="text" asp-for="BfaZscore" value="@Model.BfaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @{ if (Model != null) {@getColor(Model.BfaZscore)} }" readonly>
                         <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Percentile" asp-controller="LineChart" asp-action="BFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @{ @Model.AgeInMonths} + '&y=' + @{ @Model.BMI} );return false">
                             <i class="fa fa-line-chart"></i>
                         </a>
