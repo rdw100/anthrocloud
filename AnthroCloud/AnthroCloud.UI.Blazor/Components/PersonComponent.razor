@@ -23,20 +23,3 @@
     </div>
     <input type="submit" class="btn btn-primary" value="Save" />
 </EditForm>
-
-@*@code {
-    Person Person = new Person();
-    string LastSubmitResult;
-
-    void ValidFormSubmitted(EditContext editContext)
-    {
-        Person.LastName = "Smith";
-
-        LastSubmitResult = "OnValidSubmit was executed";
-    }
-
-    void InvalidFormSubmitted(EditContext editContext)
-    {
-        LastSubmitResult = "OnInvalidSubmit was executed";
-    }
-}*@
