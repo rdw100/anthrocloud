@@ -1,6 +1,4 @@
-﻿using AnthroCloud.Business;
-using AnthroCloud.Entities;
-using System;
+﻿using AnthroCloud.Entities;
 using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Services
@@ -9,5 +7,6 @@ namespace AnthroCloud.UI.Blazor.Services
     {
         Task<double> GetBMI(double weight, double height);
         Task<Age> GetAge(string birth, string visit);
+        Task<Outputs> GetScores(Inputs inputs);
     }
 }

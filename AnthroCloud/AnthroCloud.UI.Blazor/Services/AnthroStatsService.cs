@@ -75,7 +75,7 @@ namespace AnthroCloud.UI.Blazor.Services
         // GET: api/Stats/HeadCircumferenceForAge/45.00/365/Male
         public async Task<Tuple<double, double>> GetHCA(double headCircumference, string ageInDays, Sexes sex)
         {
-                        string pathStatsHCA = "Stats/HeadCircumferenceForAge/" + headCircumference + "/" + ageInDays + "/" + sex;
+            string pathStatsHCA = "Stats/HeadCircumferenceForAge/" + headCircumference + "/" + ageInDays + "/" + sex;
             var responseStatsHCA = await httpClient.GetAsync(pathStatsHCA);
             string resStatsHCA = "";
 
@@ -93,7 +93,7 @@ namespace AnthroCloud.UI.Blazor.Services
         // GET: api/Stats/HeightForAge/96.00/1095/Male
         public async Task<Tuple<double, double>> GetHFA(double height, string ageInDays, Sexes sex)
         {
-                        string pathStatsHFA = "Stats/HeightForAge/" + height + "/" + ageInDays + "/" + sex;
+            string pathStatsHFA = "Stats/HeightForAge/" + height + "/" + ageInDays + "/" + sex;
             var responseStatsHFA = await httpClient.GetAsync(pathStatsHFA);
             string resStatsHFA = "";
 
@@ -111,7 +111,7 @@ namespace AnthroCloud.UI.Blazor.Services
         // GET: api/Stats/LengthForAge/73.00/365/Sex.Male
         public async Task<Tuple<double, double>> GetLFA(double length, string ageInDays, Sexes sex)
         {
-                        string pathStatsLFA = "Stats/LengthForAge/" + length + "/" + ageInDays + "/" + sex;
+            string pathStatsLFA = "Stats/LengthForAge/" + length + "/" + ageInDays + "/" + sex;
             var responseStatsLFA = await httpClient.GetAsync(pathStatsLFA);
             string resStatsLFA = "";
 
@@ -129,7 +129,7 @@ namespace AnthroCloud.UI.Blazor.Services
         // GET: api/Stats/SubscapularSkinfoldForAge/7.00/365/Male
         public async Task<Tuple<double, double>> GetSFA(double subScapularSkinfold, string ageInDays, Sexes sex)
         {
-                        string pathStatsSFA = "Stats/SubscapularSkinfoldForAge/" + subScapularSkinfold + "/" + ageInDays + "/" + sex;
+            string pathStatsSFA = "Stats/SubscapularSkinfoldForAge/" + subScapularSkinfold + "/" + ageInDays + "/" + sex;
             var responseStatsSFA = await httpClient.GetAsync(pathStatsSFA);
             string resStatsSFA = "";
 
@@ -147,7 +147,7 @@ namespace AnthroCloud.UI.Blazor.Services
         // GET: api/Stats/TricepsSkinfoldForAge/8.00/365/Male
         public async Task<Tuple<double, double>> GetTFA(double tricepsSkinfold, string ageInDays, Sexes sex)
         {
-                        string pathStatsTFA = "Stats/TricepsSkinfoldForAge/" + tricepsSkinfold + "/" + ageInDays + "/" + sex;
+            string pathStatsTFA = "Stats/TricepsSkinfoldForAge/" + tricepsSkinfold + "/" + ageInDays + "/" + sex;
             var responseStatsTFA = await httpClient.GetAsync(pathStatsTFA);
             string resStatsTFA = "";
 
@@ -165,7 +165,7 @@ namespace AnthroCloud.UI.Blazor.Services
         // GET: api/Stats/WeightForHeight/14.00/96.00/Male
         public async Task<Tuple<double, double>> GetWFH(double weight, double height, Sexes sex)
         {
-                        string pathStatsWFH = "Stats/WeightForHeight/" + weight + "/" + height + "/" + sex;
+            string pathStatsWFH = "Stats/WeightForHeight/" + weight + "/" + height + "/" + sex;
             var responseStatsWFH = await httpClient.GetAsync(pathStatsWFH);
             string resStatsWFH = "";
 
@@ -183,7 +183,7 @@ namespace AnthroCloud.UI.Blazor.Services
         // GET: api/Stats/WeightForLength/9.00/73.00/Male
         public async Task<Tuple<double, double>> GetWFL(double weight, double height, Sexes sex)
         {
-                        string pathStatsWFL = "Stats/WeightForLength/" + weight + "/" + height + "/" + sex;
+            string pathStatsWFL = "Stats/WeightForLength/" + weight + "/" + height + "/" + sex;
             var responseStatsWFL = await httpClient.GetAsync(pathStatsWFL);
             string resStatsWFL = "";
 
@@ -196,6 +196,18 @@ namespace AnthroCloud.UI.Blazor.Services
 
             var wflTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsWFL);
             return wflTuple;
+        }
+
+        public async Task<Outputs> GetScores(Inputs inputs)
+        {
+            string stringData = JsonConvert.SerializeObject(inputs);
+            var contentData = new StringContent(stringData,
+                System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await httpClient.PutAsync
+                ("Stats", contentData);
+            string result = response.Content.ReadAsStringAsync().Result;
+            var outputs = JsonConvert.DeserializeObject<Outputs>(result);
+            return outputs;
         }
     }
 }

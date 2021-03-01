@@ -16,5 +16,6 @@ namespace AnthroCloud.UI.Blazor.Services
         Task<Tuple<double, double>> GetTFA(double tricepsSkinfold, string ageInDays, Sexes sex);
         Task<Tuple<double, double>> GetWFH(double weight, double height, Sexes sex);
         Task<Tuple<double, double>> GetWFL(double weight, double length, Sexes sex);
+        Task<Outputs> GetScores(Inputs inputs);
     }
 }

@@ -15,9 +15,11 @@ namespace AnthroCloud.Entities
     /// </remarks>
     public enum Sexes : byte
     {
-        Unknown = 0,
-        Male = 1,
-        Female = 2,
-        Unapplicable = 9
+        Male = 0,
+        Female = 1,
+        //Unknown = 0,
+        //Male = 1,
+        //Female = 2,
+        //Unapplicable = 9
     }
 }

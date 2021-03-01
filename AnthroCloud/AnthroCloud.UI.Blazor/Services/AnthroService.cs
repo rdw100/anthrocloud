@@ -1,5 +1,6 @@
-﻿using AnthroCloud.Business;
+﻿//using AnthroCloud.Business;
 using AnthroCloud.Entities;
+using AnthroCloud.UI.Blazor.Components;
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -45,6 +46,19 @@ namespace AnthroCloud.UI.Blazor.Services
 
             return await JsonSerializer.DeserializeAsync
                 <Age>(responseStream);
+        }
+
+        public async Task<Outputs> GetScores(Inputs inputs)
+        {
+            HttpResponseMessage response = await httpClient.PutAsJsonAsync(
+                $"STATS/", inputs);
+            response.EnsureSuccessStatusCode();
+
+            // Deserialize the updated product from the response body.
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+
+            return await JsonSerializer.DeserializeAsync
+                <Outputs>(responseStream);
         }
     }
 }
