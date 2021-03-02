@@ -203,7 +203,7 @@ namespace AnthroCloud.UI.Blazor.Services
             string stringData = JsonConvert.SerializeObject(inputs);
             var contentData = new StringContent(stringData,
                 System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await httpClient.PutAsync
+            HttpResponseMessage response = await httpClient.PostAsync
                 ("Stats", contentData);
             string result = response.Content.ReadAsStringAsync().Result;
             var outputs = JsonConvert.DeserializeObject<Outputs>(result);

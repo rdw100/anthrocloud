@@ -7,7 +7,6 @@ namespace AnthroCloud.Entities
     /// <summary>
     /// Represents all calculator inputs necessary for computed statistics.
     /// </summary>
-    /// <remarks>Move to entities.</remarks>
     public class Inputs
     {
         [Required]
@@ -48,7 +47,7 @@ namespace AnthroCloud.Entities
         public double SubscapularSkinFold { get; set; } = 7.00;
 
         public bool Oedema { get; set; } = false;
-        public Age Age { get; set; } //Todo: Move Age to Entities
+        public Age Age { get; set; }
         public string AgeString { get; set; } = "11mo";
         public byte AgeInMonths { get; set; } = 12;
         public byte AgeInYears { get; set; } = 0;

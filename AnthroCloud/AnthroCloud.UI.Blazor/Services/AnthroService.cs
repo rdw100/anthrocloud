@@ -50,15 +50,11 @@ namespace AnthroCloud.UI.Blazor.Services
 
         public async Task<Outputs> GetScores(Inputs inputs)
         {
-            HttpResponseMessage response = await httpClient.PutAsJsonAsync(
-                $"STATS/", inputs);
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                $"STATS", inputs);
             response.EnsureSuccessStatusCode();
 
-            // Deserialize the updated product from the response body.
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-
-            return await JsonSerializer.DeserializeAsync
-                <Outputs>(responseStream);
+            return await response.Content.ReadFromJsonAsync<Outputs>();
         }
     }
 }

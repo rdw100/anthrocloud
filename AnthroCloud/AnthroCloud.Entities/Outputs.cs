@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AnthroCloud.Entities
+﻿namespace AnthroCloud.Entities
 {
+    /// <summary>
+    /// Represents all calculator outputs from computed statistics.
+    /// </summary>
     public class Outputs
     {
         public double WflPercentile { get; set; } = 61.4;

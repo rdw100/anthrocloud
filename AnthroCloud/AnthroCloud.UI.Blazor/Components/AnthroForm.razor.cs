@@ -42,7 +42,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
                     formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeight);
 
-                    formModel.FormOutputs = await AnthroStatsService.GetScores(formModel.FormInputs);                    
+                    formModel.FormOutputs = await AnthroService.GetScores(formModel.FormInputs);
                 }
                 else
                 {
@@ -73,44 +73,44 @@ namespace AnthroCloud.UI.Blazor.Components
                     formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeight);  
 
                     Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(formModel.FormInputs.Weight, formModel.FormInputs.Age.TotalDays.ToString(), formModel.FormInputs.Sex);
-                    formModel.WfaZscore = wfaTuple.Item1;
-                    formModel.WfaPercentile = wfaTuple.Item2;
+                    formModel.FormOutputs.WfaZscore = wfaTuple.Item1;
+                    formModel.FormOutputs.WfaPercentile = wfaTuple.Item2;
 
                     Tuple<double, double> muacTuple = await AnthroStatsService.GetMUAC(formModel.FormInputs.MUAC, formModel.FormInputs.Age.TotalDays.ToString(), formModel.FormInputs.Sex);
-                    formModel.MuacZscore = muacTuple.Item1;
-                    formModel.MuacPercentile = muacTuple.Item2;
+                    formModel.FormOutputs.MuacZscore = muacTuple.Item1;
+                    formModel.FormOutputs.MuacPercentile = muacTuple.Item2;
 
                     Tuple<double, double> bfaTuple = await AnthroStatsService.GetBFA(formModel.FormInputs.BMI, formModel.FormInputs.Age.TotalDays.ToString(), formModel.FormInputs.Sex);
-                    formModel.BfaZscore = bfaTuple.Item1;
-                    formModel.BfaPercentile = bfaTuple.Item2;
+                    formModel.FormOutputs.BfaZscore = bfaTuple.Item1;
+                    formModel.FormOutputs.BfaPercentile = bfaTuple.Item2;
 
                     Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(formModel.FormInputs.HeadCircumference, formModel.FormInputs.Age.TotalDays.ToString(), formModel.FormInputs.Sex);
-                    formModel.HcaZscore = hcaTuple.Item1;
-                    formModel.HcaPercentile = hcaTuple.Item2;
+                    formModel.FormOutputs.HcaZscore = hcaTuple.Item1;
+                    formModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
 
                     Tuple<double, double> hfaTuple = await AnthroStatsService.GetHFA(formModel.FormInputs.LengthHeight, formModel.FormInputs.Age.TotalDays.ToString(), formModel.FormInputs.Sex);
-                    formModel.HfaZscore = hfaTuple.Item1;
-                    formModel.HfaPercentile = hfaTuple.Item2;
+                    formModel.FormOutputs.HfaZscore = hfaTuple.Item1;
+                    formModel.FormOutputs.HfaPercentile = hfaTuple.Item2;
 
                     Tuple<double, double> lfaTuple = await AnthroStatsService.GetLFA(formModel.FormInputs.LengthHeight, formModel.FormInputs.Age.TotalDays.ToString(), formModel.FormInputs.Sex);
-                    formModel.LfaZscore = lfaTuple.Item1;
-                    formModel.LfaPercentile = lfaTuple.Item2;
+                    formModel.FormOutputs.LfaZscore = lfaTuple.Item1;
+                    formModel.FormOutputs.LfaPercentile = lfaTuple.Item2;
 
                     Tuple<double, double> sfaTuple = await AnthroStatsService.GetSFA(formModel.FormInputs.SubscapularSkinFold, formModel.FormInputs.Age.TotalDays.ToString(), formModel.FormInputs.Sex);
-                    formModel.SsfZscore = sfaTuple.Item1;
-                    formModel.SsfPercentile = sfaTuple.Item2;
+                    formModel.FormOutputs.SsfZscore = sfaTuple.Item1;
+                    formModel.FormOutputs.SsfPercentile = sfaTuple.Item2;
 
                     Tuple<double, double> tfaTuple = await AnthroStatsService.GetTFA(formModel.FormInputs.TricepsSkinFold, formModel.FormInputs.Age.TotalDays.ToString(), formModel.FormInputs.Sex);
-                    formModel.TsfZscore = tfaTuple.Item1;
-                    formModel.TsfPercentile = tfaTuple.Item2;
+                    formModel.FormOutputs.TsfZscore = tfaTuple.Item1;
+                    formModel.FormOutputs.TsfPercentile = tfaTuple.Item2;
 
                     Tuple<double, double> wfhTuple = await AnthroStatsService.GetWFH(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeight, formModel.FormInputs.Sex);
-                    formModel.WfhZscore = wfhTuple.Item1;
-                    formModel.WfhPercentile = wfhTuple.Item2;
+                    formModel.FormOutputs.WfhZscore = wfhTuple.Item1;
+                    formModel.FormOutputs.WfhPercentile = wfhTuple.Item2;
 
                     Tuple<double, double> wflTuple = await AnthroStatsService.GetWFL(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeight, formModel.FormInputs.Sex);
-                    formModel.WflZscore = wflTuple.Item1;
-                    formModel.WflPercentile = wflTuple.Item2;
+                    formModel.FormOutputs.WflZscore = wflTuple.Item1;
+                    formModel.FormOutputs.WflPercentile = wflTuple.Item2;
                 }
                 else
                 {
@@ -123,7 +123,7 @@ namespace AnthroCloud.UI.Blazor.Components
             }
         }
 
-        public string setColor(double zscore)
+        public string SetColor(double zscore)
         {
             var colorCode = zscore switch
             {
@@ -136,7 +136,7 @@ namespace AnthroCloud.UI.Blazor.Components
             return colorCode;
         }
 
-        public string setPercentileRange(double measure)
+        public string SetPercentileRange(double measure)
         {
             string result = string.Empty;
 
@@ -152,7 +152,7 @@ namespace AnthroCloud.UI.Blazor.Components
             return result;
         }
 
-        public string setRangeControl(double measure, byte ageInYears, byte ageInMonths)
+        public string SetRangeControl(double measure, byte ageInYears, byte ageInMonths)
         {
             string result = string.Empty;
 
@@ -168,7 +168,7 @@ namespace AnthroCloud.UI.Blazor.Components
             return result;
         }
 
-        public string setPercText(double measure, byte ageInYears, byte ageInMonths)
+        public string SetPercText(double measure, byte ageInYears, byte ageInMonths)
         {
             string result = string.Empty;
 
@@ -184,7 +184,7 @@ namespace AnthroCloud.UI.Blazor.Components
             return result;
         }
 
-        public string setZscoreText(double measure, byte ageInYears, byte ageInMonths)
+        public string SetZscoreText(double measure, byte ageInYears, byte ageInMonths)
         {
             string result = string.Empty;
 

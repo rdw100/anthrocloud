@@ -28,7 +28,7 @@
 
 <h3>AnthroForm</h3>
 
-<EditForm EditContext="@editContext" OnValidSubmit="@HandleValidSubmitAsync">
+<EditForm EditContext="@editContext" OnValidSubmit="@HandleSubmitAsync">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -208,11 +208,11 @@
                 <div class="form-group col-md-6">
                     <div class="form-group row mb-0">
                         <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Length</label>
-                        <input id="WflPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WflPercentile" type="range" min="0" max="100" step=".1" title="@formModel.WflPercentile" value="@formModel.WflPercentile" list="tickmarks" disabled />
+                        <input id="WflPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WflPercentile" type="range" min="0" max="100" step=".1" title="@formModel.FormOutputs.WflPercentile" value="@formModel.FormOutputs.WflPercentile" list="tickmarks" disabled />
                         @if (formModel != null && formModel.FormInputs.Oedema == true)
                         {
                             <input type="text" asp-for="WflPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
-                            <input type="text" asp-for="WflZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @setColor(formModel.WflZscore)" readonly>
+                            <input type="text" asp-for="WflZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @setColor(formModel.FormOutputs.WflZscore)" readonly>
                             <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-length Percentile" asp-controller="LineChart" asp-action="WFL_P" onclick="return true">
                                 <span class="oi oi-graph" aria-hidden="true"></span>
                             </a>
@@ -222,8 +222,8 @@
                         }
                         else
                         {
-                            <input type="text" asp-for="WflPercentile" value="@setPercentileRange(@formModel.WflPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
-                            <input type="text" asp-for="WflZscore" value="@formModel.WflZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @setColor(formModel.WflZscore)" readonly>
+                            <input type="text" asp-for="WflPercentile" value="@setPercentileRange(@formModel.FormOutputs.WflPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
+                            <input type="text" asp-for="WflZscore" value="@formModel.FormOutputs.WflZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @setColor(formModel.FormOutputs.WflZscore)" readonly>
                             <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-length Percentile" asp-controller="LineChart" asp-action="WFL_P" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @formModel.FormInputs.LengthHeight + '&y=' + @formModel.FormInputs.Weight);return false">
                                 <span class="oi oi-graph" aria-hidden="true"></span>
                             </a>
@@ -240,11 +240,11 @@
                 <div class="form-group col-md-6">
                     <div class="form-group row mb-0">
                         <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Height</label>
-                        <input id="WfhPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WfhPercentile" type="range" min="0" max="100" step=".1" title="@formModel.WfhPercentile" value="@formModel.WfhPercentile" list="tickmarks" disabled />
+                        <input id="WfhPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WfhPercentile" type="range" min="0" max="100" step=".1" title="@formModel.FormOutputs.WfhPercentile" value="@formModel.FormOutputs.WfhPercentile" list="tickmarks" disabled />
                         @if (formModel != null && formModel.FormInputs.Oedema == true)
                         {
                             <input type="text" asp-for="WfhPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
-                            <input type="text" asp-for="WfhZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @setColor(formModel.WfhZscore)" readonly>
+                            <input type="text" asp-for="WfhZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @setColor(formModel.FormOutputs.WfhZscore)" readonly>
                             <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-height Percentile" asp-controller="LineChart" asp-action="WFH_P" onclick="return false">
                                 <span class="oi oi-graph" aria-hidden="true"></span>
                             </a>
@@ -254,8 +254,8 @@
                         }
                         else
                         {
-                            <input type="text" asp-for="WfhPercentile" value="@setPercentileRange(@formModel.WfhPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
-                            <input type="text" asp-for="WfhZscore" value="@formModel.WfhZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @setColor(formModel.WfhZscore)" readonly>
+                            <input type="text" asp-for="WfhPercentile" value="@setPercentileRange(@formModel.FormOutputs.WfhPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
+                            <input type="text" asp-for="WfhZscore" value="@formModel.FormOutputs.WfhZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @setColor(formModel.FormOutputs.WfhZscore)" readonly>
                             <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-height Percentile" asp-controller="LineChart" asp-action="WFH_P" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @formModel.FormInputs.LengthHeight + '&y=' + @formModel.FormInputs.Weight);return false">
                                 <span class="oi oi-graph" aria-hidden="true"></span>
                             </a>
@@ -269,9 +269,9 @@
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="col-md-3 mt-1 mr-1">HC-for-age</label>
-                    <input id="HcaPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="HcaPercentile" type="range" min="0" max="100" step=".1" title="@formModel.HcaPercentile" value="@formModel.HcaPercentile" list="tickmarks" disabled />
-                    <input type="text" asp-for="HcaPercentile" value="@setPercentileRange(@formModel.HcaPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
-                    <input type="text" asp-for="HcaZscore" value="@formModel.HcaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @setColor(formModel.HcaZscore)" readonly>
+                    <input id="HcaPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="HcaPercentile" type="range" min="0" max="100" step=".1" title="@formModel.FormOutputs.HcaPercentile" value="@formModel.FormOutputs.HcaPercentile" list="tickmarks" disabled />
+                    <input type="text" asp-for="HcaPercentile" value="@setPercentileRange(@formModel.FormOutputs.HcaPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
+                    <input type="text" asp-for="HcaZscore" value="@formModel.FormOutputs.HcaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @setColor(formModel.FormOutputs.HcaZscore)" readonly>
                     <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Head Circumference Percentile" asp-controller="LineChart" asp-action="HCA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @formModel.FormInputs.AgeInMonths + '&y=' + @formModel.FormInputs.HeadCircumference);return false">
                         <span class="oi oi-graph" aria-hidden="true"></span>
                     </a>
@@ -284,11 +284,11 @@
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Age</label>
-                    <input id="WfaPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WfaPercentile" type="range" min="0" max="100" step=".1" title="@formModel.WfaPercentile" value="@formModel.WfaPercentile" list="tickmarks" disabled />
+                    <input id="WfaPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WfaPercentile" type="range" min="0" max="100" step=".1" title="@formModel.FormOutputs.WfaPercentile" value="@formModel.FormOutputs.WfaPercentile" list="tickmarks" disabled />
                     @if (formModel != null && formModel.FormInputs.Oedema == true)
                     {
                         <input type="text" asp-for="WfaPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
-                        <input type="text" asp-for="WfaZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @setColor(formModel.WfaZscore)" readonly>
+                        <input type="text" asp-for="WfaZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @setColor(formModel.FormOutputs.WfaZscore)" readonly>
                         <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="Weight-for-age Percentile" asp-controller="LineChart" asp-action="WFA_P" onclick="return false">
                             <span class="oi oi-graph" aria-hidden="true"></span>
                         </a>
@@ -298,8 +298,8 @@
                     }
                     else
                     {
-                        <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaPercentile" value="@setPercentileRange(@formModel.WfaPercentile)" readonly>
-                        <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaZscore" value="@formModel.WfaZscore.ToString("0.00")" style="background-color: @setColor(formModel.WfaZscore)" readonly>
+                        <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaPercentile" value="@setPercentileRange(@formModel.FormOutputs.WfaPercentile)" readonly>
+                        <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaZscore" value="@formModel.FormOutputs.WfaZscore.ToString("0.00")" style="background-color: @setColor(formModel.FormOutputs.WfaZscore)" readonly>
                         <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-age Percentile" asp-controller="LineChart" asp-action="WFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @formModel.FormInputs.AgeInMonths + '&y=' + @formModel.FormInputs.Weight);return false">
                             <span class="oi oi-graph" aria-hidden="true"></span>
                         </a>
@@ -312,9 +312,9 @@
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">MUAC-for-age</label>
-                    <input id="MuacPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="MuacPercentile" type="range" min="0" max="100" step=".1" title="@setRangeControl(@formModel.MuacPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" value="@setRangeControl(@formModel.MuacPercentile, @formModel.FormInputs.AgeInYears, @formModel.FormInputs.AgeInMonths)" list="tickmarks" disabled />
-                    <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacPercentile" value="@setPercText(@formModel.MuacPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" readonly>
-                    <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacZscore" value="@setZscoreText(@formModel.MuacZscore,@formModel.FormInputs.AgeInYears, @formModel.FormInputs.AgeInMonths)" style="background-color: @setColor(formModel.MuacZscore)" readonly>
+                    <input id="MuacPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="MuacPercentile" type="range" min="0" max="100" step=".1" title="@setRangeControl(@formModel.FormOutputs.MuacPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" value="@setRangeControl(@formModel.FormOutputs.MuacPercentile, @formModel.FormInputs.AgeInYears, @formModel.FormInputs.AgeInMonths)" list="tickmarks" disabled />
+                    <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacPercentile" value="@setPercText(@formModel.FormOutputs.MuacPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" readonly>
+                    <input class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacZscore" value="@setZscoreText(@formModel.FormOutputs.MuacZscore,@formModel.FormInputs.AgeInYears, @formModel.FormInputs.AgeInMonths)" style="background-color: @setColor(formModel.FormOutputs.MuacZscore)" readonly>
                     <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="MUAC Percentile" asp-controller="LineChart" asp-action="MUAC_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @formModel.FormInputs.AgeInMonths + '&y=' + @formModel.FormInputs.MUAC );return false">
                         <span class="oi oi-graph" aria-hidden="true"></span>
                     </a>
@@ -327,9 +327,9 @@
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">Length-for-Age</label>
-                    <input id="LfaPercentileRange" class="form-control-range  col-md-2 mr-1 ml-1" asp-for="LfaPercentile" type="range" min="0" max="100" step=".1" title="@formModel.LfaPercentile" value="@formModel.LfaPercentile" list="tickmarks" disabled />
-                    <input type="text" asp-for="LfaPercentile" value="@setPercText(@formModel.LfaPercentile,@formModel.FormInputs.AgeInYears, @formModel.FormInputs.AgeInMonths)" class="form-control col-md-2 mr-1 text-center" readonly>
-                    <input type="text" asp-for="LfaZscore" value="@formModel.LfaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @setColor(formModel.LfaZscore)" readonly>
+                    <input id="LfaPercentileRange" class="form-control-range  col-md-2 mr-1 ml-1" asp-for="LfaPercentile" type="range" min="0" max="100" step=".1" title="@formModel.FormOutputs.LfaPercentile" value="@formModel.FormOutputs.LfaPercentile" list="tickmarks" disabled />
+                    <input type="text" asp-for="LfaPercentile" value="@setPercText(@formModel.FormOutputs.LfaPercentile,@formModel.FormInputs.AgeInYears, @formModel.FormInputs.AgeInMonths)" class="form-control col-md-2 mr-1 text-center" readonly>
+                    <input type="text" asp-for="LfaZscore" value="@formModel.FormOutputs.LfaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @setColor(formModel.FormOutputs.LfaZscore)" readonly>
                     <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Length/Height-for-age Percentile" asp-controller="LineChart" asp-action="LHFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @formModel.FormInputs.AgeInMonths + '&y=' + @formModel.FormInputs.LengthHeight);return false">
                         <span class="oi oi-graph" aria-hidden="true"></span>
                     </a>
@@ -341,9 +341,9 @@
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">TSF-for-age</label>
-                    <input id="TsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="TsfPercentile" type="range" min="0" max="100" step=".1" title="@setRangeControl(@formModel.TsfPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" value="@setRangeControl(@formModel.TsfPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" list="tickmarks" disabled />
-                    <input type="text" asp-for="TsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@setPercText(@formModel.TsfPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" readonly>
-                    <input type="text" asp-for="TsfZscore" class="form-control col-md-2 mr-1 text-center" value="@setZscoreText(@formModel.TsfZscore,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" style="background-color: @setColor(formModel.TsfZscore)" readonly>
+                    <input id="TsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="TsfPercentile" type="range" min="0" max="100" step=".1" title="@setRangeControl(@formModel.FormOutputs.TsfPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" value="@setRangeControl(@formModel.FormOutputs.TsfPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" list="tickmarks" disabled />
+                    <input type="text" asp-for="TsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@setPercText(@formModel.FormOutputs.TsfPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" readonly>
+                    <input type="text" asp-for="TsfZscore" class="form-control col-md-2 mr-1 text-center" value="@setZscoreText(@formModel.FormOutputs.TsfZscore,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" style="background-color: @setColor(formModel.FormOutputs.TsfZscore)" readonly>
                     <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Triceps Skinfold Percentile" asp-controller="LineChart" asp-action="TSF_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @formModel.FormInputs.AgeInMonths + '&y=' + @formModel.FormInputs.TricepsSkinFold);return false">
                         <span class="oi oi-graph" aria-hidden="true"></span>
                     </a>
@@ -364,11 +364,11 @@
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">BMI-for-Age</label>
-                    <input id="BfaPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="BfaPercentile" type="range" min="0" max="100" step="25" title="@formModel.BfaPercentile" value="@formModel.BfaPercentile" list="tickmarks" disabled />
+                    <input id="BfaPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="BfaPercentile" type="range" min="0" max="100" step="25" title="@formModel.FormOutputs.BfaPercentile" value="@formModel.FormOutputs.BfaPercentile" list="tickmarks" disabled />
                     @if (formModel != null && formModel.FormInputs.Oedema == true)
                     {
                         <input type="text" asp-for="BfaPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
-                        <input type="text" asp-for="BfaZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @setColor(formModel.BfaZscore)" readonly>
+                        <input type="text" asp-for="BfaZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @setColor(formModel.FormOutputs.BfaZscore)" readonly>
                         <a class="btn btn-outline-secondary col-md-1 mr-1 disabled" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Percentile" asp-controller="LineChart" asp-action="BFA_P" onclick="return false">
                             <span class="oi oi-graph" aria-hidden="true"></span>
                         </a>
@@ -378,8 +378,8 @@
                     }
                     else
                     {
-                        <input type="text" asp-for="BfaPercentile" value="@setPercText(@formModel.BfaPercentile,@formModel.FormInputs.AgeInYears, @formModel.FormInputs.AgeInMonths)" class="form-control col-md-2 mr-1 text-center" readonly>
-                        <input type="text" asp-for="BfaZscore" class="form-control col-md-2 mr-1 text-center" value="@formModel.BfaZscore.ToString("0.00")" style="background-color: @setColor(formModel.BfaZscore)" readonly>
+                        <input type="text" asp-for="BfaPercentile" value="@setPercText(@formModel.FormOutputs.BfaPercentile,@formModel.FormInputs.AgeInYears, @formModel.FormInputs.AgeInMonths)" class="form-control col-md-2 mr-1 text-center" readonly>
+                        <input type="text" asp-for="BfaZscore" class="form-control col-md-2 mr-1 text-center" value="@formModel.FormOutputs.BfaZscore.ToString("0.00")" style="background-color: @setColor(formModel.FormOutputs.BfaZscore)" readonly>
                         <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="BMI-for-Age Percentile" asp-controller="LineChart" asp-action="BFA_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @formModel.FormInputs.AgeInMonths + '&y=' + @formModel.FormInputs.BMI);return false">
                             <span class="oi oi-graph" aria-hidden="true"></span>
                         </a>
@@ -392,9 +392,9 @@
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">SSF-for-age</label>
-                    <input id="SsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="SsfPercentile" type="range" min="0" max="100" step="25" title="@setRangeControl(@formModel.SsfPercentile,@formModel.FormInputs.AgeInYears, @formModel.FormInputs.AgeInMonths)" value="@setRangeControl(@formModel.SsfPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" list="tickmarks" disabled />
-                    <input type="text" asp-for="SsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@setPercText(@formModel.SsfPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" readonly>
-                    <input type="text" asp-for="SsfZscore" class="form-control col-md-2 mr-1 text-center" value="@setZscoreText(@formModel.SsfZscore,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" style="background-color: @setColor(formModel.SsfZscore)" readonly>
+                    <input id="SsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="SsfPercentile" type="range" min="0" max="100" step="25" title="@setRangeControl(@formModel.FormOutputs.SsfPercentile,@formModel.FormInputs.AgeInYears, @formModel.FormInputs.AgeInMonths)" value="@setRangeControl(@formModel.FormOutputs.SsfPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" list="tickmarks" disabled />
+                    <input type="text" asp-for="SsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@setPercText(@formModel.FormOutputs.SsfPercentile,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" readonly>
+                    <input type="text" asp-for="SsfZscore" class="form-control col-md-2 mr-1 text-center" value="@setZscoreText(@formModel.FormOutputs.SsfZscore,@formModel.FormInputs.AgeInYears,@formModel.FormInputs.AgeInMonths)" style="background-color: @setColor(formModel.FormOutputs.SsfZscore)" readonly>
                     <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Subscapular Skinfold Percentile" asp-controller="LineChart" asp-action="SSF_P" onclick="basicPopup(this.href + '?s=' + getRadioValue() + '&x=' + @formModel.FormInputs.AgeInMonths + '&y=' + @formModel.FormInputs.SubscapularSkinFold );return false">
                         <span class="oi oi-graph" aria-hidden="true"></span>
                     </a>
