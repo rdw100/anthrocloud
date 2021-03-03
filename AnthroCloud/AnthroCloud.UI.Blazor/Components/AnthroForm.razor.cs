@@ -20,6 +20,8 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public bool loadFailed;
 
+        public string ExecutionTime;
+
         protected override void OnInitialized()
         {
             editContext = new EditContext(formModel);
@@ -27,6 +29,8 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected async Task HandleSubmitAsync()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             var isValid = editContext.Validate();
 
             try
@@ -53,10 +57,15 @@ namespace AnthroCloud.UI.Blazor.Components
             {
                 loadFailed = true;
             }
+
+            watch.Stop();
+            ExecutionTime = "- Button 1 - " + watch.ElapsedMilliseconds;
         }
 
         protected async Task HandleValidSubmitAsync()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             var isValid = editContext.Validate();
             
             try
@@ -121,6 +130,9 @@ namespace AnthroCloud.UI.Blazor.Components
             {
                 loadFailed = true;
             }
+
+            watch.Stop();
+            ExecutionTime = "- Button 2 - " + watch.ElapsedMilliseconds;
         }
 
         public string SetColor(double zscore)
