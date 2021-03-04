@@ -123,5 +123,30 @@
         </reference>
       </references>
     </layer>
+    <layer Id="f9a20ff7-c45d-43b5-8084-2c6ce2c7f4ac" name="AnthroCloud.UI.Blazor">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="98979e0a-7faa-46ba-8985-6daae9f0f8ae" direction="Forward">
+          <layerMoniker Id="f471a5c1-9a7f-4eb9-a5b0-cb4917fb213f" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="9ce5bf33-b2a4-4fe6-8970-baadf5bae822" direction="Forward">
+          <layerMoniker Id="7c7b2b57-3d41-4d48-a2cd-1ecd7f6982d5" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="efb53e1d-65c2-4f4d-88dc-f0ca5d3fb7a6" direction="Forward">
+          <layerMoniker Id="131ee222-9a4f-4dad-abaf-d8db89662d1f" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="1d35efa9-0142-4624-b984-d31fb99df24f" name="AnthroCloud.UI.Blazor">
+          <ArtifactNode Label="AnthroCloud.UI.Blazor" Category="CodeSchema_Project" Id="(Assembly=../AnthroCloud.UI.Blazor/AnthroCloud.UI.Blazor.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=AnthroCloud.UI.Blazor)" Label="AnthroCloud.UI.Blazor.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
   </layers>
 </layerModel>
