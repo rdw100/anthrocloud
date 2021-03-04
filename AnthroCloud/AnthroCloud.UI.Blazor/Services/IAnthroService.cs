@@ -8,5 +8,6 @@ namespace AnthroCloud.UI.Blazor.Services
         Task<double> GetBMI(double weight, double height);
         Task<Age> GetAge(string birth, string visit);
         Task<Outputs> GetScores(Inputs inputs);
+        Task<Outputs> GetMeasuredScores(Inputs inputs);
     }
 }

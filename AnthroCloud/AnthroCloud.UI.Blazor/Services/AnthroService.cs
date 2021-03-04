@@ -56,5 +56,14 @@ namespace AnthroCloud.UI.Blazor.Services
 
             return await response.Content.ReadFromJsonAsync<Outputs>();
         }
+
+        public async Task<Outputs> GetMeasuredScores(Inputs inputs)
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                $"STATS/MEASURED", inputs);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<Outputs>();
+        }
     }
 }

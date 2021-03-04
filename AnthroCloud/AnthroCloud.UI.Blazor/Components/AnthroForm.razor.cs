@@ -27,6 +27,36 @@ namespace AnthroCloud.UI.Blazor.Components
             editContext = new EditContext(formModel);
         }
 
+        protected async Task HandleMeasuredAsync()
+        {
+            var isValid = editContext.Validate();
+
+            try
+            {
+                loadFailed = false;
+                if (isValid)
+                {
+                    string BirthDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfBirth);
+                    string VisitDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfVisit);
+
+                    formModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+                    formModel.FormInputs.AgeString = formModel.FormInputs.Age.ToReadableString().ToString();
+
+                    formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
+
+                    formModel.FormOutputs = await AnthroService.GetMeasuredScores(formModel.FormInputs);
+                }
+                else
+                {
+                    loadFailed = true;
+                }
+            }
+            catch (Exception)
+            {
+                loadFailed = true;
+            }
+        }
+
         protected async Task HandleSubmitAsync()
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();

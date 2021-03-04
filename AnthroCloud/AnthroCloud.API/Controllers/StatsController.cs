@@ -85,5 +85,45 @@ namespace AnthroCloud.API.Controllers
 
             return outputs;
         }
+
+        /// <summary>
+        /// Represents length height measured change to calculator inputs necessary for computed statistics.
+        /// </summary>
+        /// <param name="inputs">Represents all calculator inputs necessary for computed statistics.</param>
+        /// <returns>Represents all calculator outputs from computed statistics.</returns>
+        /// <remarks>Note that the difference between recumbent length and stature for this calculator is 
+        /// 0.7 cm.</remarks>
+        [HttpPost("MEASURED")]
+        public async Task<Outputs> GetMeasuredScores([FromBody] Inputs inputs)
+        {
+            Outputs outputs = new Outputs();
+            Stats stats = new Stats();
+
+            Tuple<double, double> wfaTuple = await stats.GetScore(Indicator.WeightForAge, inputs.Weight, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            outputs.WfaZscore = wfaTuple.Item1;
+            outputs.WfaPercentile = wfaTuple.Item2;
+
+            Tuple<double, double> wfhTuple = await stats.GetScore(Indicator.WeightForHeight, inputs.Weight, inputs.LengthHeightAdjusted, (Sex)inputs.Sex);
+            outputs.WfhZscore = wfhTuple.Item1;
+            outputs.WfhPercentile = wfhTuple.Item2;
+
+            Tuple<double, double> wflTuple = await stats.GetScore(Indicator.WeightForLength, inputs.Weight, inputs.LengthHeightAdjusted, (Sex)inputs.Sex);
+            outputs.WflZscore = wflTuple.Item1;
+            outputs.WflPercentile = wflTuple.Item2;
+
+            Tuple<double, double> bfaTuple = await stats.GetScore(Indicator.BodyMassIndexForAge, inputs.BMI, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            outputs.BfaZscore = bfaTuple.Item1;
+            outputs.BfaPercentile = bfaTuple.Item2;
+
+            Tuple<double, double> hfaTuple = await stats.GetScore(Indicator.HeightForAge, inputs.LengthHeightAdjusted, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            outputs.HfaZscore = hfaTuple.Item1;
+            outputs.HfaPercentile = hfaTuple.Item2;
+
+            Tuple<double, double> lfaTuple = await stats.GetScore(Indicator.LengthForAge, inputs.LengthHeightAdjusted, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            outputs.LfaZscore = lfaTuple.Item1;
+            outputs.LfaPercentile = lfaTuple.Item2;
+
+            return outputs;
+        }
     }
 }

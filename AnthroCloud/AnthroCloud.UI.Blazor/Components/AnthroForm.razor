@@ -69,24 +69,14 @@
                 <label class="col-form-label">Standing</label>
                 <div class="form-group">
                     <label class="d-block">
-                        @if (formModel.FormInputs.AgeInYears < 2)
-                        {
-                            <input type="radio" class="ml-2 mr-2" name="measurement" checked><label>Recumbent</label>
-                        }
-                        else
-                        {
-                            <input type="radio" class="ml-2 mr-2" name="measurement" disabled><label>Recumbent</label>
-                        }
-                    </label>
-                    <label class="d-block">
-                        @if (formModel.FormInputs.AgeInYears >= 2)
-                        {
-                            <input type="radio" class="ml-2 mr-2" name="measurement" checked><label>Standing</label>
-                        }
-                        else
-                        {
-                            <input type="radio" class="ml-2 mr-2" name="measurement" disabled><label>Standing</label>
-                        }
+                        <InputRadioGroup Name="measured" @bind-Value="formModel.FormInputs.Measured" >
+                            <label class="d-block">
+                                <InputRadio Name="measured" Value="MeasuredType.Recumbent" @onclick="HandleMeasuredAsync"/>Recumbent<br>
+                            </label>
+                            <label class="d-block">
+                                <InputRadio Name="measured" Value="MeasuredType.Standing" @onclick="HandleMeasuredAsync"/>Standing<br>
+                            </label>
+                        </InputRadioGroup>
                     </label>
                 </div>
             </div>
