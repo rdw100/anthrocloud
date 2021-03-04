@@ -9,7 +9,6 @@ namespace AnthroCloud.Unit.Tests
     /// <summary>
     /// Tests statistics class.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class StatsTests
     {
         /// <summary>

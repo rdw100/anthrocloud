@@ -10,9 +10,7 @@ namespace AnthroCloud.Tests
     /// <summary>
     /// Represents the database context or fixture necessary to run tests and evaluate outcomes.
     /// </summary>
-#pragma warning disable DV2002 // Unmapped types
     public class TestAnthroCloudContext
-#pragma warning restore DV2002 // Unmapped types
     {   
         private const string STORE = "appsettings.json";
         private const string APP = "AnthroCloud.API\\";

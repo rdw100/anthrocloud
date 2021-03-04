@@ -8,8 +8,6 @@ using Xunit;
 
 namespace AnthroCloud.Tests.Bunit
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
-
     public class AnthroFormTests
     {
         private readonly string baseAddressPath;

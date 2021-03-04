@@ -11,7 +11,6 @@ namespace AnthroCloud.Integration.Tests
     /// <summary>
     /// Integration tests controller logic for chart data.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class ChartControllerTests
     {
         private AnthroCloudContextMySql _context = new TestAnthroCloudContext().Context;

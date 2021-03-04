@@ -9,7 +9,6 @@ namespace AnthroCloud.Integration.Tests
     /// <summary>
     /// Tests integration controller logic for statistics data.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class StatsControllerTests
     {
         /// <summary>

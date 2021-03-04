@@ -7,7 +7,6 @@ namespace AnthroCloud.Unit.Tests
     /// <summary>
     /// Tests age class.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Architecture", "DV2002:Unmapped types", Justification = "<Pending>")]
     public class AgeTests
     {
         /// <summary>
