@@ -123,7 +123,7 @@
         </reference>
       </references>
     </layer>
-    <layer Id="f9a20ff7-c45d-43b5-8084-2c6ce2c7f4ac" name="AnthroCloud.UI.Blazor">
+    <layer Id="f9a20ff7-c45d-43b5-8084-2c6ce2c7f4ac" name="AnthroCloud.UI.Blazor" requiredNamespace="AnthroCloud.UI.Blazor;AnthroCloud.UI.Blazor.Components;AnthroCloud.UI.Blazor.Components.AnthroFormBase">
       <dependencyToLayers>
         <dependencyFromLayerToLayer Id="98979e0a-7faa-46ba-8985-6daae9f0f8ae" direction="Forward">
           <layerMoniker Id="f471a5c1-9a7f-4eb9-a5b0-cb4917fb213f" />

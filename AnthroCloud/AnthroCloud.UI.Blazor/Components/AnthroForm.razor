@@ -106,7 +106,8 @@
                                placeholder="Weight (kg)"
                                required
                                data-error-msg="Must be .9 and 58"
-                               @bind-value="@formModel.FormInputs.Weight" />
+                               @bind-value="@formModel.FormInputs.Weight"
+                               @onclick="HandleMeasuredAsync"/>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -133,7 +134,8 @@
                                placeholder="Length/Height (cm)"
                                required
                                data-error-msg="Must be 45.0 and 120.0"
-                               @bind-value="@formModel.FormInputs.LengthHeight" />
+                               @bind-value="@formModel.FormInputs.LengthHeight"
+                               @onclick="HandleMeasuredAsync" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -151,7 +153,7 @@
             </div>
         </div>
         <div class="col-md-12 justify-content-center">
-            <button class="btn btn-primary" type="submit" @onclick="HandleSubmitAsync" style="width:49%">Submit</button>@*@onclick="HandleValidSubmitAsync"*@
+            <button class="btn btn-primary" type="submit" @onclick="HandleSubmitAsync" style="width:49%">Submit</button>
             <button class="btn btn-secondary" type="submit" @onclick="HandleValidSubmitAsync" style="width:49%">Submit</button>
             @*<button class="btn btn-primary btn-block"
                     type="submit"
