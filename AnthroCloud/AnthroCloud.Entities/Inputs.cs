@@ -46,7 +46,9 @@ namespace AnthroCloud.Entities
         [DisplayName("Subscapular skinfold (mm)")]
         public double SubscapularSkinFold { get; set; } = 7.00;
 
-        public bool Oedema { get; set; } = false;
+        [Required, EnumDataType(typeof(OedemaTypes))]
+        public OedemaTypes Oedema { get; set; } = OedemaTypes.No;
+
         public Age Age { get; set; }
         public string AgeString { get; set; } = "11mo";
         public byte AgeInMonths { get; set; } = 12;

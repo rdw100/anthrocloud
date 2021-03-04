@@ -10,13 +10,41 @@ namespace AnthroCloud.Tests.Bunit
 {
     public class AnthroFormTests
     {
+        private readonly string baseAddressPath;
+
+        public AnthroFormTests()
+        {
+            baseAddressPath = "https://localhost:5001/api/";
+        }
+
+        [Fact]
+        public void AnthroForm_Height_Matches()
+        {
+            // Arrange
+            using var ctx = new TestContext();            
+
+            ctx.Services.AddHttpClient<IAnthroService, AnthroService>(client =>
+            {
+                client.BaseAddress = new Uri(baseAddressPath);
+            });
+
+            ctx.Services.AddHttpClient<IAnthroStatsService, AnthroStatsService>(client =>
+            {
+                client.BaseAddress = new Uri(baseAddressPath);
+            });
+
+            // Act
+            var cut = ctx.RenderComponent<AnthroForm>();
+
+            // Assert
+            Assert.Equal(73, cut.Instance.formModel.FormInputs.LengthHeight);
+        }
+
         [Fact]
         public void AnthroForm_Results_Matches()
         {
             // Arrange
             using var ctx = new TestContext();
-
-            String baseAddressPath = "https://localhost:5001/api/";
 
             ctx.Services.AddHttpClient<IAnthroService, AnthroService>(client =>
             {

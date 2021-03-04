@@ -10,22 +10,11 @@ namespace AnthroCloud.Tests.Bunit
 {
     public class AnthroComponentTests
     {
-        [Fact]
-        public void AnthroComponent_Height_Matches()
+        private readonly string baseAddressPath;
+
+        public AnthroComponentTests()
         {
-            // Arrange
-            using var ctx = new TestContext();
-
-            ctx.Services.AddHttpClient<IAnthroService, AnthroService>(client =>
-            {
-                client.BaseAddress = new Uri("https://localhost:5001/api/");
-            });
-
-            // Act
-            var cut = ctx.RenderComponent<Anthro>();
-
-            // Assert
-            Assert.Equal(73, cut.Instance.Height);
+            baseAddressPath = "https://localhost:5001/api/";
         }
 
         [Fact]
@@ -36,7 +25,12 @@ namespace AnthroCloud.Tests.Bunit
 
             ctx.Services.AddHttpClient<IAnthroService, AnthroService>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:5001/api/");
+                client.BaseAddress = new Uri(baseAddressPath);
+            });
+
+            ctx.Services.AddHttpClient<IAnthroStatsService, AnthroStatsService>(client =>
+            {
+                client.BaseAddress = new Uri(baseAddressPath);
             });
 
             var component = ctx.RenderComponent<Anthro>();

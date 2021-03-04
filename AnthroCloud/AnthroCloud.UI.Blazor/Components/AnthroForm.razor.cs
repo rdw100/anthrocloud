@@ -59,7 +59,7 @@ namespace AnthroCloud.UI.Blazor.Components
             }
 
             watch.Stop();
-            ExecutionTime = "- Button 1 - " + watch.ElapsedMilliseconds;
+            ExecutionTime = "- Button 1 - " + watch.ElapsedMilliseconds + "ms";
         }
 
         protected async Task HandleValidSubmitAsync()
@@ -132,7 +132,7 @@ namespace AnthroCloud.UI.Blazor.Components
             }
 
             watch.Stop();
-            ExecutionTime = "- Button 2 - " + watch.ElapsedMilliseconds;
+            ExecutionTime = "- Button 2 - " + watch.ElapsedMilliseconds + "ms";
         }
 
         public string SetColor(double zscore)
@@ -150,8 +150,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public string SetPercentileRange(double measure)
         {
-            string result = string.Empty;
-
+            string result;
             if (measure >= 99.9 || measure <= .01)
             {
                 result = "NA";
@@ -166,8 +165,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public string SetRangeControl(double measure, byte ageInYears, byte ageInMonths)
         {
-            string result = string.Empty;
-
+            string result;
             if (ageInYears < 1 && ageInMonths < 3)
             {
                 result = "50";
@@ -182,8 +180,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public string SetPercText(double measure, byte ageInYears, byte ageInMonths)
         {
-            string result = string.Empty;
-
+            string result;
             if (ageInYears < 1 && ageInMonths < 3)
             {
                 result = "NA";
@@ -198,8 +195,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public string SetZscoreText(double measure, byte ageInYears, byte ageInMonths)
         {
-            string result = string.Empty;
-
+            string result;
             if (ageInYears < 1 && ageInMonths < 3)
             {
                 result = "NA";

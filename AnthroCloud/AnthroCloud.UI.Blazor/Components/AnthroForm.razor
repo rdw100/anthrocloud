@@ -27,12 +27,6 @@
 </style>
 
 <h3>AnthroForm @ExecutionTime</h3>
-@*@if (ExecutionTime != null)
-{
-<h2>
-    Execution Time: @ExecutionTime
-</h2>
-}*@
 
 <EditForm EditContext="@editContext">
     <DataAnnotationsValidator />
@@ -59,21 +53,17 @@
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-2">
-                <InputRadioGroup Name="sex" @bind-Value="formModel.FormInputs.Sex">
-                    Sex:
-                    <br>
-                    <InputRadio Name="sex" Value="Sexes.Male" />Male<br>
-                    <InputRadio Name="sex" Value="Sexes.Female" />Female<br>
-                </InputRadioGroup>
-                @*<label class="col-form-label">Sex</label>
-                    <div class="form-group">
+                <label class="col-form-label">Sex</label>
+                <div class="form-group">
+                    <InputRadioGroup Name="sex" @bind-Value="formModel.FormInputs.Sex">
                         <label class="d-block">
-                            <input id="SexMale" asp-for="Sex" type="radio" value="1" class="ml-2 mr-2"> Male
+                            <InputRadio Name="sex" Value="Sexes.Male" />Male<br>
                         </label>
                         <label class="d-block">
-                            <input id="SexFemale" asp-for="Sex" type="radio" value="2" class="ml-2 mr-2"> Female
+                            <InputRadio Name="sex" Value="Sexes.Female" />Female<br>
                         </label>
-                    </div>*@
+                    </InputRadioGroup>
+                </div>
             </div>
             <div class="col-md-4 mb-2">
                 <label class="col-form-label">Standing</label>
@@ -103,12 +93,14 @@
             <div class="col-md-4 mb-2">
                 <label class="col-form-label">Oedema</label>
                 <div class="form-group">
-                    <label class="d-block">
-                        <input id="OedemaYes" asp-for="Oedema" type="radio" class="ml-2 mr-2" value="True"> Yes
-                    </label>
-                    <label class="d-block">
-                        <input id="OedemaNo" asp-for="Oedema" type="radio" class="ml-2 mr-2" value="False"> No
-                    </label>
+                    <InputRadioGroup Name="oedema" @bind-Value="formModel.FormInputs.Oedema">
+                        <label class="d-block">
+                            <InputRadio Name="oedema" Value="OedemaTypes.Yes" />Yes<br>
+                        </label>
+                        <label class="d-block">
+                            <InputRadio Name="oedema" Value="OedemaTypes.No" />No<br>
+                        </label>
+                    </InputRadioGroup>
                 </div>
             </div>
         </div>
@@ -191,7 +183,7 @@
             </div>
             <div class="col-md-6 mb-2">
                 <label>BMI:</label>
-                <input asp-for="BMI" value="@formModel.FormInputs.BMI" class="form-control text-center" type="text" placeholder="..." readonly />
+                <input asp-for="BMI" value="@formModel.FormInputs.BMI.ToString("0.0")" class="form-control text-center" type="text" placeholder="..." readonly />
             </div>
         </div>
         <div class="form-row">
@@ -216,7 +208,7 @@
                     <div class="form-group row mb-0">
                         <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Length</label>
                         <input id="WflPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WflPercentile" type="range" min="0" max="100" step=".1" title="@formModel.FormOutputs.WflPercentile" value="@formModel.FormOutputs.WflPercentile" list="tickmarks" disabled />
-                        @if (formModel != null && formModel.FormInputs.Oedema == true)
+                        @if (formModel != null && formModel.FormInputs.Oedema == OedemaTypes.Yes)
                         {
                             <input type="text" asp-for="WflPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
                             <input type="text" asp-for="WflZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @SetColor(formModel.FormOutputs.WflZscore)" readonly>
@@ -248,7 +240,7 @@
                     <div class="form-group row mb-0">
                         <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Height</label>
                         <input id="WfhPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WfhPercentile" type="range" min="0" max="100" step=".1" title="@formModel.FormOutputs.WfhPercentile" value="@formModel.FormOutputs.WfhPercentile" list="tickmarks" disabled />
-                        @if (formModel != null && formModel.FormInputs.Oedema == true)
+                        @if (formModel != null && formModel.FormInputs.Oedema == OedemaTypes.Yes)
                         {
                             <input type="text" asp-for="WfhPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
                             <input type="text" asp-for="WfhZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @SetColor(formModel.FormOutputs.WfhZscore)" readonly>
@@ -292,7 +284,7 @@
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">Weight-for-Age</label>
                     <input id="WfaPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="WfaPercentile" type="range" min="0" max="100" step=".1" title="@formModel.FormOutputs.WfaPercentile" value="@formModel.FormOutputs.WfaPercentile" list="tickmarks" disabled />
-                    @if (formModel != null && formModel.FormInputs.Oedema == true)
+                    @if (formModel != null && formModel.FormInputs.Oedema == OedemaTypes.Yes)
                     {
                         <input type="text" asp-for="WfaPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
                         <input type="text" asp-for="WfaZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @SetColor(formModel.FormOutputs.WfaZscore)" readonly>
@@ -372,7 +364,7 @@
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">BMI-for-Age</label>
                     <input id="BfaPercentileRange" class="form-control-range col-md-2 mr-1 ml-1" asp-for="BfaPercentile" type="range" min="0" max="100" step="25" title="@formModel.FormOutputs.BfaPercentile" value="@formModel.FormOutputs.BfaPercentile" list="tickmarks" disabled />
-                    @if (formModel != null && formModel.FormInputs.Oedema == true)
+                    @if (formModel != null && formModel.FormInputs.Oedema == OedemaTypes.Yes)
                     {
                         <input type="text" asp-for="BfaPercentile" class="form-control col-md-2 mr-1 text-center" value="NA" readonly>
                         <input type="text" asp-for="BfaZscore" class="form-control col-md-2 mr-1 text-center" value="NA" style="background-color: @SetColor(formModel.FormOutputs.BfaZscore)" readonly>

@@ -82,7 +82,7 @@ namespace AnthroCloud.API.Controllers
         public double GetBMI(double weight, double height)
         {
             BMI bmi = new BMI(weight, height);
-            return bmi.Bmi;// bmi.ToReadableDouble();
+            return bmi.Bmi;
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace AnthroCloud.API.Controllers
         {
             BMI bmi = new BMI();
             _ = await bmi.Calculate(weight, height);
-            return bmi.ToReadableDouble();
+            return bmi.Bmi;
         }
     }
 }
