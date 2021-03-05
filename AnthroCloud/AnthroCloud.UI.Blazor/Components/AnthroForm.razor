@@ -40,7 +40,7 @@
 
                     </label><InputDate @bind-Value="formModel.DateOfBirth" DisplayName="Date of Birth" />*@
                 <label>Date of Birth</label>
-                <input @bind-value="@formModel.FormInputs.DateOfBirth" type="date" class="form-control text-center" required>
+                <input @bind-value="@formModel.FormInputs.DateOfBirth" @onclick="HandleSubmitAsync" type="date" class="form-control text-center" required>
             </div>
             <div class="col-md-6 mb-2">
                 @*<label class="form-control text-center">
@@ -48,7 +48,7 @@
 
                     </label><InputDate @bind-Value="formModel.DateOfVisit" DisplayName="Date of Visit" />*@
                 <label>Date of Visit</label>
-                <input @bind-value="@formModel.FormInputs.DateOfVisit" asp-for="DateOfVisit" type="date" class="form-control text-center" required />
+                <input @bind-value="@formModel.FormInputs.DateOfVisit" @onclick="HandleSubmitAsync" asp-for="DateOfVisit" type="date" class="form-control text-center" required />
             </div>
         </div>
         <div class="form-row">
@@ -57,10 +57,10 @@
                 <div class="form-group">
                     <InputRadioGroup Name="sex" @bind-Value="formModel.FormInputs.Sex">
                         <label class="d-block">
-                            <InputRadio Name="sex" Value="Sexes.Male" />Male<br>
+                            <InputRadio Name="sex" Value="Sexes.Male" @onclick="HandleSubmitAsync"/>Male<br>
                         </label>
                         <label class="d-block">
-                            <InputRadio Name="sex" Value="Sexes.Female" />Female<br>
+                            <InputRadio Name="sex" Value="Sexes.Female" @onclick="HandleSubmitAsync"/>Female<br>
                         </label>
                     </InputRadioGroup>
                 </div>
@@ -113,13 +113,13 @@
                 <div class="form-group row">
                     <label for="validationDefault02" class="col-sm-5 col-form-label">Head Circumference (cm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="HeadCircumference" @bind-value="@formModel.FormInputs.HeadCircumference" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>
+                        <input asp-for="HeadCircumference" @bind-value="@formModel.FormInputs.HeadCircumference" @onclick="HandleHcaAsync" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="validationDefault03" class="col-sm-5 col-form-label">MUAC (cm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="MUAC" @bind-value="@formModel.FormInputs.MUAC" class="form-control text-center" type="number" MIN="6.0" MAX="35.0" STEP=".1" id="validationDefault03" required>
+                        <input asp-for="MUAC" @bind-value="@formModel.FormInputs.MUAC" @onclick="HandleMuacAsync" class="form-control text-center" type="number" MIN="6.0" MAX="35.0" STEP=".1" id="validationDefault03" required>
                     </div>
                 </div>
             </div>
@@ -141,13 +141,13 @@
                 <div class="form-group row">
                     <label for="validationDefault05" class="col-sm-5 col-form-label">Triceps skinfold (mm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="TricepsSkinFold" @bind-value="formModel.FormInputs.TricepsSkinFold" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault05" required>
+                        <input asp-for="TricepsSkinFold" @bind-value="formModel.FormInputs.TricepsSkinFold" @onclick="HandleTsfAsync" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault05" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="validationDefault06" class="col-sm-5 col-form-label">Subscapular skinfold (mm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="SubscapularSkinFold" @bind-value="formModel.FormInputs.SubscapularSkinFold" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault06" required>
+                        <input asp-for="SubscapularSkinFold" @bind-value="formModel.FormInputs.SubscapularSkinFold" @onclick="HandleSsfAsync" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault06" required>
                     </div>
                 </div>
             </div>

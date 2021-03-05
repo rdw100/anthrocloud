@@ -9,5 +9,9 @@ namespace AnthroCloud.UI.Blazor.Services
         Task<Age> GetAge(string birth, string visit);
         Task<Outputs> GetScores(Inputs inputs);
         Task<Outputs> GetMeasuredScores(Inputs inputs);
+        Task<Outputs> GetHcaScores(Inputs inputs);
+        Task<Outputs> GetMuacScores(Inputs inputs);
+        Task<Outputs> GetTsfScores(Inputs inputs);
+        Task<Outputs> GetSsfScores(Inputs inputs);
     }
 }

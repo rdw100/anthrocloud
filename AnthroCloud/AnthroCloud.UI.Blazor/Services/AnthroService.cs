@@ -1,7 +1,4 @@
-﻿//using AnthroCloud.Business;
-using AnthroCloud.Entities;
-using AnthroCloud.UI.Blazor.Components;
-using System;
+﻿using AnthroCloud.Entities;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -61,6 +58,42 @@ namespace AnthroCloud.UI.Blazor.Services
         {
             HttpResponseMessage response = await httpClient.PostAsJsonAsync(
                 $"STATS/MEASURED", inputs);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<Outputs>();
+        }
+
+        public async Task<Outputs> GetHcaScores(Inputs inputs)
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                $"STATS/HCA", inputs);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<Outputs>();
+        }
+
+        public async Task<Outputs> GetMuacScores(Inputs inputs)
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                $"STATS/MUAC", inputs);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<Outputs>();
+        }
+
+        public async Task<Outputs> GetTsfScores(Inputs inputs)
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                $"STATS/TSF", inputs);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<Outputs>();
+        }
+
+        public async Task<Outputs> GetSsfScores(Inputs inputs)
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                $"STATS/SSF", inputs);
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadFromJsonAsync<Outputs>();

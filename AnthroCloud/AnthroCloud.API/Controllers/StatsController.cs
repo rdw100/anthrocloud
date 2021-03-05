@@ -33,10 +33,10 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Represents all calculator inputs necessary for computed statistics.
+        /// Gets computed statistics from inputs.
         /// </summary>
-        /// <param name="inputs">Represents all calculator inputs necessary for computed statistics.</param>
-        /// <returns>Represents all calculator outputs from computed statistics.</returns>
+        /// <param name="inputs">Calculator inputs necessary for computed statistics.</param>
+        /// <returns>Returns computed statistics.</returns>
         [HttpPost]
         public async Task<Outputs> GetScores([FromBody] Inputs inputs)
         {
@@ -87,10 +87,10 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Represents length height measured change to calculator inputs necessary for computed statistics.
+        /// Gets computed statistics from length & height changes.
         /// </summary>
-        /// <param name="inputs">Represents all calculator inputs necessary for computed statistics.</param>
-        /// <returns>Represents all calculator outputs from computed statistics.</returns>
+        /// <param name="inputs">Calculator inputs necessary for computed statistics.</param>
+        /// <returns>Returns computed statistics.</returns>
         /// <remarks>Note that the difference between recumbent length and stature for this calculator is 
         /// 0.7 cm.</remarks>
         [HttpPost("MEASURED")]
@@ -122,6 +122,78 @@ namespace AnthroCloud.API.Controllers
             Tuple<double, double> lfaTuple = await stats.GetScore(Indicator.LengthForAge, inputs.LengthHeightAdjusted, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
             outputs.LfaZscore = lfaTuple.Item1;
             outputs.LfaPercentile = lfaTuple.Item2;
+
+            return outputs;
+        }
+
+        /// <summary>
+        /// Gets computed statistics from head circumference changes.
+        /// </summary>
+        /// <param name="inputs">Calculator inputs necessary for computed statistics.</param>
+        /// <returns>Returns computed statistics.</returns>
+        [HttpPost("HCA")]
+        public async Task<Outputs> GetHcaScores([FromBody] Inputs inputs)
+        {
+            Outputs outputs = new Outputs();
+            Stats stats = new Stats();
+
+            Tuple<double, double> hcaTuple = await stats.GetScore(Indicator.HeadCircumferenceForAge, inputs.HeadCircumference, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            outputs.HcaZscore = hcaTuple.Item1;
+            outputs.HcaPercentile = hcaTuple.Item2;
+
+            return outputs;
+        }
+
+        /// <summary>
+        /// Gets computed statistics from MUAC changes.
+        /// </summary>
+        /// <param name="inputs">Calculator inputs necessary for computed statistics.</param>
+        /// <returns>Returns computed statistics.</returns>
+        [HttpPost("MUAC")]
+        public async Task<Outputs> GetMuacScores([FromBody] Inputs inputs)
+        {
+            Outputs outputs = new Outputs();
+            Stats stats = new Stats();
+
+            Tuple<double, double> muacTuple = await stats.GetScore(Indicator.ArmCircumferenceForAge, inputs.MUAC, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            outputs.MuacZscore = muacTuple.Item1;
+            outputs.MuacPercentile = muacTuple.Item2;
+
+            return outputs;
+        }
+
+        /// <summary>
+        /// Gets computed statistics from Triceps skinfold changes.
+        /// </summary>
+        /// <param name="inputs">Calculator inputs necessary for computed statistics.</param>
+        /// <returns>Returns computed statistics.</returns>
+        [HttpPost("TSF")]
+        public async Task<Outputs> GetTricepsScores([FromBody] Inputs inputs)
+        {
+            Outputs outputs = new Outputs();
+            Stats stats = new Stats();
+
+            Tuple<double, double> tfaTuple = await stats.GetScore(Indicator.TricepsSkinfoldForAge, inputs.TricepsSkinFold, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            outputs.TsfZscore = tfaTuple.Item1;
+            outputs.TsfPercentile = tfaTuple.Item2;
+
+            return outputs;
+        }
+
+        /// <summary>
+        /// Gets computed statistics from Subscapular skinfold changes.
+        /// </summary>
+        /// <param name="inputs">Calculator inputs necessary for computed statistics.</param>
+        /// <returns>Returns computed statistics.</returns>
+        [HttpPost("SSF")]
+        public async Task<Outputs> GetSubscapularScores([FromBody] Inputs inputs)
+        {
+            Outputs outputs = new Outputs();
+            Stats stats = new Stats();
+
+            Tuple<double, double> sfaTuple = await stats.GetScore(Indicator.SubscapularSkinfoldForAge, inputs.SubscapularSkinFold, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            outputs.SsfZscore = sfaTuple.Item1;
+            outputs.SsfPercentile = sfaTuple.Item2;
 
             return outputs;
         }
