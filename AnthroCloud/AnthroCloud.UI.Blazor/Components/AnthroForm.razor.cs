@@ -22,6 +22,8 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public string ExecutionTime;
 
+        protected bool IsCalculating { get; set; }
+
         protected override void OnInitialized()
         {
             editContext = new EditContext(formModel);
@@ -34,8 +36,11 @@ namespace AnthroCloud.UI.Blazor.Components
             try
             {
                 loadFailed = false;
+                
                 if (isValid)
                 {
+                    IsCalculating = true;
+                    
                     string BirthDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfBirth);
                     string VisitDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfVisit);
 
@@ -45,6 +50,8 @@ namespace AnthroCloud.UI.Blazor.Components
                     formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
 
                     formModel.FormOutputs = await AnthroService.GetHcaScores(formModel.FormInputs);
+
+                    IsCalculating = false;
                 }
                 else
                 {
@@ -64,8 +71,11 @@ namespace AnthroCloud.UI.Blazor.Components
             try
             {
                 loadFailed = false;
+                
                 if (isValid)
                 {
+                    IsCalculating = true;
+                    
                     string BirthDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfBirth);
                     string VisitDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfVisit);
 
@@ -75,6 +85,8 @@ namespace AnthroCloud.UI.Blazor.Components
                     formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
 
                     formModel.FormOutputs = await AnthroService.GetMuacScores(formModel.FormInputs);
+
+                    IsCalculating = false;
                 }
                 else
                 {
@@ -94,8 +106,11 @@ namespace AnthroCloud.UI.Blazor.Components
             try
             {
                 loadFailed = false;
+                
                 if (isValid)
                 {
+                    IsCalculating = true;
+
                     string BirthDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfBirth);
                     string VisitDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfVisit);
 
@@ -105,6 +120,8 @@ namespace AnthroCloud.UI.Blazor.Components
                     formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
 
                     formModel.FormOutputs = await AnthroService.GetTsfScores(formModel.FormInputs);
+
+                    IsCalculating = false;
                 }
                 else
                 {
@@ -124,8 +141,11 @@ namespace AnthroCloud.UI.Blazor.Components
             try
             {
                 loadFailed = false;
+                
                 if (isValid)
                 {
+                    IsCalculating = true;
+                    
                     string BirthDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfBirth);
                     string VisitDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfVisit);
 
@@ -135,6 +155,8 @@ namespace AnthroCloud.UI.Blazor.Components
                     formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
 
                     formModel.FormOutputs = await AnthroService.GetSsfScores(formModel.FormInputs);
+
+                    IsCalculating = false;
                 }
                 else
                 {
@@ -154,8 +176,11 @@ namespace AnthroCloud.UI.Blazor.Components
             try
             {
                 loadFailed = false;
+                
                 if (isValid)
                 {
+                    IsCalculating = true;
+                    
                     string BirthDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfBirth);
                     string VisitDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfVisit);
 
@@ -165,6 +190,8 @@ namespace AnthroCloud.UI.Blazor.Components
                     formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
 
                     formModel.FormOutputs = await AnthroService.GetMeasuredScores(formModel.FormInputs);
+
+                    IsCalculating = false;
                 }
                 else
                 {
@@ -186,8 +213,11 @@ namespace AnthroCloud.UI.Blazor.Components
             try
             {
                 loadFailed = false;
+                
                 if (isValid)
                 {
+                    IsCalculating = true;
+                    
                     string BirthDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfBirth);
                     string VisitDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfVisit);
 
@@ -197,6 +227,8 @@ namespace AnthroCloud.UI.Blazor.Components
                     formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeight);
 
                     formModel.FormOutputs = await AnthroService.GetScores(formModel.FormInputs);
+
+                    IsCalculating = false;
                 }
                 else
                 {
@@ -221,8 +253,11 @@ namespace AnthroCloud.UI.Blazor.Components
             try
             {
                 loadFailed = false;
+                
                 if (isValid)
                 {
+                    IsCalculating = true;
+                    
                     string BirthDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfBirth);
                     string VisitDateString = string.Format("{0:yyyy-MM-dd}", formModel.FormInputs.DateOfVisit);
 
@@ -270,6 +305,8 @@ namespace AnthroCloud.UI.Blazor.Components
                     Tuple<double, double> wflTuple = await AnthroStatsService.GetWFL(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeight, formModel.FormInputs.Sex);
                     formModel.FormOutputs.WflZscore = wflTuple.Item1;
                     formModel.FormOutputs.WflPercentile = wflTuple.Item2;
+
+                    IsCalculating = false;
                 }
                 else
                 {
