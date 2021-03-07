@@ -15,6 +15,7 @@ namespace AnthroCloud.Entities
 
         [Required]
         [DisplayName("Visit Date")]
+        [CheckFutureDateRange]
         public DateTime DateOfVisit { get; set; } = DateTime.Today;
 
         [Required]
