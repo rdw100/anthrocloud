@@ -35,22 +35,18 @@
     <fieldset>
         <div class="form-row">
             <div class="col-md-6 mb-2">
-                @*<label class="form-control text-center">
-                        Date of Birth
-
-                    </label><InputDate @bind-Value="formModel.DateOfBirth" DisplayName="Date of Birth" />*@
                 <label>Date of Birth</label>
-                <input @bind-value="@formModel.FormInputs.DateOfBirth" @onclick="HandleSubmitAsync" type="date" class="form-control text-center" required>
+                <InputDate @bind-Value="@formModel.FormInputs.DateOfBirth"
+                           ParsingErrorMessage="Must be a valid date."
+                           @onchange="HandleSubmitAsync"
+                           class="form-control text-center" />
             </div>
             <div class="col-md-6 mb-2">
-
                 <label>Visit Date</label>
                 <InputDate @bind-Value="@formModel.FormInputs.DateOfVisit"
                            ParsingErrorMessage="Must be a valid date."
                            @onchange="HandleSubmitAsync"
                            class="form-control text-center" />
-                @*<label>Date of Visit</label>
-                    <input @bind-value="formModel.FormInputs.DateOfVisit" @onclick="HandleSubmitAsync" type="date" class="form-control text-center" required />*@
             </div>
         </div>
         <div class="form-row">
@@ -101,15 +97,12 @@
                 <div class="form-group row">
                     <label class="col-sm-5 col-form-label">Weight (kg)</label>
                     <div class="col-sm-7">
-                        <input asp-for="Weight"
-                               class="form-control text-center"
-                               type="number"
-                               MIN=".9" MAX="58" STEP=".1"
-                               placeholder="Weight (kg)"
-                               required
-                               data-error-msg="Must be .9 and 58"
-                               @bind-value="@formModel.FormInputs.Weight"
-                               @onclick="HandleMeasuredAsync" />
+                        <InputNumber @bind-Value="@formModel.FormInputs.Weight"
+                                     @onclick="HandleMeasuredAsync"
+                                     class="form-control text-center"
+                                     MIN=".9" MAX="58" STEP=".1"
+                                     data-error-msg="Must be .9 and 58"
+                                     placeholder="Weight (kg)" />
                     </div>
                 </div>
                 <div class="form-group row">

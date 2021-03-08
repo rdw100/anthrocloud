@@ -11,6 +11,7 @@ namespace AnthroCloud.Entities
     {
         [Required]
         [DisplayName("Birth Date")]
+        [CheckPresentDateRange]
         public DateTime DateOfBirth { get; set; } = DateTime.Today.AddYears(-1);
 
         [Required]
