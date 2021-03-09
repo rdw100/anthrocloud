@@ -395,16 +395,16 @@ namespace AnthroCloud.UI.Blazor.Components
             return result;
         }
 
-        public MarkupString logger { get; set; }
+        public MarkupString Logger { get; set; }
 
         public void OnValidSubmit()
         {
-            logger = new MarkupString(logger + $"<br />valid submit on {DateTime.Now}");
+            Logger = new MarkupString(Logger + $"<br />valid submit on {DateTime.Now}");
         }
 
         public void OnInvalidSubmit()
         {
-            logger = new MarkupString(logger + $"<br />INVALID submit on {DateTime.Now}");
+            Logger = new MarkupString(Logger + $"<br />INVALID submit on {DateTime.Now}");
         }
     }
 }
