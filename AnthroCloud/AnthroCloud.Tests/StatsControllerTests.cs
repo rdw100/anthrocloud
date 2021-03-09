@@ -72,7 +72,7 @@ namespace AnthroCloud.Integration.Tests
         /// <param name="zscore"></param>
         /// <returns></returns>
         /// <remarks>Range-based switching is possible with the switch statement.</remarks>
-        private string GetColorCoding(double zscore)
+        private static string GetColorCoding(double zscore)
         {
             var testColorCode = zscore switch
             {
