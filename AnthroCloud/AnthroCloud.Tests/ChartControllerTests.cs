@@ -13,7 +13,7 @@ namespace AnthroCloud.Integration.Tests
     /// </summary>
     public class ChartControllerTests
     {
-        private AnthroCloudContextMySql _context = new TestAnthroCloudContext().Context;
+        private readonly AnthroCloudContextMySql _context = new TestAnthroCloudContext().Context;
         
         /// <summary>
         /// Tests chart controller logic for BMI chart data given new data point (x,y) when male.

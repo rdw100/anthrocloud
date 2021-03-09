@@ -11,7 +11,7 @@ namespace AnthroCloud.Data
     /// </summary>
     public class ChartDAC : IChartDAC
     {
-        private AnthroCloudContextMySql _context;
+        private readonly AnthroCloudContextMySql _context;
         
         public ChartDAC() { }
 
