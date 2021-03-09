@@ -17,7 +17,7 @@ namespace AnthroCloud.Business
         /// <returns>Returns the calculated age in total days.</returns>
         public int GetAgeInDays(DateTime birth, DateTime visit)
         {
-            Age age = new Age(birth, visit);
+            Age age = new(birth, visit);
             return age.TotalDays;
         }
 
@@ -29,7 +29,7 @@ namespace AnthroCloud.Business
         /// <returns>Returns the formatted age string for user interface display.</returns>
         public string GetAgeString(DateTime birth, DateTime visit)
         {
-            Age age = new Age(birth, visit);
+            Age age = new(birth, visit);
             return age.ToReadableString();
         }
 
@@ -41,7 +41,7 @@ namespace AnthroCloud.Business
         /// <returns>Returns the calculated body-mass index.</returns>
         public double GetBMI(double weight, double height)
         {
-            BMI bmi = new BMI(9.00, 73.00);
+            BMI bmi = new(9.00, 73.00);
             return bmi.Bmi;//.ToReadableDouble();
         }
     }

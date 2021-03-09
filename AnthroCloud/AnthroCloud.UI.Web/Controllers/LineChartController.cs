@@ -218,7 +218,7 @@ namespace AnthroCloud.UI.Web.Controllers
 
         public static List<BmiforAge> GetBMIForAgeData(byte id, double x, double y)
         {
-            List<BmiforAge> bfaList = new List<BmiforAge>();
+            List<BmiforAge> bfaList = new();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseAddressPath);
@@ -241,7 +241,7 @@ namespace AnthroCloud.UI.Web.Controllers
 
         public static List<HcForAge> GetHCForAgeData(byte id, double x, double y)
         {
-            List<HcForAge> hcaList = new List<HcForAge>();
+            List<HcForAge> hcaList = new();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseAddressPath);
@@ -264,7 +264,7 @@ namespace AnthroCloud.UI.Web.Controllers
 
         public static List<LengthHeightForAge> GetLengthHeightForAgeData(byte id, double x, double y)
         {
-            List<LengthHeightForAge> lhfaList = new List<LengthHeightForAge>();
+            List<LengthHeightForAge> lhfaList = new();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseAddressPath);
@@ -287,7 +287,7 @@ namespace AnthroCloud.UI.Web.Controllers
 
         public static List<MuacforAge> GetMUACForAgeData(byte id, double x, double y)
         {
-            List<MuacforAge> muacList = new List<MuacforAge>();
+            List<MuacforAge> muacList = new();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseAddressPath);
@@ -310,7 +310,7 @@ namespace AnthroCloud.UI.Web.Controllers
 
         public static List<SsfforAge> GetSSFForAgeData(byte id, double x, double y)
         {
-            List<SsfforAge> ssfList = new List<SsfforAge>();
+            List<SsfforAge> ssfList = new();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseAddressPath);
@@ -333,7 +333,7 @@ namespace AnthroCloud.UI.Web.Controllers
 
         public static List<TsfforAge> GetTSFForAgeData(byte id, double x, double y)
         {
-            List<TsfforAge> tsfList = new List<TsfforAge>();
+            List<TsfforAge> tsfList = new();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseAddressPath);
@@ -356,7 +356,7 @@ namespace AnthroCloud.UI.Web.Controllers
 
         public static List<WeightForAge> GetWeightForAgeData(byte id, double x, double y)
         {
-            List<WeightForAge> hcaList = new List<WeightForAge>();
+            List<WeightForAge> hcaList = new();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseAddressPath);
@@ -379,7 +379,7 @@ namespace AnthroCloud.UI.Web.Controllers
 
         public static List<WeightForLength> GetWeightForLengthData(byte id, double x, double y)
         {
-            List<WeightForLength> wflList = new List<WeightForLength>();
+            List<WeightForLength> wflList = new();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseAddressPath);
@@ -402,7 +402,7 @@ namespace AnthroCloud.UI.Web.Controllers
 
         public static List<WeightForHeight> GetWeightForHeightData(byte id, double x, double y)
         {
-            List<WeightForHeight> wfhList = new List<WeightForHeight>();
+            List<WeightForHeight> wfhList = new();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseAddressPath);

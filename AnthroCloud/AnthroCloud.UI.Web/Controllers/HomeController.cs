@@ -31,7 +31,7 @@ namespace AnthroCloud.UI.Web.Controllers
         [HttpPost]
         public IActionResult Index(FormViewModel model)
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = new();
 
             string baseAddressPath = _configuration.GetValue<string>("ConfigurationSettings:baseApiAddressPath");
 

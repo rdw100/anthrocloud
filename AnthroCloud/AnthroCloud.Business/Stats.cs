@@ -30,7 +30,7 @@ namespace AnthroCloud.Business
         /// <returns>Returns the z-score for a growth measure using a specified value.</returns>
         public async Task<double> CalculateZScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
-            WHO2006 who2006 = new WHO2006();
+            WHO2006 who2006 = new();
             double z = 0.0;
 
             if (await Task.FromResult(who2006.TryCalculateZScore(indicator, measurement, ageInDays, sex, z: ref z)))
@@ -51,7 +51,7 @@ namespace AnthroCloud.Business
         /// <returns>Returns the z-score and percentile for a growth measure using a specified value.</returns>
         public static async Task<Tuple<double, double>> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
-            WHO2006 who2006 = new WHO2006();
+            WHO2006 who2006 = new();
 
             double z = 0.0;
             double p = 0.0;

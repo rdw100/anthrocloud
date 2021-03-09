@@ -30,7 +30,7 @@ namespace AnthroCloud.Tests
         private AnthroCloudContextMySql Configure()
         {
             // Retrieve application settings file
-            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+            ConfigurationBuilder configurationBuilder = new();
             String projectPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, DIR)); 
             String settingsPath = Path.Combine(projectPath + APP, STORE);            
             configurationBuilder.AddJsonFile(settingsPath, false);
@@ -40,7 +40,7 @@ namespace AnthroCloud.Tests
             _connectionString = root.GetSection(KEY).GetSection(VALUE).Value;
 
             // Configure context with setting
-            DbContextOptionsBuilder<AnthroCloudContextMySql> optionsBuilder = new DbContextOptionsBuilder<AnthroCloudContextMySql>();
+            DbContextOptionsBuilder<AnthroCloudContextMySql> optionsBuilder = new();
             optionsBuilder.UseMySql(_connectionString,
                     new MySqlServerVersion(new Version(5, 7, 29)),
                     mySqlOptions => mySqlOptions
@@ -49,7 +49,7 @@ namespace AnthroCloud.Tests
 
 
             // Initialize context with setting
-            AnthroCloudContextMySql context = new AnthroCloudContextMySql(optionsBuilder.Options);
+            AnthroCloudContextMySql context = new(optionsBuilder.Options);
 
             return context;
         }

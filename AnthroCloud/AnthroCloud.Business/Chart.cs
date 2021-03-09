@@ -77,7 +77,7 @@ namespace AnthroCloud.Business
                 var largeNearElement = bmiCurves.FindIndex(0, x => x.Month == largerNearestValue);
 
                 // Interpolate Data Point Pair for Y
-                LinearInterpolation yDataPoint = new LinearInterpolation();
+                LinearInterpolation yDataPoint = new();
 
                 yDataPoint = new LinearInterpolation(newX, bmiCurves[smallNearElement].Month, bmiCurves[smallNearElement].Month, bmiCurves[smallNearElement].P3, bmiCurves[largeNearElement].P3);
                 decimal newP3 = yDataPoint.CalculateY();
@@ -162,7 +162,7 @@ namespace AnthroCloud.Business
                 var largeNearElement = hcfaCurves.FindIndex(0, x => x.Month == largerNearestValue);
 
                 // Interpolate Data Point Pair for Y
-                LinearInterpolation yDataPoint = new LinearInterpolation();
+                LinearInterpolation yDataPoint = new();
 
                 yDataPoint = new LinearInterpolation(newX, hcfaCurves[smallNearElement].Month, hcfaCurves[smallNearElement].Month, hcfaCurves[smallNearElement].P3, hcfaCurves[largeNearElement].P3);
                 decimal newP3 = yDataPoint.CalculateY();
@@ -254,7 +254,7 @@ namespace AnthroCloud.Business
                 var largeNearElement = lhfaCurves.FindIndex(0, x => x.Month == largerNearestValue);
 
                 // Interpolate Data Point Pair for Y
-                LinearInterpolation yDataPoint = new LinearInterpolation();
+                LinearInterpolation yDataPoint = new();
 
                 yDataPoint = new LinearInterpolation(newX, lhfaCurves[smallNearElement].Month, lhfaCurves[smallNearElement].Month, lhfaCurves[smallNearElement].P3, lhfaCurves[largeNearElement].P3);
                 decimal newP3 = yDataPoint.CalculateY();
@@ -334,7 +334,7 @@ namespace AnthroCloud.Business
                 var largeNearElement = muacCurves.FindIndex(0, x => x.Month == largerNearestValue);
 
                 // Interpolate Data Point Pair for Y
-                LinearInterpolation yDataPoint = new LinearInterpolation();
+                LinearInterpolation yDataPoint = new();
 
                 yDataPoint = new LinearInterpolation(newX, muacCurves[smallNearElement].Month, muacCurves[smallNearElement].Month, muacCurves[smallNearElement].P3, muacCurves[largeNearElement].P3);
                 decimal newP3 = yDataPoint.CalculateY();
@@ -419,7 +419,7 @@ namespace AnthroCloud.Business
                 var largeNearElement = ssfCurves.FindIndex(0, x => x.Month == largerNearestValue);
 
                 // Interpolate Data Point Pair for Y
-                LinearInterpolation yDataPoint = new LinearInterpolation();
+                LinearInterpolation yDataPoint = new();
 
                 yDataPoint = new LinearInterpolation(newX, ssfCurves[smallNearElement].Month, ssfCurves[smallNearElement].Month, ssfCurves[smallNearElement].P3, ssfCurves[largeNearElement].P3);
                 decimal newP3 = yDataPoint.CalculateY();
@@ -503,7 +503,7 @@ namespace AnthroCloud.Business
                 var largeNearElement = tsfCurves.FindIndex(0, x => x.Month == largerNearestValue);
 
                 // Interpolate Data Point Pair for Y
-                LinearInterpolation yDataPoint = new LinearInterpolation();
+                LinearInterpolation yDataPoint = new();
 
                 yDataPoint = new LinearInterpolation(newX, tsfCurves[smallNearElement].Month, tsfCurves[smallNearElement].Month, tsfCurves[smallNearElement].P3, tsfCurves[largeNearElement].P3);
                 decimal newP3 = yDataPoint.CalculateY();
@@ -587,7 +587,7 @@ namespace AnthroCloud.Business
                 var largeNearElement = wfaCurves.FindIndex(0, x => x.Month == largerNearestValue);
 
                 // Interpolate Data Point Pair for Y
-                LinearInterpolation yDataPoint = new LinearInterpolation();
+                LinearInterpolation yDataPoint = new();
 
                 yDataPoint = new LinearInterpolation(newX, wfaCurves[smallNearElement].Month, wfaCurves[smallNearElement].Month, wfaCurves[smallNearElement].P3, wfaCurves[largeNearElement].P3);
                 decimal newP3 = yDataPoint.CalculateY();
@@ -667,7 +667,7 @@ namespace AnthroCloud.Business
                 var largeNearElement = wfhCurves.FindIndex(0, x => x.Heightincm == largerNearestValue);
 
                 // Interpolate Data Point Pair for Y
-                LinearInterpolation yDataPoint = new LinearInterpolation();
+                LinearInterpolation yDataPoint = new();
 
                 yDataPoint = new LinearInterpolation(newX, wfhCurves[smallNearElement].Heightincm, wfhCurves[smallNearElement].Heightincm, wfhCurves[smallNearElement].P3, wfhCurves[largeNearElement].P3);
                 decimal newP3 = yDataPoint.CalculateY();
@@ -751,7 +751,7 @@ namespace AnthroCloud.Business
                 var largeNearElement = wflCurves.FindIndex(0, x => x.Lengthincm == largerNearestValue);
             
                 // Interpolate Data Point Pair for Y
-                LinearInterpolation yDataPoint = new LinearInterpolation();
+                LinearInterpolation yDataPoint = new();
 
                 yDataPoint = new LinearInterpolation(newX, wflCurves[smallNearElement].Lengthincm, wflCurves[smallNearElement].Lengthincm, wflCurves[smallNearElement].P3, wflCurves[largeNearElement].P3);
                 decimal newP3 = yDataPoint.CalculateY();

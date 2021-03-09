@@ -39,7 +39,7 @@ namespace AnthroCloud.API.Controllers
         [HttpPost]
         public async Task<Outputs> GetScores([FromBody] Inputs inputs)
         {
-            Outputs outputs = new Outputs();
+            Outputs outputs = new();
 
             Tuple<double, double> wfaTuple = await Stats.GetScore(Indicator.WeightForAge, inputs.Weight, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
             outputs.WfaZscore = wfaTuple.Item1;
@@ -94,7 +94,7 @@ namespace AnthroCloud.API.Controllers
         [HttpPost("MEASURED")]
         public async Task<Outputs> GetMeasuredScores([FromBody] Inputs inputs)
         {
-            Outputs outputs = new Outputs();
+            Outputs outputs = new();
 
             Tuple<double, double> wfaTuple = await Stats.GetScore(Indicator.WeightForAge, inputs.Weight, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
             outputs.WfaZscore = wfaTuple.Item1;
@@ -131,7 +131,7 @@ namespace AnthroCloud.API.Controllers
         [HttpPost("HCA")]
         public async Task<Outputs> GetHcaScores([FromBody] Inputs inputs)
         {
-            Outputs outputs = new Outputs();
+            Outputs outputs = new();
 
             Tuple<double, double> hcaTuple = await Stats.GetScore(Indicator.HeadCircumferenceForAge, inputs.HeadCircumference, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
             outputs.HcaZscore = hcaTuple.Item1;
@@ -148,7 +148,7 @@ namespace AnthroCloud.API.Controllers
         [HttpPost("MUAC")]
         public async Task<Outputs> GetMuacScores([FromBody] Inputs inputs)
         {
-            Outputs outputs = new Outputs();
+            Outputs outputs = new();
 
             Tuple<double, double> muacTuple = await Stats.GetScore(Indicator.ArmCircumferenceForAge, inputs.MUAC, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
             outputs.MuacZscore = muacTuple.Item1;
@@ -165,7 +165,7 @@ namespace AnthroCloud.API.Controllers
         [HttpPost("TSF")]
         public async Task<Outputs> GetTricepsScores([FromBody] Inputs inputs)
         {
-            Outputs outputs = new Outputs();
+            Outputs outputs = new();
 
             Tuple<double, double> tfaTuple = await Stats.GetScore(Indicator.TricepsSkinfoldForAge, inputs.TricepsSkinFold, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
             outputs.TsfZscore = tfaTuple.Item1;
@@ -182,7 +182,7 @@ namespace AnthroCloud.API.Controllers
         [HttpPost("SSF")]
         public async Task<Outputs> GetSubscapularScores([FromBody] Inputs inputs)
         {
-            Outputs outputs = new Outputs();
+            Outputs outputs = new();
 
             Tuple<double, double> sfaTuple = await Stats.GetScore(Indicator.SubscapularSkinfoldForAge, inputs.SubscapularSkinFold, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
             outputs.SsfZscore = sfaTuple.Item1;

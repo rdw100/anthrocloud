@@ -16,7 +16,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected EditContext editContext;
 
-        public FormViewModel formModel = new FormViewModel();
+        public FormViewModel formModel = new();
 
         public bool loadFailed;
 
