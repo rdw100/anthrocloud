@@ -27,7 +27,7 @@ namespace AnthroCloud.Tests
             Context = Configure();
         }
 
-        private AnthroCloudContextMySql Configure()
+        private static AnthroCloudContextMySql Configure()
         {
             // Retrieve application settings file
             ConfigurationBuilder configurationBuilder = new();
