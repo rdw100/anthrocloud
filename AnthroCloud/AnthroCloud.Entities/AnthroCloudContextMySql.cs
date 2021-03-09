@@ -9,8 +9,6 @@ namespace AnthroCloud.Entities
 {
     public partial class AnthroCloudContextMySql : DbContext
     {
-        private readonly DbContextOptions<AnthroCloudContextMySql> _options;
-
         public AnthroCloudContextMySql()
         {
         }
@@ -18,7 +16,6 @@ namespace AnthroCloud.Entities
         public AnthroCloudContextMySql(DbContextOptions<AnthroCloudContextMySql> options)
             : base(options)
         {
-            _options = options;
         }
 
         public virtual DbSet<BmiforAge> BmiforAge { get; set; }
