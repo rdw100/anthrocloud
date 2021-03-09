@@ -26,7 +26,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllBFA(1,12,17.5M) as List<BmiforAge>;
 
-            Assert.Equal(62, target.Count());
+            Assert.Equal(62, target.Count);
             
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -80,7 +80,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllBFA(2, 12, 17) as List<BmiforAge>;
 
-            Assert.Equal(62, target.Count());
+            Assert.Equal(62, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -134,7 +134,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllHCFA(1, 12, 73.00M) as List<HcForAge>;
 
-            Assert.Equal(61, target.Count());
+            Assert.Equal(61, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -188,7 +188,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllHCFA(2, 12, 73.00M) as List<HcForAge>;
 
-            Assert.Equal(61, target.Count());
+            Assert.Equal(61, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -242,7 +242,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllLHFA(1, 12, 73) as List<LengthHeightForAge>;
 
-            Assert.Equal(62, target.Count());
+            Assert.Equal(62, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -294,7 +294,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllLHFA(2, 12, 73) as List<LengthHeightForAge>;
 
-            Assert.Equal(62, target.Count());
+            Assert.Equal(62, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -346,7 +346,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllMUAC(1, 12, 15) as List<MuacforAge>;
 
-            Assert.Equal(58, target.Count());
+            Assert.Equal(58, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -400,7 +400,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllMUAC(2, 12, 15) as List<MuacforAge>;
 
-            Assert.Equal(58, target.Count());
+            Assert.Equal(58, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -454,7 +454,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllSSFA(1, 12, 7) as List<SsfforAge>;
 
-            Assert.Equal(58, target.Count());
+            Assert.Equal(58, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -508,7 +508,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllSSFA(2, 12, 7) as List<SsfforAge>;
 
-            Assert.Equal(58, target.Count());
+            Assert.Equal(58, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -562,7 +562,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllTSFA(1, 12, 8) as List<TsfforAge>;
 
-            Assert.Equal(58, target.Count());
+            Assert.Equal(58, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -616,7 +616,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllTSFA(2, 12, 8) as List<TsfforAge>;
 
-            Assert.Equal(58, target.Count());
+            Assert.Equal(58, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -670,7 +670,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllWFA(1, 12, 9) as List<WeightForAge>;
 
-            Assert.Equal(61, target.Count());
+            Assert.Equal(61, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -722,7 +722,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllWFA(2, 12, 9) as List<WeightForAge>;
 
-            Assert.Equal(61, target.Count());
+            Assert.Equal(61, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -774,7 +774,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllWFH(1, 73, 9) as List<WeightForHeight>;
 
-            Assert.Equal(111, target.Count());
+            Assert.Equal(111, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -828,7 +828,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllWFH(1, 87.70M, 12.35M) as List<WeightForHeight>;
 
-            Assert.Equal(111 + 1, target.Count());
+            Assert.Equal(111 + 1, target.Count);
 
             var actual = (from l in target where l.Score == 12.35M select l).FirstOrDefault();
 
@@ -884,7 +884,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllWFH(2, 73, 9) as List<WeightForHeight>;
 
-            Assert.Equal(111, target.Count());
+            Assert.Equal(111, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -939,7 +939,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllWFH(1, 87.70M, 12.35M) as List<WeightForHeight>;
 
-            Assert.Equal(111 + 1, target.Count());
+            Assert.Equal(111 + 1, target.Count);
 
             var actual = (from l in target where l.Score == 12.35M select l).FirstOrDefault();
 
@@ -996,7 +996,7 @@ namespace AnthroCloud.Integration.Tests
             var target = await controller.GetAllWFL(1, 73.00M, 9.00M) as List<WeightForLength>;
 
             // + 1 represents added interpolated data row for scored line chart
-            Assert.Equal(131, target.Count());
+            Assert.Equal(131, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -1050,7 +1050,7 @@ namespace AnthroCloud.Integration.Tests
             var target = await controller.GetAllWFL(1, 73.25M, 9.25M) as List<WeightForLength>;
 
             // + 1 represents added interpolated data row for scored line chart
-            Assert.Equal(131 + 1, target.Count());
+            Assert.Equal(131 + 1, target.Count);
 
             var actual = (from l in target where l.Score == 9.25M select l).FirstOrDefault();
 
@@ -1106,7 +1106,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllWFL(2, 73.00M, 9.00M) as List<WeightForLength>;
 
-            Assert.Equal(131, target.Count());
+            Assert.Equal(131, target.Count);
 
             var actual = (from l in target select l).FirstOrDefault();
 
@@ -1160,7 +1160,7 @@ namespace AnthroCloud.Integration.Tests
             var controller = new ChartController(_context);
             var target = await controller.GetAllWFL(2, 73.25M, 9.25M) as List<WeightForLength>;
 
-            Assert.Equal(131 + 1, target.Count());
+            Assert.Equal(131 + 1, target.Count);
 
             var actual = (from l in target where l.Score == 9.25M select l).FirstOrDefault();
 
