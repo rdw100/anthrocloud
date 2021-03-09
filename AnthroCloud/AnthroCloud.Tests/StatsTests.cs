@@ -281,8 +281,7 @@ namespace AnthroCloud.Unit.Tests
         [InlineData(Indicator.WeightForLength, 9.00, 73.00, Sex.Male)]
         public async Task Stats_All_TupleAsync(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
-            var stat = new Stats();
-            Tuple<double, double> GetScores = await stat.GetScore(indicator, measurement, ageInDays, sex);
+            Tuple<double, double> GetScores = await Stats.GetScore(indicator, measurement, ageInDays, sex);
             
             Assert.InRange(GetScores.Item1, -4, 4);
             Assert.InRange(GetScores.Item2, 0, 100);

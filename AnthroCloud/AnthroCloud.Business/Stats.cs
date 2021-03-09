@@ -49,7 +49,7 @@ namespace AnthroCloud.Business
         /// <param name="ageInDays">The age in total days</param>
         /// <param name="sex">Human sex designation per ISO/IEC 5218 code</param>
         /// <returns>Returns the z-score and percentile for a growth measure using a specified value.</returns>
-        public async Task<Tuple<double, double>> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
+        public static async Task<Tuple<double, double>> GetScore(Indicator indicator, double measurement, double ageInDays, Sex sex)
         {
             WHO2006 who2006 = new WHO2006();
 

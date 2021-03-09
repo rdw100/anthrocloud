@@ -42,7 +42,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample BMI data for a male.
         /// </summary>
         /// <returns>Returns sample BMI data for a male.</returns>
-        private List<BmiforAge> GetTestBmiforAge_Male()
+        private static List<BmiforAge> GetTestBmiforAge_Male()
         {
             var testBmiforAge = new List<BmiforAge>();
             testBmiforAge.Add(new BmiforAge
@@ -96,7 +96,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample BMI data for a female.
         /// </summary>
         /// <returns>Returns sample BMI data for a female.</returns>
-        private List<BmiforAge> GetTestBmiforAge_Female()
+        private static List<BmiforAge> GetTestBmiforAge_Female()
         {
             var testBmiforAge = new List<BmiforAge>();
             testBmiforAge.Add(new BmiforAge
@@ -150,7 +150,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample HCFA data for a male.
         /// </summary>
         /// <returns>Returns sample HCFA data for a male.</returns>
-        private List<HcForAge> GetAllHCFA_Male()
+        private static List<HcForAge> GetAllHCFA_Male()
         {
             var testHcforAge = new List<HcForAge>();
             testHcforAge.Add(new HcForAge
@@ -204,7 +204,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample HCFA data for a female.
         /// </summary>
         /// <returns>Returns sample HCFA data for a female.</returns>
-        private List<HcForAge> GetAllHCFA_Female()
+        private static List<HcForAge> GetAllHCFA_Female()
         {
             var testHcforAge = new List<HcForAge>();
             testHcforAge.Add(new HcForAge
@@ -258,7 +258,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample LHFA data for a male.
         /// </summary>
         /// <returns>Returns sample LHFA data for a male.</returns>
-        private List<LengthHeightForAge> GetAllLHFA_Male()
+        private static List<LengthHeightForAge> GetAllLHFA_Male()
         {
             var testLhfaforAge = new List<LengthHeightForAge>();
             testLhfaforAge.Add(new LengthHeightForAge
@@ -310,7 +310,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample LHFA data for a female.
         /// </summary>
         /// <returns>Returns sample LHFA data for a female.</returns>
-        private List<LengthHeightForAge> GetAllLHFA_Female()
+        private static List<LengthHeightForAge> GetAllLHFA_Female()
         {
             var testLhfaforAge = new List<LengthHeightForAge>();
             testLhfaforAge.Add(new LengthHeightForAge
@@ -362,7 +362,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample MUAC data for a male.
         /// </summary>
         /// <returns>Returns sample MUAC data for a male.</returns>
-        private List<MuacforAge> GetAllMUAC_Male()
+        private static List<MuacforAge> GetAllMUAC_Male()
         {
             var testMuacforAge = new List<MuacforAge>();
             testMuacforAge.Add(new MuacforAge
@@ -416,7 +416,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample MUAC data for a female.
         /// </summary>
         /// <returns>Returns sample MUAC data for a female.</returns>
-        private List<MuacforAge> GetAllMUAC_Female()
+        private static List<MuacforAge> GetAllMUAC_Female()
         {
             var testMuacforAge = new List<MuacforAge>();
             testMuacforAge.Add(new MuacforAge
@@ -470,7 +470,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample SSFA data for a male.
         /// </summary>
         /// <returns>Returns sample SSFA data for a male.</returns>
-        private List<SsfforAge> GetAllSSFA_Male()
+        private static List<SsfforAge> GetAllSSFA_Male()
         {
             var testSSFforAge = new List<SsfforAge>();
             testSSFforAge.Add(new SsfforAge
@@ -524,7 +524,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample SSFA data for a female.
         /// </summary>
         /// <returns>Returns sample SSFA data for a female.</returns>
-        private List<SsfforAge> GetAllSSFA_Female()
+        private static List<SsfforAge> GetAllSSFA_Female()
         {
             var testSSFforAge = new List<SsfforAge>();
             testSSFforAge.Add(new SsfforAge
@@ -578,7 +578,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample TSFA data for a male.
         /// </summary>
         /// <returns>Returns sample TSFA data for a male.</returns>
-        private List<TsfforAge> GetAllTSFA_Male()
+        private static List<TsfforAge> GetAllTSFA_Male()
         {
             var testTsfforAge = new List<TsfforAge>();
             testTsfforAge.Add(new TsfforAge
@@ -632,7 +632,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample TSFA data for a female.
         /// </summary>
         /// <returns>Returns sample TSFA data for a female.</returns>
-        private List<TsfforAge> GetAllTSFA_Female()
+        private static List<TsfforAge> GetAllTSFA_Female()
         {
             var testTsfforAge = new List<TsfforAge>();
             testTsfforAge.Add(new TsfforAge
@@ -686,7 +686,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample WFA data for a male.
         /// </summary>
         /// <returns>Returns sample WFA data for a male.</returns>
-        private List<WeightForAge> GetAllWFA_Male()
+        private static List<WeightForAge> GetAllWFA_Male()
         {
             var testWeightForAge = new List<WeightForAge>();
             testWeightForAge.Add(new WeightForAge
@@ -738,7 +738,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample WFA data for a female.
         /// </summary>
         /// <returns>Returns sample WFA data for a female.</returns>
-        private List<WeightForAge> GetAllWFA_Female()
+        private static List<WeightForAge> GetAllWFA_Female()
         {
             var testWeightForAge = new List<WeightForAge>();
             testWeightForAge.Add(new WeightForAge
@@ -790,7 +790,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample WFH data for a male.
         /// </summary>
         /// <returns>Returns sample WFH data for a male.</returns>
-        private List<WeightForHeight> GetAllWFH_Male()
+        private static List<WeightForHeight> GetAllWFH_Male()
         {
             var testWeightForHeight = new List<WeightForHeight>();
             testWeightForHeight.Add(new WeightForHeight
@@ -845,7 +845,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample interpolated WFH data for a male.
         /// </summary>
         /// <returns>Returns sample interpolated WFH data for a male.</returns>
-        private List<WeightForHeight> GetWFH_Male_Interpolated_Row()
+        private static List<WeightForHeight> GetWFH_Male_Interpolated_Row()
         {
             var testWeightForHeight = new List<WeightForHeight>();
             testWeightForHeight.Add(new WeightForHeight
@@ -901,7 +901,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample WFH data for a female.
         /// </summary>
         /// <returns>Returns sample WFH data for a female.</returns>
-        private List<WeightForHeight> GetAllWFH_Female()
+        private static List<WeightForHeight> GetAllWFH_Female()
         {
             var testWeightForHeight = new List<WeightForHeight>();
             testWeightForHeight.Add(new WeightForHeight
@@ -956,7 +956,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample interpolated WFH data for a female.
         /// </summary>
         /// <returns>Gets sample interpolated WFH data for a female.</returns>
-        private List<WeightForHeight> GetWFH_Female_Interpolated_Row()
+        private static List<WeightForHeight> GetWFH_Female_Interpolated_Row()
         {
             var testWeightForHeight = new List<WeightForHeight>();
             testWeightForHeight.Add(new WeightForHeight
@@ -1012,7 +1012,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample WFL data for a male.
         /// </summary>
         /// <returns>Returns sample WFL data for a male.</returns>
-        private List<WeightForLength> GetAllWFL_Male()
+        private static List<WeightForLength> GetAllWFL_Male()
         {
             var testWeightForLength = new List<WeightForLength>();
             testWeightForLength.Add(new WeightForLength
@@ -1067,7 +1067,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample intepolated WFL data for a male.
         /// </summary>
         /// <returns>Returns sample intepolated WFL data for a male.</returns>
-        private List<WeightForLength> GetWFL_Male_Interpolated_Row()
+        private static List<WeightForLength> GetWFL_Male_Interpolated_Row()
         {
             var testWeightForLength = new List<WeightForLength>();
             testWeightForLength.Add(new WeightForLength
@@ -1122,7 +1122,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample WFL data for a female.
         /// </summary>
         /// <returns>Returns sample WFL data for a female.</returns>
-        private List<WeightForLength> GetAllWFL_Female()
+        private static List<WeightForLength> GetAllWFL_Female()
         {
             var testWeightForLength = new List<WeightForLength>();
             testWeightForLength.Add(new WeightForLength
@@ -1177,7 +1177,7 @@ namespace AnthroCloud.Integration.Tests
         /// Gets sample interpolated WFL data for a female.
         /// </summary>
         /// <returns>Returns sample interpolated WFL data for a female.</returns>
-        private List<WeightForLength> GetWFL_Female_Interpolated_Row()
+        private static List<WeightForLength> GetWFL_Female_Interpolated_Row()
         {
             var testWeightForLength = new List<WeightForLength>();
             testWeightForLength.Add(new WeightForLength
