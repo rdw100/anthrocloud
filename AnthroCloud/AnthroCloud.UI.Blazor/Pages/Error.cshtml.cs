@@ -19,7 +19,7 @@ namespace AnthroCloud.UI.Blazor.Pages
 
         //private readonly ILogger<ErrorModel> _logger;
 
-        public ErrorModel(ILogger<ErrorModel> logger)
+        public ErrorModel()//ILogger<ErrorModel> logger)
         {
             //_logger = logger;
         }
