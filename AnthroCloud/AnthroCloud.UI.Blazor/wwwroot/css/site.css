@@ -82,3 +82,15 @@ a, .btn-link {
 .btn.search {
     width: 10rem;
 }
+
+/* Relatively positioned container dedicated to the chart canvas */
+canvas {
+    border: 1px dotted red;
+}
+
+.line-chart-container {
+    position: relative;
+    margin: auto;
+    height: 30vh;
+    width: 30vw;
+}

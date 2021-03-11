@@ -1,0 +1,14 @@
+﻿@page "/Line"
+@using AnthroCloud.UI.Blazor.Components
+@using AnthroCloud.Entities
+<h5>Line Chart</h5>
+<div class="row">
+    <div class="col">
+        <LineChart Id="line1"
+                   Types="@ChartTypes.Line"
+                   Data="@(new[] { "65","59","80","81","56","55","40" })"
+                   BackgroundColor="@(new[] { "rgb(75, 192, 192)"})"
+                   BorderColor="@(new[] { "rgb(75, 192, 192)"})"
+                   Labels="@(new[] { "January", "February", "March", "April", "May", "June", "July"})"></LineChart>
+    </div>
+</div>
