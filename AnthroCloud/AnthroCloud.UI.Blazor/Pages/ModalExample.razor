@@ -1,3 +1,5 @@
 ﻿@page "/ModalExample"
 @inject IModalService Modal
-<button @onclick="@(() => Modal.Show<FetchData>("Modal Popup Example"))" class="btn btn-primary">View </button>
+@using AnthroCloud.UI.Blazor.Components
+
+<button @onclick="@(() => Modal.Show<AnthroForm>("Modal Popup Example"))" class="btn btn-primary">View </button>
