@@ -91,6 +91,6 @@ canvas {
 .line-chart-container {
     position: relative;
     margin: auto;
-    height: 30vh;
-    width: 30vw;
+    height: 100vh;
+    width: 100vw;
 }
