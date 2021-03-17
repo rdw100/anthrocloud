@@ -1,6 +1,8 @@
 ﻿using AnthroCloud.Entities;
+using AnthroCloud.UI.Blazor.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Components
@@ -14,6 +16,9 @@ namespace AnthroCloud.UI.Blazor.Components
     {
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        public IChartService ChartService { get; set; }
 
         [Parameter]
         public string Id { get; set; }
@@ -42,6 +47,44 @@ namespace AnthroCloud.UI.Blazor.Components
         [Parameter]
         public string DatasetTitle { get; set; } = "My First Dataset";
 
+        readonly DataItem[] myData = new DataItem[] {
+            new DataItem
+            {
+                X = 2.75,
+                Y = 50
+            },
+            new DataItem
+            {
+                X = 5.5,
+                Y = 60
+            },
+            new DataItem
+            {
+                X = 7,
+                Y = 70
+            },
+            new DataItem
+            {
+                X = 9,
+                Y = 80
+            },
+            new DataItem
+            {
+                X = 11,
+                Y = 90
+            },
+            new DataItem
+            {
+                X = 12.5,
+                Y = 100
+            },
+            new DataItem
+            {
+                X = 15,
+                Y = 110
+            }
+        };
+
         /// <summary>
         /// Instantiates the Chart class with all configurable options.
         /// Method invoked after each time the component has been rendered. Note that the component does
@@ -55,9 +98,14 @@ namespace AnthroCloud.UI.Blazor.Components
         /// are useful for performing interop, or interacting with values received from <c>@ref</c>.
         /// Use the <paramref name="firstRender" /> parameter to ensure that initialization work is only performed
         /// once.
+        /// https://www.chartjs.org/docs/latest/axes/cartesian/linear.html#linear-cartesian-axis
         /// </remarks>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            // TODO:  Original LineChartController call returns
+            // JsonResult to JS manipulated data array
+            List<WeightForLength> chartData = await ChartService.GetAllWFL(1, 73, 9);
+
             var config = new
             {
                 Type = Types.ToString().ToLower(),
@@ -67,39 +115,36 @@ namespace AnthroCloud.UI.Blazor.Components
                     Title = new
                     {
                         Display = true,
-                        Text = "Birth to 5 Years (Z-scores)"
+                        Text = "Birth to 5 Years (Percentile)"
                     },
                     Scales = new
                     {
-                        YAxes = new
+                        YAxes = new[]
                         {
-                            Title = new
-                            {
-                                Display = true,
-                                Text = "Length (cm)"
-                            },
-                            ViewWindow = new
-                            { 
-                                Min = 80,
-                                Max = 110
-                            },
-                            Ticks = new[] 
-                            {
-                                50, 60, 70, 80, 90, 100, 110
+                            new {
+                                ScaleLabel = new { Display = true, labelString = "Weight (kg)" },
+                                Ticks = new { BeginAtZero = true, StepSize = 2, SuggestedMax = 26, SuggestMin = 0 }
                             }
                         },
-                        XAxes = new 
+                        XAxes = new[]
                         {
-                            Title = new
-                            {
-                                Display = true,
-                                Text = "Weight (kg)"
-                            },
-                            Ticks = new[]
-                            {
-                                0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26
+                            new {
+                                ScaleLabel = new { Display = true, labelString = "Length (cm)" }
                             }
                         }
+                    },
+                    Legend = new
+                    {
+                        Display = true,
+                        Position = "right",
+                        Labels = new
+                        {
+                            fontColor = "rgb(255, 99, 132)"
+                        }
+                    },
+                    Series = new[]
+                    {
+                        new {Color = "#e10808" }
                     }
                 },
                 Data = new
@@ -107,11 +152,12 @@ namespace AnthroCloud.UI.Blazor.Components
                     Datasets = new[]
                     {
                     new {
-                            Data = Data,
-                            BackgroundColor = BackgroundColor,
+                            Data = myData,
+                            // BackgroundColor = BackgroundColor,
                             BorderColor = BorderColor,
                             BorderWidth = BorderWidthNum,
-                            Label = DatasetTitle
+                            Label = DatasetTitle,
+                            fill = false
                     }
                 },
                     Labels = Labels
@@ -121,5 +167,11 @@ namespace AnthroCloud.UI.Blazor.Components
             // Inject the IJSRuntime abstraction into a class (.cs)
             await JSRuntime.InvokeVoidAsync("setup", Id, config);
         }
+    }
+
+    class DataItem
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
     }
 }
