@@ -1,5 +1,4 @@
 ﻿using AnthroCloud.Entities;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Services
 {
-    public class ChartService
+    public class ChartService : IChartService
     {
         private readonly HttpClient httpClient;
 

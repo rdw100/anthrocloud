@@ -6,6 +6,6 @@ namespace AnthroCloud.UI.Blazor.Services
 {
     public interface IChartService
     {
-        Task<List<WeightForLength>> GetAllWFL(byte id, decimal x, decimal y);
+        Task<List<WeightForLength>> GetAllWFL(byte id, double x, double y);
     }
 }
