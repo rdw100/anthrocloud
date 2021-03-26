@@ -2,7 +2,7 @@
 using AnthroCloud.UI.Blazor.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System.Data;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Components
@@ -27,7 +27,7 @@ namespace AnthroCloud.UI.Blazor.Components
         public ChartTypes Types { get; set; }
 
         [Parameter]
-        public string[] Data { get; set; }
+        public string[] Data { get; set; } 
 
         [Parameter]
         public string[] BackgroundColor { get; set; }
@@ -39,16 +39,7 @@ namespace AnthroCloud.UI.Blazor.Components
         public int BorderWidthNum { get; set; } = 0;
 
         [Parameter]
-        public int[] Labels { get; set; }// = new[] { "LengthInCm", "Score", "97th", "85th", "50th", "15th", "3rd" };
-
-        //  [{ label: 'lengthincm', type: 'number' },
-        //      { label: 'Score', type: 'number' },
-        //      { label: '97th', type: 'number' },
-        //      { label: '85th', type: 'number' },
-        //      { label: '50th', type: 'number' },
-        //      { label: '15th', type: 'number' },
-        //      { label: '3rd', type: 'number' } ]
-        //      }//= typeof(WflDataItem).GetType().GetProperties().Select(prop => prop.Name).ToArray();
+        public int[] Labels { get; set; }
 
         [Parameter]
         public string Title { get; set; }
@@ -95,6 +86,14 @@ namespace AnthroCloud.UI.Blazor.Components
             }
         };
 
+        readonly DataItem[] myScatterPlotData = new DataItem[] {            
+            new DataItem
+            {
+                Y = 9.5,
+                X = 80
+            }
+        };
+
         readonly WflDataItem[] myLineData = new WflDataItem[] {
             new WflDataItem
             {
@@ -120,27 +119,6 @@ namespace AnthroCloud.UI.Blazor.Components
         };
 
         /// <summary>
-        /// This example method generates a DataTable.
-        /// </summary>
-        static DataTable GetTable()
-        {
-            // Here we create a DataTable with four columns.
-            DataTable table = new DataTable();
-            table.Columns.Add("Dosage", typeof(int));
-            table.Columns.Add("Drug", typeof(string));
-            table.Columns.Add("Patient", typeof(string));
-            table.Columns.Add("Dose", typeof(int));
-
-            // Here we add five DataRows.
-            table.Rows.Add(25, "Indocin", "David", 2);
-            table.Rows.Add(50, "Enebrel", "Sam", 2);
-            table.Rows.Add(10, "Hydralazine", "Christoff",5);
-            table.Rows.Add(21, "Combivent", "Janet", 3);
-            table.Rows.Add(100, "Dilantin", "Melanie", 1);
-            return table;
-        }
-
-        /// <summary>
         /// Instantiates the Chart class with all configurable options.
         /// Method invoked after each time the component has been rendered. Note that the component does
         /// not automatically re-render after the completion of any returned <see cref="T:System.Threading.Tasks.Task" />, because
@@ -160,6 +138,8 @@ namespace AnthroCloud.UI.Blazor.Components
             // TODO:  Original LineChartController call returns
             // JsonResult to JS manipulated data array
             //List<WeightForLength> chartData = await ChartService.GetAllWFL(1, 73, 9);
+            var gChart = new Data.GrowthChartData();
+            var myData = gChart.GetData();
 
             var config = new
             {
@@ -204,54 +184,112 @@ namespace AnthroCloud.UI.Blazor.Components
                         new { Color = "#8a08e1" }
                     }
                 },
-                Data = new
+                Data = 
+                new
                 {
                     Datasets = new[]
                     {
-                        //new {
+                         //new {
                         //    Data = myScatterData, //GetTable(),//myScatterData, //myLineData,//
                         //    BorderColor = BorderColor,
                         //    BorderWidth = BorderWidthNum,
                         //    Label = DatasetTitle,//new[] { "Score", "97th", "85th", "50th", "15th", "3rd" },// 
                         //    fill = false
                         //}
-                        new { 
-                            Data = new[] {2,6,8,10,12,14,16},
+                        new {
+                            Data = myScatterData,
                             Label = "Africa",
                             BorderColor = "#3e95cd",
                             fill = false
                         },
                         new {
-                            Data = new[] {3,7,9,11,13,15,17},
+                            Data = myScatterPlotData,
                             Label = "Asia",
                             BorderColor = "#8e5ea2",
                             fill = false
                         },
-                        new {
-                            Data = new[] {2,4,9,10,13,16,17},
-                            Label = "Europe",
-                            BorderColor = "#3cba9f",
-                            fill = false
-                        },
-                        new {
-                            Data = new[] {3,4,5,7,8,9,15},
-                            Label = "Latin America",
-                            BorderColor = "#e8c3b9",
-                            fill = false
-                        },
-                        new {
-                            Data = new[] {3,6,9,11,14,15,16},
-                            Label = "North America",
-                            BorderColor = "#c45850",
-                            fill = false
-                        }
-                    },
+                        //new {
+                        //    Data = new[] {2,4,9,10,13,16,17},
+                        //    Label = "Europe",
+                        //    BorderColor = "#3cba9f",
+                        //    fill = false
+                        //},
+                        //new {
+                        //    Data = new[] {3,4,5,7,8,9,15},
+                        //    Label = "Latin America",
+                        //    BorderColor = "#e8c3b9",
+                        //    fill = false
+                        //},
+                        //new {
+                        //    Data = new[] {3,6,9,11,14,15,16},
+                        //    Label = "North America",
+                        //    BorderColor = "#c45850",
+                        //    fill = false
+                        //}
+                    }
+                    ,
                     Labels = new[] { 50, 60, 70, 80, 90, 100, 110 }
                 }
             };
 
             // Inject the IJSRuntime abstraction into a class (.cs)
-            await JSRuntime.InvokeVoidAsync("setup", Id, config);
+            // await JSRuntime.InvokeVoidAsync("setup", Id, config);
+             await JSRuntime.InvokeVoidAsync("drawChart", Id, myData, null);
+        }
+
+        public string LoadChartData()
+        {
+            var myLabels = new object[]
+            {
+                new { label = "lengthincm", type = "number"},
+                new { label = "Score", type = "number"},
+                new { label = "97th", type = "number"},
+                new { label = "85th", type = "number"},
+                new { label = "50th", type = "number"},
+                new { label = "15th", type = "number"},
+                new { label = "3rd", type = "number"}
+            };
+
+            var myData = new object[]
+            {
+                new { 
+                    LengthInCm = 73.0,
+                    Score = 9,
+                    P3 = 7.800,
+                    P15 = 8.400,
+                    P50 = 9.100,
+                    P85 = 9.900,
+                    P97 = 10.700
+                }
+            };
+            
+            string result = string.Concat(myLabels, myData);
+            
+            return result;
+        }
+
+        public string GetChartData()
+        {
+            var chart = new Chart
+            {
+                cols = new object[]
+                {
+                    new { id = "year", label = "Year", type = "string" },
+                    new { id = "sales", label = "Sales", type = "number" },
+                    new { id = "expenses", label = "Expenses", type = "number" }
+                },
+                rows = new object[]
+                {
+                    new { c = new object[] { new { v = "2014" }, new { v = 1000 }, new { v = 400 } } },
+                    new { c = new object[] { new { v = "2015" }, new { v = 1170 }, new { v = 460 } } },
+                    new { c = new object[] { new { v = "2016" }, new { v = 660 }, new { v = 1120 } } },
+                    new { c = new object[] { new { v = "2017" }, new { v = 1030 }, new { v = 540 } } }
+                }
+            };
+
+            string jsonString = JsonSerializer.Serialize(chart);
+
+            return jsonString;
         }
 
         //public async Task<DataItem[]> GetChartData(byte id, decimal x, decimal y)
@@ -260,6 +298,15 @@ namespace AnthroCloud.UI.Blazor.Components
         //    dataList = await ChartService.GetAllWFL(id, x, y);
         //    //DataItem[] dataChart = dataList.ToArray<>();
         //    //return dataChart;
+        //}
+
+        //public async Task<string> GetWeightForLengthJson(byte id, double x, double y)
+        //{
+        //    List<WeightForLength> dataList = new();
+        //    //dataList = await ChartService.GetAllWFL(id, x, y);
+        //    dataList = await ChartService.GetAllWFL(id, x, y);
+        //    var result = JsonSerializer.Serialize(dataList);
+        //    return result;
         //}
     }
 
@@ -295,5 +342,11 @@ namespace AnthroCloud.UI.Blazor.Components
     {
         public string Label { get; set; }
         public string Type { get; set; }
+    }
+
+    public class Chart
+    {
+        public object[] cols { get; set; }
+        public object[] rows { get; set; }
     }
 }

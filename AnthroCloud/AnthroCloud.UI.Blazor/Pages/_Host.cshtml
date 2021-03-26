@@ -16,6 +16,7 @@
     <link href="css/site.css" rel="stylesheet" />
     <link href="AnthroCloud.UI.Blazor.styles.css" rel="stylesheet" />
     <link href="_content/Blazored.Modal/blazored-modal.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
     <component type="typeof(App)" render-mode="ServerPrerendered" />
@@ -33,7 +34,8 @@
 
     <script src="_framework/blazor.server.js"></script>
     <script src="~/js/Chart.bundle.min.js"></script>
-    <script src="~/js/ChartSetup.js"></script>
+    @*<script src="~/js/ChartSetup.js"></script>*@
+    <script src="~/js/chartjs.js"></script>
 </body>
 </html>
 <script src="_content/Blazored.Modal/blazored.modal.js"></script>
