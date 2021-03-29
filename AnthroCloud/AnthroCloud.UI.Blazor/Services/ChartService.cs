@@ -27,5 +27,15 @@ namespace AnthroCloud.UI.Blazor.Services
             return await JsonSerializer.DeserializeAsync
                 <List<WeightForLength>>(responseStream);
         }
+
+        public async Task<string> GetAllWFLJson(byte id, double x, double y)
+        {
+            string uri = $"chart/WFLJson/{id}/{x}/{y}";
+            var response = await httpClient.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+        }
     }
 }
