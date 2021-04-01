@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace AnthroCloud.API.Controllers
 {
     /// <summary>
-    /// Provides chart data for display individual measurements.
+    /// Provides chart data for displaying individual measurements.
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
@@ -193,6 +193,13 @@ namespace AnthroCloud.API.Controllers
             return result;
         }
 
+        /// <summary>
+        /// Gets a JSON serialized JavaScript string literal object. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns>Returns a JSON representation of the DataTable that can be passed into the DataTable constructor.</returns>
         [HttpGet("{id}")]
         [Route("WFLJson/{id}")]
         [Route("WFLJson/{id}/{x}/{y}")]
@@ -200,13 +207,12 @@ namespace AnthroCloud.API.Controllers
         {
             Chart chart = new Chart(_context);
             List<WeightForLength> result = await chart.ListWeightForLength((Sexes)id, x, y);
-            // Remove first column
-            List<Row> resultPChartData = result.Select(x => new Row(x.Lengthincm, x.P3, x.P15, x.P50, x.P85, x.P97, x.Score)).ToList();
+            
+            // Select P Columns
+            List<WFL_P> wfl = result.Select(x => new WFL_P(x.Lengthincm, x.P3, x.P15, x.P50, x.P85, x.P97, x.Score)).ToList();
 
-            var data = new DataTable
+            List<Col> cols = new List<Col>()
             {
-                cols = new List<Col>
-                {
                     //new Col { id = "sex", label = "Sex", type = "string" },
                     new Col { id = "lengthincm", label = "Lengthincm", type = "number" },
                     //new Col { id = "l", label = "L", type = "number" },
@@ -224,81 +230,34 @@ namespace AnthroCloud.API.Controllers
                     new Col { id = "p50", label = "P50", type = "number" },
                     new Col { id = "p85", label = "P85", type = "number" },
                     new Col { id = "p97", label = "P97", type = "number" },
-                    new Col { id = "score", label = "Score", type = "string" },
-                },
-                rows = resultPChartData
+                    new Col { id = "score", label = "Score", type = "number" },
             };
 
-            //string[] colResult = data.cols.Select(i => i.ToString()).ToArray();
-            //string[] rowResult = resultPChartData.Select(i => i.ToString()).ToArray();
-
-            string colResult = JsonSerializer.Serialize(data.cols.ToArray());
-            string rowResult = JsonSerializer.Serialize(resultPChartData.First());
-            //string jsonResult = "[" + colResult + "," + rowResult + "]";
-            //string jsonResult = "[" + colResult + "," + rowResult + "]";
-            //var rowItemResult = new[] { colResult };// = resultPChartData.ToArray().ToString();
-            //string[] rowItemResult;
-            string rowItemResult = string.Empty;
-            foreach (var item in resultPChartData)
+            List<Row> rows = new List<Row>();
+            foreach (var item in wfl)
             {
-                //string newScore;
-                //if (!(item.Score == null))
-                //{
-                //    newScore = item.Score;
-                //} 
-                //else 
-                //{ "null"; }
-                if (!(rowItemResult ==string.Empty)) { rowItemResult += ","; }
-                rowItemResult += "[" + item.Lengthincm + ","
-                                     + item.P3 + ","
-                                     + item.P15 + ","
-                                     + item.P50 + ","
-                                     + item.P85 + ","
-                                     + item.P97 + ","
-                                     + JsonSerializer.Serialize(item.Score)
-                               + "]" ;
+                rows.Add(new Row
+                {
+                    c = new List<Cell>()
+                    {
+                        new Cell { v = item.Lengthincm },
+                        new Cell { v = item.P3 },
+                        new Cell { v = item.P15 },
+                        new Cell { v = item.P50 },
+                        new Cell { v = item.P85 },
+                        new Cell { v = item.P97 },
+                        new Cell { v = item.Score }
+                    }
+                });
             }
 
-            //string rowItemResult;
-            //foreach (var item in resultPChartData)
-            //{
-            //    rowItemResult = rowItemResult.Concat(new[] { item }).ToArray();
-            //    //rowItemResult = rowItemResult.Concat(new[] { JsonSerializer.Serialize(item) }).ToArray();
-            //    //rowItemResult = new[] { item.ToString() };
-            //    //newRowResult += rowItemResult;
-            //}
+            // Datatable
+            DataTable gChart = new DataTable();
+            gChart.cols = cols;
+            gChart.rows = rows;
 
-            string jsonResult = "[" + colResult + "," + rowItemResult + "]";
-
-            //string jsonResult = "[" + colResult + "," + "[" + rowResult + "]";
-            //var c = new[]
-            //{
-            //    new[]
-            //    {
-            //        colResult
-            //    },
-            //    new[]
-            //    {
-            //        rowResult
-            //    }
-            //};
-
-            //string jsonResult = JsonSerializer.Serialize(c);
-
-            //var arrayOfObjects = JsonSerializer.Serialize(
-            //    new[] { JsonConvert.DeserializeObject(json1), JsonConvert.DeserializeObject(json2) }
-            //);
-
-            ////string[] concatResult = { colResult, rowResult };
-            //string[] concatResult = { data.cols.ToArray().ToString(), data.rows.ToArray().ToString() };
-            //// string jsonResult = JsonSerializer.Serialize(concatResult);
-            //// string jsonResult = JsonSerializer.Serialize(data);
-            //string jsonResult = JsonSerializer.Serialize(concatResult.ToString());
-            //string jsonArray = concatResult.ToArray().ToString();
-            //string jsonResultSerialize = JsonSerializer.Serialize(concatResult);
-            //string jsonArraySerialize = JsonSerializer.Serialize(concatResult.ToArray());
-
-            return jsonResult;
+            string sJson = JsonSerializer.Serialize(gChart);
+            return sJson;
         }
     }
     public class DataTable
@@ -312,6 +271,39 @@ namespace AnthroCloud.API.Controllers
         public string id { get; set; }
         public string label { get; set; }
         public string type { get; set; }
+    }
+
+    public class Cell
+    {
+        public dynamic v { get; set; }
+        //public object f { get; set; }
+    }
+
+    public class Row
+    {
+        public List<Cell> c { get; set; }
+    }
+
+    public class WFL_P
+    {
+        public decimal Lengthincm { get; }
+        public decimal P3 { get; }
+        public decimal P15 { get; }
+        public decimal P50 { get; }
+        public decimal P85 { get; }
+        public decimal P97 { get; }
+        public decimal? Score { get; }
+
+        public WFL_P(decimal lengthincm, decimal p3, decimal p15, decimal p50, decimal p85, decimal p97, decimal? score)
+        {
+            Lengthincm = lengthincm;
+            P3 = p3;
+            P15 = p15;
+            P50 = p50;
+            P85 = p85;
+            P97 = p97;
+            Score = score;
+        }
     }
 
     //public class Row
@@ -335,43 +327,4 @@ namespace AnthroCloud.API.Controllers
     //    public double P97 { get; set; }
     //    public double Score { get; set; }
     //}
-
-    public class Row
-    {
-        public decimal Lengthincm { get; }
-        public decimal P3 { get; }
-        public decimal P15 { get; }
-        public decimal P50 { get; }
-        public decimal P85 { get; }
-        public decimal P97 { get; }
-        public decimal? Score { get; }
-
-        public Row(decimal lengthincm, decimal p3, decimal p15, decimal p50, decimal p85, decimal p97, decimal? score)
-        {
-            Lengthincm = lengthincm;
-            P3 = p3;
-            P15 = p15;
-            P50 = p50;
-            P85 = p85;
-            P97 = p97;
-            Score = score;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is Row other &&
-                   Lengthincm == other.Lengthincm &&
-                   P3 == other.P3 &&
-                   P15 == other.P15 &&
-                   P50 == other.P50 &&
-                   P85 == other.P85 &&
-                   P97 == other.P97 &&
-                   Score == other.Score;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Lengthincm, P3, P15, P50, P85, P97, Score);
-        }
-    }
 }
