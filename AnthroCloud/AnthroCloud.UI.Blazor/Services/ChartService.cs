@@ -28,9 +28,9 @@ namespace AnthroCloud.UI.Blazor.Services
                 <List<WeightForLength>>(responseStream);
         }
 
-        public async Task<string> GetAllWFLJson(byte id, double x, double y)
+        public async Task<string> GetAllWFLJson(byte id, double x, double y, GraphTypes z)
         {
-            string uri = $"chart/WFLJson/{id}/{x}/{y}";
+            string uri = $"chart/WFLJson/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 

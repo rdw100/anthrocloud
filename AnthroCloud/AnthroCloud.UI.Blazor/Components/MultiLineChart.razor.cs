@@ -1,4 +1,5 @@
 ﻿using AnthroCloud.UI.Blazor.Services;
+using AnthroCloud.Entities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
@@ -62,7 +63,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public async Task<string> GetChartData(byte id, double x, double y)
         {
-            string data = await ChartService.GetAllWFLJson(id, x, y);
+            string data = await ChartService.GetAllWFLJson(id, x, y, GraphTypes.PValue);
             return data;
         }
     }    

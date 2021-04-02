@@ -66,7 +66,7 @@ namespace AnthroCloud.Entities
         [Required, EnumDataType(typeof(OedemaTypes))]
         public OedemaTypes Oedema { get; set; } = OedemaTypes.No;
 
-        public MeasuredType Measured { get; set; } = MeasuredType.Recumbent;
+        public MeasurementTypes Measured { get; set; } = MeasurementTypes.Recumbent;
 
         public Age Age { get; set; }
         public string AgeString { get; set; } = "11mo";
@@ -74,15 +74,15 @@ namespace AnthroCloud.Entities
         public byte AgeInYears { get; set; } = 0;
         public double BMI { get; set; } = 16.9;
 
-        public double AdjustMeasured(double LengthHeight, MeasuredType Measured)
+        public double AdjustMeasured(double LengthHeight, MeasurementTypes Measured)
         {
             double adjusted = LengthHeight;
 
-            if (AgeInYears < 2 && Measured == MeasuredType.Standing)
+            if (AgeInYears < 2 && Measured == MeasurementTypes.Standing)
             {
                 adjusted += .7;
             }
-            else if (AgeInYears > 2 && Measured == MeasuredType.Recumbent)
+            else if (AgeInYears > 2 && Measured == MeasurementTypes.Recumbent)
             {
                 adjusted += .7;
             }

@@ -196,135 +196,25 @@ namespace AnthroCloud.API.Controllers
         /// <summary>
         /// Gets a JSON serialized JavaScript string literal object. 
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="id">Sex</param>
+        /// <param name="x">X-axis data point</param>
+        /// <param name="y">Y-axis data point</param>
+        /// <param name="z"></param>
         /// <returns>Returns a JSON representation of the DataTable that can be passed into the DataTable constructor.</returns>
         [HttpGet("{id}")]
         [Route("WFLJson/{id}")]
-        [Route("WFLJson/{id}/{x}/{y}")]
-        public async Task<string> GetAllWFLJson(byte id, decimal x, decimal y)
+        [Route("WFLJson/{id}/{x}/{y}/{z}")]
+        public async Task<string> GetAllWFLJson(byte id, decimal x, decimal y, GraphTypes z)
         {
-            Chart chart = new Chart(_context);
+            Chart chart = new(_context);
             List<WeightForLength> result = await chart.ListWeightForLength((Sexes)id, x, y);
-            
-            // Select P Columns
-            List<WFL_P> wfl = result.Select(x => new WFL_P(x.Lengthincm, x.P3, x.P15, x.P50, x.P85, x.P97, x.Score)).ToList();
 
-            List<Col> cols = new List<Col>()
-            {
-                    //new Col { id = "sex", label = "Sex", type = "string" },
-                    new Col { id = "lengthincm", label = "Lengthincm", type = "number" },
-                    //new Col { id = "l", label = "L", type = "number" },
-                    //new Col { id = "m", label = "M", type = "number" },
-                    //new Col { id = "s", label = "S", type = "number" },
-                    //new Col { id = "sd3neg", label = "Sd3neg", type = "number" },
-                    //new Col { id = "sd2neg", label = "Sd2neg", type = "number" },
-                    //new Col { id = "sd1neg", label = "Sd1neg", type = "number" },
-                    //new Col { id = "sd0", label = "Sd0", type = "number" },
-                    //new Col { id = "sd1", label = "Sd1", type = "number" },
-                    //new Col { id = "sd2", label = "Sd2", type = "number" },
-                    //new Col { id = "sd3", label = "Sd3", type = "number" },
-                    new Col { id = "p3", label = "P3", type = "number" },
-                    new Col { id = "p15", label = "P15", type = "number" },
-                    new Col { id = "p50", label = "P50", type = "number" },
-                    new Col { id = "p85", label = "P85", type = "number" },
-                    new Col { id = "p97", label = "P97", type = "number" },
-                    new Col { id = "score", label = "Score", type = "number" },
-            };
-
-            List<Row> rows = new List<Row>();
-            foreach (var item in wfl)
-            {
-                rows.Add(new Row
-                {
-                    c = new List<Cell>()
-                    {
-                        new Cell { v = item.Lengthincm },
-                        new Cell { v = item.P3 },
-                        new Cell { v = item.P15 },
-                        new Cell { v = item.P50 },
-                        new Cell { v = item.P85 },
-                        new Cell { v = item.P97 },
-                        new Cell { v = item.Score }
-                    }
-                });
-            }
-
-            // Datatable
-            DataTable gChart = new DataTable();
-            gChart.cols = cols;
-            gChart.rows = rows;
+            ChartDataTable gChart = new();
+            gChart.cols = gChart.GetCols(z, GrowthTypes.WFL);
+            gChart.rows = gChart.GetWflRows(z, GrowthTypes.WFL, result);
 
             string sJson = JsonSerializer.Serialize(gChart);
             return sJson;
         }
     }
-    public class DataTable
-    {
-        public List<Col> cols { get; set; }
-        public List<Row> rows { get; set; }
-    }
-
-    public class Col
-    {
-        public string id { get; set; }
-        public string label { get; set; }
-        public string type { get; set; }
-    }
-
-    public class Cell
-    {
-        public dynamic v { get; set; }
-        //public object f { get; set; }
-    }
-
-    public class Row
-    {
-        public List<Cell> c { get; set; }
-    }
-
-    public class WFL_P
-    {
-        public decimal Lengthincm { get; }
-        public decimal P3 { get; }
-        public decimal P15 { get; }
-        public decimal P50 { get; }
-        public decimal P85 { get; }
-        public decimal P97 { get; }
-        public decimal? Score { get; }
-
-        public WFL_P(decimal lengthincm, decimal p3, decimal p15, decimal p50, decimal p85, decimal p97, decimal? score)
-        {
-            Lengthincm = lengthincm;
-            P3 = p3;
-            P15 = p15;
-            P50 = p50;
-            P85 = p85;
-            P97 = p97;
-            Score = score;
-        }
-    }
-
-    //public class Row
-    //{
-    //    //public int Sex { get; set; }
-    //    public double LengthInCm { get; set; }
-    //    //public double L { get; set; }
-    //    //public double M { get; set; }
-    //    //public double S { get; set; }
-    //    //public double Sd3neg { get; set; }
-    //    //public double Sd2neg { get; set; }
-    //    //public double Sd1neg { get; set; }
-    //    //public double Sd0 { get; set; }
-    //    //public double Sd1 { get; set; }
-    //    //public double Sd2 { get; set; }
-    //    //public double Sd3 { get; set; }
-    //    public double P3 { get; set; }
-    //    public double P15 { get; set; }
-    //    public double P50 { get; set; }
-    //    public double P85 { get; set; }
-    //    public double P97 { get; set; }
-    //    public double Score { get; set; }
-    //}
 }
