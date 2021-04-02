@@ -1,4 +1,4 @@
-﻿namespace AnthroCloud.Entities
+﻿namespace AnthroCloud.Entities.Charts
 {
     public enum GrowthTypes
     {

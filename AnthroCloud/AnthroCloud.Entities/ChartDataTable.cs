@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AnthroCloud.Entities
+namespace AnthroCloud.Entities.Charts
 {
     public class ChartDataTable
     {

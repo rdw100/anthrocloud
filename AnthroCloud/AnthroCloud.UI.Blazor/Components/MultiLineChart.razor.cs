@@ -1,5 +1,5 @@
 ﻿using AnthroCloud.UI.Blazor.Services;
-using AnthroCloud.Entities;
+using AnthroCloud.Entities.Charts;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
@@ -21,6 +21,9 @@ namespace AnthroCloud.UI.Blazor.Components
 
         [Parameter]
         public string Id { get; set; }
+
+        [Parameter]
+        public GraphTypes Graph { get; set; }
 
         public string Gdata { get; set; } 
 

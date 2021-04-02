@@ -1,6 +1,6 @@
-﻿namespace AnthroCloud.Entities
+﻿namespace AnthroCloud.Entities.Charts
 {
-    public enum ChartTypes
+    public enum ChartJsTypes
     {
         Line,
         Pie,

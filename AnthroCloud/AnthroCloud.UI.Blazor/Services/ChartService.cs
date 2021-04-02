@@ -1,4 +1,5 @@
 ﻿using AnthroCloud.Entities;
+using AnthroCloud.Entities.Charts;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;

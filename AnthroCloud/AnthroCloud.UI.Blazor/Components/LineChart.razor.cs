@@ -1,4 +1,4 @@
-﻿using AnthroCloud.Entities;
+﻿using AnthroCloud.Entities.Charts;
 using AnthroCloud.UI.Blazor.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -24,7 +24,7 @@ namespace AnthroCloud.UI.Blazor.Components
         public string Id { get; set; }
 
         [Parameter]
-        public ChartTypes Types { get; set; }
+        public ChartJsTypes Types { get; set; }
 
         [Parameter]
         public string[] Data { get; set; } 
