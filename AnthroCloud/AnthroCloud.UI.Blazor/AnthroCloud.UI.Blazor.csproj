@@ -5,11 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\WFL-Z.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.Modal" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AnthroCloud.Business\AnthroCloud.Business.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Components\MultiLineChart - Copy - Copy.razor.cs">
+      <DependentUpon>MultiLineChart - Copy.razor.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Components\MultiLineChart - Copy.razor.cs">
+      <DependentUpon>MultiLineChart.razor.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

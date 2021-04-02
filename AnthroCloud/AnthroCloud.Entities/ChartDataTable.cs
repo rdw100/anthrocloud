@@ -132,21 +132,57 @@ namespace AnthroCloud.Entities.Charts
         public List<Row> GetWflRows(GraphTypes graph, GrowthTypes growth, List<WeightForLength> newList)
         {
             List<Row> rows = new();
-            foreach (var item in newList)
+            switch (graph)
             {
-                rows.Add(new Row
-                {
-                    c = new List<Cell>()
+                case (GraphTypes.PValue):
+                    switch (growth)
                     {
-                        new Cell { v = item.Lengthincm },
-                        new Cell { v = item.P3 },
-                        new Cell { v = item.P15 },
-                        new Cell { v = item.P50 },
-                        new Cell { v = item.P85 },
-                        new Cell { v = item.P97 },
-                        new Cell { v = item.Score }
+                        case (GrowthTypes.WFL):
+
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Lengthincm },
+                                        new Cell { v = item.P3 },
+                                        new Cell { v = item.P15 },
+                                        new Cell { v = item.P50 },
+                                        new Cell { v = item.P85 },
+                                        new Cell { v = item.P97 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
                     }
-                });
+                    break;
+                case (GraphTypes.ZScore):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.WFL):
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Lengthincm },
+                                        new Cell { v = item.Sd3neg },
+                                        new Cell { v = item.Sd2neg },
+                                        new Cell { v = item.Sd1neg },
+                                        new Cell { v = item.Sd0 },
+                                        new Cell { v = item.Sd1 },
+                                        new Cell { v = item.Sd2 },
+                                        new Cell { v = item.Sd3 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
             }
             return rows;
         }
