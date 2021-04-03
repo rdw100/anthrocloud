@@ -43,8 +43,8 @@ namespace AnthroCloud.UI.Blazor.Components
                     Title = Title,//"Birth to 5 Years (Percentile)","Birth to 5 Years (Z-scores)"
                     Width = 650,
                     height = 500,
-                    hAxis = new { Title = "Weight (kg)", ViewWindow = new { min = 45, max = 110 }, Ticks = new[] { 50, 60, 70, 80, 90, 100, 110 } },
-                    vAxis = new { Title = "Length (cm)", Ticks = new[] { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26 } },
+                    hAxis = new { Title = "Weight (kg)", ViewWindow = new { min = 45, max = 110 }, Ticks = Ticks.GetHaxisTicks(Graph, Growth) },
+                    vAxis = new { Title = "Length (cm)", Ticks = Ticks.GetVaxisTicks(Graph, Growth)},
                     Legend = new
                     {
                         Display = true,
