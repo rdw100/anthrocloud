@@ -42,7 +42,7 @@ namespace AnthroCloud.UI.Blazor.Components
                     Title = "Birth to 5 Years (Percentile)",
                     Width = 900,
                     height = 500,
-                    hAxis = new { Title = "Weight (kg)", ViewWindow = new { min = 45, max = 110}, Ticks = new[] { 50, 60, 70, 80, 90, 100, 110 } },
+                    hAxis = new { Title = "Weight (kg)", ViewWindow = new { min = 45, max = 110 }, Ticks = new[] { 50, 60, 70, 80, 90, 100, 110 } },
                     vAxis = new { Title = "Length (cm)", Ticks = new[] { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26 } },
                     Legend = new
                     {
@@ -50,14 +50,7 @@ namespace AnthroCloud.UI.Blazor.Components
                         Position = "bottom"
                     },
                     CurveType = "Function",
-                    series = new[] {
-                        new { color = "#e10808", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "#ffd700", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "#0c8d00", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "#ffd700", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "#e10808", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "blue", visibleInLegend = false, type = "scatter", pointSize = 20 }
-                    }
+                    series = Series.GetSeries(Graph, GrowthTypes.WFL)
                 };
 
                 await JsRuntime.InvokeAsync<Task>("drawChart", data, options);

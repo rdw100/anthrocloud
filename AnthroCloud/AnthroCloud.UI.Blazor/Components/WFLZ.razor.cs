@@ -50,17 +50,7 @@ namespace AnthroCloud.UI.Blazor.Components
                         Position = "bottom"
                     },
                     CurveType = "Function",
-                    series = new[] {
-                        new { color = "#000000", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "#e10808", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "#ffd700", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "#0c8d00", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "#ffd700", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "#e10808", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "#000000", visibleInLegend = true, type = "linear", pointSize = 0 } ,
-                        new { color = "blue", visibleInLegend = false, type = "scatter", pointSize = 20 }
-                    }
-
+                    series = Series.GetSeries(Graph, GrowthTypes.WFL)
                 };
 
                 await JsRuntime.InvokeAsync<Task>("drawChart", data, options);
