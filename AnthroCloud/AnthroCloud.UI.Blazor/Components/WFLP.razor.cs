@@ -11,7 +11,7 @@ namespace AnthroCloud.UI.Blazor.Components
     /// from C# by injecting the IJSRuntime service.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Components.ComponentBase" />
-    public class MultiLineChartBase : ComponentBase
+    public class WFLPChartBase : ComponentBase
     {
         [Inject]
         public IJSRuntime JsRuntime { get; set; }
