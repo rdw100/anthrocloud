@@ -29,7 +29,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected override async Task OnParametersSetAsync()
         {
-            Gdata = await GetChartData(1, 73, 9);
+            Gdata = await GetChartData(1, 73, 9, Graph);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -64,9 +64,9 @@ namespace AnthroCloud.UI.Blazor.Components
             }
         }
 
-        public async Task<string> GetChartData(byte id, double x, double y)
+        public async Task<string> GetChartData(byte id, double x, double y, GraphTypes z)
         {
-            string data = await ChartService.GetAllWFLJson(id, x, y, GraphTypes.PValue);
+            string data = await ChartService.GetAllWFLJson(id, x, y, z);
             return data;
         }
     }    
