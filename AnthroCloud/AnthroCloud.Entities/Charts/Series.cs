@@ -43,6 +43,13 @@ namespace AnthroCloud.Entities.Charts
                 case (GraphTypes.PValue):
                     switch (growth)
                     {
+                        case GrowthTypes.BFA:
+                        case GrowthTypes.HCA:
+                        case GrowthTypes.LHFA:
+                        case GrowthTypes.MUAC:
+                        case GrowthTypes.SSF:
+                        case GrowthTypes.TSF:
+                        case GrowthTypes.WFA:
                         case (GrowthTypes.WFL):
                         case (GrowthTypes.WFH):
                             series.Add(new Series { color = "#e10808", visibleInLegend = true, type = "linear", pointSize = 0 });
@@ -51,20 +58,17 @@ namespace AnthroCloud.Entities.Charts
                             series.Add(new Series { color = "#ffd700", visibleInLegend = true, type = "linear", pointSize = 0 });
                             series.Add(new Series { color = "#e10808", visibleInLegend = true, type = "linear", pointSize = 0 });
                             series.Add(new Series { color = "blue", visibleInLegend = false, type = "scatter", pointSize = 20 });
-                            break;
-                        case GrowthTypes.BFA:
-                        case GrowthTypes.HCA:
-                        case GrowthTypes.LHFA:
-                        case GrowthTypes.MUAC:
-                        case GrowthTypes.SSF:
-                        case GrowthTypes.TSF:
-                        case GrowthTypes.WFA:
                             break;
                     }
                     break;
                 case (GraphTypes.ZScore):
                     switch (growth)
                     {
+                        case GrowthTypes.BFA:
+                        case GrowthTypes.HCA:
+                        case GrowthTypes.MUAC:
+                        case GrowthTypes.SSF:
+                        case GrowthTypes.TSF:
                         case (GrowthTypes.WFL):
                         case (GrowthTypes.WFH):
                             series.Add(new Series { color = "#000000", visibleInLegend = true, type = "linear", pointSize = 0 });
@@ -75,14 +79,15 @@ namespace AnthroCloud.Entities.Charts
                             series.Add(new Series { color = "#e10808", visibleInLegend = true, type = "linear", pointSize = 0 });
                             series.Add(new Series { color = "#000000", visibleInLegend = true, type = "linear", pointSize = 0 });
                             series.Add(new Series { color = "blue", visibleInLegend = false, type = "scatter", pointSize = 20 });
-                            break;                           
-                        case GrowthTypes.BFA:
-                        case GrowthTypes.HCA:
+                            break;
                         case GrowthTypes.LHFA:
-                        case GrowthTypes.MUAC:
-                        case GrowthTypes.SSF:
-                        case GrowthTypes.TSF:
                         case GrowthTypes.WFA:
+                            series.Add(new Series { color = "#000000", visibleInLegend = true, type = "linear", pointSize = 0 });
+                            series.Add(new Series { color = "#e10808", visibleInLegend = true, type = "linear", pointSize = 0 });
+                            series.Add(new Series { color = "#0c8d00", visibleInLegend = true, type = "linear", pointSize = 0 });
+                            series.Add(new Series { color = "#e10808", visibleInLegend = true, type = "linear", pointSize = 0 });
+                            series.Add(new Series { color = "#000000", visibleInLegend = true, type = "linear", pointSize = 0 });
+                            series.Add(new Series { color = "blue", visibleInLegend = false, type = "scatter", pointSize = 20 });
                             break;
                     }
                     break;
