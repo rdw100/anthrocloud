@@ -18,7 +18,7 @@ namespace AnthroCloud.UI.Blazor.Components
         public string Id { get; set; }
 
         [Parameter]
-        public string Title { get; set; }
+        public string SubTitle { get; set; }
 
         [Parameter]
         public GraphTypes Graph { get; set; }
@@ -34,7 +34,7 @@ namespace AnthroCloud.UI.Blazor.Components
             
             var options = new
             {
-                Title = Title,//"Birth to 5 Years (Percentile)","Birth to 5 Years (Z-scores)"
+                Title = SubTitle = ChartSubTitles.GetTitle(Graph, Growth),//"Birth to 5 Years (Percentile)","Birth to 5 Years (Z-scores)"
                 Width = 650,
                 height = 500,
                 hAxis = new { Title = Titles.GetHaxisTitle(Growth), Ticks = Ticks.GetHaxisTicks(Graph, Growth) },

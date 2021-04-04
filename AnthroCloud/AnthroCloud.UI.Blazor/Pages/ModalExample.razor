@@ -4,7 +4,7 @@
 @using AnthroCloud.UI.Blazor.Components
 
 <button @onclick="@(() => ShowGrowthChart(GrowthTypes.WFL, GraphTypes.PValue))" class="btn btn-primary">WFL P</button>
-<button @onclick="@(() => ShowGrowthChart(GrowthTypes.WFH, GraphTypes.ZScore))" class="btn btn-primary">WFL Z</button>
+<button @onclick="@(() => ShowGrowthChart(GrowthTypes.WFL, GraphTypes.ZScore))" class="btn btn-primary">WFL Z</button>
 <button @onclick="@(() => ShowGrowthChart(GrowthTypes.BFA, GraphTypes.PValue))" class="btn btn-primary">BFA P</button>
 <button @onclick="@(() => ShowGrowthChart(GrowthTypes.BFA, GraphTypes.ZScore))" class="btn btn-primary">BFA Z</button>
 <button @onclick="@(() => Modal.Show<PValue>("Weight-for-length"))" class="btn btn-primary">WFL P [manual]</button>
