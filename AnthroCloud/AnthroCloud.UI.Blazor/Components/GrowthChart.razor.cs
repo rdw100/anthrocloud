@@ -28,34 +28,27 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public string Gdata { get; set; }
 
-        protected override async Task OnParametersSetAsync()
+        protected override async Task OnInitializedAsync() // OnAfterRenderAsync(bool firstRender)
         {
-            Gdata = await GetChartData(1, 73, 9, Graph);
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (!firstRender)
+            var data = await GetChartData(1, 73, 9, Graph); //Gdata;
+            
+            var options = new
             {
-                var data = Gdata;
-                var options = new
+                Title = Title,//"Birth to 5 Years (Percentile)","Birth to 5 Years (Z-scores)"
+                Width = 650,
+                height = 500,
+                hAxis = new { Title = Titles.GetHaxisTitle(Growth), Ticks = Ticks.GetHaxisTicks(Graph, Growth) },
+                vAxis = new { Title = Titles.GetVaxisTitles(Growth), Ticks = Ticks.GetVaxisTicks(Graph, Growth) },
+                Legend = new
                 {
-                    Title = Title,//"Birth to 5 Years (Percentile)","Birth to 5 Years (Z-scores)"
-                    Width = 650,
-                    height = 500,
-                    hAxis = new { Title = Titles.GetHaxisTitle(Growth), Ticks = Ticks.GetHaxisTicks(Graph, Growth) },
-                    vAxis = new { Title = Titles.GetVaxisTitles(Growth), Ticks = Ticks.GetVaxisTicks(Graph, Growth) },
-                    Legend = new
-                    {
-                        Display = true,
-                        Position = "bottom"
-                    },
-                    CurveType = "Function",
-                    series = Series.GetSeries(Graph, Growth)
-                };
+                    Display = true,
+                    Position = "bottom"
+                },
+                CurveType = "Function",
+                series = Series.GetSeries(Graph, Growth)
+            };
 
-                await JsRuntime.InvokeAsync<Task>("drawChart", data, options);
-            }
+            await JsRuntime.InvokeAsync<Task>("drawChart", data, options);
         }
 
         public async Task<string> GetChartData(byte id, double x, double y, GraphTypes z)

@@ -1,0 +1,20 @@
+﻿@page "/Chart"
+@inject NavigationManager NavigationHelper
+
+@using AnthroCloud.UI.Blazor.Components
+@using AnthroCloud.Entities.Charts
+
+@code {
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+    [Parameter]
+    public GrowthTypes Growth { get; set; }
+
+    [Parameter]
+    public GraphTypes Graph { get; set; }
+}
+
+<GrowthChart Id="Line1"
+             Title="Birth to 5 Years (Z-scores)"
+             Graph="@Graph"
+             Growth="@Growth"></GrowthChart>
