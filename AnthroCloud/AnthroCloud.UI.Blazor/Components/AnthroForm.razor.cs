@@ -415,7 +415,7 @@ namespace AnthroCloud.UI.Blazor.Components
             Logger = new MarkupString(Logger + $"<br />INVALID submit on {DateTime.Now}");
         }
 
-        public void ShowGrowthChart(GrowthTypes growth, GraphTypes graph, Sexes sex, decimal x, decimal y)
+        public void ShowGrowthChart(GrowthTypes growth, GraphTypes graph, Sexes sex, double x, double y)
         {
             var parameters = new ModalParameters();
             parameters.Add(nameof(Chart.Growth), growth);

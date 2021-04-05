@@ -31,10 +31,10 @@ namespace AnthroCloud.UI.Blazor.Components
         public Sexes Sex { get; set; }
 
         [Parameter]
-        public decimal X { get; set; }
+        public double X { get; set; }
 
         [Parameter]
-        public decimal Y { get; set; }
+        public double Y { get; set; }
 
         public string Gdata { get; set; }
 
@@ -61,9 +61,40 @@ namespace AnthroCloud.UI.Blazor.Components
             await JsRuntime.InvokeAsync<Task>("drawChart", data, options);
         }
 
-        public async Task<string> GetChartData(byte id, decimal x, decimal y, GraphTypes z)
+        public async Task<string> GetChartData(byte id, double x, double y, GraphTypes z)
         {
-            string data = await ChartService.GetAllWflJson(id, x, y, z);
+            string data = string.Empty;
+            switch(Growth)
+            {
+                case GrowthTypes.BFA:
+                    data = await ChartService.GetAllBfaJson(id, (byte)x, y, z);
+                    break;
+                case GrowthTypes.HCA:
+                    data = await ChartService.GetAllHcfaJson(id, (byte)x, y, z);
+                    break;
+                case GrowthTypes.LHFA:
+                    data = await ChartService.GetAllLhfaJson(id, (byte)x, y, z);
+                    break;
+                case GrowthTypes.MUAC:
+                    data = await ChartService.GetAllMuacJson(id, (byte)x, y, z);
+                    break;
+                case GrowthTypes.SSF:
+                    data = await ChartService.GetAllSsfaJson(id, (byte)x, y, z);
+                    break;
+                case GrowthTypes.TSF:
+                    data = await ChartService.GetAllTsfaJson(id, (byte)x, y, z);
+                    break;
+                case GrowthTypes.WFA:
+                    data = await ChartService.GetAllWfaJson(id, (byte)x, y, z);
+                    break;
+                case GrowthTypes.WFH:
+                    data = await ChartService.GetAllWfhJson(id, x, y, z);
+                    break;
+                case GrowthTypes.WFL:
+                    data = await ChartService.GetAllWflJson(id, x, y, z);
+                    break;
+            }
+
             return data;
         }
     }
