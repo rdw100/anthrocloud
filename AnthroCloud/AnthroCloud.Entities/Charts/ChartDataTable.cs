@@ -129,6 +129,408 @@ namespace AnthroCloud.Entities.Charts
             return cols;
         }
 
+        public List<Row> GetBfaRows(GraphTypes graph, GrowthTypes growth, List<BmiforAge> newList)
+        {
+            List<Row> rows = new();
+            switch (graph)
+            {
+                case (GraphTypes.PValue):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.BFA):
+
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.P3 },
+                                        new Cell { v = item.P15 },
+                                        new Cell { v = item.P50 },
+                                        new Cell { v = item.P85 },
+                                        new Cell { v = item.P97 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+                case (GraphTypes.ZScore):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.BFA):
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.Sd3neg },
+                                        new Cell { v = item.Sd2neg },
+                                        new Cell { v = item.Sd1neg },
+                                        new Cell { v = item.Sd0 },
+                                        new Cell { v = item.Sd1 },
+                                        new Cell { v = item.Sd2 },
+                                        new Cell { v = item.Sd3 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+            }
+            return rows;
+        }
+
+        public List<Row> GetHcaRows(GraphTypes graph, GrowthTypes growth, List<HcForAge> newList)
+        {
+            List<Row> rows = new();
+            switch (graph)
+            {
+                case (GraphTypes.PValue):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.HCA):
+
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.P3 },
+                                        new Cell { v = item.P15 },
+                                        new Cell { v = item.P50 },
+                                        new Cell { v = item.P85 },
+                                        new Cell { v = item.P97 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+                case (GraphTypes.ZScore):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.HCA):
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.Sd3neg },
+                                        new Cell { v = item.Sd2neg },
+                                        new Cell { v = item.Sd1neg },
+                                        new Cell { v = item.Sd0 },
+                                        new Cell { v = item.Sd1 },
+                                        new Cell { v = item.Sd2 },
+                                        new Cell { v = item.Sd3 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+            }
+            return rows;
+        }
+
+        public List<Row> GetLhfaRows(GraphTypes graph, GrowthTypes growth, List<LengthHeightForAge> newList)
+        {
+            List<Row> rows = new();
+            switch (graph)
+            {
+                case (GraphTypes.PValue):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.LHFA):
+
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.P3 },
+                                        new Cell { v = item.P15 },
+                                        new Cell { v = item.P50 },
+                                        new Cell { v = item.P85 },
+                                        new Cell { v = item.P97 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+                case (GraphTypes.ZScore):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.LHFA):
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.Sd3neg },
+                                        new Cell { v = item.Sd2neg },
+                                        new Cell { v = item.Sd0 },
+                                        new Cell { v = item.Sd2 },
+                                        new Cell { v = item.Sd3 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+            }
+            return rows;
+        }
+
+        public List<Row> GetMuacRows(GraphTypes graph, GrowthTypes growth, List<MuacforAge> newList)
+        {
+            List<Row> rows = new();
+            switch (graph)
+            {
+                case (GraphTypes.PValue):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.MUAC):
+
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.P3 },
+                                        new Cell { v = item.P15 },
+                                        new Cell { v = item.P50 },
+                                        new Cell { v = item.P85 },
+                                        new Cell { v = item.P97 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+                case (GraphTypes.ZScore):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.MUAC):
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.Sd3neg },
+                                        new Cell { v = item.Sd2neg },
+                                        new Cell { v = item.Sd1neg },
+                                        new Cell { v = item.Sd0 },
+                                        new Cell { v = item.Sd1 },
+                                        new Cell { v = item.Sd2 },
+                                        new Cell { v = item.Sd3 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+            }
+            return rows;
+        }
+
+        public List<Row> GetSsfRows(GraphTypes graph, GrowthTypes growth, List<SsfforAge> newList)
+        {
+            List<Row> rows = new();
+            switch (graph)
+            {
+                case (GraphTypes.PValue):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.SSF):
+
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.P3 },
+                                        new Cell { v = item.P15 },
+                                        new Cell { v = item.P50 },
+                                        new Cell { v = item.P85 },
+                                        new Cell { v = item.P97 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+                case (GraphTypes.ZScore):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.SSF):
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.Sd3neg },
+                                        new Cell { v = item.Sd2neg },
+                                        new Cell { v = item.Sd1neg },
+                                        new Cell { v = item.Sd0 },
+                                        new Cell { v = item.Sd1 },
+                                        new Cell { v = item.Sd2 },
+                                        new Cell { v = item.Sd3 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+            }
+            return rows;
+        }
+
+        public List<Row> GetTsfRows(GraphTypes graph, GrowthTypes growth, List<TsfforAge> newList)
+        {
+            List<Row> rows = new();
+            switch (graph)
+            {
+                case (GraphTypes.PValue):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.TSF):
+
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.P3 },
+                                        new Cell { v = item.P15 },
+                                        new Cell { v = item.P50 },
+                                        new Cell { v = item.P85 },
+                                        new Cell { v = item.P97 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+                case (GraphTypes.ZScore):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.TSF):
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.Sd3neg },
+                                        new Cell { v = item.Sd2neg },
+                                        new Cell { v = item.Sd1neg },
+                                        new Cell { v = item.Sd0 },
+                                        new Cell { v = item.Sd1 },
+                                        new Cell { v = item.Sd2 },
+                                        new Cell { v = item.Sd3 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+            }
+            return rows;
+        }
+
+        public List<Row> GetWfaRows(GraphTypes graph, GrowthTypes growth, List<WeightForAge> newList)
+        {
+            List<Row> rows = new();
+            switch (graph)
+            {
+                case (GraphTypes.PValue):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.WFA):
+
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.P3 },
+                                        new Cell { v = item.P15 },
+                                        new Cell { v = item.P50 },
+                                        new Cell { v = item.P85 },
+                                        new Cell { v = item.P97 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+                case (GraphTypes.ZScore):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.WFA):
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Month },
+                                        new Cell { v = item.Sd3neg },
+                                        new Cell { v = item.Sd2neg },
+                                        new Cell { v = item.Sd0 },
+                                        new Cell { v = item.Sd2 },
+                                        new Cell { v = item.Sd3 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+            }
+            return rows;
+        }
+
         public List<Row> GetWflRows(GraphTypes graph, GrowthTypes growth, List<WeightForLength> newList)
         {
             List<Row> rows = new();
@@ -169,6 +571,64 @@ namespace AnthroCloud.Entities.Charts
                                     c = new List<Cell>()
                                     {
                                         new Cell { v = item.Lengthincm },
+                                        new Cell { v = item.Sd3neg },
+                                        new Cell { v = item.Sd2neg },
+                                        new Cell { v = item.Sd1neg },
+                                        new Cell { v = item.Sd0 },
+                                        new Cell { v = item.Sd1 },
+                                        new Cell { v = item.Sd2 },
+                                        new Cell { v = item.Sd3 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+            }
+            return rows;
+        }
+
+        public List<Row> GetWfhRows(GraphTypes graph, GrowthTypes growth, List<WeightForHeight> newList)
+        {
+            List<Row> rows = new();
+            switch (graph)
+            {
+                case (GraphTypes.PValue):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.WFH):
+
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Heightincm },
+                                        new Cell { v = item.P3 },
+                                        new Cell { v = item.P15 },
+                                        new Cell { v = item.P50 },
+                                        new Cell { v = item.P85 },
+                                        new Cell { v = item.P97 },
+                                        new Cell { v = item.Score }
+                                    }
+                                });
+                            }
+                            break;
+                    }
+                    break;
+                case (GraphTypes.ZScore):
+                    switch (growth)
+                    {
+                        case (GrowthTypes.WFH):
+                            foreach (var item in newList)
+                            {
+                                rows.Add(new Row
+                                {
+                                    c = new List<Cell>()
+                                    {
+                                        new Cell { v = item.Heightincm },
                                         new Cell { v = item.Sd3neg },
                                         new Cell { v = item.Sd2neg },
                                         new Cell { v = item.Sd1neg },

@@ -7,7 +7,14 @@ namespace AnthroCloud.UI.Blazor.Services
 {
     public interface IChartService
     {
-        Task<List<WeightForLength>> GetAllWFL(byte id, double x, double y);
-        Task<string> GetAllWFLJson(byte id, double x, double y, GraphTypes z);
+        Task<string> GetAllBfaJson(byte id, byte x, decimal y, GraphTypes z);
+        Task<string> GetAllHcfaJson(byte id, byte x, decimal y, GraphTypes z);
+        Task<string> GetAllMuacJson(byte id, byte x, decimal y, GraphTypes z);
+        Task<string> GetAllLhfaJson(byte id, byte x, decimal y, GraphTypes z);
+        Task<string> GetAllSsfaJson(byte id, byte x, decimal y, GraphTypes z);
+        Task<string> GetAllTsfaJson(byte id, byte x, decimal y, GraphTypes z);
+        Task<string> GetAllWfaJson(byte id, byte x, decimal y, GraphTypes z);
+        Task<string> GetAllWfhJson(byte id, decimal x, decimal y, GraphTypes z);
+        Task<string> GetAllWflJson(byte id, decimal x, decimal y, GraphTypes z);
     }
 }

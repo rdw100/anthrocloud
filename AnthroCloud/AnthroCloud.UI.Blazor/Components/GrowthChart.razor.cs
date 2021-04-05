@@ -31,10 +31,10 @@ namespace AnthroCloud.UI.Blazor.Components
         public Sexes Sex { get; set; }
 
         [Parameter]
-        public double X { get; set; }
+        public decimal X { get; set; }
 
         [Parameter]
-        public double Y { get; set; }
+        public decimal Y { get; set; }
 
         public string Gdata { get; set; }
 
@@ -61,9 +61,9 @@ namespace AnthroCloud.UI.Blazor.Components
             await JsRuntime.InvokeAsync<Task>("drawChart", data, options);
         }
 
-        public async Task<string> GetChartData(byte id, double x, double y, GraphTypes z)
+        public async Task<string> GetChartData(byte id, decimal x, decimal y, GraphTypes z)
         {
-            string data = await ChartService.GetAllWFLJson(id, x, y, z);
+            string data = await ChartService.GetAllWflJson(id, x, y, z);
             return data;
         }
     }

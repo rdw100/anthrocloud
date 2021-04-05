@@ -192,12 +192,207 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
+        /// Gets chart data for the Body mass index (BMI) for age indicator.
+        /// </summary>
+        /// <param name="id">Sex</param>
+        /// <param name="x">X-axis data point</param>
+        /// <param name="y">Y-axis data point</param>
+        /// <returns>Returns chart data for the Body mass index (BMI) for age indicator.</returns>
+        /// <example>
+        /// GET: api/Chart/BFA/1
+        /// GET: api/chart/BFA/1/12/16.9
+        /// </example>
+        [HttpGet("{id}")]
+        [Route("BFAJson/{id}")]
+        [Route("BFAJson/{id}/{x}/{y}/{z}")]
+        public async Task<string> GetAllBFAJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            Chart chart = new Chart(_context);
+            List<BmiforAge> result = await chart.ListBmiforAgeAsync((Sexes)id, x, y);
+
+            ChartDataTable gChart = new();
+            gChart.cols = gChart.GetCols(z, GrowthTypes.BFA);
+            gChart.rows = gChart.GetBfaRows(z, GrowthTypes.BFA, result);
+
+            string sJson = JsonSerializer.Serialize(gChart);
+            return sJson;
+        }
+
+        /// <summary>
+        /// Gets chart data for the Head circumference-for-age indicator.
+        /// </summary>
+        /// <param name="id">Sex</param>
+        /// <param name="x">X-axis data point</param>
+        /// <param name="y">Y-axis data point</param>
+        /// <returns>Returns chart data for the Head circumference-for-age indicator.</returns>
+        /// <example>GET: api/Chart/HCFA/1</example>
+        [HttpGet("{id}")]
+        [Route("HCFAJson/{id}")]
+        [Route("HCFAJson/{id}/{x}/{y}/{z}")]
+        public async Task<string> GetAllHCFAJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            Chart chart = new Chart(_context);
+            List<HcForAge> result = await chart.ListHcforAge((Sexes)id, x, y);
+
+            ChartDataTable gChart = new();
+            gChart.cols = gChart.GetCols(z, GrowthTypes.HCA);
+            gChart.rows = gChart.GetHcaRows(z, GrowthTypes.HCA, result);
+
+            string sJson = JsonSerializer.Serialize(gChart);
+            return sJson;
+        }
+
+        /// <summary>
+        /// Gets chart data for the Length/height-for-age indicator.
+        /// </summary>
+        /// <param name="id">Sex</param>
+        /// <param name="x">X-axis data point</param>
+        /// <param name="y">Y-axis data point</param>
+        /// <returns>Returns chart data for the Length/height-for-age indicator.</returns>
+        /// <example>GET: api/Chart/LHFA/1</example>
+        [HttpGet("{id}")]
+        [Route("LHFAJson/{id}")]
+        [Route("LHFAJson/{id}/{x}/{y}/{z}")]
+        public async Task<string> GetAllLHFAJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            Chart chart = new Chart(_context);
+            List<LengthHeightForAge> result = await chart.ListLengthHeightForAge((Sexes)id, x, y);
+           
+            ChartDataTable gChart = new();
+            gChart.cols = gChart.GetCols(z, GrowthTypes.LHFA);
+            gChart.rows = gChart.GetLhfaRows(z, GrowthTypes.LHFA, result);
+
+            string sJson = JsonSerializer.Serialize(gChart);
+            return sJson;
+        }
+
+        /// <summary>
+        /// Gets chart data for the Arm circumference-for-age indicator.
+        /// </summary>
+        /// <param name="id">Sex</param>
+        /// <param name="x">X-axis data point</param>
+        /// <param name="y">Y-axis data point</param>
+        /// <returns>Returns chart data for the Arm circumference-for-age indicator.</returns>
+        /// <example>GET: api/Chart/MUAC/1</example>
+        [HttpGet("{id}")]
+        [Route("MUACJson/{id}")]
+        [Route("MUACJson/{id}/{x}/{y}/{z}")]
+        public async Task<string> GetAllMUACJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            Chart chart = new Chart(_context);
+            List<MuacforAge> result = await chart.ListMuacforAge((Sexes)id, x, y);
+
+            ChartDataTable gChart = new();
+            gChart.cols = gChart.GetCols(z, GrowthTypes.MUAC);
+            gChart.rows = gChart.GetMuacRows(z, GrowthTypes.MUAC, result);
+
+            string sJson = JsonSerializer.Serialize(gChart);
+            return sJson;
+        }
+
+        /// <summary>
+        /// Gets chart data for the Subscapular skinfold-for-age indicator.
+        /// </summary>
+        /// <param name="id">Sex</param>
+        /// <param name="x">X-axis data point</param>
+        /// <param name="y">Y-axis data point</param>
+        /// <returns>Returns chart data for the Subscapular skinfold-for-age indicator.</returns>
+        /// <example>GET: api/Chart/SSFA/1</example>
+        [HttpGet("{id}")]
+        [Route("SSFAJson/{id}")]
+        [Route("SSFAJson/{id}/{x}/{y}/{z}")]
+        public async Task<string> GetAllSSFAJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            Chart chart = new Chart(_context);
+            List<SsfforAge> result = await chart.ListSsfforAge((Sexes)id, x, y);
+            
+            ChartDataTable gChart = new();
+            gChart.cols = gChart.GetCols(z, GrowthTypes.SSF);
+            gChart.rows = gChart.GetSsfRows(z, GrowthTypes.SSF, result);
+
+            string sJson = JsonSerializer.Serialize(gChart);
+            return sJson;
+        }
+
+        /// <summary>
+        /// Gets chart data for the Triceps skinfold-for-age indicator.
+        /// </summary>
+        /// <param name="id">Sex</param>
+        /// <param name="x">X-axis data point</param>
+        /// <param name="y">Y-axis data point</param>
+        /// <returns>Retrieve chart data for the Triceps skinfold-for-age indicator.</returns>
+        /// <example>GET: api/Chart/TSFA/1</example>
+        [HttpGet("{id}")]
+        [Route("TSFAJson/{id}")]
+        [Route("TSFAJson/{id}/{x}/{y}/{z}")]
+        public async Task<string> GetAllTSFAJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            Chart chart = new Chart(_context);
+            List<TsfforAge> result = await chart.ListTsfforAge((Sexes)id, x, y);
+
+            ChartDataTable gChart = new();
+            gChart.cols = gChart.GetCols(z, GrowthTypes.TSF);
+            gChart.rows = gChart.GetTsfRows(z, GrowthTypes.TSF, result);
+
+            string sJson = JsonSerializer.Serialize(gChart);
+            return sJson;
+        }
+
+        /// <summary>
+        /// Gets chart data for the Weight-for-age indicator.
+        /// </summary>
+        /// <param name="id">Sex</param>
+        /// <param name="x">X-axis data point</param>
+        /// <param name="y">Y-axis data point</param>
+        /// <returns>Returns chart data for the Weight-for-age indicator.</returns>
+        /// <example>GET: api/Chart/WFA/1</example>
+        [HttpGet("{id}")]
+        [Route("WFAJson/{id}")]
+        [Route("WFAJson/{id}/{x}/{y}/{z}")]
+        public async Task<string> GetAllWFAJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            Chart chart = new Chart(_context);
+            List<WeightForAge> result = await chart.ListWeightForAge((Sexes)id, x, y);
+
+            ChartDataTable gChart = new();
+            gChart.cols = gChart.GetCols(z, GrowthTypes.WFA);
+            gChart.rows = gChart.GetWfaRows(z, GrowthTypes.WFA, result);
+
+            string sJson = JsonSerializer.Serialize(gChart);
+            return sJson;
+        }
+
+        /// <summary>
+        /// Gets chart data for the Weight-for-height indicator.
+        /// </summary>
+        /// <param name="id">Sex</param>
+        /// <param name="x">X-axis data point</param>
+        /// <param name="y">Y-axis data point</param>
+        /// <returns>Returns chart data for the Weight-for-height indicator.</returns>
+        /// <example>GET: api/Chart/WFH/1</example>
+        [HttpGet("{id}")]
+        [Route("WFHJson/{id}")]
+        [Route("WFHJson/{id}/{x}/{y}/{z}")]
+        public async Task<string> GetAllWFHJson(byte id, decimal x, decimal y, GraphTypes z)
+        {
+            Chart chart = new Chart(_context);
+            List<WeightForHeight> result = await chart.ListWeightForHeight((Sexes)id, x, y);
+
+            ChartDataTable gChart = new();
+            gChart.cols = gChart.GetCols(z, GrowthTypes.WFH);
+            gChart.rows = gChart.GetWfhRows(z, GrowthTypes.WFH, result);
+
+            string sJson = JsonSerializer.Serialize(gChart);
+            return sJson;
+        }
+
+        /// <summary>
         /// Gets a JSON serialized JavaScript string literal object. 
         /// </summary>
         /// <param name="id">Sex</param>
         /// <param name="x">X-axis data point</param>
         /// <param name="y">Y-axis data point</param>
-        /// <param name="z"></param>
+        /// <param name="z">Growth Chart type</param>
         /// <returns>Returns a JSON representation of the DataTable that can be passed into the DataTable constructor.</returns>
         [HttpGet("{id}")]
         [Route("WFLJson/{id}")]

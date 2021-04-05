@@ -16,20 +16,87 @@ namespace AnthroCloud.UI.Blazor.Services
             this.httpClient = httpClient;
         }
 
-        // https://localhost:5001/api/chart/WFL/1/73/9
-        public async Task<List<WeightForLength>> GetAllWFL(byte id, double x, double y)
+        public async Task<string> GetAllBfaJson(byte id, byte x, decimal y, GraphTypes z)
         {
-            string uri = $"chart/WFL/{id}/{x}/{y}";
+            string uri = $"chart/BFAJson/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-
-            return await JsonSerializer.DeserializeAsync
-                <List<WeightForLength>>(responseStream);
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
         }
 
-        public async Task<string> GetAllWFLJson(byte id, double x, double y, GraphTypes z)
+        public async Task<string> GetAllHcfaJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            string uri = $"chart/HCFAJson/{id}/{x}/{y}/{z}";
+            var response = await httpClient.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+        }
+
+        public async Task<string> GetAllLhfaJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            string uri = $"chart/LHFAJson/{id}/{x}/{y}/{z}";
+            var response = await httpClient.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+        }
+
+        public async Task<string> GetAllMuacJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            string uri = $"chart/MUACJson/{id}/{x}/{y}/{z}";
+            var response = await httpClient.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+        }
+
+        public async Task<string> GetAllSsfaJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            string uri = $"chart/SSFAJson/{id}/{x}/{y}/{z}";
+            var response = await httpClient.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+        }
+
+        public async Task<string> GetAllTsfaJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            string uri = $"chart/TSFAJson/{id}/{x}/{y}/{z}";
+            var response = await httpClient.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+        }
+
+        public async Task<string> GetAllWfaJson(byte id, byte x, decimal y, GraphTypes z)
+        {
+            string uri = $"chart/WFAJson/{id}/{x}/{y}/{z}";
+            var response = await httpClient.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+        }
+
+        public async Task<string> GetAllWfhJson(byte id, decimal x, decimal y, GraphTypes z)
+        {
+            string uri = $"chart/WFHJson/{id}/{x}/{y}/{z}";
+            var response = await httpClient.GetAsync(uri);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+        }
+
+        public async Task<string> GetAllWflJson(byte id, decimal x, decimal y, GraphTypes z)
         {
             string uri = $"chart/WFLJson/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
