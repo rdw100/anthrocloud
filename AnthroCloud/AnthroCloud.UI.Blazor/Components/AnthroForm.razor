@@ -1,5 +1,6 @@
 ﻿@inherits AnthroFormBase
 @using AnthroCloud.Entities
+@using AnthroCloud.Entities.Charts
 
 <style>
     fieldset {
@@ -212,6 +213,9 @@
                         {
                             <input type="text" asp-for="WflPercentile" value="@SetPercentileRange(@formModel.FormOutputs.WflPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
                             <input type="text" asp-for="WflZscore" value="@formModel.FormOutputs.WflZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(formModel.FormOutputs.WflZscore)" readonly>
+
+                            <button @onclick="@(() => ShowGrowthChart(GrowthTypes.WFL, GraphTypes.PValue))" class="btn btn-primary">WFL P</button>
+
                             <a class="btn btn-outline-secondary col-md-1 mr-1" data-toggle="tooltip" data-placement="top" title="Weight-for-length Percentile" asp-controller="LineChart" asp-action="WFL_P" onclick="basicPopup(this.href+ '?s=' + getRadioValue() + '&x=' + @formModel.FormInputs.LengthHeight + '&y=' + @formModel.FormInputs.Weight);return false">
                                 <span class="oi oi-graph" aria-hidden="true"></span>
                             </a>
@@ -402,5 +406,8 @@ else
 {
     <h2 style="text-align: center;">Loading ...</h2>
 }
+
+@* Add a @ref to the component *@
+@*<Chart @ref="myChart"></Chart>*@
 
 @Logger

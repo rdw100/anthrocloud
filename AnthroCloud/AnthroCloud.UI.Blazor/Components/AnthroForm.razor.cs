@@ -1,4 +1,8 @@
-﻿using AnthroCloud.UI.Blazor.Services;
+﻿using AnthroCloud.Entities.Charts;
+using AnthroCloud.UI.Blazor.Services;
+using AnthroCloud.UI.Blazor.Pages;
+using Blazored.Modal;
+using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System;
@@ -13,6 +17,9 @@ namespace AnthroCloud.UI.Blazor.Components
 
         [Inject]
         public IAnthroStatsService AnthroStatsService { get; set; }
+
+        [Inject]
+        [CascadingParameter] public IModalService Modal { get; set; }
 
         protected EditContext editContext;
 
@@ -405,6 +412,15 @@ namespace AnthroCloud.UI.Blazor.Components
         public void OnInvalidSubmit()
         {
             Logger = new MarkupString(Logger + $"<br />INVALID submit on {DateTime.Now}");
+        }
+
+        public void ShowGrowthChart(GrowthTypes growth, GraphTypes graph)
+        {
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(Chart.Growth), growth);
+            parameters.Add(nameof(Chart.Graph), graph);
+
+            Modal.Show<Chart>("Weight-for-length", parameters);
         }
     }
 }
