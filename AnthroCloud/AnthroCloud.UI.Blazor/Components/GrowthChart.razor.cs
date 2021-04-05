@@ -1,4 +1,5 @@
-﻿using AnthroCloud.Entities.Charts;
+﻿using AnthroCloud.Entities;
+using AnthroCloud.Entities.Charts;
 using AnthroCloud.UI.Blazor.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -25,12 +26,21 @@ namespace AnthroCloud.UI.Blazor.Components
 
         [Parameter]
         public GrowthTypes Growth { get; set; }
+        
+        [Parameter]
+        public Sexes Sex { get; set; }
+
+        [Parameter]
+        public double X { get; set; }
+
+        [Parameter]
+        public double Y { get; set; }
 
         public string Gdata { get; set; }
 
         protected override async Task OnInitializedAsync() // OnAfterRenderAsync(bool firstRender)
         {
-            var data = await GetChartData(1, 73, 9, Graph);
+            var data = await GetChartData((byte)Sex, X, Y, Graph);
             
             var options = new
             {

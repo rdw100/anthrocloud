@@ -2,6 +2,7 @@
 @inject NavigationManager NavigationHelper
 
 @using AnthroCloud.UI.Blazor.Components
+@using AnthroCloud.Entities
 @using AnthroCloud.Entities.Charts
 
 @code {
@@ -12,8 +13,20 @@
 
     [Parameter]
     public GraphTypes Graph { get; set; }
+
+    [Parameter]
+    public Sexes Sex { get; set; }
+
+    [Parameter]
+    public double X { get; set; }
+
+    [Parameter]
+    public double Y { get; set; }
 }
 
 <GrowthChart Id="Line1"
              Graph="@Graph"
-             Growth="@Growth"></GrowthChart>
+             Growth="@Growth"
+             Sex="@Sex"
+             X="@X"
+             Y="@Y"></GrowthChart>

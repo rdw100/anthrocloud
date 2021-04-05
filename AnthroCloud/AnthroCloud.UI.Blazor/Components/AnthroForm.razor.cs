@@ -1,6 +1,7 @@
-﻿using AnthroCloud.Entities.Charts;
-using AnthroCloud.UI.Blazor.Services;
+﻿using AnthroCloud.Entities;
+using AnthroCloud.Entities.Charts;
 using AnthroCloud.UI.Blazor.Pages;
+using AnthroCloud.UI.Blazor.Services;
 using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
@@ -414,12 +415,14 @@ namespace AnthroCloud.UI.Blazor.Components
             Logger = new MarkupString(Logger + $"<br />INVALID submit on {DateTime.Now}");
         }
 
-        public void ShowGrowthChart(GrowthTypes growth, GraphTypes graph)
+        public void ShowGrowthChart(GrowthTypes growth, GraphTypes graph, Sexes sex, double x, double y)
         {
             var parameters = new ModalParameters();
             parameters.Add(nameof(Chart.Growth), growth);
             parameters.Add(nameof(Chart.Graph), graph);
-
+            parameters.Add(nameof(Chart.Sex), sex);
+            parameters.Add(nameof(Chart.X), x);
+            parameters.Add(nameof(Chart.Y), y);
             Modal.Show<Chart>("Weight-for-length", parameters);
         }
     }
