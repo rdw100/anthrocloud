@@ -38,8 +38,8 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public string Gdata { get; set; }
 
-        protected override async Task OnInitializedAsync() // OnAfterRenderAsync(bool firstRender)
-        {//(byte)((byte)Sex + 1)
+        protected override async Task OnInitializedAsync()
+        {
             var data = await GetChartData(Sex.ToChartValue(), X, Y, Graph);
             
             var options = new
@@ -55,7 +55,21 @@ namespace AnthroCloud.UI.Blazor.Components
                     Position = "right"
                 },
                 CurveType = "Function",
-                series = Series.GetSeries(Graph, Growth)
+                series = Series.GetSeries(Graph, Growth),
+                Annotations = new {
+                    Style = "line", 
+                    Color = "#d3d3d3",
+                    TextStyle = new
+                    {
+                        Color = "#d3d3d3",
+                        Opacity = 0.5,
+                        Stem = new
+                        {
+                            Color = "#d3d3d3",
+                            Opacity = 0.5,
+                        }
+                    }
+                }
             };
 
             await JsRuntime.InvokeAsync<Task>("drawChart", data, options);

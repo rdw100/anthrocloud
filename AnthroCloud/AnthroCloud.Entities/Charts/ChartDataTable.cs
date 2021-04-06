@@ -41,8 +41,21 @@ namespace AnthroCloud.Entities.Charts
                             };
                             break;
                         case GrowthTypes.BFA:
-                        case GrowthTypes.HCA:
                         case GrowthTypes.LHFA:
+                            cols = new List<Col>()
+                            {
+                                new Col { id = "month", label = "Month", type = "number" },
+                                new Col { type = "string", role="annotation"},
+                                new Col { type = "string", role="annotationText"},
+                                new Col { id = "p3", label = "P3", type = "number" },
+                                new Col { id = "p15", label = "P15", type = "number" },
+                                new Col { id = "p50", label = "P50", type = "number" },
+                                new Col { id = "p85", label = "P85", type = "number" },
+                                new Col { id = "p97", label = "P97", type = "number" },
+                                new Col { id = "score", label = "Score", type = "number" },
+                            };
+                            break;
+                        case GrowthTypes.HCA:
                         case GrowthTypes.MUAC:
                         case GrowthTypes.SSF:
                         case GrowthTypes.TSF:
@@ -92,6 +105,21 @@ namespace AnthroCloud.Entities.Charts
                             };
                             break;
                         case GrowthTypes.BFA:
+                            cols = new List<Col>()
+                            {
+                                new Col { id = "month", label = "Month", type = "number" },
+                                new Col { type = "string", role="annotation"},
+                                new Col { type = "string", role="annotationText"},
+                                new Col { id = "sd3neg", label = "-3SD", type = "number" },
+                                new Col { id = "sd2neg", label = "-2SD", type = "number" },
+                                new Col { id = "sd1neg", label = "-1SD", type = "number" },
+                                new Col { id = "sd0", label = "Median", type = "number" },
+                                new Col { id = "sd1", label = "+1SD", type = "number" },
+                                new Col { id = "sd2", label = "+2SD", type = "number" },
+                                new Col { id = "sd3", label = "+3SD", type = "number" },
+                                new Col { id = "score", label = "Score", type = "number" },
+                            };
+                            break;
                         case GrowthTypes.HCA:
                         case GrowthTypes.MUAC:
                         case GrowthTypes.SSF:
@@ -110,6 +138,19 @@ namespace AnthroCloud.Entities.Charts
                             };
                             break;
                         case GrowthTypes.LHFA:
+                            cols = new List<Col>()
+                            {
+                                new Col { id = "month", label = "Month", type = "number" },
+                                new Col { type = "string", role="annotation"},
+                                new Col { type = "string", role="annotationText"},
+                                new Col { id = "sd3neg", label = "-3SD", type = "number" },
+                                new Col { id = "sd2neg", label = "-2SD", type = "number" },
+                                new Col { id = "sd0", label = "Median", type = "number" },
+                                new Col { id = "sd2", label = "+2SD", type = "number" },
+                                new Col { id = "sd3", label = "+3SD", type = "number" },
+                                new Col { id = "score", label = "Score", type = "number" },
+                            };
+                            break;
                         case GrowthTypes.WFA:
                             cols = new List<Col>()
                             {
@@ -146,6 +187,8 @@ namespace AnthroCloud.Entities.Charts
                                     c = new List<Cell>()
                                     {
                                         new Cell { v = item.Month },
+                                        new Cell { v = item.Mark },
+                                        new Cell { v = item.Marktext },
                                         new Cell { v = item.P3 },
                                         new Cell { v = item.P15 },
                                         new Cell { v = item.P50 },
@@ -169,6 +212,8 @@ namespace AnthroCloud.Entities.Charts
                                     c = new List<Cell>()
                                     {
                                         new Cell { v = item.Month },
+                                        new Cell { v = item.Mark },
+                                        new Cell { v = item.Marktext },
                                         new Cell { v = item.Sd3neg },
                                         new Cell { v = item.Sd2neg },
                                         new Cell { v = item.Sd1neg },
@@ -262,6 +307,8 @@ namespace AnthroCloud.Entities.Charts
                                     c = new List<Cell>()
                                     {
                                         new Cell { v = item.Month },
+                                        new Cell { v = item.Mark },
+                                        new Cell { v = item.Marktext },
                                         new Cell { v = item.P3 },
                                         new Cell { v = item.P15 },
                                         new Cell { v = item.P50 },
@@ -285,6 +332,8 @@ namespace AnthroCloud.Entities.Charts
                                     c = new List<Cell>()
                                     {
                                         new Cell { v = item.Month },
+                                        new Cell { v = item.Mark },
+                                        new Cell { v = item.Marktext },
                                         new Cell { v = item.Sd3neg },
                                         new Cell { v = item.Sd2neg },
                                         new Cell { v = item.Sd0 },
@@ -817,6 +866,7 @@ namespace AnthroCloud.Entities.Charts
         public string id { get; set; }
         public string label { get; set; }
         public string type { get; set; }
+        public string role { get; set; }
     }
 
     public class Cell
