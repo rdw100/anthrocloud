@@ -39,8 +39,8 @@ namespace AnthroCloud.UI.Blazor.Components
         public string Gdata { get; set; }
 
         protected override async Task OnInitializedAsync() // OnAfterRenderAsync(bool firstRender)
-        {
-            var data = await GetChartData((byte)Sex, X, Y, Graph);
+        {//(byte)((byte)Sex + 1)
+            var data = await GetChartData(Sex.ToChartValue(), X, Y, Graph);
             
             var options = new
             {
