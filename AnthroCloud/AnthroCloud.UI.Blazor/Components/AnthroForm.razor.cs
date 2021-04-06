@@ -403,6 +403,15 @@ namespace AnthroCloud.UI.Blazor.Components
             return result;
         }
 
+        public string SetChartTitle(string title, Sexes sex)
+        {
+            if (sex == Sexes.Male)
+                title += " Boys";
+            else if (sex == Sexes.Female)
+                title += " Girls";
+            return title;
+        }
+
         public MarkupString Logger { get; set; }
 
         public void OnValidSubmit()
@@ -423,7 +432,7 @@ namespace AnthroCloud.UI.Blazor.Components
             parameters.Add(nameof(Chart.Sex), sex);
             parameters.Add(nameof(Chart.X), x);
             parameters.Add(nameof(Chart.Y), y);
-            Modal.Show<Chart>(title, parameters);
+            Modal.Show<Chart>(SetChartTitle(title, sex), parameters);
         }
     }
 }
