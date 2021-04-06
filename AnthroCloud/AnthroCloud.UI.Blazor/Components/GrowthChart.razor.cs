@@ -45,14 +45,14 @@ namespace AnthroCloud.UI.Blazor.Components
             var options = new
             {
                 Title = SubTitle = ChartSubTitles.GetTitle(Graph, Growth),
-                Width = 650,
-                height = 500,
+                Width = 550,
+                height = 350,
                 hAxis = new { Title = Titles.GetHaxisTitle(Growth), Ticks = Ticks.GetHaxisTicks(Graph, Growth) },
                 vAxis = new { Title = Titles.GetVaxisTitles(Growth), Ticks = Ticks.GetVaxisTicks(Graph, Growth) },
                 Legend = new
                 {
                     Display = true,
-                    Position = "bottom"
+                    Position = "right"
                 },
                 CurveType = "Function",
                 series = Series.GetSeries(Graph, Growth)
