@@ -39,6 +39,8 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected async Task HandleHcaAsync()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            
             var isValid = editContext.Validate();
 
             try
@@ -70,11 +72,16 @@ namespace AnthroCloud.UI.Blazor.Components
             {
                 loadFailed = true;
             }
+
+            watch.Stop();
+            ExecutionTime = "- HCA Click - " + watch.ElapsedMilliseconds + "ms";
         }
 
         protected async Task HandleMuacAsync()
         {
             var isValid = editContext.Validate();
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
 
             try
             {
@@ -105,11 +112,16 @@ namespace AnthroCloud.UI.Blazor.Components
             {
                 loadFailed = true;
             }
+
+            watch.Stop();
+            ExecutionTime = "- MUAC Click - " + watch.ElapsedMilliseconds + "ms";
         }
 
         protected async Task HandleTsfAsync()
         {
             var isValid = editContext.Validate();
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
 
             try
             {
@@ -140,11 +152,16 @@ namespace AnthroCloud.UI.Blazor.Components
             {
                 loadFailed = true;
             }
+
+            watch.Stop();
+            ExecutionTime = "- TSF Click - " + watch.ElapsedMilliseconds + "ms";
         }
 
         protected async Task HandleSsfAsync()
         {
             var isValid = editContext.Validate();
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
 
             try
             {
@@ -175,11 +192,16 @@ namespace AnthroCloud.UI.Blazor.Components
             {
                 loadFailed = true;
             }
+
+            watch.Stop();
+            ExecutionTime = "- SSF Click - " + watch.ElapsedMilliseconds + "ms";
         }
 
         protected async Task HandleMeasuredAsync()
         {
             var isValid = editContext.Validate();
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
 
             try
             {
@@ -210,6 +232,9 @@ namespace AnthroCloud.UI.Blazor.Components
             {
                 loadFailed = true;
             }
+
+            watch.Stop();
+            ExecutionTime = "- Measured (HT/WT) Click - " + watch.ElapsedMilliseconds + "ms";
         }
 
         protected async Task HandleSubmitAsync()
@@ -249,7 +274,7 @@ namespace AnthroCloud.UI.Blazor.Components
             }
 
             watch.Stop();
-            ExecutionTime = "- Button 1 - " + watch.ElapsedMilliseconds + "ms";
+            ExecutionTime = "- Submit 1 (New) - " + watch.ElapsedMilliseconds + "ms";
         }
 
         protected async Task HandleValidSubmitAsync()
@@ -327,7 +352,7 @@ namespace AnthroCloud.UI.Blazor.Components
             }
 
             watch.Stop();
-            ExecutionTime = "- Button 2 - " + watch.ElapsedMilliseconds + "ms";
+            ExecutionTime = "- Submit 2 (Original) - " + watch.ElapsedMilliseconds + "ms";
         }
 
         public string SetColor(double zscore)

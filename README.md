@@ -17,7 +17,7 @@ The physical view of the software is represented as a deployment diagram.  The w
  
  | Layer         | Technologies                                                  |
  | ------------- | ------------------------------------------------------------- |
- | Presentation	 | .NET Core, ASP.NET Core MVC, Google Charts, HTML5, Javascript
+ | Presentation	 | .NET Core, Blazor Server App, ASP.NET Core MVC, Google Charts, HTML5, Javascript
  | Service	     | ASP.NET Core Web API |
  | Business	     | C# |
  | Data	         | Entity Framework Core |
@@ -45,5 +45,8 @@ The AnthroCloud RESTful API is designed to support retrieval operations.  The RE
  |Statistics	   | GET       | STATS/{indicator}/{measurement}/{ageInDays}/{id} | Returns a tuple of both calculated Zscore and Percentile values. |
  
  ### Demo
- The animated gif below demonstrates application execution. 
- ![Application Execution](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/toQO8tLp8W.gif?raw=true)
+ The animated gif below demonstrates ASP.NET MVC application execution. 
+ ![ASP.NET MVC Demo](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/toQO8tLp8W.gif?raw=true)
+
+ The animated gif below demonstrates Blazor Server application execution.
+ ![Blazor Server App Demo](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Blazor/wwwroot/img/stp0eKMSiY.gif?raw=true)
