@@ -1,8 +1,5 @@
-﻿using AnthroCloud.Entities;
-using AnthroCloud.Entities.Charts;
-using System.Collections.Generic;
+﻿using AnthroCloud.Entities.Charts;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Services
@@ -16,9 +13,9 @@ namespace AnthroCloud.UI.Blazor.Services
             this.httpClient = httpClient;
         }
 
-        public async Task<string> GetAllBfaJson(byte id, byte x, double y, GraphTypes z)
+        public async Task<string> GetBfa(byte id, byte x, double y, GraphTypes z)
         {
-            string uri = $"chart/BFAJson/{id}/{x}/{y}/{z}";
+            string uri = $"chart/BFA/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 
@@ -26,9 +23,9 @@ namespace AnthroCloud.UI.Blazor.Services
             return responseBody;
         }
 
-        public async Task<string> GetAllHcfaJson(byte id, byte x, double y, GraphTypes z)
+        public async Task<string> GetHcfa(byte id, byte x, double y, GraphTypes z)
         {
-            string uri = $"chart/HCFAJson/{id}/{x}/{y}/{z}";
+            string uri = $"chart/HCFA/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 
@@ -36,9 +33,9 @@ namespace AnthroCloud.UI.Blazor.Services
             return responseBody;
         }
 
-        public async Task<string> GetAllLhfaJson(byte id, byte x, double y, GraphTypes z)
+        public async Task<string> GetLhfa(byte id, byte x, double y, GraphTypes z)
         {
-            string uri = $"chart/LHFAJson/{id}/{x}/{y}/{z}";
+            string uri = $"chart/LHFA/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 
@@ -46,9 +43,9 @@ namespace AnthroCloud.UI.Blazor.Services
             return responseBody;
         }
 
-        public async Task<string> GetAllMuacJson(byte id, byte x, double y, GraphTypes z)
+        public async Task<string> GetMuac(byte id, byte x, double y, GraphTypes z)
         {
-            string uri = $"chart/MUACJson/{id}/{x}/{y}/{z}";
+            string uri = $"chart/MUAC/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 
@@ -56,9 +53,9 @@ namespace AnthroCloud.UI.Blazor.Services
             return responseBody;
         }
 
-        public async Task<string> GetAllSsfaJson(byte id, byte x, double y, GraphTypes z)
+        public async Task<string> GetSsfa(byte id, byte x, double y, GraphTypes z)
         {
-            string uri = $"chart/SSFAJson/{id}/{x}/{y}/{z}";
+            string uri = $"chart/SSFA/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 
@@ -66,9 +63,9 @@ namespace AnthroCloud.UI.Blazor.Services
             return responseBody;
         }
 
-        public async Task<string> GetAllTsfaJson(byte id, byte x, double y, GraphTypes z)
+        public async Task<string> GetTsfa(byte id, byte x, double y, GraphTypes z)
         {
-            string uri = $"chart/TSFAJson/{id}/{x}/{y}/{z}";
+            string uri = $"chart/TSFA/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 
@@ -76,9 +73,9 @@ namespace AnthroCloud.UI.Blazor.Services
             return responseBody;
         }
 
-        public async Task<string> GetAllWfaJson(byte id, byte x, double y, GraphTypes z)
+        public async Task<string> GetWfa(byte id, byte x, double y, GraphTypes z)
         {
-            string uri = $"chart/WFAJson/{id}/{x}/{y}/{z}";
+            string uri = $"chart/WFA/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 
@@ -86,9 +83,9 @@ namespace AnthroCloud.UI.Blazor.Services
             return responseBody;
         }
 
-        public async Task<string> GetAllWfhJson(byte id, double x, double y, GraphTypes z)
+        public async Task<string> GetWfh(byte id, double x, double y, GraphTypes z)
         {
-            string uri = $"chart/WFHJson/{id}/{x}/{y}/{z}";
+            string uri = $"chart/WFH/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 
@@ -96,9 +93,9 @@ namespace AnthroCloud.UI.Blazor.Services
             return responseBody;
         }
 
-        public async Task<string> GetAllWflJson(byte id, double x, double y, GraphTypes z)
+        public async Task<string> GetWfl(byte id, double x, double y, GraphTypes z)
         {
-            string uri = $"chart/WFLJson/{id}/{x}/{y}/{z}";
+            string uri = $"chart/WFL/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 

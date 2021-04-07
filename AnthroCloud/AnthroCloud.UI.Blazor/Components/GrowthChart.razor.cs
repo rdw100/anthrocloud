@@ -81,31 +81,31 @@ namespace AnthroCloud.UI.Blazor.Components
             switch(Growth)
             {
                 case GrowthTypes.BFA:
-                    data = await ChartService.GetAllBfaJson(id, (byte)x, y, z);
+                    data = await ChartService.GetBfa(id, (byte)x, y, z);
                     break;
                 case GrowthTypes.HCA:
-                    data = await ChartService.GetAllHcfaJson(id, (byte)x, y, z);
+                    data = await ChartService.GetHcfa(id, (byte)x, y, z);
                     break;
                 case GrowthTypes.LHFA:
-                    data = await ChartService.GetAllLhfaJson(id, (byte)x, y, z);
+                    data = await ChartService.GetLhfa(id, (byte)x, y, z);
                     break;
                 case GrowthTypes.MUAC:
-                    data = await ChartService.GetAllMuacJson(id, (byte)x, y, z);
+                    data = await ChartService.GetMuac(id, (byte)x, y, z);
                     break;
                 case GrowthTypes.SSF:
-                    data = await ChartService.GetAllSsfaJson(id, (byte)x, y, z);
+                    data = await ChartService.GetSsfa(id, (byte)x, y, z);
                     break;
                 case GrowthTypes.TSF:
-                    data = await ChartService.GetAllTsfaJson(id, (byte)x, y, z);
+                    data = await ChartService.GetTsfa(id, (byte)x, y, z);
                     break;
                 case GrowthTypes.WFA:
-                    data = await ChartService.GetAllWfaJson(id, (byte)x, y, z);
+                    data = await ChartService.GetWfa(id, (byte)x, y, z);
                     break;
                 case GrowthTypes.WFH:
-                    data = await ChartService.GetAllWfhJson(id, x, y, z);
+                    data = await ChartService.GetWfh(id, x, y, z);
                     break;
                 case GrowthTypes.WFL:
-                    data = await ChartService.GetAllWflJson(id, x, y, z);
+                    data = await ChartService.GetWfl(id, x, y, z);
                     break;
             }
 

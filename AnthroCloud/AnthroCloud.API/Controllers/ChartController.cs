@@ -192,19 +192,19 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Gets chart data for the Body mass index (BMI) for age indicator.
+        /// Gets Body mass index (BMI) for age indicator chart data as a JSON 
+        /// serialized DataTable structure to pass into Chart.js DataTable 
+        /// constructor.
         /// </summary>
         /// <param name="id">Sex</param>
         /// <param name="x">X-axis data point</param>
         /// <param name="y">Y-axis data point</param>
-        /// <returns>Returns chart data for the Body mass index (BMI) for age indicator.</returns>
-        /// <example>
-        /// GET: api/Chart/BFA/1
-        /// GET: api/chart/BFA/1/12/16.9
-        /// </example>
-        [HttpGet("{id}")]
-        [Route("BFAJson/{id}")]
-        [Route("BFAJson/{id}/{x}/{y}/{z}")]
+        /// <param name="z">Graph Type</param>
+        /// <returns>Returns Body mass index (BMI) for age indicator chart data
+        /// as a JSON serialized DataTable structure to pass into Chart.js 
+        /// DataTable constructor.</returns>
+        /// <example>GET: api/chart/BFA/2/12/17.5/PValue</example>
+        [Route("BFA/{id}/{x}/{y}/{z}")]
         public async Task<string> GetAllBFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new Chart(_context);
@@ -219,16 +219,19 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Gets chart data for the Head circumference-for-age indicator.
+        /// Gets Head circumference-for-age indicator chart data as a JSON 
+        /// serialized DataTable structure to pass into Chart.js DataTable 
+        /// constructor.
         /// </summary>
         /// <param name="id">Sex</param>
         /// <param name="x">X-axis data point</param>
         /// <param name="y">Y-axis data point</param>
-        /// <returns>Returns chart data for the Head circumference-for-age indicator.</returns>
-        /// <example>GET: api/Chart/HCFA/1</example>
-        [HttpGet("{id}")]
-        [Route("HCFAJson/{id}")]
-        [Route("HCFAJson/{id}/{x}/{y}/{z}")]
+        /// <param name="z">Graph Type</param>
+        /// <returns>Returns Head circumference-for-age indicator chart data as
+        /// a JSON serialized DataTable structure to pass into Chart.js 
+        /// DataTable constructor.</returns>
+        /// <example>GET: api/Chart/HCFA/1/12/73/ZScore</example>
+        [Route("HCFA/{id}/{x}/{y}/{z}")]
         public async Task<string> GetAllHCFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new Chart(_context);
@@ -243,16 +246,19 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Gets chart data for the Length/height-for-age indicator.
+        /// Gets Length/height-for-age indicator chart data as a JSON 
+        /// serialized DataTable structure to pass into Chart.js DataTable 
+        /// constructor.
         /// </summary>
         /// <param name="id">Sex</param>
         /// <param name="x">X-axis data point</param>
         /// <param name="y">Y-axis data point</param>
-        /// <returns>Returns chart data for the Length/height-for-age indicator.</returns>
-        /// <example>GET: api/Chart/LHFA/1</example>
-        [HttpGet("{id}")]
-        [Route("LHFAJson/{id}")]
-        [Route("LHFAJson/{id}/{x}/{y}/{z}")]
+        /// <param name="z">Graph Type</param>
+        /// <returns>Returns Length/height-for-age indicator chart data as a 
+        /// JSON serialized DataTable structure to pass into Chart.js DataTable
+        /// constructor.</returns>
+        /// <example>GET: api/Chart/LHFA/2/12/73/PValue</example>
+        [Route("LHFA/{id}/{x}/{y}/{z}")]
         public async Task<string> GetAllLHFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new Chart(_context);
@@ -267,16 +273,19 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Gets chart data for the Arm circumference-for-age indicator.
+        /// Gets Arm circumference-for-age indicator chart data as a JSON
+        /// serialized DataTable structure to pass into Chart.js DataTable 
+        /// constructor.
         /// </summary>
         /// <param name="id">Sex</param>
         /// <param name="x">X-axis data point</param>
         /// <param name="y">Y-axis data point</param>
-        /// <returns>Returns chart data for the Arm circumference-for-age indicator.</returns>
-        /// <example>GET: api/Chart/MUAC/1</example>
-        [HttpGet("{id}")]
-        [Route("MUACJson/{id}")]
-        [Route("MUACJson/{id}/{x}/{y}/{z}")]
+        /// <param name="z">Graph Type</param>
+        /// <returns>Returns Arm circumference-for-age indicator chart data as 
+        /// a JSON serialized DataTable structure to pass into Chart.js 
+        /// DataTable constructor.</returns>
+        /// <example>GET: api/Chart/MUAC/1/12/15/ZScore</example>
+        [Route("MUAC/{id}/{x}/{y}/{z}")]
         public async Task<string> GetAllMUACJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new Chart(_context);
@@ -291,16 +300,19 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Gets chart data for the Subscapular skinfold-for-age indicator.
+        /// Gets Subscapular skinfold-for-age indicator chart data as a JSON
+        /// serialized DataTable structure to pass into Chart.js DataTable 
+        /// constructor.
         /// </summary>
         /// <param name="id">Sex</param>
         /// <param name="x">X-axis data point</param>
         /// <param name="y">Y-axis data point</param>
-        /// <returns>Returns chart data for the Subscapular skinfold-for-age indicator.</returns>
-        /// <example>GET: api/Chart/SSFA/1</example>
-        [HttpGet("{id}")]
-        [Route("SSFAJson/{id}")]
-        [Route("SSFAJson/{id}/{x}/{y}/{z}")]
+        /// <param name="z">Graph Type</param>
+        /// <returns>Returns Subscapular skinfold-for-age indicator chart data 
+        /// as a JSON serialized DataTable structure to pass into Chart.js 
+        /// DataTable constructor.</returns>
+        /// <example>GET: api/Chart/SSFA/1/12/7/PValue</example>
+        [Route("SSFA/{id}/{x}/{y}/{z}")]
         public async Task<string> GetAllSSFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new Chart(_context);
@@ -315,16 +327,19 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Gets chart data for the Triceps skinfold-for-age indicator.
+        /// Gets Triceps skinfold-for-age indicator chart data as a JSON 
+        /// serialized DataTable structure to pass into Chart.js DataTable 
+        /// constructor.
         /// </summary>
         /// <param name="id">Sex</param>
         /// <param name="x">X-axis data point</param>
         /// <param name="y">Y-axis data point</param>
-        /// <returns>Retrieve chart data for the Triceps skinfold-for-age indicator.</returns>
-        /// <example>GET: api/Chart/TSFA/1</example>
-        [HttpGet("{id}")]
-        [Route("TSFAJson/{id}")]
-        [Route("TSFAJson/{id}/{x}/{y}/{z}")]
+        /// <param name="z">Graph Type</param>
+        /// <returns>Returns Triceps skinfold-for-age indicator chart data as a
+        /// JSON serialized DataTable structure to pass into Chart.js DataTable 
+        /// constructor.</returns>
+        /// <example>GET: api/Chart/TSFA/2/12/8/ZScore</example>
+        [Route("TSFA/{id}/{x}/{y}/{z}")]
         public async Task<string> GetAllTSFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new Chart(_context);
@@ -339,16 +354,18 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Gets chart data for the Weight-for-age indicator.
+        /// Gets Weight-for-age indicator chart data as a JSON serialized
+        /// DataTable structure to pass into Chart.js DataTable constructor.
         /// </summary>
         /// <param name="id">Sex</param>
         /// <param name="x">X-axis data point</param>
         /// <param name="y">Y-axis data point</param>
-        /// <returns>Returns chart data for the Weight-for-age indicator.</returns>
-        /// <example>GET: api/Chart/WFA/1</example>
-        [HttpGet("{id}")]
-        [Route("WFAJson/{id}")]
-        [Route("WFAJson/{id}/{x}/{y}/{z}")]
+        /// <param name="z">Graph Type</param>
+        /// <returns>Returns Gets Weight-for-age indicator chart data as a 
+        /// JSON serialized DataTable structure to pass into Chart.js DataTable
+        /// constructor.</returns>
+        /// <example>GET: api/Chart/WFA/1/12/9/PValue</example>
+        [Route("WFA/{id}/{x}/{y}/{z}")]
         public async Task<string> GetAllWFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new Chart(_context);
@@ -363,16 +380,18 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Gets chart data for the Weight-for-height indicator.
+        /// Gets Weight-for-height indicator chart data as a JSON serialized
+        /// DataTable structure to pass into Chart.js DataTable constructor.
         /// </summary>
         /// <param name="id">Sex</param>
         /// <param name="x">X-axis data point</param>
         /// <param name="y">Y-axis data point</param>
-        /// <returns>Returns chart data for the Weight-for-height indicator.</returns>
-        /// <example>GET: api/Chart/WFH/1</example>
-        [HttpGet("{id}")]
-        [Route("WFHJson/{id}")]
-        [Route("WFHJson/{id}/{x}/{y}/{z}")]
+        /// <param name="z">Graph Type</param>
+        /// <returns>Returns Gets Weight-for-height indicator chart data as a 
+        /// JSON serialized DataTable structure to pass into Chart.js DataTable
+        /// constructor.</returns>
+        /// <example>GET: api/Chart/WFH/1/73/9/PValue</example>
+        [Route("WFH/{id}/{x}/{y}/{z}")]
         public async Task<string> GetAllWFHJson(byte id, decimal x, decimal y, GraphTypes z)
         {
             Chart chart = new Chart(_context);
@@ -387,16 +406,18 @@ namespace AnthroCloud.API.Controllers
         }
 
         /// <summary>
-        /// Gets a JSON serialized JavaScript string literal object. 
+        /// Gets Weight-for-length indicator chart data as a JSON serialized
+        /// DataTable structure to pass into Chart.js DataTable constructor.
         /// </summary>
         /// <param name="id">Sex</param>
         /// <param name="x">X-axis data point</param>
         /// <param name="y">Y-axis data point</param>
-        /// <param name="z">Growth Chart type</param>
-        /// <returns>Returns a JSON representation of the DataTable that can be passed into the DataTable constructor.</returns>
-        [HttpGet("{id}")]
-        [Route("WFLJson/{id}")]
-        [Route("WFLJson/{id}/{x}/{y}/{z}")]
+        /// <param name="z">Graph Type</param>
+        /// <returns>Returns Gets Weight-for-height indicator chart data as a 
+        /// JSON serialized DataTable structure to pass into Chart.js DataTable
+        /// constructor.</returns>
+        /// <example>GET: api/Chart/WFL/1/73/9/PValue</example>
+        [Route("WFL/{id}/{x}/{y}/{z}")]
         public async Task<string> GetAllWFLJson(byte id, decimal x, decimal y, GraphTypes z)
         {
             Chart chart = new(_context);

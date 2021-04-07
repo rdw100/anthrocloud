@@ -29,9 +29,9 @@ The AnthroCloud RESTful API is designed to support retrieval operations.  The RE
  | Resource Type | HTTP Verb | Resource API	                      | Description                                             |
  | ------------- | --------- | ---------------------------------- | ------------------------------------------------------- |
  | Anthro        | GET	     | /ANTHRO/AGE/{birth}/{visit}        | Returns a human readable string in either Months or Year-Month (TotalMonths) format. |
- | Anthro	       | GET	     | /ANTHRO/AGE/DAYS/{birth}/{visit}   | Returns string of age in total days.                    |
- | Anthro	       | GET       | /ANTHRO/AGE/MONTHS/{birth}/{visit}	| Returns string of age in total months.                  |
- | Anthro	       | GET	     | /ANTHRO/AGE/YEARS/{birth}/{visit}	| Returns string of age in total years.                   |
+ | Anthro	     | GET	     | /ANTHRO/AGE/DAYS/{birth}/{visit}   | Returns string of age in total days.                    |
+ | Anthro	     | GET       | /ANTHRO/AGE/MONTHS/{birth}/{visit} | Returns string of age in total months.                  |
+ | Anthro	     | GET	     | /ANTHRO/AGE/YEARS/{birth}/{visit}  | Returns string of age in total years.                   |
  | Anthro        | GET       | /ANTHRO/BMI/{weight}/{height}      | Returns BMI rounded to tenths.                          |
  | Chart         | GET       | BFA/{id}/{x}/{y}                   | Returns a list of age-based indicator table data for measurement of body mass index by age used to create a WHO chart. |
  | Chart         | GET       | HCFA/{id}/{x}/{y}                  | Returns a list of age-based indicator table data for measurement of Head circumference-for-age used to create a WHO chart.  Data point (x,y) is insert if new; otherwise updated. |
@@ -41,8 +41,17 @@ The AnthroCloud RESTful API is designed to support retrieval operations.  The RE
  | Chart         | GET       | TSFA/{id}/{x}/{y}                  | Returns a list of age-based indicator table data for measurement of Triceps skinfold-for-age used to create a WHO chart.  Data point (x,y) is insert if new; otherwise updated. |
  | Chart         | GET       | WFA/{id}/{x}/{y}                   | Returns a list of age-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart.  Data point (x,y) is insert if new; otherwise updated. |
  | Chart         | GET       | WFH/{id}/{x}/{y}                   | Returns a list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (2 to 5 years).  Data point (x,y) is insert if new; otherwise updated. |
- | Chart         | GET       | WFL/{id}/{x}/{y}                   | Returns a list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (Birth to 2 years).  Data point (x,y) is insert if new; otherwise updated.
- |Statistics	   | GET       | STATS/{indicator}/{measurement}/{ageInDays}/{id} | Returns a tuple of both calculated Zscore and Percentile values. |
+ | Chart         | GET       | WFL/{id}/{x}/{y}                   | Returns a list of height-based indicator table data for measurement of Weight-for-length/height used to create a WHO chart (Birth to 2 years).  Data point (x,y) is insert if new; otherwise updated. |
+ | Chart         | GET       | BFA/{id}/{x}/{y}/{z}               | Returns Body mass index (BMI) for age indicator chart data as a JSON serialized DataTable structure to pass into Chart.js DataTable constructor. |
+ | Chart         | GET       | HCFA/{id}/{x}/{y}/{z}              | Returns Head circumference-for-age indicator chart data as a JSON serialized DataTable structure to pass into Chart.js DataTable constructor. |
+ | Chart         | GET       | LHFA/{id}/{x}/{y}/{z}              | Returns Length/height-for-age indicator chart data as a JSON serialized DataTable structure to pass into Chart.js DataTable constructor. |
+ | Chart         | GET       | MUAC/{id}/{x}/{y}/{z}              | Returns Arm circumference-for-age indicator chart data as a JSON serialized DataTable structure to pass into Chart.js DataTable constructor. |
+ | Chart         | GET       | SSFA/{id}/{x}/{y}/{z}              | Returns Subscapular skinfold-for-age indicator chart data as a JSON serialized DataTable structure to pass into Chart.js DataTable constructor. |
+ | Chart         | GET       | TSFA/{id}/{x}/{y}/{z}              | Returns Triceps skinfold-for-age indicator chart data as a JSON serialized DataTable structure to pass into Chart.js DataTable constructor. |
+ | Chart         | GET       | WFA/{id}/{x}/{y}/{z}               | Returns Gets Weight-for-age indicator chart data as a JSON serialized DataTable structure to pass into Chart.js DataTable constructor. |
+ | Chart         | GET       | WFH/{id}/{x}/{y}/{z}               | Returns Gets Weight-for-height indicator chart data as a JSON serialized DataTable structure to pass into Chart.js DataTable constructor. |
+ | Chart         | GET       | WFL/{id}/{x}/{y}/{z}               | Returns Gets Weight-for-height indicator chart data as a JSON serialized DataTable structure to pass into Chart.js DataTable constructor. |
+ | Statistics	 | GET       | STATS/{indicator}/{measurement}/{ageInDays}/{id} | Returns a tuple of both calculated Zscore and Percentile values. |
  
  ### Demo
  The animated gif below demonstrates ASP.NET MVC application execution. 
