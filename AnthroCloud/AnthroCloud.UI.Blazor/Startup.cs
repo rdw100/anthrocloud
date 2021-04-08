@@ -30,7 +30,6 @@ namespace AnthroCloud.UI.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
 
             string baseAddressPath = Configuration.GetValue<string>("ConfigurationSettings:baseApiAddressPath");
 
