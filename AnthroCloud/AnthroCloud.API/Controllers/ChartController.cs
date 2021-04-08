@@ -15,7 +15,7 @@ namespace AnthroCloud.API.Controllers
     [ApiController]
     public class ChartController : ControllerBase
     {
-        private AnthroCloudContextMsSql _context;
+        private readonly AnthroCloudContextMsSql _context;
 
         /// <summary>
         /// Solely constructs controller with database context.
@@ -211,8 +211,8 @@ namespace AnthroCloud.API.Controllers
             List<BmiforAge> result = await chart.ListBmiforAgeAsync((Sexes)id, x, y);
 
             ChartDataTable gChart = new();
-            gChart.cols = gChart.GetCols(z, GrowthTypes.BFA);
-            gChart.rows = gChart.GetBfaRows(z, GrowthTypes.BFA, result);
+            gChart.cols = ChartDataTable.GetCols(z, GrowthTypes.BFA);
+            gChart.rows = ChartDataTable.GetBfaRows(z, GrowthTypes.BFA, result);
 
             string sJson = JsonSerializer.Serialize(gChart);
             return sJson;
@@ -238,8 +238,8 @@ namespace AnthroCloud.API.Controllers
             List<HcForAge> result = await chart.ListHcforAge((Sexes)id, x, y);
 
             ChartDataTable gChart = new();
-            gChart.cols = gChart.GetCols(z, GrowthTypes.HCA);
-            gChart.rows = gChart.GetHcaRows(z, GrowthTypes.HCA, result);
+            gChart.cols = ChartDataTable.GetCols(z, GrowthTypes.HCA);
+            gChart.rows = ChartDataTable.GetHcaRows(z, GrowthTypes.HCA, result);
 
             string sJson = JsonSerializer.Serialize(gChart);
             return sJson;
@@ -265,8 +265,8 @@ namespace AnthroCloud.API.Controllers
             List<LengthHeightForAge> result = await chart.ListLengthHeightForAge((Sexes)id, x, y);
            
             ChartDataTable gChart = new();
-            gChart.cols = gChart.GetCols(z, GrowthTypes.LHFA);
-            gChart.rows = gChart.GetLhfaRows(z, GrowthTypes.LHFA, result);
+            gChart.cols = ChartDataTable.GetCols(z, GrowthTypes.LHFA);
+            gChart.rows = ChartDataTable.GetLhfaRows(z, GrowthTypes.LHFA, result);
 
             string sJson = JsonSerializer.Serialize(gChart);
             return sJson;
@@ -292,8 +292,8 @@ namespace AnthroCloud.API.Controllers
             List<MuacforAge> result = await chart.ListMuacforAge((Sexes)id, x, y);
 
             ChartDataTable gChart = new();
-            gChart.cols = gChart.GetCols(z, GrowthTypes.MUAC);
-            gChart.rows = gChart.GetMuacRows(z, GrowthTypes.MUAC, result);
+            gChart.cols = ChartDataTable.GetCols(z, GrowthTypes.MUAC);
+            gChart.rows = ChartDataTable.GetMuacRows(z, GrowthTypes.MUAC, result);
 
             string sJson = JsonSerializer.Serialize(gChart);
             return sJson;
@@ -319,8 +319,8 @@ namespace AnthroCloud.API.Controllers
             List<SsfforAge> result = await chart.ListSsfforAge((Sexes)id, x, y);
             
             ChartDataTable gChart = new();
-            gChart.cols = gChart.GetCols(z, GrowthTypes.SSF);
-            gChart.rows = gChart.GetSsfRows(z, GrowthTypes.SSF, result);
+            gChart.cols = ChartDataTable.GetCols(z, GrowthTypes.SSF);
+            gChart.rows = ChartDataTable.GetSsfRows(z, GrowthTypes.SSF, result);
 
             string sJson = JsonSerializer.Serialize(gChart);
             return sJson;
@@ -346,8 +346,8 @@ namespace AnthroCloud.API.Controllers
             List<TsfforAge> result = await chart.ListTsfforAge((Sexes)id, x, y);
 
             ChartDataTable gChart = new();
-            gChart.cols = gChart.GetCols(z, GrowthTypes.TSF);
-            gChart.rows = gChart.GetTsfRows(z, GrowthTypes.TSF, result);
+            gChart.cols = ChartDataTable.GetCols(z, GrowthTypes.TSF);
+            gChart.rows = ChartDataTable.GetTsfRows(z, GrowthTypes.TSF, result);
 
             string sJson = JsonSerializer.Serialize(gChart);
             return sJson;
@@ -372,8 +372,8 @@ namespace AnthroCloud.API.Controllers
             List<WeightForAge> result = await chart.ListWeightForAge((Sexes)id, x, y);
 
             ChartDataTable gChart = new();
-            gChart.cols = gChart.GetCols(z, GrowthTypes.WFA);
-            gChart.rows = gChart.GetWfaRows(z, GrowthTypes.WFA, result);
+            gChart.cols = ChartDataTable.GetCols(z, GrowthTypes.WFA);
+            gChart.rows = ChartDataTable.GetWfaRows(z, GrowthTypes.WFA, result);
 
             string sJson = JsonSerializer.Serialize(gChart);
             return sJson;
@@ -398,8 +398,8 @@ namespace AnthroCloud.API.Controllers
             List<WeightForHeight> result = await chart.ListWeightForHeight((Sexes)id, x, y);
 
             ChartDataTable gChart = new();
-            gChart.cols = gChart.GetCols(z, GrowthTypes.WFH);
-            gChart.rows = gChart.GetWfhRows(z, GrowthTypes.WFH, result);
+            gChart.cols = ChartDataTable.GetCols(z, GrowthTypes.WFH);
+            gChart.rows = ChartDataTable.GetWfhRows(z, GrowthTypes.WFH, result);
 
             string sJson = JsonSerializer.Serialize(gChart);
             return sJson;
@@ -424,8 +424,8 @@ namespace AnthroCloud.API.Controllers
             List<WeightForLength> result = await chart.ListWeightForLength((Sexes)id, x, y);
 
             ChartDataTable gChart = new();
-            gChart.cols = gChart.GetCols(z, GrowthTypes.WFL);
-            gChart.rows = gChart.GetWflRows(z, GrowthTypes.WFL, result);
+            gChart.cols = ChartDataTable.GetCols(z, GrowthTypes.WFL);
+            gChart.rows = ChartDataTable.GetWflRows(z, GrowthTypes.WFL, result);
 
             string sJson = JsonSerializer.Serialize(gChart);
             return sJson;

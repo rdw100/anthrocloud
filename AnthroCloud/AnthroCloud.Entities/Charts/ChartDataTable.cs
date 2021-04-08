@@ -7,7 +7,7 @@ namespace AnthroCloud.Entities.Charts
         public List<Col> cols { get; set; }
         public List<Row> rows { get; set; }
 
-        public List<Col> GetCols(GraphTypes graph, GrowthTypes growth)
+        public static List<Col> GetCols(GraphTypes graph, GrowthTypes growth)
         {
             List<Col> cols = new();
 
@@ -170,7 +170,7 @@ namespace AnthroCloud.Entities.Charts
             return cols;
         }
 
-        public List<Row> GetBfaRows(GraphTypes graph, GrowthTypes growth, List<BmiforAge> newList)
+        public static List<Row> GetBfaRows(GraphTypes graph, GrowthTypes growth, List<BmiforAge> newList)
         {
             List<Row> rows = new();
             switch (graph)
@@ -232,7 +232,7 @@ namespace AnthroCloud.Entities.Charts
             return rows;
         }
 
-        public List<Row> GetHcaRows(GraphTypes graph, GrowthTypes growth, List<HcForAge> newList)
+        public static List<Row> GetHcaRows(GraphTypes graph, GrowthTypes growth, List<HcForAge> newList)
         {
             List<Row> rows = new();
             switch (graph)
@@ -290,7 +290,7 @@ namespace AnthroCloud.Entities.Charts
             return rows;
         }
 
-        public List<Row> GetLhfaRows(GraphTypes graph, GrowthTypes growth, List<LengthHeightForAge> newList)
+        public static List<Row> GetLhfaRows(GraphTypes graph, GrowthTypes growth, List<LengthHeightForAge> newList)
         {
             List<Row> rows = new();
             switch (graph)
@@ -350,7 +350,7 @@ namespace AnthroCloud.Entities.Charts
             return rows;
         }
 
-        public List<Row> GetMuacRows(GraphTypes graph, GrowthTypes growth, List<MuacforAge> newList)
+        public static List<Row> GetMuacRows(GraphTypes graph, GrowthTypes growth, List<MuacforAge> newList)
         {
             List<Row> rows = new();
             switch (graph)
@@ -408,7 +408,7 @@ namespace AnthroCloud.Entities.Charts
             return rows;
         }
 
-        public List<Row> GetSsfRows(GraphTypes graph, GrowthTypes growth, List<SsfforAge> newList)
+        public static List<Row> GetSsfRows(GraphTypes graph, GrowthTypes growth, List<SsfforAge> newList)
         {
             List<Row> rows = new();
             switch (graph)
@@ -466,7 +466,7 @@ namespace AnthroCloud.Entities.Charts
             return rows;
         }
 
-        public List<Row> GetTsfRows(GraphTypes graph, GrowthTypes growth, List<TsfforAge> newList)
+        public static List<Row> GetTsfRows(GraphTypes graph, GrowthTypes growth, List<TsfforAge> newList)
         {
             List<Row> rows = new();
             switch (graph)
@@ -524,7 +524,7 @@ namespace AnthroCloud.Entities.Charts
             return rows;
         }
 
-        public List<Row> GetWfaRows(GraphTypes graph, GrowthTypes growth, List<WeightForAge> newList)
+        public static List<Row> GetWfaRows(GraphTypes graph, GrowthTypes growth, List<WeightForAge> newList)
         {
             List<Row> rows = new();
             switch (graph)
@@ -580,7 +580,7 @@ namespace AnthroCloud.Entities.Charts
             return rows;
         }
 
-        public List<Row> GetWflRows(GraphTypes graph, GrowthTypes growth, List<WeightForLength> newList)
+        public static List<Row> GetWflRows(GraphTypes graph, GrowthTypes growth, List<WeightForLength> newList)
         {
             List<Row> rows = new();
             switch (graph)
@@ -638,7 +638,7 @@ namespace AnthroCloud.Entities.Charts
             return rows;
         }
 
-        public List<Row> GetWfhRows(GraphTypes graph, GrowthTypes growth, List<WeightForHeight> newList)
+        public static List<Row> GetWfhRows(GraphTypes graph, GrowthTypes growth, List<WeightForHeight> newList)
         {
             List<Row> rows = new();
             switch (graph)
@@ -696,7 +696,7 @@ namespace AnthroCloud.Entities.Charts
             return rows;
         }
 
-        public List<Row> GetRows(GraphTypes graph, GrowthTypes growth, List<dynamic> newList)
+        public static List<Row> GetRows(GraphTypes graph, GrowthTypes growth, List<dynamic> newList)
         {
             List<Row> rows = new();
 
@@ -877,6 +877,7 @@ namespace AnthroCloud.Entities.Charts
 
     public class Row
     {
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
         public List<Cell> c { get; set; }
     }
 }
