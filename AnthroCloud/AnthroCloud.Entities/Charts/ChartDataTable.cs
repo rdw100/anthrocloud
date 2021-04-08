@@ -2,6 +2,7 @@
 
 namespace AnthroCloud.Entities.Charts
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Lowercase required in JS DataTable Cell.")]
     public class ChartDataTable
     {
         public List<Col> cols { get; set; }
@@ -861,6 +862,7 @@ namespace AnthroCloud.Entities.Charts
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Lowercase required in JS DataTable Cell.")]
     public class Col
     {
         public string id { get; set; }
@@ -871,13 +873,14 @@ namespace AnthroCloud.Entities.Charts
 
     public class Cell
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Lowercase required in JS DataTable Cell.")]
         public dynamic v { get; set; }
         //public object f { get; set; }
     }
 
     public class Row
     {
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Lowercase required in JS DataTable Cell.")]
         public List<Cell> c { get; set; }
     }
 }
