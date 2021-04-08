@@ -9,7 +9,7 @@ namespace AnthroCloud.Entities.Charts
 
         public List<Col> GetCols(GraphTypes graph, GrowthTypes growth)
         {
-            List<Col> cols = new List<Col>();
+            List<Col> cols = new();
 
             switch (graph)
             {
@@ -698,7 +698,7 @@ namespace AnthroCloud.Entities.Charts
 
         public List<Row> GetRows(GraphTypes graph, GrowthTypes growth, List<dynamic> newList)
         {
-            List<Row> rows = new List<Row>();
+            List<Row> rows = new();
 
             switch (graph)
             {
