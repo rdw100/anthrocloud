@@ -1,19 +1,14 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.IO;
-using System.Configuration;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace AnthroCloud.Entities
 {
-    public partial class AnthroCloudContextMySql : DbContext
+    public partial class AnthroCloudContext : DbContext
     {
-        public AnthroCloudContextMySql()
+        public AnthroCloudContext()
         {
         }
 
-        public AnthroCloudContextMySql(DbContextOptions<AnthroCloudContextMySql> options)
+        public AnthroCloudContext(DbContextOptions<AnthroCloudContext> options)
             : base(options)
         {
         }
@@ -30,12 +25,6 @@ namespace AnthroCloud.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //if (!optionsBuilder.IsConfigured)
-            //{
-            //    // optionsBuilder.UseMySql(options => options.UseSqlServer(Configuration.GetConnectionString("AnthroCloudDatabaseMySql")));
-            //    // optionsBuilder.UseMySql(Configuration.GetConnectionString("AnthroCloudDatabaseMySql"));
-            //    // base.OnConfiguring(optionsBuilder);     
-            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -348,7 +337,7 @@ namespace AnthroCloud.Entities
             {
                 entity.HasKey(e => new { e.Sex, e.Month, e.M });
                     //.HasName("PK_CompositePK_WeightForAge")
-                    ///.IsClustered(false);
+                    //.IsClustered(false);
 
                 entity.Property(e => e.L).HasColumnType("decimal(5, 4)");
 
@@ -390,7 +379,7 @@ namespace AnthroCloud.Entities
             modelBuilder.Entity<WeightForHeight>(entity =>
             {
                 entity.HasKey(e => new { e.Sex, e.Heightincm });
-                    //;.HasName("PK_CompositePK_WeightForHeight")
+                    //.HasName("PK_CompositePK_WeightForHeight")
                     //.IsClustered(false);
 
                 entity.Property(e => e.Heightincm)

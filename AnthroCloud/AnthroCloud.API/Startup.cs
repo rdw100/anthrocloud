@@ -28,7 +28,7 @@ namespace AnthroCloud.API
             {
                 String connection = Configuration.GetConnectionString("AnthroCloudDatabaseMySql");
 
-                services.AddDbContext<AnthroCloudContextMySql>(options =>
+                services.AddDbContext<AnthroCloudContext>(options =>
                    options.UseMySql(connection,
                                     new MySqlServerVersion(new Version(5, 7, 29)),
                                     mySqlOptions => mySqlOptions
@@ -39,7 +39,7 @@ namespace AnthroCloud.API
             {
                 String connection = Configuration.GetConnectionString("AnthroCloudDatabaseMsSql");
 
-                services.AddDbContext<AnthroCloudContextMsSql>(options =>
+                services.AddDbContext<AnthroCloudContext>(options =>
                     options.UseSqlServer(connection));
             }
 

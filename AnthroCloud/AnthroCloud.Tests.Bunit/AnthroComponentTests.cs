@@ -42,22 +42,22 @@ namespace AnthroCloud.Tests.Bunit
             component.WaitForAssertion(() => component.Find("p").MarkupMatches("<p>The BMI for a weight of 9 kg and Length/height of 73 cm is 16.9.</p>"), TimeSpan.FromSeconds(5));
         }
 
-        [Fact]
-        public void CounterComponent_MultiClick_Matches()
-        {
-            // Arrange
-            using var ctx = new TestContext();
-            var cut = ctx.RenderComponent<Counter>();
-            var paraElm = cut.Find("p");
+        //[Fact]
+        //public void CounterComponent_MultiClick_Matches()
+        //{
+        //    // Arrange
+        //    using var ctx = new TestContext();
+        //    var cut = ctx.RenderComponent<Counter>();
+        //    var paraElm = cut.Find("p");
 
-            // Act
-            cut.Find("button").Click();
-            cut.Find("button").Click();
-            cut.Find("button").Click();
-            var paraElmText = paraElm.TextContent;
+        //    // Act
+        //    cut.Find("button").Click();
+        //    cut.Find("button").Click();
+        //    cut.Find("button").Click();
+        //    var paraElmText = paraElm.TextContent;
 
-            // Assert
-            paraElmText.MarkupMatches("Current count: 3");
-        }
+        //    // Assert
+        //    paraElmText.MarkupMatches("Current count: 3");
+        //}
     }
 }

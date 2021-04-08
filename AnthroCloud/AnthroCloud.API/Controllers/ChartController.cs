@@ -15,13 +15,13 @@ namespace AnthroCloud.API.Controllers
     [ApiController]
     public class ChartController : ControllerBase
     {
-        private readonly AnthroCloudContextMsSql _context;
+        private readonly AnthroCloudContext _context;
 
         /// <summary>
         /// Solely constructs controller with database context.
         /// </summary>
         /// <param name="ctx">The database context</param>
-        public ChartController(AnthroCloudContextMsSql context)
+        public ChartController(AnthroCloudContext context)
         {
             _context = context;
         }

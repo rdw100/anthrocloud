@@ -11,7 +11,7 @@ namespace AnthroCloud.Data
     /// </summary>
     public class ChartDAC : IChartDAC
     {
-        private readonly AnthroCloudContextMsSql _context;
+        private readonly AnthroCloudContext _context;
 
         public ChartDAC() { }
 
@@ -19,7 +19,7 @@ namespace AnthroCloud.Data
         /// Constructs controller with database context.
         /// </summary>
         /// <param name="context">The database context</param>
-        public ChartDAC(AnthroCloudContextMsSql context)
+        public ChartDAC(AnthroCloudContext context)
         {
             _context = context;
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
