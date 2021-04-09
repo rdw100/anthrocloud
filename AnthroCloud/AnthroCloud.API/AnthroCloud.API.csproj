@@ -5,6 +5,7 @@
     <UserSecretsId>be8fdda1-8f36-4896-a69e-fd78d61197b8</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     <AspNetCoreHostingModel>OutofProcess</AspNetCoreHostingModel>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

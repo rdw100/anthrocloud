@@ -40,7 +40,7 @@ namespace AnthroCloud.API
                 String connection = Configuration.GetConnectionString("AnthroCloudDatabaseMsSql");
 
                 services.AddDbContext<AnthroCloudContext>(options =>
-                    options.UseSqlServer(connection));
+                            options.UseSqlServer(connection));
             }
 
             services.AddControllers();

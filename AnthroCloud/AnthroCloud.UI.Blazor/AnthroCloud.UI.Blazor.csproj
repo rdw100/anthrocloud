@@ -2,27 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>9a0ad407-c6d5-45ad-91b7-5808039c0ead</UserSecretsId>
+    <AspNetCoreHostingModel>OutofProcess</AspNetCoreHostingModel>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Components\WFL-Z.razor.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Blazored.Modal" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AnthroCloud.Business\AnthroCloud.Business.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Components\MultiLineChart - Copy - Copy.razor.cs">
-      <DependentUpon>MultiLineChart - Copy.razor.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Components\MultiLineChart - Copy.razor.cs">
-      <DependentUpon>MultiLineChart.razor.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
