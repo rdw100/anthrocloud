@@ -162,7 +162,7 @@
     <fieldset>
         @if (IsCalculating)
         {
-            <legend>Results: &emsp;Calculating...<span class="oi oi-loop-circular spinning" aria-hidden="true"></span> </legend>
+            <legend>Results: &emsp;Calculating...<span class="oi oi-reload spinning" aria-hidden="true"></span> </legend>
         }
         else
         {
@@ -589,6 +589,10 @@
             </div>
         </div>
     </fieldset>
+}
+else if (Error)
+{
+    <div class="alert alert-danger">@ErrorMessage</div>
 }
 else if (loadFailed)
 {

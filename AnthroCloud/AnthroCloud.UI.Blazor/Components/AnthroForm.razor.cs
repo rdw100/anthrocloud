@@ -30,6 +30,9 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public string ExecutionTime;
 
+        public string ErrorMessage;
+        public bool Error => !string.IsNullOrWhiteSpace(ErrorMessage);
+
         protected bool IsCalculating { get; set; }
 
         protected override void OnInitialized()
@@ -68,9 +71,10 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 loadFailed = true;
+                ErrorMessage = ex.Message;
             }
 
             watch.Stop();
@@ -108,9 +112,10 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 loadFailed = true;
+                ErrorMessage = ex.Message;
             }
 
             watch.Stop();
@@ -148,9 +153,10 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 loadFailed = true;
+                ErrorMessage = ex.Message;
             }
 
             watch.Stop();
@@ -188,9 +194,10 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 loadFailed = true;
+                ErrorMessage = ex.Message;
             }
 
             watch.Stop();
@@ -228,9 +235,10 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 loadFailed = true;
+                ErrorMessage = ex.Message;
             }
 
             watch.Stop();
@@ -268,9 +276,10 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 loadFailed = true;
+                ErrorMessage = ex.Message;
             }
 
             watch.Stop();
@@ -346,9 +355,10 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 loadFailed = true;
+                ErrorMessage = ex.Message;
             }
 
             watch.Stop();
