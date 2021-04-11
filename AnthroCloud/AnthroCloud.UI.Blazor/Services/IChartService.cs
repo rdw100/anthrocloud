@@ -1,6 +1,4 @@
-﻿using AnthroCloud.Entities;
-using AnthroCloud.Entities.Charts;
-using System.Collections.Generic;
+﻿using AnthroCloud.Entities.Charts;
 using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Services

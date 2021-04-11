@@ -17,13 +17,13 @@ namespace AnthroCloud.UI.Blazor.Components
         public double BMI { get; set; }
 
         public string AgeString { get; set; }
-        
+
         public double WfaZscore { get; set; }
 
         public double WfaPercentile { get; set; }
 
         public Age Age { get; set; }
-        
+
         [Parameter]
         public double Weight { get; set; } = 9.00;
 
@@ -59,7 +59,7 @@ namespace AnthroCloud.UI.Blazor.Components
             string BirthDateString = string.Format("{0:yyyy-MM-dd}", Birth);
             string VisitDateString = string.Format("{0:yyyy-MM-dd}", Visit);
 
-            Age = await AnthroService.GetAge(BirthDateString, VisitDateString);            
+            Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
             AgeString = Age.ToReadableString();
 
             Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(Weight, Age.ToDaysString(), Sex);

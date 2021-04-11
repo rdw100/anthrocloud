@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using AnthroCloud.Business;
-using AnthroCloud.Entities;
+﻿using AnthroCloud.Entities;
 
 namespace AnthroCloud.UI.Blazor.Components
 {

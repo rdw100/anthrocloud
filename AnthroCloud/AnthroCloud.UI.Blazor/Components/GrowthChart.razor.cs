@@ -26,7 +26,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
         [Parameter]
         public GrowthTypes Growth { get; set; }
-        
+
         [Parameter]
         public Sexes Sex { get; set; }
 
@@ -41,7 +41,7 @@ namespace AnthroCloud.UI.Blazor.Components
         protected override async Task OnInitializedAsync()
         {
             var data = await GetChartData(Sex.ToChartValue(), X, Y, Graph);
-            
+
             var options = new
             {
                 Title = SubTitle = ChartSubTitles.GetTitle(Graph, Growth),
@@ -56,8 +56,9 @@ namespace AnthroCloud.UI.Blazor.Components
                 },
                 CurveType = "Function",
                 series = Series.GetSeries(Graph, Growth),
-                Annotations = new {
-                    Style = "line", 
+                Annotations = new
+                {
+                    Style = "line",
                     Color = "#d3d3d3",
                     TextStyle = new
                     {
@@ -78,7 +79,7 @@ namespace AnthroCloud.UI.Blazor.Components
         public async Task<string> GetChartData(byte id, double x, double y, GraphTypes z)
         {
             string data = string.Empty;
-            switch(Growth)
+            switch (Growth)
             {
                 case GrowthTypes.BFA:
                     data = await ChartService.GetBfa(id, (byte)x, y, z);

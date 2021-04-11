@@ -27,7 +27,7 @@ namespace AnthroCloud.UI.Blazor
 
             string baseAddressPath = Configuration.GetValue<string>("ConfigurationSettings:baseApiAddressPath");
 
-            services.AddHttpClient<IAnthroService, AnthroService>(client => 
+            services.AddHttpClient<IAnthroService, AnthroService>(client =>
             {
                 client.BaseAddress = new Uri(baseAddressPath);
             });
@@ -38,11 +38,16 @@ namespace AnthroCloud.UI.Blazor
             });
 
             services.AddHttpClient<IChartService, ChartService>(client =>
-            { 
-                client.BaseAddress = new Uri(baseAddressPath); 
+            {
+                client.BaseAddress = new Uri(baseAddressPath);
             });
 
             services.AddBlazoredModal();
+
+            services.AddServerSideBlazor().AddCircuitOptions(option =>
+            {
+                option.DetailedErrors = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +63,7 @@ namespace AnthroCloud.UI.Blazor
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
