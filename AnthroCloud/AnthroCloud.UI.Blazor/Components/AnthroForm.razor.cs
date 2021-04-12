@@ -2,6 +2,7 @@
 using AnthroCloud.Entities.Charts;
 using AnthroCloud.UI.Blazor.Pages;
 using AnthroCloud.UI.Blazor.Services;
+using AnthroCloud.UI.Blazor.Shared;
 using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
@@ -22,6 +23,9 @@ namespace AnthroCloud.UI.Blazor.Components
         [Inject]
         [CascadingParameter] public IModalService Modal { get; set; }
 
+        [CascadingParameter]
+        public GlobalError Error { get; set; }
+
         protected EditContext editContext;
 
         public FormViewModel formModel = new();
@@ -31,7 +35,8 @@ namespace AnthroCloud.UI.Blazor.Components
         public string ExecutionTime;
 
         public string ErrorMessage;
-        public bool Error => !string.IsNullOrWhiteSpace(ErrorMessage);
+
+        public bool IsError => !string.IsNullOrWhiteSpace(ErrorMessage);
 
         protected bool IsCalculating { get; set; }
 
@@ -74,6 +79,7 @@ namespace AnthroCloud.UI.Blazor.Components
             catch (Exception ex)
             {
                 loadFailed = true;
+                Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
             }
 
@@ -115,6 +121,7 @@ namespace AnthroCloud.UI.Blazor.Components
             catch (Exception ex)
             {
                 loadFailed = true;
+                Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
             }
 
@@ -156,6 +163,7 @@ namespace AnthroCloud.UI.Blazor.Components
             catch (Exception ex)
             {
                 loadFailed = true;
+                Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
             }
 
@@ -197,6 +205,7 @@ namespace AnthroCloud.UI.Blazor.Components
             catch (Exception ex)
             {
                 loadFailed = true;
+                Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
             }
 
@@ -238,6 +247,7 @@ namespace AnthroCloud.UI.Blazor.Components
             catch (Exception ex)
             {
                 loadFailed = true;
+                Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
             }
 
@@ -279,6 +289,7 @@ namespace AnthroCloud.UI.Blazor.Components
             catch (Exception ex)
             {
                 loadFailed = true;
+                Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
             }
 
@@ -358,6 +369,7 @@ namespace AnthroCloud.UI.Blazor.Components
             catch (Exception ex)
             {
                 loadFailed = true;
+                Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
             }
 
@@ -447,16 +459,16 @@ namespace AnthroCloud.UI.Blazor.Components
             return title;
         }
 
-        public MarkupString Logger { get; set; }
+        public MarkupString LocalLogger { get; set; }
 
         public void OnValidSubmit()
         {
-            Logger = new MarkupString(Logger + $"<br />valid submit on {DateTime.Now}");
+            LocalLogger = new MarkupString(LocalLogger + $"<br />valid submit on {DateTime.Now}");
         }
 
         public void OnInvalidSubmit()
         {
-            Logger = new MarkupString(Logger + $"<br />INVALID submit on {DateTime.Now}");
+            LocalLogger = new MarkupString(LocalLogger + $"<br />INVALID submit on {DateTime.Now}");
         }
 
         public void ShowGrowthChart(GrowthTypes growth, GraphTypes graph, Sexes sex, double x, double y, string title)
@@ -469,6 +481,5 @@ namespace AnthroCloud.UI.Blazor.Components
             parameters.Add(nameof(Chart.Y), y);
             Modal.Show<Chart>(SetChartTitle(title, sex), parameters);
         }
-
     }
 }
