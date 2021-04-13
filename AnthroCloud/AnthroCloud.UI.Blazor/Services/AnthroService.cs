@@ -75,7 +75,7 @@ namespace AnthroCloud.UI.Blazor.Services
 
         public async Task<Outputs> GetScores(Inputs inputs)
         {
-            Outputs results = new();
+            Outputs results;
             string uri = string.Empty;
             try
             {
@@ -96,7 +96,7 @@ namespace AnthroCloud.UI.Blazor.Services
 
         public async Task<Outputs> GetMeasuredScores(Inputs inputs)
         {
-            Outputs results = new();
+            Outputs results;
             string uri = string.Empty;
             try
             {
@@ -117,7 +117,7 @@ namespace AnthroCloud.UI.Blazor.Services
 
         public async Task<Outputs> GetHcaScores(Inputs inputs)
         {
-            Outputs results = new();
+            Outputs results;
             string uri = string.Empty;
             try
             {
@@ -138,7 +138,7 @@ namespace AnthroCloud.UI.Blazor.Services
 
         public async Task<Outputs> GetMuacScores(Inputs inputs)
         {
-            Outputs results = new();
+            Outputs results;
             string uri = string.Empty;
             try
             {
@@ -159,7 +159,7 @@ namespace AnthroCloud.UI.Blazor.Services
 
         public async Task<Outputs> GetTsfScores(Inputs inputs)
         {
-            Outputs results = new();
+            Outputs results;
             string uri = string.Empty;
             try
             {
@@ -180,7 +180,7 @@ namespace AnthroCloud.UI.Blazor.Services
 
         public async Task<Outputs> GetSsfScores(Inputs inputs)
         {
-            Outputs results = new();
+            Outputs results;
             string uri = string.Empty;
             try
             {
