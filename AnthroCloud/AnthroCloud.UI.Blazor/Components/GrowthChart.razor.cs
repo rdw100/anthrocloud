@@ -40,7 +40,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected override async Task OnInitializedAsync()
         {
-            var data = await GetChartData(Sex.ToChartValue(), X, Y, Graph);
+            var data = await GetChartData(Sex.ToChartValue(), X, Y, Graph).ConfigureAwait(false);
 
             var options = new
             {
@@ -73,7 +73,7 @@ namespace AnthroCloud.UI.Blazor.Components
                 }
             };
 
-            await JsRuntime.InvokeAsync<Task>("drawChart", data, options);
+            await JsRuntime.InvokeAsync<Task>("drawChart", data, options).ConfigureAwait(false);
         }
 
         public async Task<string> GetChartData(byte id, double x, double y, GraphTypes z)
@@ -82,31 +82,31 @@ namespace AnthroCloud.UI.Blazor.Components
             switch (Growth)
             {
                 case GrowthTypes.BFA:
-                    data = await ChartService.GetBfa(id, (byte)x, y, z);
+                    data = await ChartService.GetBfa(id, (byte)x, y, z).ConfigureAwait(false);
                     break;
                 case GrowthTypes.HCA:
-                    data = await ChartService.GetHcfa(id, (byte)x, y, z);
+                    data = await ChartService.GetHcfa(id, (byte)x, y, z).ConfigureAwait(false);
                     break;
                 case GrowthTypes.LHFA:
-                    data = await ChartService.GetLhfa(id, (byte)x, y, z);
+                    data = await ChartService.GetLhfa(id, (byte)x, y, z).ConfigureAwait(false);
                     break;
                 case GrowthTypes.MUAC:
-                    data = await ChartService.GetMuac(id, (byte)x, y, z);
+                    data = await ChartService.GetMuac(id, (byte)x, y, z).ConfigureAwait(false);
                     break;
                 case GrowthTypes.SSF:
-                    data = await ChartService.GetSsfa(id, (byte)x, y, z);
+                    data = await ChartService.GetSsfa(id, (byte)x, y, z).ConfigureAwait(false);
                     break;
                 case GrowthTypes.TSF:
-                    data = await ChartService.GetTsfa(id, (byte)x, y, z);
+                    data = await ChartService.GetTsfa(id, (byte)x, y, z).ConfigureAwait(false);
                     break;
                 case GrowthTypes.WFA:
-                    data = await ChartService.GetWfa(id, (byte)x, y, z);
+                    data = await ChartService.GetWfa(id, (byte)x, y, z).ConfigureAwait(false);
                     break;
                 case GrowthTypes.WFH:
-                    data = await ChartService.GetWfh(id, x, y, z);
+                    data = await ChartService.GetWfh(id, x, y, z).ConfigureAwait(false);
                     break;
                 case GrowthTypes.WFL:
-                    data = await ChartService.GetWfl(id, x, y, z);
+                    data = await ChartService.GetWfl(id, x, y, z).ConfigureAwait(false);
                     break;
             }
 
