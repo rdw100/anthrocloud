@@ -59,15 +59,15 @@ namespace AnthroCloud.UI.Blazor.Components
             string BirthDateString = FormattableString.Invariant($"{Birth:yyyy-MM-dd}");
             string VisitDateString = FormattableString.Invariant($"{Visit:yyyy-MM-dd}");
 
-            Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+            Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
             AgeString = Age.ToReadableString();
 
-            Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(Weight, Age.ToDaysString(), Sex);
+            Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(Weight, Age.ToDaysString(), Sex).ConfigureAwait(false);
 
             WfaZscore = wfaTuple.Item1;
             WfaPercentile = wfaTuple.Item2;
 
-            BMI = await AnthroService.GetBMI(Weight, Height);
+            BMI = await AnthroService.GetBMI(Weight, Height).ConfigureAwait(false);
             return BMI;
         }
 

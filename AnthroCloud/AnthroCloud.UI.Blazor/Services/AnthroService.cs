@@ -29,21 +29,20 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<double> GetBMI(double weight, double height)
         {
             double result = 0D;
-            string uri = string.Empty;
+            Uri newUri = new($"anthro/BMIAsync/{weight}/{height}");
             try
-            {
-                uri = $"anthro/BMIAsync/{weight}/{height}";
-                var response = await httpClient.GetAsync(uri);
+            {                
+                var response = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
-                using var responseStream = await response.Content.ReadAsStreamAsync();
+                using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
                 result = await JsonSerializer.DeserializeAsync
-                    <double>(responseStream);
+                    <double>(responseStream).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
                 throw;
             }
             return result;
@@ -53,21 +52,21 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Age> GetAge(string birth, string visit)
         {
             Age result = new();
-            string uri = string.Empty;
+            Uri newUri = new($"anthro/AgeObjectAsync/{birth}/{visit}");
             try
             {
-                uri = $"anthro/AgeObjectAsync/{birth}/{visit}";
-                var response = await httpClient.GetAsync(uri);
+                
+                var response = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
-                using var responseStream = await response.Content.ReadAsStreamAsync();
+                using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
                 result = await JsonSerializer.DeserializeAsync
-                    <Age>(responseStream);
+                    <Age>(responseStream).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
                 throw;
             }
             return result;
@@ -76,19 +75,19 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetScores(Inputs inputs)
         {
             Outputs results;
-            string uri = string.Empty;
+            Uri newUri = new($"STATS");
             try
             {
-                uri = $"STATS";
+                
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    uri, inputs);
+                    newUri, inputs).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>();
+                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
                 throw;
             }
             return results;
@@ -97,19 +96,18 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetMeasuredScores(Inputs inputs)
         {
             Outputs results;
-            string uri = string.Empty;
+            Uri newUri = new($"STATS/MEASURED");
             try
-            {
-                uri = $"STATS/MEASURED";
+            {                
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    uri, inputs);
+                    newUri, inputs).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>();
+                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
                 throw;
             }
             return results;
@@ -118,19 +116,18 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetHcaScores(Inputs inputs)
         {
             Outputs results;
-            string uri = string.Empty;
+            Uri newUri = new($"STATS/HCA");
             try
-            {
-                uri = $"STATS/HCA";
+            {                
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    uri, inputs);
+                    newUri, inputs).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>();
+                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
                 throw;
             }
             return results;
@@ -139,19 +136,18 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetMuacScores(Inputs inputs)
         {
             Outputs results;
-            string uri = string.Empty;
+            Uri newUri = new($"STATS/MUAC");
             try
-            {
-                uri = $"STATS/MUAC";
+            {                
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    uri, inputs);
+                    newUri, inputs).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>();
+                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
                 throw;
             }
             return results;
@@ -160,19 +156,18 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetTsfScores(Inputs inputs)
         {
             Outputs results;
-            string uri = string.Empty;
+            Uri newUri = new($"STATS/TSF");
             try
-            {
-                uri = $"STATS/TSF";
+            {                
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    uri, inputs);
+                    newUri, inputs).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>();
+                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
                 throw;
             }
             return results;
@@ -181,19 +176,18 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetSsfScores(Inputs inputs)
         {
             Outputs results;
-            string uri = string.Empty;
+            Uri newUri = new($"STATS/SSF"); ;
             try
             {
-                uri = $"STATS/SSF";
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    uri, inputs);
+                    newUri, inputs).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>();
+                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
                 throw;
             }
             return results;

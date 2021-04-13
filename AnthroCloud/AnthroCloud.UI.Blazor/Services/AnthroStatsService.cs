@@ -29,7 +29,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 uri = "Stats/WeightForAge/" + weight + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri);
+                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -59,7 +59,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 uri = "Stats/ArmCircumferenceForAge/" + muac + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri);
+                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -88,7 +88,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 uri = "Stats/BodyMassIndexForAge/" + bmi + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri);
+                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -117,7 +117,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 uri = "Stats/HeadCircumferenceForAge/" + headCircumference + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri);
+                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -146,7 +146,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 uri = "Stats/HeightForAge/" + height + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri);
+                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -175,7 +175,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 uri = "Stats/LengthForAge/" + length + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri);
+                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -204,7 +204,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 uri = "Stats/SubscapularSkinfoldForAge/" + subScapularSkinfold + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri);
+                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -233,7 +233,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 uri = "Stats/TricepsSkinfoldForAge/" + tricepsSkinfold + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri);
+                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
                 string response = "";
 
                 using (HttpContent content = message.Content)
@@ -262,7 +262,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 uri = "Stats/WeightForHeight/" + weight + "/" + height + "/" + sex;
-                var message = await httpClient.GetAsync(uri);
+                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -291,7 +291,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 uri = "Stats/WeightForLength/" + weight + "/" + height + "/" + sex;
-                var message = await httpClient.GetAsync(uri);
+                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -323,7 +323,7 @@ namespace AnthroCloud.UI.Blazor.Services
                 var contentData = new StringContent(stringData,
                     System.Text.Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await httpClient.PostAsync
-                    (uri, contentData);
+                    (uri, contentData).ConfigureAwait(false);
                 string result = response.Content.ReadAsStringAsync().Result;
                 outputs = JsonConvert.DeserializeObject<Outputs>(result);
             }
