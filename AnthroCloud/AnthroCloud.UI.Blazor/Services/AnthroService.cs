@@ -29,7 +29,7 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<double> GetBMI(double weight, double height)
         {
             double result = 0D;
-            Uri newUri = new($"anthro/BMIAsync/{weight}/{height}");
+            Uri newUri = new(httpClient.BaseAddress + $"anthro/BMIAsync/{weight}/{height}");
             try
             {                
                 var response = await httpClient.GetAsync(newUri).ConfigureAwait(false);
@@ -42,7 +42,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
+                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
                 throw;
             }
             return result;
@@ -52,10 +52,9 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Age> GetAge(string birth, string visit)
         {
             Age result = new();
-            Uri newUri = new($"anthro/AgeObjectAsync/{birth}/{visit}");
+            Uri newUri = new(httpClient.BaseAddress + $"anthro/AgeObjectAsync/{birth}/{visit}");
             try
-            {
-                
+            {                
                 var response = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
 
@@ -66,7 +65,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
+                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
                 throw;
             }
             return result;
@@ -75,7 +74,7 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new($"STATS");
+            Uri newUri = new(httpClient.BaseAddress + $"STATS");
             try
             {
                 
@@ -87,7 +86,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
+                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
                 throw;
             }
             return results;
@@ -96,7 +95,7 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetMeasuredScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new($"STATS/MEASURED");
+            Uri newUri = new(httpClient.BaseAddress + $"STATS/MEASURED");
             try
             {                
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
@@ -107,7 +106,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
+                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
                 throw;
             }
             return results;
@@ -116,7 +115,7 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetHcaScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new($"STATS/HCA");
+            Uri newUri = new(httpClient.BaseAddress + $"STATS/HCA");
             try
             {                
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
@@ -127,7 +126,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
+                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
                 throw;
             }
             return results;
@@ -136,7 +135,7 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetMuacScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new($"STATS/MUAC");
+            Uri newUri = new(httpClient.BaseAddress + $"STATS/MUAC");
             try
             {                
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
@@ -147,7 +146,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
+                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
                 throw;
             }
             return results;
@@ -156,7 +155,7 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetTsfScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new($"STATS/TSF");
+            Uri newUri = new(httpClient.BaseAddress + $"STATS/TSF");
             try
             {                
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
@@ -167,7 +166,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
+                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
                 throw;
             }
             return results;
@@ -176,7 +175,7 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetSsfScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new($"STATS/SSF"); ;
+            Uri newUri = new(httpClient.BaseAddress + $"STATS/SSF");
             try
             {
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
@@ -187,7 +186,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to retrieve data {uri}.", newUri);
+                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
                 throw;
             }
             return results;

@@ -25,7 +25,6 @@ namespace AnthroCloud.UI.Blazor.Services
         {
             Tuple<double, double> tuple;
             string uri = string.Empty;
-
             try
             {
                 uri = "Stats/WeightForAge/" + weight + "/" + ageInDays + "/" + sex;
