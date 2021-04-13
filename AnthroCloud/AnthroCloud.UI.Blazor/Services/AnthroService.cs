@@ -54,8 +54,8 @@ namespace AnthroCloud.UI.Blazor.Services
         {
             Age result = new();
             string uri = string.Empty;
-            try 
-            { 
+            try
+            {
                 uri = $"anthro/AgeObjectAsync/{birth}/{visit}";
                 var response = await httpClient.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
@@ -63,7 +63,7 @@ namespace AnthroCloud.UI.Blazor.Services
                 using var responseStream = await response.Content.ReadAsStreamAsync();
 
                 result = await JsonSerializer.DeserializeAsync
-                    <Age>(responseStream);            
+                    <Age>(responseStream);
             }
             catch (Exception ex)
             {

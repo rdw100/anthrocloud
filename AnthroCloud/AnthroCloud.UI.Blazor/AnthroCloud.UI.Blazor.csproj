@@ -5,6 +5,8 @@
     <UserSecretsId>9a0ad407-c6d5-45ad-91b7-5808039c0ead</UserSecretsId>
     <AspNetCoreHostingModel>OutofProcess</AspNetCoreHostingModel>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
 
   <ItemGroup>

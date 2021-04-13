@@ -26,8 +26,8 @@ namespace AnthroCloud.UI.Blazor.Services
             Tuple<double, double> tuple;
             string uri = string.Empty;
 
-            try 
-            { 
+            try
+            {
                 uri = "Stats/WeightForAge/" + weight + "/" + ageInDays + "/" + sex;
                 var message = await httpClient.GetAsync(uri);
                 string result = "";
@@ -41,7 +41,7 @@ namespace AnthroCloud.UI.Blazor.Services
 
                 tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
                 throw;
@@ -56,8 +56,8 @@ namespace AnthroCloud.UI.Blazor.Services
             Tuple<double, double> tuple;
             string uri = string.Empty;
 
-            try 
-            { 
+            try
+            {
                 uri = "Stats/ArmCircumferenceForAge/" + muac + "/" + ageInDays + "/" + sex;
                 var message = await httpClient.GetAsync(uri);
                 string result = "";

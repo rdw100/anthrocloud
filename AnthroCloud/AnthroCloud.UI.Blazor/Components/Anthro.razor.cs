@@ -56,8 +56,8 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public async Task<double> CalculateBMI()
         {
-            string BirthDateString = string.Format("{0:yyyy-MM-dd}", Birth);
-            string VisitDateString = string.Format("{0:yyyy-MM-dd}", Visit);
+            string BirthDateString = FormattableString.Invariant($"{Birth:yyyy-MM-dd}");
+            string VisitDateString = FormattableString.Invariant($"{Visit:yyyy-MM-dd}");
 
             Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
             AgeString = Age.ToReadableString();
