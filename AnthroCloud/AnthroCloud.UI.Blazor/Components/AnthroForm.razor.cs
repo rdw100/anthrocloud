@@ -81,7 +81,7 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
                 loadFailed = true;
                 Error.ProcessError(ex);
@@ -124,7 +124,7 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
                 loadFailed = true;
                 Error.ProcessError(ex);
@@ -167,7 +167,7 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
                 loadFailed = true;
                 Error.ProcessError(ex);
@@ -210,7 +210,7 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
                 loadFailed = true;
                 Error.ProcessError(ex);
@@ -253,7 +253,7 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
                 loadFailed = true;
                 Error.ProcessError(ex);
@@ -296,7 +296,7 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
                 loadFailed = true;
                 Error.ProcessError(ex);
@@ -377,7 +377,7 @@ namespace AnthroCloud.UI.Blazor.Components
                     loadFailed = true;
                 }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
                 loadFailed = true;
                 Error.ProcessError(ex);
