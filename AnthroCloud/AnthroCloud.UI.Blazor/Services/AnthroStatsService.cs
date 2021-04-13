@@ -309,7 +309,7 @@ namespace AnthroCloud.UI.Blazor.Services
             try
             {
                 string stringData = JsonConvert.SerializeObject(inputs);
-                var contentData = new StringContent(stringData,
+                using StringContent contentData = new(stringData,
                     System.Text.Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await httpClient.PostAsync
                     (newUri, contentData).ConfigureAwait(false);
