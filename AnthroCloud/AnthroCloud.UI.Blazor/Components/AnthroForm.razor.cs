@@ -31,15 +31,15 @@ namespace AnthroCloud.UI.Blazor.Components
         [CascadingParameter]
         public GlobalError Error { get; set; }
 
-        protected EditContext editContext;
+        protected EditContext EditContext { get; set; }
 
-        public FormViewModel formModel = new();
+        public FormViewModel FormModel { get; set; }
 
-        public bool loadFailed;
+        public bool LoadFailed { get; set; }
 
-        public string ExecutionTime;
+        public string ExecutionTime { get; set; }
 
-        public string ErrorMessage;
+        public string ErrorMessage { get; set; }
 
         public bool IsError => !string.IsNullOrWhiteSpace(ErrorMessage);
 
@@ -47,43 +47,44 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected override void OnInitialized()
         {
-            editContext = new EditContext(formModel);
+            FormModel = new FormViewModel();
+            EditContext = new EditContext(FormModel);
         }
 
         protected async Task HandleHcaAsync()
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            var isValid = editContext.Validate();
+            var isValid = EditContext.Validate();
 
             try
             {
-                loadFailed = false;
+                LoadFailed = false;
 
                 if (isValid)
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    formModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
-                    formModel.FormInputs.AgeString = formModel.FormInputs.Age.ToReadableString().ToString();
+                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
+                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted);
 
-                    formModel.FormOutputs = await AnthroService.GetHcaScores(formModel.FormInputs);
+                    FormModel.FormOutputs = await AnthroService.GetHcaScores(FormModel.FormInputs);
 
                     IsCalculating = false;
                 }
                 else
                 {
-                    loadFailed = true;
+                    LoadFailed = true;
                 }
             }
             catch (ApplicationException ex)
             {
-                loadFailed = true;
+                LoadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
                 Logger.LogWarning(ex.Message);
@@ -95,38 +96,38 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected async Task HandleMuacAsync()
         {
-            var isValid = editContext.Validate();
+            var isValid = EditContext.Validate();
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
             try
             {
-                loadFailed = false;
+                LoadFailed = false;
 
                 if (isValid)
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    formModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
-                    formModel.FormInputs.AgeString = formModel.FormInputs.Age.ToReadableString().ToString();
+                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
+                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted);
 
-                    formModel.FormOutputs = await AnthroService.GetMuacScores(formModel.FormInputs);
+                    FormModel.FormOutputs = await AnthroService.GetMuacScores(FormModel.FormInputs);
 
                     IsCalculating = false;
                 }
                 else
                 {
-                    loadFailed = true;
+                    LoadFailed = true;
                 }
             }
             catch (ApplicationException ex)
             {
-                loadFailed = true;
+                LoadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
                 Logger.LogWarning(ex.Message);
@@ -138,38 +139,38 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected async Task HandleTsfAsync()
         {
-            var isValid = editContext.Validate();
+            var isValid = EditContext.Validate();
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
             try
             {
-                loadFailed = false;
+                LoadFailed = false;
 
                 if (isValid)
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    formModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
-                    formModel.FormInputs.AgeString = formModel.FormInputs.Age.ToReadableString().ToString();
+                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
+                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted);
 
-                    formModel.FormOutputs = await AnthroService.GetTsfScores(formModel.FormInputs);
+                    FormModel.FormOutputs = await AnthroService.GetTsfScores(FormModel.FormInputs);
 
                     IsCalculating = false;
                 }
                 else
                 {
-                    loadFailed = true;
+                    LoadFailed = true;
                 }
             }
             catch (ApplicationException ex)
             {
-                loadFailed = true;
+                LoadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
                 Logger.LogWarning(ex.Message);
@@ -181,38 +182,38 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected async Task HandleSsfAsync()
         {
-            var isValid = editContext.Validate();
+            var isValid = EditContext.Validate();
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
             try
             {
-                loadFailed = false;
+                LoadFailed = false;
 
                 if (isValid)
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    formModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
-                    formModel.FormInputs.AgeString = formModel.FormInputs.Age.ToReadableString().ToString();
+                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
+                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted);
 
-                    formModel.FormOutputs = await AnthroService.GetSsfScores(formModel.FormInputs);
+                    FormModel.FormOutputs = await AnthroService.GetSsfScores(FormModel.FormInputs);
 
                     IsCalculating = false;
                 }
                 else
                 {
-                    loadFailed = true;
+                    LoadFailed = true;
                 }
             }
             catch (ApplicationException ex)
             {
-                loadFailed = true;
+                LoadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
                 Logger.LogWarning(ex.Message);
@@ -224,38 +225,38 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected async Task HandleMeasuredAsync()
         {
-            var isValid = editContext.Validate();
+            var isValid = EditContext.Validate();
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
             try
             {
-                loadFailed = false;
+                LoadFailed = false;
 
                 if (isValid)
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    formModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
-                    formModel.FormInputs.AgeString = formModel.FormInputs.Age.ToReadableString().ToString();
+                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeightAdjusted);
+                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted);
 
-                    formModel.FormOutputs = await AnthroService.GetMeasuredScores(formModel.FormInputs);
+                    FormModel.FormOutputs = await AnthroService.GetMeasuredScores(FormModel.FormInputs);
 
                     IsCalculating = false;
                 }
                 else
                 {
-                    loadFailed = true;
+                    LoadFailed = true;
                 }
             }
             catch (ApplicationException ex)
             {
-                loadFailed = true;
+                LoadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
                 Logger.LogWarning(ex.Message);
@@ -269,36 +270,36 @@ namespace AnthroCloud.UI.Blazor.Components
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            var isValid = editContext.Validate();
+            var isValid = EditContext.Validate();
 
             try
             {
-                loadFailed = false;
+                LoadFailed = false;
 
                 if (isValid)
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    formModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
-                    formModel.FormInputs.AgeString = formModel.FormInputs.Age.ToReadableString().ToString();
+                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeight);
+                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight);
 
-                    formModel.FormOutputs = await AnthroService.GetScores(formModel.FormInputs);
+                    FormModel.FormOutputs = await AnthroService.GetScores(FormModel.FormInputs);
 
                     IsCalculating = false;
                 }
                 else
                 {
-                    loadFailed = true;
+                    LoadFailed = true;
                 }
             }
             catch (ApplicationException ex)
             {
-                loadFailed = true;
+                LoadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
                 Logger.LogWarning(ex.Message);
@@ -312,74 +313,74 @@ namespace AnthroCloud.UI.Blazor.Components
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            var isValid = editContext.Validate();
+            var isValid = EditContext.Validate();
 
             try
             {
-                loadFailed = false;
+                LoadFailed = false;
 
                 if (isValid)
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{formModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    formModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
-                    formModel.FormInputs.AgeString = formModel.FormInputs.Age.ToReadableString().ToString();
+                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString);
+                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    formModel.FormInputs.BMI = await AnthroService.GetBMI(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeight);
+                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight);
 
-                    Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(formModel.FormInputs.Weight, FormattableString.Invariant($"{formModel.FormInputs.Age.TotalDays}"), formModel.FormInputs.Sex);
-                    formModel.FormOutputs.WfaZscore = wfaTuple.Item1;
-                    formModel.FormOutputs.WfaPercentile = wfaTuple.Item2;
+                    Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(FormModel.FormInputs.Weight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex);
+                    FormModel.FormOutputs.WfaZscore = wfaTuple.Item1;
+                    FormModel.FormOutputs.WfaPercentile = wfaTuple.Item2;
 
-                    Tuple<double, double> muacTuple = await AnthroStatsService.GetMUAC(formModel.FormInputs.MUAC, FormattableString.Invariant($"{formModel.FormInputs.Age.TotalDays}"), formModel.FormInputs.Sex);
-                    formModel.FormOutputs.MuacZscore = muacTuple.Item1;
-                    formModel.FormOutputs.MuacPercentile = muacTuple.Item2;
+                    Tuple<double, double> muacTuple = await AnthroStatsService.GetMUAC(FormModel.FormInputs.MUAC, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex);
+                    FormModel.FormOutputs.MuacZscore = muacTuple.Item1;
+                    FormModel.FormOutputs.MuacPercentile = muacTuple.Item2;
 
-                    Tuple<double, double> bfaTuple = await AnthroStatsService.GetBFA(formModel.FormInputs.BMI, FormattableString.Invariant($"{formModel.FormInputs.Age.TotalDays}"), formModel.FormInputs.Sex);
-                    formModel.FormOutputs.BfaZscore = bfaTuple.Item1;
-                    formModel.FormOutputs.BfaPercentile = bfaTuple.Item2;
+                    Tuple<double, double> bfaTuple = await AnthroStatsService.GetBFA(FormModel.FormInputs.BMI, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex);
+                    FormModel.FormOutputs.BfaZscore = bfaTuple.Item1;
+                    FormModel.FormOutputs.BfaPercentile = bfaTuple.Item2;
 
-                    Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(formModel.FormInputs.HeadCircumference, FormattableString.Invariant($"{formModel.FormInputs.Age.TotalDays}"), formModel.FormInputs.Sex);
-                    formModel.FormOutputs.HcaZscore = hcaTuple.Item1;
-                    formModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
+                    Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(FormModel.FormInputs.HeadCircumference, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex);
+                    FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;
+                    FormModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
 
-                    Tuple<double, double> hfaTuple = await AnthroStatsService.GetHFA(formModel.FormInputs.LengthHeight, FormattableString.Invariant($"{formModel.FormInputs.Age.TotalDays}"), formModel.FormInputs.Sex);
-                    formModel.FormOutputs.HfaZscore = hfaTuple.Item1;
-                    formModel.FormOutputs.HfaPercentile = hfaTuple.Item2;
+                    Tuple<double, double> hfaTuple = await AnthroStatsService.GetHFA(FormModel.FormInputs.LengthHeight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex);
+                    FormModel.FormOutputs.HfaZscore = hfaTuple.Item1;
+                    FormModel.FormOutputs.HfaPercentile = hfaTuple.Item2;
 
-                    Tuple<double, double> lfaTuple = await AnthroStatsService.GetLFA(formModel.FormInputs.LengthHeight, FormattableString.Invariant($"{formModel.FormInputs.Age.TotalDays}"), formModel.FormInputs.Sex);
-                    formModel.FormOutputs.LfaZscore = lfaTuple.Item1;
-                    formModel.FormOutputs.LfaPercentile = lfaTuple.Item2;
+                    Tuple<double, double> lfaTuple = await AnthroStatsService.GetLFA(FormModel.FormInputs.LengthHeight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex);
+                    FormModel.FormOutputs.LfaZscore = lfaTuple.Item1;
+                    FormModel.FormOutputs.LfaPercentile = lfaTuple.Item2;
 
-                    Tuple<double, double> sfaTuple = await AnthroStatsService.GetSFA(formModel.FormInputs.SubscapularSkinFold, FormattableString.Invariant($"{formModel.FormInputs.Age.TotalDays}"), formModel.FormInputs.Sex);
-                    formModel.FormOutputs.SsfZscore = sfaTuple.Item1;
-                    formModel.FormOutputs.SsfPercentile = sfaTuple.Item2;
+                    Tuple<double, double> sfaTuple = await AnthroStatsService.GetSFA(FormModel.FormInputs.SubscapularSkinFold, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex);
+                    FormModel.FormOutputs.SsfZscore = sfaTuple.Item1;
+                    FormModel.FormOutputs.SsfPercentile = sfaTuple.Item2;
 
-                    Tuple<double, double> tfaTuple = await AnthroStatsService.GetTFA(formModel.FormInputs.TricepsSkinFold, FormattableString.Invariant($"{formModel.FormInputs.Age.TotalDays}"), formModel.FormInputs.Sex);
-                    formModel.FormOutputs.TsfZscore = tfaTuple.Item1;
-                    formModel.FormOutputs.TsfPercentile = tfaTuple.Item2;
+                    Tuple<double, double> tfaTuple = await AnthroStatsService.GetTFA(FormModel.FormInputs.TricepsSkinFold, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex);
+                    FormModel.FormOutputs.TsfZscore = tfaTuple.Item1;
+                    FormModel.FormOutputs.TsfPercentile = tfaTuple.Item2;
 
-                    Tuple<double, double> wfhTuple = await AnthroStatsService.GetWFH(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeight, formModel.FormInputs.Sex);
-                    formModel.FormOutputs.WfhZscore = wfhTuple.Item1;
-                    formModel.FormOutputs.WfhPercentile = wfhTuple.Item2;
+                    Tuple<double, double> wfhTuple = await AnthroStatsService.GetWFH(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight, FormModel.FormInputs.Sex);
+                    FormModel.FormOutputs.WfhZscore = wfhTuple.Item1;
+                    FormModel.FormOutputs.WfhPercentile = wfhTuple.Item2;
 
-                    Tuple<double, double> wflTuple = await AnthroStatsService.GetWFL(formModel.FormInputs.Weight, formModel.FormInputs.LengthHeight, formModel.FormInputs.Sex);
-                    formModel.FormOutputs.WflZscore = wflTuple.Item1;
-                    formModel.FormOutputs.WflPercentile = wflTuple.Item2;
+                    Tuple<double, double> wflTuple = await AnthroStatsService.GetWFL(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight, FormModel.FormInputs.Sex);
+                    FormModel.FormOutputs.WflZscore = wflTuple.Item1;
+                    FormModel.FormOutputs.WflPercentile = wflTuple.Item2;
 
                     IsCalculating = false;
                 }
                 else
                 {
-                    loadFailed = true;
+                    LoadFailed = true;
                 }
             }
             catch (ApplicationException ex)
             {
-                loadFailed = true;
+                LoadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
                 Logger.LogWarning(ex.Message);
