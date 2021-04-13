@@ -24,11 +24,10 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Tuple<double, double>> GetWFA(double weight, string ageInDays, Sexes sex)
         {
             Tuple<double, double> tuple;
-            string uri = string.Empty;
+            Uri newUri = new(httpClient.BaseAddress + $"Stats/WeightForAge/{weight}/{ageInDays}/{sex}");
             try
             {
-                uri = "Stats/WeightForAge/" + weight + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -42,7 +41,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
@@ -53,12 +52,10 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Tuple<double, double>> GetMUAC(double muac, string ageInDays, Sexes sex)
         {
             Tuple<double, double> tuple;
-            string uri = string.Empty;
-
+            Uri newUri = new(httpClient.BaseAddress + $"Stats/ArmCircumferenceForAge/{muac}/{ageInDays}/{sex}");
             try
             {
-                uri = "Stats/ArmCircumferenceForAge/" + muac + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -72,7 +69,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
@@ -83,11 +80,10 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Tuple<double, double>> GetBFA(double bmi, string ageInDays, Sexes sex)
         {
             Tuple<double, double> tuple;
-            string uri = string.Empty;
+            Uri newUri = new(httpClient.BaseAddress + $"Stats/ArmCircumferenceForAge/{bmi}/{ageInDays}/{sex}");
             try
             {
-                uri = "Stats/BodyMassIndexForAge/" + bmi + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -101,7 +97,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
@@ -112,11 +108,11 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Tuple<double, double>> GetHCA(double headCircumference, string ageInDays, Sexes sex)
         {
             Tuple<double, double> tuple;
-            string uri = string.Empty;
+            Uri newUri = new(httpClient.BaseAddress 
+                + $"Stats/HeadCircumferenceForAge/{headCircumference}/{ageInDays}/{sex}");
             try
             {
-                uri = "Stats/HeadCircumferenceForAge/" + headCircumference + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -130,7 +126,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
@@ -141,11 +137,10 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Tuple<double, double>> GetHFA(double height, string ageInDays, Sexes sex)
         {
             Tuple<double, double> tuple;
-            string uri = string.Empty;
+            Uri newUri = new(httpClient.BaseAddress + $"Stats/HeightForAge/{height}/{ageInDays}/{sex}");
             try
             {
-                uri = "Stats/HeightForAge/" + height + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -159,7 +154,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
@@ -170,11 +165,10 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Tuple<double, double>> GetLFA(double length, string ageInDays, Sexes sex)
         {
             Tuple<double, double> tuple;
-            string uri = string.Empty;
+            Uri newUri = new(httpClient.BaseAddress + $"Stats/LengthForAge/{length}/{ageInDays}/{sex}");
             try
             {
-                uri = "Stats/LengthForAge/" + length + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -188,7 +182,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
@@ -199,11 +193,10 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Tuple<double, double>> GetSFA(double subScapularSkinfold, string ageInDays, Sexes sex)
         {
             Tuple<double, double> tuple;
-            string uri = string.Empty;
+            Uri newUri = new(httpClient.BaseAddress + $"Stats/SubscapularSkinfoldForAge/{subScapularSkinfold}/{ageInDays}/{sex}");
             try
             {
-                uri = "Stats/SubscapularSkinfoldForAge/" + subScapularSkinfold + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -217,7 +210,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
@@ -228,11 +221,10 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Tuple<double, double>> GetTFA(double tricepsSkinfold, string ageInDays, Sexes sex)
         {
             Tuple<double, double> tuple;
-            string uri = string.Empty;
+            Uri newUri = new(httpClient.BaseAddress + $"Stats/TricepsSkinfoldForAge/{tricepsSkinfold}/{ageInDays}/{sex}");
             try
             {
-                uri = "Stats/TricepsSkinfoldForAge/" + tricepsSkinfold + "/" + ageInDays + "/" + sex;
-                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 string response = "";
 
                 using (HttpContent content = message.Content)
@@ -246,7 +238,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
@@ -257,11 +249,10 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Tuple<double, double>> GetWFH(double weight, double height, Sexes sex)
         {
             Tuple<double, double> tuple;
-            string uri = string.Empty;
+            Uri newUri = new(httpClient.BaseAddress + $"Stats/WeightForHeight/{weight}/{height}/{sex}");
             try
             {
-                uri = "Stats/WeightForHeight/" + weight + "/" + height + "/" + sex;
-                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -275,7 +266,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
@@ -286,11 +277,10 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Tuple<double, double>> GetWFL(double weight, double height, Sexes sex)
         {
             Tuple<double, double> tuple;
-            string uri = string.Empty;
+            Uri newUri = new(httpClient.BaseAddress + $"Stats/WeightForLength/{weight}/{height}/{sex}");
             try
             {
-                uri = "Stats/WeightForLength/" + weight + "/" + height + "/" + sex;
-                var message = await httpClient.GetAsync(uri).ConfigureAwait(false);
+                var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
                 string result = "";
 
                 using (HttpContent content = message.Content)
@@ -304,7 +294,7 @@ namespace AnthroCloud.UI.Blazor.Services
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
@@ -314,21 +304,21 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetScores(Inputs inputs)
         {
             Outputs outputs;
-            string uri = string.Empty;
+            Uri newUri = new(httpClient.BaseAddress + $"Stats");
+
             try
             {
-                uri = "Stats";
                 string stringData = JsonConvert.SerializeObject(inputs);
                 var contentData = new StringContent(stringData,
                     System.Text.Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await httpClient.PostAsync
-                    (uri, contentData).ConfigureAwait(false);
+                    (newUri, contentData).ConfigureAwait(false);
                 string result = response.Content.ReadAsStringAsync().Result;
                 outputs = JsonConvert.DeserializeObject<Outputs>(result);
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogWarning(ex, $"Failed to calculate data {newUri}.", newUri);
                 throw;
             }
 
