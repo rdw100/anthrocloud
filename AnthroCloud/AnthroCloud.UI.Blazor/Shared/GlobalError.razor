@@ -13,5 +13,6 @@
     {
         Logger.LogError("Error:ProcessError - Type: {Type} Message: {Message}",
             ex.GetType(), ex.Message);
+        StateHasChanged();
     }
 }

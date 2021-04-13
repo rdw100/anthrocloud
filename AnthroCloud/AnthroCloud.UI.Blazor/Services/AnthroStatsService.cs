@@ -44,6 +44,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch(Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                throw;
             }
 
             return tuple;
@@ -73,6 +74,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                throw;
             }
 
             return tuple;
@@ -101,6 +103,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                throw;
             }
 
             return tuple;
@@ -125,14 +128,11 @@ namespace AnthroCloud.UI.Blazor.Services
                 }
 
                 tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
-
-                throw new InvalidOperationException("Division by Fake Zero");
             }
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
-                Logger.LogError("Error:ProcessError - Type: {Type} Message: {Message}",
-    ex.GetType(), ex.Message);
+                throw;
             }
 
             return tuple;
@@ -161,6 +161,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                throw;
             }
 
             return tuple;
@@ -189,6 +190,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                throw;
             }
 
             return tuple;
@@ -217,6 +219,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                throw;
             }
 
             return tuple;
@@ -245,6 +248,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                throw;
             }
 
             return tuple;
@@ -273,6 +277,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                throw;
             }
 
             return tuple;
@@ -301,6 +306,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                throw;
             }
 
             return tuple;
@@ -324,6 +330,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                throw;
             }
 
             return outputs;

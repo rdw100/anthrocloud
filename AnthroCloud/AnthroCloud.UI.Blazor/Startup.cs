@@ -68,7 +68,7 @@ namespace AnthroCloud.UI.Blazor
                 .AddHubOptions(options =>
                 {
                     options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
-                    options.EnableDetailedErrors = false;
+                    options.EnableDetailedErrors = true;
                     options.HandshakeTimeout = TimeSpan.FromSeconds(15);
                     options.KeepAliveInterval = TimeSpan.FromSeconds(15);
                     options.MaximumParallelInvocationsPerClient = 1;

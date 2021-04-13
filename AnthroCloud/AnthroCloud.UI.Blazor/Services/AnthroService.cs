@@ -15,7 +15,8 @@ namespace AnthroCloud.UI.Blazor.Services
     /// <seealso cref="AnthroCloud.UI.Blazor.Services.IAnthroService" />
     public class AnthroService : IAnthroService
     {
-        ILogger<AnthroService> Logger;
+        [Inject]
+        protected ILogger<AnthroService> Logger { get; set; }
 
         private readonly HttpClient httpClient;
 
@@ -43,6 +44,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                throw;
             }
             return result;
         }
@@ -66,6 +68,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                throw;
             }
             return result;
         }
@@ -86,6 +89,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                throw;
             }
             return results;
         }
@@ -106,6 +110,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                throw;
             }
             return results;
         }
@@ -126,6 +131,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                throw;
             }
             return results;
         }
@@ -146,6 +152,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                throw;
             }
             return results;
         }
@@ -166,6 +173,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                throw;
             }
             return results;
         }
@@ -186,6 +194,7 @@ namespace AnthroCloud.UI.Blazor.Services
             catch (Exception ex)
             {
                 Logger.LogWarning(ex, "Failed to retrieve data {uri}.", uri);
+                throw;
             }
             return results;
         }

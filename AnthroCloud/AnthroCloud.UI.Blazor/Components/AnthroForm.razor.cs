@@ -370,6 +370,8 @@ namespace AnthroCloud.UI.Blazor.Components
                     formModel.FormOutputs.WflPercentile = wflTuple.Item2;
 
                     IsCalculating = false;
+
+                    //throw new InvalidOperationException("Division by Fake Zero");
                 }
                 else
                 {
