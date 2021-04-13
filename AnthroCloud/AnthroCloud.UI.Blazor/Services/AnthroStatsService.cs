@@ -274,10 +274,10 @@ namespace AnthroCloud.UI.Blazor.Services
         }
 
         // GET: api/Stats/WeightForLength/9.00/73.00/Male
-        public async Task<Tuple<double, double>> GetWFL(double weight, double height, Sexes sex)
+        public async Task<Tuple<double, double>> GetWFL(double weight, double length, Sexes sex)
         {
             Tuple<double, double> tuple;
-            Uri newUri = new(httpClient.BaseAddress + $"Stats/WeightForLength/{weight}/{height}/{sex}");
+            Uri newUri = new(httpClient.BaseAddress + $"Stats/WeightForLength/{weight}/{length}/{sex}");
             try
             {
                 var message = await httpClient.GetAsync(newUri).ConfigureAwait(false);
