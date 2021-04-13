@@ -55,26 +55,27 @@ namespace AnthroCloud.UI.Blazor
 
             services.AddBlazoredModal();
 
-            services.AddServerSideBlazor().AddCircuitOptions(option =>
-            {
-                option.DetailedErrors = true;
-                option.DisconnectedCircuitMaxRetained = 100;
-                option.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3);
-                option.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);
-                option.MaxBufferedUnacknowledgedRenderBatches = 10;
-            });
+            //services.AddServerSideBlazor()
+            //    .AddCircuitOptions(option =>
+            //    {
+            //        option.DetailedErrors = true;
+            //        //option.DisconnectedCircuitMaxRetained = 100;
+            //        //option.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3);
+            //        //option.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);
+            //        //option.MaxBufferedUnacknowledgedRenderBatches = 10;
+            //    });
 
-            services.AddServerSideBlazor()
-                .AddHubOptions(options =>
-                {
-                    options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
-                    options.EnableDetailedErrors = true;
-                    options.HandshakeTimeout = TimeSpan.FromSeconds(15);
-                    options.KeepAliveInterval = TimeSpan.FromSeconds(15);
-                    options.MaximumParallelInvocationsPerClient = 1;
-                    options.MaximumReceiveMessageSize = 32 * 1024;
-                    options.StreamBufferCapacity = 10;
-                });
+            //services.AddServerSideBlazor()
+            //    .AddHubOptions(options =>
+            //    {
+            //        //options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+            //        options.EnableDetailedErrors = true;
+            //        //options.HandshakeTimeout = TimeSpan.FromSeconds(15);
+            //        //options.KeepAliveInterval = TimeSpan.FromSeconds(15);
+            //        //options.MaximumParallelInvocationsPerClient = 1;
+            //        //options.MaximumReceiveMessageSize = 32 * 1024;
+            //        //options.StreamBufferCapacity = 10;
+            //    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

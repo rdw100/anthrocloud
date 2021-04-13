@@ -28,17 +28,17 @@ namespace AnthroCloud.UI.Blazor.Pages
         {
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
 
-            //var exceptionHandlerPathFeature =
-            //    HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            //if (exceptionHandlerPathFeature?.Error is FileNotFoundException)
-            //{
-            //    ExceptionMessage = "File error thrown";
-            //    _logger.LogError(ExceptionMessage);
-            //}
-            //if (exceptionHandlerPathFeature?.Path == "/index")
-            //{
-            //    ExceptionMessage += " from home page";
-            //}
+            var exceptionHandlerPathFeature =
+                HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            if (exceptionHandlerPathFeature?.Error is FileNotFoundException)
+            {
+                ExceptionMessage = "File error thrown";
+                _logger.LogError(ExceptionMessage);
+            }
+            if (exceptionHandlerPathFeature?.Path == "/index")
+            {
+                ExceptionMessage += " from home page";
+            }
         }
     }
 }
