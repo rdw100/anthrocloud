@@ -1,4 +1,6 @@
 ﻿using AnthroCloud.Entities;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
@@ -8,6 +10,9 @@ namespace AnthroCloud.UI.Blazor.Services
 {
     public class AnthroStatsService : IAnthroStatsService
     {
+        [Inject]
+        protected ILogger<AnthroStatsService> Logger { get; set; }
+
         private readonly HttpClient httpClient;
 
         public AnthroStatsService(HttpClient httpClient)
@@ -18,195 +23,309 @@ namespace AnthroCloud.UI.Blazor.Services
         // GET: https://localhost:5001/api/Stats/WeightForAge/9.00/365/Male
         public async Task<Tuple<double, double>> GetWFA(double weight, string ageInDays, Sexes sex)
         {
-            // GET: api/Stats/WeightForAge/9.00/365/Male
-            string pathStatsWFA = "Stats/WeightForAge/" + weight + "/" + ageInDays + "/" + sex;
-            var responseStatsWFA = await httpClient.GetAsync(pathStatsWFA);
-            string resStatsWFA = "";
+            Tuple<double, double> tuple = new (0.0, 0.0);
+            string uri = string.Empty;
 
-            using (HttpContent contentStatsWFA = responseStatsWFA.Content)
+            try 
+            { 
+                uri = "Stats/WeightForAge/" + weight + "/" + ageInDays + "/" + sex;
+                var message = await httpClient.GetAsync(uri);
+                string result = "";
+
+                using (HttpContent content = message.Content)
+                {
+                    // ... Read the string.
+                    Task<string> response = content.ReadAsStringAsync();
+                    result = response.Result;
+                }
+
+                tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
+            }
+            catch(Exception ex)
             {
-                // ... Read the string.
-                Task<string> result = contentStatsWFA.ReadAsStringAsync();
-                resStatsWFA = result.Result;
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
             }
 
-            var wfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsWFA);
-
-            return wfaTuple;
+            return tuple;
         }
 
         // GET: https://localhost:5001/api/Stats/ArmCircumferenceForAge/15.00/365/Male
         public async Task<Tuple<double, double>> GetMUAC(double muac, string ageInDays, Sexes sex)
         {
-            string pathStatsMUAC = "Stats/ArmCircumferenceForAge/" + muac + "/" + ageInDays + "/" + sex;
-            var responseStatsMUAC = await httpClient.GetAsync(pathStatsMUAC);
-            string resStatsMUAC = "";
+            Tuple<double, double> tuple = new(0.0, 0.0);
+            string uri = string.Empty;
 
-            using (HttpContent contentStatsMUAC = responseStatsMUAC.Content)
+            try 
+            { 
+                uri = "Stats/ArmCircumferenceForAge/" + muac + "/" + ageInDays + "/" + sex;
+                var message = await httpClient.GetAsync(uri);
+                string result = "";
+
+                using (HttpContent content = message.Content)
+                {
+                    // ... Read the string.
+                    Task<string> response = content.ReadAsStringAsync();
+                    result = response.Result;
+                }
+
+                tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
+            }
+            catch (Exception ex)
             {
-                // ... Read the string.
-                Task<string> result = contentStatsMUAC.ReadAsStringAsync();
-                resStatsMUAC = result.Result;
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
             }
 
-            var muacTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsMUAC);
-
-            return muacTuple;
+            return tuple;
         }
 
         // GET: api/Stats/BodyMassIndexForAge/16.89/365/Male
         public async Task<Tuple<double, double>> GetBFA(double bmi, string ageInDays, Sexes sex)
         {
-            string pathStatsBFA = "Stats/BodyMassIndexForAge/" + bmi + "/" + ageInDays + "/" + sex;
-            var responseStatsBFA = await httpClient.GetAsync(pathStatsBFA);
-            string resStatsBFA = "";
-
-            using (HttpContent contentStatsBFA = responseStatsBFA.Content)
+            Tuple<double, double> tuple = new(0.0, 0.0);
+            string uri = string.Empty;
+            try
             {
-                // ... Read the string.
-                Task<string> result = contentStatsBFA.ReadAsStringAsync();
-                resStatsBFA = result.Result;
+                uri = "Stats/BodyMassIndexForAge/" + bmi + "/" + ageInDays + "/" + sex;
+                var message = await httpClient.GetAsync(uri);
+                string result = "";
+
+                using (HttpContent content = message.Content)
+                {
+                    // ... Read the string.
+                    Task<string> response = content.ReadAsStringAsync();
+                    result = response.Result;
+                }
+
+                tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
             }
 
-            var bfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsBFA);
-            return bfaTuple;
+            return tuple;
         }
 
         // GET: api/Stats/HeadCircumferenceForAge/45.00/365/Male
         public async Task<Tuple<double, double>> GetHCA(double headCircumference, string ageInDays, Sexes sex)
         {
-            string pathStatsHCA = "Stats/HeadCircumferenceForAge/" + headCircumference + "/" + ageInDays + "/" + sex;
-            var responseStatsHCA = await httpClient.GetAsync(pathStatsHCA);
-            string resStatsHCA = "";
-
-            using (HttpContent contentStatsHCA = responseStatsHCA.Content)
+            Tuple<double, double> tuple = new(0.0, 0.0);
+            string uri = string.Empty;
+            try
             {
-                // ... Read the string.
-                Task<string> result = contentStatsHCA.ReadAsStringAsync();
-                resStatsHCA = result.Result;
+                uri = "Stats/HeadCircumferenceForAge/" + headCircumference + "/" + ageInDays + "/" + sex;
+                var message = await httpClient.GetAsync(uri);
+                string result = "";
+
+                using (HttpContent content = message.Content)
+                {
+                    // ... Read the string.
+                    Task<string> response = content.ReadAsStringAsync();
+                    result = response.Result;
+                }
+
+                tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
+
+                throw new InvalidOperationException("Division by Fake Zero");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+                Logger.LogError("Error:ProcessError - Type: {Type} Message: {Message}",
+    ex.GetType(), ex.Message);
             }
 
-            var hcaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsHCA);
-            return hcaTuple;
+            return tuple;
         }
 
         // GET: api/Stats/HeightForAge/96.00/1095/Male
         public async Task<Tuple<double, double>> GetHFA(double height, string ageInDays, Sexes sex)
         {
-            string pathStatsHFA = "Stats/HeightForAge/" + height + "/" + ageInDays + "/" + sex;
-            var responseStatsHFA = await httpClient.GetAsync(pathStatsHFA);
-            string resStatsHFA = "";
-
-            using (HttpContent contentStatsHFA = responseStatsHFA.Content)
+            Tuple<double, double> tuple = new(0.0, 0.0);
+            string uri = string.Empty;
+            try
             {
-                // ... Read the string.
-                Task<string> result = contentStatsHFA.ReadAsStringAsync();
-                resStatsHFA = result.Result;
+                uri = "Stats/HeightForAge/" + height + "/" + ageInDays + "/" + sex;
+                var message = await httpClient.GetAsync(uri);
+                string result = "";
+
+                using (HttpContent content = message.Content)
+                {
+                    // ... Read the string.
+                    Task<string> response = content.ReadAsStringAsync();
+                    result = response.Result;
+                }
+
+                tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
             }
 
-            var hfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsHFA);
-            return hfaTuple;
+            return tuple;
         }
 
         // GET: api/Stats/LengthForAge/73.00/365/Sex.Male
         public async Task<Tuple<double, double>> GetLFA(double length, string ageInDays, Sexes sex)
         {
-            string pathStatsLFA = "Stats/LengthForAge/" + length + "/" + ageInDays + "/" + sex;
-            var responseStatsLFA = await httpClient.GetAsync(pathStatsLFA);
-            string resStatsLFA = "";
-
-            using (HttpContent contentStatsLFA = responseStatsLFA.Content)
+            Tuple<double, double> tuple = new(0.0, 0.0);
+            string uri = string.Empty;
+            try
             {
-                // ... Read the string.
-                Task<string> result = contentStatsLFA.ReadAsStringAsync();
-                resStatsLFA = result.Result;
+                uri = "Stats/LengthForAge/" + length + "/" + ageInDays + "/" + sex;
+                var message = await httpClient.GetAsync(uri);
+                string result = "";
+
+                using (HttpContent content = message.Content)
+                {
+                    // ... Read the string.
+                    Task<string> response = content.ReadAsStringAsync();
+                    result = response.Result;
+                }
+
+                tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
             }
 
-            var lfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsLFA);
-            return lfaTuple;
+            return tuple;
         }
 
         // GET: api/Stats/SubscapularSkinfoldForAge/7.00/365/Male
         public async Task<Tuple<double, double>> GetSFA(double subScapularSkinfold, string ageInDays, Sexes sex)
         {
-            string pathStatsSFA = "Stats/SubscapularSkinfoldForAge/" + subScapularSkinfold + "/" + ageInDays + "/" + sex;
-            var responseStatsSFA = await httpClient.GetAsync(pathStatsSFA);
-            string resStatsSFA = "";
-
-            using (HttpContent contentStatsSFA = responseStatsSFA.Content)
+            Tuple<double, double> tuple = new(0.0, 0.0);
+            string uri = string.Empty;
+            try
             {
-                // ... Read the string.
-                Task<string> result = contentStatsSFA.ReadAsStringAsync();
-                resStatsSFA = result.Result;
+                uri = "Stats/SubscapularSkinfoldForAge/" + subScapularSkinfold + "/" + ageInDays + "/" + sex;
+                var message = await httpClient.GetAsync(uri);
+                string result = "";
+
+                using (HttpContent content = message.Content)
+                {
+                    // ... Read the string.
+                    Task<string> response = content.ReadAsStringAsync();
+                    result = response.Result;
+                }
+
+                tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
             }
 
-            var sfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsSFA);
-            return sfaTuple;
+            return tuple;
         }
 
         // GET: api/Stats/TricepsSkinfoldForAge/8.00/365/Male
         public async Task<Tuple<double, double>> GetTFA(double tricepsSkinfold, string ageInDays, Sexes sex)
         {
-            string pathStatsTFA = "Stats/TricepsSkinfoldForAge/" + tricepsSkinfold + "/" + ageInDays + "/" + sex;
-            var responseStatsTFA = await httpClient.GetAsync(pathStatsTFA);
-            string resStatsTFA = "";
-
-            using (HttpContent contentStatsTFA = responseStatsTFA.Content)
+            Tuple<double, double> tuple = new(0.0, 0.0);
+            string uri = string.Empty;
+            try
             {
-                // ... Read the string.
-                Task<string> result = contentStatsTFA.ReadAsStringAsync();
-                resStatsTFA = result.Result;
+                uri = "Stats/TricepsSkinfoldForAge/" + tricepsSkinfold + "/" + ageInDays + "/" + sex;
+                var message = await httpClient.GetAsync(uri);
+                string response = "";
+
+                using (HttpContent content = message.Content)
+                {
+                    // ... Read the string.
+                    Task<string> result = content.ReadAsStringAsync();
+                    response = result.Result;
+                }
+
+                tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(response);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
             }
 
-            var tfaTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsTFA);
-            return tfaTuple;
+            return tuple;
         }
 
         // GET: api/Stats/WeightForHeight/14.00/96.00/Male
         public async Task<Tuple<double, double>> GetWFH(double weight, double height, Sexes sex)
         {
-            string pathStatsWFH = "Stats/WeightForHeight/" + weight + "/" + height + "/" + sex;
-            var responseStatsWFH = await httpClient.GetAsync(pathStatsWFH);
-            string resStatsWFH = "";
-
-            using (HttpContent contentStatsWFH = responseStatsWFH.Content)
+            Tuple<double, double> tuple = new(0.0, 0.0);
+            string uri = string.Empty;
+            try
             {
-                // ... Read the string.
-                Task<string> result = contentStatsWFH.ReadAsStringAsync();
-                resStatsWFH = result.Result;
+                uri = "Stats/WeightForHeight/" + weight + "/" + height + "/" + sex;
+                var message = await httpClient.GetAsync(uri);
+                string result = "";
+
+                using (HttpContent content = message.Content)
+                {
+                    // ... Read the string.
+                    Task<string> response = content.ReadAsStringAsync();
+                    result = response.Result;
+                }
+
+                tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
             }
 
-            var wfhTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsWFH);
-            return wfhTuple;
+            return tuple;
         }
 
         // GET: api/Stats/WeightForLength/9.00/73.00/Male
         public async Task<Tuple<double, double>> GetWFL(double weight, double height, Sexes sex)
         {
-            string pathStatsWFL = "Stats/WeightForLength/" + weight + "/" + height + "/" + sex;
-            var responseStatsWFL = await httpClient.GetAsync(pathStatsWFL);
-            string resStatsWFL = "";
-
-            using (HttpContent contentStatsWFL = responseStatsWFL.Content)
+            Tuple<double, double> tuple = new(0.0, 0.0);
+            string uri = string.Empty;
+            try
             {
-                // ... Read the string.
-                Task<string> result = contentStatsWFL.ReadAsStringAsync();
-                resStatsWFL = result.Result;
+                uri = "Stats/WeightForLength/" + weight + "/" + height + "/" + sex;
+                var message = await httpClient.GetAsync(uri);
+                string result = "";
+
+                using (HttpContent content = message.Content)
+                {
+                    // ... Read the string.
+                    Task<string> response = content.ReadAsStringAsync();
+                    result = response.Result;
+                }
+
+                tuple = JsonConvert.DeserializeObject<Tuple<double, double>>(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
             }
 
-            var wflTuple = JsonConvert.DeserializeObject<Tuple<double, double>>(resStatsWFL);
-            return wflTuple;
+            return tuple;
         }
 
         public async Task<Outputs> GetScores(Inputs inputs)
         {
-            string stringData = JsonConvert.SerializeObject(inputs);
-            var contentData = new StringContent(stringData,
-                System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await httpClient.PostAsync
-                ("Stats", contentData);
-            string result = response.Content.ReadAsStringAsync().Result;
-            var outputs = JsonConvert.DeserializeObject<Outputs>(result);
+            Outputs outputs = new();
+            string uri = string.Empty;
+            try
+            {
+                uri = "Stats";
+                string stringData = JsonConvert.SerializeObject(inputs);
+                var contentData = new StringContent(stringData,
+                    System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await httpClient.PostAsync
+                    (uri, contentData);
+                string result = response.Content.ReadAsStringAsync().Result;
+                outputs = JsonConvert.DeserializeObject<Outputs>(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(ex, "Failed to calculate data {uri}.", uri);
+            }
+
             return outputs;
         }
     }

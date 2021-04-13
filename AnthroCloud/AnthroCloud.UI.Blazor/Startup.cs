@@ -11,12 +11,14 @@ namespace AnthroCloud.UI.Blazor
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
+        private readonly IWebHostEnvironment _env;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -25,7 +27,16 @@ namespace AnthroCloud.UI.Blazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            string baseAddressPath = Configuration.GetValue<string>("ConfigurationSettings:baseApiAddressPath");
+            string baseAddressPath;
+
+            if (_env.IsProduction())
+            {
+                baseAddressPath = Configuration.GetValue<string>("ConfigurationSettings:baseProdApiAddressPath");
+            }
+            else
+            {
+                baseAddressPath = Configuration.GetValue<string>("ConfigurationSettings:baseApiAddressPath");
+            }
 
             services.AddHttpClient<IAnthroService, AnthroService>(client =>
             {
@@ -47,7 +58,23 @@ namespace AnthroCloud.UI.Blazor
             services.AddServerSideBlazor().AddCircuitOptions(option =>
             {
                 option.DetailedErrors = true;
+                option.DisconnectedCircuitMaxRetained = 100;
+                option.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3);
+                option.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);
+                option.MaxBufferedUnacknowledgedRenderBatches = 10;
             });
+
+            services.AddServerSideBlazor()
+                .AddHubOptions(options =>
+                {
+                    options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+                    options.EnableDetailedErrors = false;
+                    options.HandshakeTimeout = TimeSpan.FromSeconds(15);
+                    options.KeepAliveInterval = TimeSpan.FromSeconds(15);
+                    options.MaximumParallelInvocationsPerClient = 1;
+                    options.MaximumReceiveMessageSize = 32 * 1024;
+                    options.StreamBufferCapacity = 10;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

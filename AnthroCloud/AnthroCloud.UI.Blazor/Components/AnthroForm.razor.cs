@@ -7,6 +7,7 @@ using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -22,6 +23,9 @@ namespace AnthroCloud.UI.Blazor.Components
 
         [Inject]
         [CascadingParameter] public IModalService Modal { get; set; }
+
+        [Inject]
+        protected ILogger<AnthroFormBase> Logger { get; set; }
 
         [CascadingParameter]
         public GlobalError Error { get; set; }
@@ -81,6 +85,7 @@ namespace AnthroCloud.UI.Blazor.Components
                 loadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
             }
 
             watch.Stop();
@@ -123,6 +128,7 @@ namespace AnthroCloud.UI.Blazor.Components
                 loadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
             }
 
             watch.Stop();
@@ -165,6 +171,7 @@ namespace AnthroCloud.UI.Blazor.Components
                 loadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
             }
 
             watch.Stop();
@@ -207,6 +214,7 @@ namespace AnthroCloud.UI.Blazor.Components
                 loadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
             }
 
             watch.Stop();
@@ -249,6 +257,7 @@ namespace AnthroCloud.UI.Blazor.Components
                 loadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
             }
 
             watch.Stop();
@@ -291,6 +300,7 @@ namespace AnthroCloud.UI.Blazor.Components
                 loadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
             }
 
             watch.Stop();
@@ -371,6 +381,7 @@ namespace AnthroCloud.UI.Blazor.Components
                 loadFailed = true;
                 Error.ProcessError(ex);
                 ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
             }
 
             watch.Stop();

@@ -181,7 +181,7 @@ namespace AnthroCloud.UI.Blazor.Services
                     uri, inputs);
                 response.EnsureSuccessStatusCode();
 
-                return await response.Content.ReadFromJsonAsync<Outputs>();
+                results = await response.Content.ReadFromJsonAsync<Outputs>();
             }
             catch (Exception ex)
             {
