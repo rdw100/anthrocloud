@@ -17,8 +17,6 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<string> GetBfa(byte id, byte x, double y, GraphTypes z)
         {
             Uri newUri = new(httpClient.BaseAddress + $"chart/BFA/{id}/{x}/{y}/{z}");
-
-            //string uri = $"chart/BFA/{id}/{x}/{y}/{z}";
             var response = await httpClient.GetAsync(newUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
