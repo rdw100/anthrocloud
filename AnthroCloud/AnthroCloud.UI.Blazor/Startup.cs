@@ -43,6 +43,11 @@ namespace AnthroCloud.UI.Blazor
                 client.BaseAddress = new Uri(baseAddressPath);
             });
 
+            services.AddHttpClient<IAnthroStatsService, AnthroStatsService>(client =>
+            {
+                client.BaseAddress = new Uri(baseAddressPath);
+            });
+
             services.AddHttpClient<IChartService, ChartService>(client =>
             {
                 client.BaseAddress = new Uri(baseAddressPath);

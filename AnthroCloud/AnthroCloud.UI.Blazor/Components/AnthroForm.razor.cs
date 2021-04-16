@@ -19,8 +19,8 @@ namespace AnthroCloud.UI.Blazor.Components
         [Inject]
         public IAnthroService AnthroService { get; set; }
 
-        //[Inject]
-        //public IAnthroStatsService AnthroStatsService { get; set; }
+        [Inject]
+        public IAnthroStatsService AnthroStatsService { get; set; }
 
         [Inject]
         [CascadingParameter] public IModalService Modal { get; set; }
@@ -65,15 +65,15 @@ namespace AnthroCloud.UI.Blazor.Components
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
-                    FormModel.FormOutputs = await AnthroService.GetHcaScores(FormModel.FormInputs).ConfigureAwait(false);
+                    FormModel.FormOutputs. = await AnthroService.GetHcaScores(FormModel.FormInputs).ConfigureAwait(false);
 
                     IsCalculating = false;
                 }
@@ -108,13 +108,13 @@ namespace AnthroCloud.UI.Blazor.Components
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
                     FormModel.FormOutputs = await AnthroService.GetMuacScores(FormModel.FormInputs).ConfigureAwait(false);
 
@@ -151,13 +151,13 @@ namespace AnthroCloud.UI.Blazor.Components
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
                     FormModel.FormOutputs = await AnthroService.GetTsfScores(FormModel.FormInputs).ConfigureAwait(false);
 
@@ -194,13 +194,13 @@ namespace AnthroCloud.UI.Blazor.Components
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
                     FormModel.FormOutputs = await AnthroService.GetSsfScores(FormModel.FormInputs).ConfigureAwait(false);
 
@@ -237,13 +237,13 @@ namespace AnthroCloud.UI.Blazor.Components
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
                     FormModel.FormOutputs = await AnthroService.GetMeasuredScores(FormModel.FormInputs).ConfigureAwait(false);
 
@@ -280,13 +280,13 @@ namespace AnthroCloud.UI.Blazor.Components
                 {
                     IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight).ConfigureAwait(false);
+                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight).ConfigureAwait(false);
 
                     FormModel.FormOutputs = await AnthroService.GetScores(FormModel.FormInputs).ConfigureAwait(false);
 
@@ -331,43 +331,43 @@ namespace AnthroCloud.UI.Blazor.Components
 
                     FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight).ConfigureAwait(false);
 
-                    Tuple<double, double> wfaTuple = await AnthroService.GetWFA(FormModel.FormInputs.Weight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(FormModel.FormInputs.Weight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
                     FormModel.FormOutputs.WfaZscore = wfaTuple.Item1;
                     FormModel.FormOutputs.WfaPercentile = wfaTuple.Item2;
 
-                    Tuple<double, double> muacTuple = await AnthroService.GetMUAC(FormModel.FormInputs.MUAC, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> muacTuple = await AnthroStatsService.GetMUAC(FormModel.FormInputs.MUAC, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
                     FormModel.FormOutputs.MuacZscore = muacTuple.Item1;
                     FormModel.FormOutputs.MuacPercentile = muacTuple.Item2;
 
-                    Tuple<double, double> bfaTuple = await AnthroService.GetBFA(FormModel.FormInputs.BMI, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> bfaTuple = await AnthroStatsService.GetBFA(FormModel.FormInputs.BMI, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
                     FormModel.FormOutputs.BfaZscore = bfaTuple.Item1;
                     FormModel.FormOutputs.BfaPercentile = bfaTuple.Item2;
 
-                    Tuple<double, double> hcaTuple = await AnthroService.GetHCA(FormModel.FormInputs.HeadCircumference, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(FormModel.FormInputs.HeadCircumference, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
                     FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;
                     FormModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
 
-                    Tuple<double, double> hfaTuple = await AnthroService.GetHFA(FormModel.FormInputs.LengthHeight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> hfaTuple = await AnthroStatsService.GetHFA(FormModel.FormInputs.LengthHeight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
                     FormModel.FormOutputs.HfaZscore = hfaTuple.Item1;
                     FormModel.FormOutputs.HfaPercentile = hfaTuple.Item2;
 
-                    Tuple<double, double> lfaTuple = await AnthroService.GetLFA(FormModel.FormInputs.LengthHeight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> lfaTuple = await AnthroStatsService.GetLFA(FormModel.FormInputs.LengthHeight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
                     FormModel.FormOutputs.LfaZscore = lfaTuple.Item1;
                     FormModel.FormOutputs.LfaPercentile = lfaTuple.Item2;
 
-                    Tuple<double, double> sfaTuple = await AnthroService.GetSFA(FormModel.FormInputs.SubscapularSkinFold, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> sfaTuple = await AnthroStatsService.GetSFA(FormModel.FormInputs.SubscapularSkinFold, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
                     FormModel.FormOutputs.SsfZscore = sfaTuple.Item1;
                     FormModel.FormOutputs.SsfPercentile = sfaTuple.Item2;
 
-                    Tuple<double, double> tfaTuple = await AnthroService.GetTFA(FormModel.FormInputs.TricepsSkinFold, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> tfaTuple = await AnthroStatsService.GetTFA(FormModel.FormInputs.TricepsSkinFold, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
                     FormModel.FormOutputs.TsfZscore = tfaTuple.Item1;
                     FormModel.FormOutputs.TsfPercentile = tfaTuple.Item2;
 
-                    Tuple<double, double> wfhTuple = await AnthroService.GetWFH(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight, FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> wfhTuple = await AnthroStatsService.GetWFH(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight, FormModel.FormInputs.Sex).ConfigureAwait(false);
                     FormModel.FormOutputs.WfhZscore = wfhTuple.Item1;
                     FormModel.FormOutputs.WfhPercentile = wfhTuple.Item2;
 
-                    Tuple<double, double> wflTuple = await AnthroService.GetWFL(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight, FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> wflTuple = await AnthroStatsService.GetWFL(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight, FormModel.FormInputs.Sex).ConfigureAwait(false);
                     FormModel.FormOutputs.WflZscore = wflTuple.Item1;
                     FormModel.FormOutputs.WflPercentile = wflTuple.Item2;
 
