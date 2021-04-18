@@ -288,14 +288,6 @@ namespace AnthroCloud.UI.Blazor.Components
                 {
                     IsCalculating = true;
 
-                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
-
-                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
-
-                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight).ConfigureAwait(false);
-
                     FormModel.FormOutputs = await AnthroService.GetScores(FormModel.FormInputs).ConfigureAwait(false);
 
                     IsCalculating = false;
