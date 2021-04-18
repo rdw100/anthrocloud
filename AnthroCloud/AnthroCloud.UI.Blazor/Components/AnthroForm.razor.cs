@@ -73,7 +73,15 @@ namespace AnthroCloud.UI.Blazor.Components
 
                     //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
-                    FormModel.FormOutputs. = await AnthroService.GetHcaScores(FormModel.FormInputs).ConfigureAwait(false);
+                    FormModel.FormOutputs = await AnthroService.GetHcaScores(FormModel.FormInputs).ConfigureAwait(false);
+
+                    //Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(
+                    //    FormModel.FormInputs.HeadCircumference,
+                    //    FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"),
+                    //    FormModel.FormInputs.Sex).ConfigureAwait(false);
+
+                    //FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;
+                    //FormModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
 
                     IsCalculating = false;
                 }
