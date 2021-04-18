@@ -70,6 +70,8 @@ namespace AnthroCloud.Business
         /// <param name="visit">The date of visit</param>
         private Age CalculateAge(DateTime birth, DateTime visit)
         {
+            visit = visit.AddDays(-1);
+
             if ((visit.Year - birth.Year) > 0 ||
                 (((visit.Year - birth.Year) == 0) && ((birth.Month < visit.Month) ||
                   ((birth.Month == visit.Month) && (birth.Day <= visit.Day)))))

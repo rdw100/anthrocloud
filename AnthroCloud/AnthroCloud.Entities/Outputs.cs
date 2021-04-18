@@ -5,6 +5,8 @@
     /// </summary>
     public class Outputs
     {
+        public string Age { get; set; } = "11mo";
+        public double Bmi { get; set; } = 16.9;
         public double WflPercentile { get; set; } = 61.4;
         public double WflZscore { get; set; } = 0.29;
         public double WfaPercentile { get; set; } = 51.9;

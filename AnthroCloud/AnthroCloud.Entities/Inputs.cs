@@ -69,6 +69,7 @@ namespace AnthroCloud.Entities
         public MeasurementTypes Measured { get; set; } = MeasurementTypes.Recumbent;
 
         public Age Age { get; set; }
+
         public string AgeString { get; set; } = "11mo";
         public byte AgeInMonths { get; set; } = 12;
         public byte AgeInYears { get; set; } = 0;
