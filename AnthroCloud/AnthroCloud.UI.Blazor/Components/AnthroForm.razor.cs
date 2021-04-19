@@ -33,8 +33,8 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected EditContext EditContext { get; set; }
 
-        //public FormViewModel FormModel { get; set; }
-        private FormViewModel FormModel = new();
+        public FormViewModel FormModel { get; set; }
+        //private FormViewModel FormModel = new();
 
         public bool LoadFailed { get; set; }
 
@@ -50,9 +50,9 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected override void OnInitialized()
         {
-            //FormModel = new FormViewModel();
+            FormModel = new FormViewModel();
             EditContext = new EditContext(FormModel);
-            EditContext.OnFieldChanged += HandleFieldChanged;
+            //EditContext.OnFieldChanged += HandleFieldChanged;
         }
 
         private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
