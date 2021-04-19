@@ -29,21 +29,6 @@ namespace AnthroCloud.Entities
         [Range(45.0, 120.0, ErrorMessage = "Weight must be between 45.0 and 120.0.")]
         public double LengthHeight { get; set; } = 73.00;
 
-        public double LengthHeightAdjusted 
-        {            
-            get
-            {
-                double adjusted = 0.0;
-
-                if (LengthHeight > 0.0)
-                {
-                    adjusted = AdjustMeasured(LengthHeight, Measured);
-                }
-
-                return adjusted;
-            }
-        }
-
         [Required, EnumDataType(typeof(Sexes))]
         public Sexes Sex { get; set; } = Sexes.Female;
 
@@ -69,26 +54,5 @@ namespace AnthroCloud.Entities
         public MeasurementTypes Measured { get; set; } = MeasurementTypes.Recumbent;
 
         public Age Age { get; set; }
-
-        public string AgeString { get; set; } = "11mo";
-        public byte AgeInMonths { get; set; } = 12;
-        public byte AgeInYears { get; set; } = 0;
-        public double BMI { get; set; } = 16.9;
-
-        public double AdjustMeasured(double LengthHeight, MeasurementTypes Measured)
-        {
-            double adjusted = LengthHeight;
-
-            if (AgeInYears < 2 && Measured == MeasurementTypes.Standing)
-            {
-                adjusted += .7;
-            }
-            else if (AgeInYears > 2 && Measured == MeasurementTypes.Recumbent)
-            {
-                adjusted += .7;
-            }
-
-            return adjusted;
-        }
     }
 }

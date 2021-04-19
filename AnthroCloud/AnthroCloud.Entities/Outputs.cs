@@ -6,6 +6,8 @@
     public class Outputs
     {
         public string Age { get; set; } = "11mo";
+        public int AgeInMonths { get; set; } = 11;
+        public int AgeInYears { get; set; } = 0;        
         public double Bmi { get; set; } = 16.9;
         public double WflPercentile { get; set; } = 61.4;
         public double WflZscore { get; set; } = 0.29;
@@ -27,5 +29,29 @@
         public double WfhZscore { get; set; }
         public double HfaPercentile { get; set; } = 53.1;
         public double HfaZscore { get; set; } = 0.08;
+
+        private double LengthHeightAdjusted = 73.00;
+
+        public double GetLengthHeightAdjusted () {
+            return LengthHeightAdjusted;
+        } 
+
+        public double SetLengthHeightAdjusted(int AgeInYears, double LengthHeight, MeasurementTypes Measured)
+        {
+            double adjusted = LengthHeight;
+
+            if (AgeInYears < 2 && Measured == MeasurementTypes.Standing)
+            {
+                adjusted += .7;
+            }
+            else if (AgeInYears > 2 && Measured == MeasurementTypes.Recumbent)
+            {
+                adjusted += .7;
+            }
+
+            LengthHeightAdjusted = adjusted;
+
+            return LengthHeightAdjusted;
+        }
     }
 }

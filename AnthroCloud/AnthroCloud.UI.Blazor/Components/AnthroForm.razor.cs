@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AnthroCloud.UI.Blazor.Components
 {
-    public class AnthroFormBase : ComponentBase
+    public class AnthroFormBase : ComponentBase, IDisposable
     {
         [Inject]
         public IAnthroService AnthroService { get; set; }
@@ -33,7 +33,8 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected EditContext EditContext { get; set; }
 
-        public FormViewModel FormModel { get; set; }
+        //public FormViewModel FormModel { get; set; }
+        private FormViewModel FormModel = new();
 
         public bool LoadFailed { get; set; }
 
@@ -45,10 +46,24 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected bool IsCalculating { get; set; }
 
+        private bool formInvalid = true;
+
         protected override void OnInitialized()
         {
-            FormModel = new FormViewModel();
+            //FormModel = new FormViewModel();
             EditContext = new EditContext(FormModel);
+            EditContext.OnFieldChanged += HandleFieldChanged;
+        }
+
+        private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
+        {
+            formInvalid = !EditContext.Validate();
+            StateHasChanged();
+        }
+
+        public void Dispose()
+        {
+            EditContext.OnFieldChanged -= HandleFieldChanged;
         }
 
         protected async Task HandleHcaAsync()
@@ -231,51 +246,53 @@ namespace AnthroCloud.UI.Blazor.Components
             ExecutionTime = "- SSF Click - " + watch.ElapsedMilliseconds + "ms";
         }
 
-        protected async Task HandleMeasuredAsync()
-        {
-            var isValid = EditContext.Validate();
+        //protected async Task HandleMeasuredAsync()
+        //{
+        //    var isValid = EditContext.Validate();
 
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+        //    var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            try
-            {
-                LoadFailed = false;
+        //    try
+        //    {
+        //        LoadFailed = false;
 
-                if (isValid)
-                {
-                    IsCalculating = true;
+        //        if (isValid)
+        //        {
+        //            IsCalculating = true;
 
-                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+        //            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+        //            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+        //            //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+        //            //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+        //            //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
-                    FormModel.FormOutputs = await AnthroService.GetMeasuredScores(FormModel.FormInputs).ConfigureAwait(false);
+        //            FormModel.FormOutputs = await AnthroService.GetMeasuredScores(FormModel.FormInputs).ConfigureAwait(false);
 
-                    IsCalculating = false;
-                }
-                else
-                {
-                    LoadFailed = true;
-                }
-            }
-            catch (ApplicationException ex)
-            {
-                LoadFailed = true;
-                Error.ProcessError(ex);
-                ErrorMessage = ex.Message;
-                Logger.LogWarning(ex.Message);
-            }
+        //            IsCalculating = false;
+        //        }
+        //        else
+        //        {
+        //            LoadFailed = true;
+        //        }
+        //    }
+        //    catch (ApplicationException ex)
+        //    {
+        //        LoadFailed = true;
+        //        Error.ProcessError(ex);
+        //        ErrorMessage = ex.Message;
+        //        Logger.LogWarning(ex.Message);
+        //    }
 
-            watch.Stop();
-            ExecutionTime = "- Measured (HT/WT) Click - " + watch.ElapsedMilliseconds + "ms";
-        }
+        //    watch.Stop();
+        //    ExecutionTime = "- Measured (HT/WT) Click - " + watch.ElapsedMilliseconds + "ms";
+        //}
 
         protected async Task HandleSubmitAsync()
         {
+            LocalLogger = new MarkupString(LocalLogger + $"<br />valid submit on {DateTime.Now}");
+
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
             var isValid = EditContext.Validate();
@@ -287,7 +304,7 @@ namespace AnthroCloud.UI.Blazor.Components
                 if (isValid)
                 {
                     IsCalculating = true;
-
+                    //StateHasChanged();
                     FormModel.FormOutputs = await AnthroService.GetScores(FormModel.FormInputs).ConfigureAwait(false);
 
                     IsCalculating = false;
@@ -309,86 +326,86 @@ namespace AnthroCloud.UI.Blazor.Components
             ExecutionTime = "- Submit 1 (New) - " + watch.ElapsedMilliseconds + "ms";
         }
 
-        protected async Task HandleValidSubmitAsync()
-        {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+        //protected async Task HandleValidSubmitAsync()
+        //{
+        //    var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            var isValid = EditContext.Validate();
+        //    var isValid = EditContext.Validate();
 
-            try
-            {
-                LoadFailed = false;
+        //    try
+        //    {
+        //        LoadFailed = false;
 
-                if (isValid)
-                {
-                    IsCalculating = true;
+        //        if (isValid)
+        //        {
+        //            IsCalculating = true;
 
-                    string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+        //            string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+        //            string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+        //            FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+        //            FormModel.FormInputs.AgeString = FormModel.FormOutputs.Age;
 
-                    FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight).ConfigureAwait(false);
+        //            FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight).ConfigureAwait(false);
 
-                    Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(FormModel.FormInputs.Weight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
-                    FormModel.FormOutputs.WfaZscore = wfaTuple.Item1;
-                    FormModel.FormOutputs.WfaPercentile = wfaTuple.Item2;
+        //            Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(FormModel.FormInputs.Weight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            FormModel.FormOutputs.WfaZscore = wfaTuple.Item1;
+        //            FormModel.FormOutputs.WfaPercentile = wfaTuple.Item2;
 
-                    Tuple<double, double> muacTuple = await AnthroStatsService.GetMUAC(FormModel.FormInputs.MUAC, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
-                    FormModel.FormOutputs.MuacZscore = muacTuple.Item1;
-                    FormModel.FormOutputs.MuacPercentile = muacTuple.Item2;
+        //            Tuple<double, double> muacTuple = await AnthroStatsService.GetMUAC(FormModel.FormInputs.MUAC, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            FormModel.FormOutputs.MuacZscore = muacTuple.Item1;
+        //            FormModel.FormOutputs.MuacPercentile = muacTuple.Item2;
 
-                    Tuple<double, double> bfaTuple = await AnthroStatsService.GetBFA(FormModel.FormInputs.BMI, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
-                    FormModel.FormOutputs.BfaZscore = bfaTuple.Item1;
-                    FormModel.FormOutputs.BfaPercentile = bfaTuple.Item2;
+        //            Tuple<double, double> bfaTuple = await AnthroStatsService.GetBFA(FormModel.FormInputs.BMI, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            FormModel.FormOutputs.BfaZscore = bfaTuple.Item1;
+        //            FormModel.FormOutputs.BfaPercentile = bfaTuple.Item2;
 
-                    Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(FormModel.FormInputs.HeadCircumference, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
-                    FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;
-                    FormModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
+        //            Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(FormModel.FormInputs.HeadCircumference, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;
+        //            FormModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
 
-                    Tuple<double, double> hfaTuple = await AnthroStatsService.GetHFA(FormModel.FormInputs.LengthHeight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
-                    FormModel.FormOutputs.HfaZscore = hfaTuple.Item1;
-                    FormModel.FormOutputs.HfaPercentile = hfaTuple.Item2;
+        //            Tuple<double, double> hfaTuple = await AnthroStatsService.GetHFA(FormModel.FormInputs.LengthHeight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            FormModel.FormOutputs.HfaZscore = hfaTuple.Item1;
+        //            FormModel.FormOutputs.HfaPercentile = hfaTuple.Item2;
 
-                    Tuple<double, double> lfaTuple = await AnthroStatsService.GetLFA(FormModel.FormInputs.LengthHeight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
-                    FormModel.FormOutputs.LfaZscore = lfaTuple.Item1;
-                    FormModel.FormOutputs.LfaPercentile = lfaTuple.Item2;
+        //            Tuple<double, double> lfaTuple = await AnthroStatsService.GetLFA(FormModel.FormInputs.LengthHeight, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            FormModel.FormOutputs.LfaZscore = lfaTuple.Item1;
+        //            FormModel.FormOutputs.LfaPercentile = lfaTuple.Item2;
 
-                    Tuple<double, double> sfaTuple = await AnthroStatsService.GetSFA(FormModel.FormInputs.SubscapularSkinFold, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
-                    FormModel.FormOutputs.SsfZscore = sfaTuple.Item1;
-                    FormModel.FormOutputs.SsfPercentile = sfaTuple.Item2;
+        //            Tuple<double, double> sfaTuple = await AnthroStatsService.GetSFA(FormModel.FormInputs.SubscapularSkinFold, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            FormModel.FormOutputs.SsfZscore = sfaTuple.Item1;
+        //            FormModel.FormOutputs.SsfPercentile = sfaTuple.Item2;
 
-                    Tuple<double, double> tfaTuple = await AnthroStatsService.GetTFA(FormModel.FormInputs.TricepsSkinFold, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
-                    FormModel.FormOutputs.TsfZscore = tfaTuple.Item1;
-                    FormModel.FormOutputs.TsfPercentile = tfaTuple.Item2;
+        //            Tuple<double, double> tfaTuple = await AnthroStatsService.GetTFA(FormModel.FormInputs.TricepsSkinFold, FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"), FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            FormModel.FormOutputs.TsfZscore = tfaTuple.Item1;
+        //            FormModel.FormOutputs.TsfPercentile = tfaTuple.Item2;
 
-                    Tuple<double, double> wfhTuple = await AnthroStatsService.GetWFH(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight, FormModel.FormInputs.Sex).ConfigureAwait(false);
-                    FormModel.FormOutputs.WfhZscore = wfhTuple.Item1;
-                    FormModel.FormOutputs.WfhPercentile = wfhTuple.Item2;
+        //            Tuple<double, double> wfhTuple = await AnthroStatsService.GetWFH(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight, FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            FormModel.FormOutputs.WfhZscore = wfhTuple.Item1;
+        //            FormModel.FormOutputs.WfhPercentile = wfhTuple.Item2;
 
-                    Tuple<double, double> wflTuple = await AnthroStatsService.GetWFL(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight, FormModel.FormInputs.Sex).ConfigureAwait(false);
-                    FormModel.FormOutputs.WflZscore = wflTuple.Item1;
-                    FormModel.FormOutputs.WflPercentile = wflTuple.Item2;
+        //            Tuple<double, double> wflTuple = await AnthroStatsService.GetWFL(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeight, FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            FormModel.FormOutputs.WflZscore = wflTuple.Item1;
+        //            FormModel.FormOutputs.WflPercentile = wflTuple.Item2;
 
-                    IsCalculating = false;
-                }
-                else
-                {
-                    LoadFailed = true;
-                }
-            }
-            catch (ApplicationException ex)
-            {
-                LoadFailed = true;
-                Error.ProcessError(ex);
-                ErrorMessage = ex.Message;
-                Logger.LogWarning(ex.Message);
-            }
+        //            IsCalculating = false;
+        //        }
+        //        else
+        //        {
+        //            LoadFailed = true;
+        //        }
+        //    }
+        //    catch (ApplicationException ex)
+        //    {
+        //        LoadFailed = true;
+        //        Error.ProcessError(ex);
+        //        ErrorMessage = ex.Message;
+        //        Logger.LogWarning(ex.Message);
+        //    }
 
-            watch.Stop();
-            ExecutionTime = "- Submit 2 (Original) - " + watch.ElapsedMilliseconds + "ms";
-        }
+        //    watch.Stop();
+        //    ExecutionTime = "- Submit 2 (Original) - " + watch.ElapsedMilliseconds + "ms";
+        //}
 
         public string SetColor(double zscore)
         {
@@ -418,7 +435,7 @@ namespace AnthroCloud.UI.Blazor.Components
             return result;
         }
 
-        public string SetRangeControl(double measure, byte ageInYears, byte ageInMonths)
+        public string SetRangeControl(double measure, int ageInYears, int ageInMonths)
         {
             string result;
             if (ageInYears < 1 && ageInMonths < 3)
@@ -433,7 +450,7 @@ namespace AnthroCloud.UI.Blazor.Components
             return result;
         }
 
-        public string SetPercText(double measure, byte ageInYears, byte ageInMonths)
+        public string SetPercText(double measure, int ageInYears, int ageInMonths)
         {
             string result;
             if (ageInYears < 1 && ageInMonths < 3)
@@ -448,7 +465,7 @@ namespace AnthroCloud.UI.Blazor.Components
             return result;
         }
 
-        public string SetZscoreText(double measure, byte ageInYears, byte ageInMonths)
+        public string SetZscoreText(double measure, int ageInYears, int ageInMonths)
         {
             string result;
             if (ageInYears < 1 && ageInMonths < 3)
