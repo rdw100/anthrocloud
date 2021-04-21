@@ -30,8 +30,7 @@
 <h5>AnthroForm @ExecutionTime</h5>
 
 <p>This calculator component retreives data from a service.  A dialog displays a chart component that also retrieves data from a service.</p>
-
-<EditForm EditContext="@EditContext" OnValidSubmit="@HandleSubmitAsync" OnInvalidSubmit="@OnInvalidSubmit">
+<EditForm EditContext="@EditContext" OnValidSubmit="@OnValidSubmit" OnInvalidSubmit="@OnInvalidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -54,16 +53,19 @@
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-2">
-                <label for="grpRadio" class="col-form-label">Sex</label>
-                <div class="form-group">
-                    <InputRadioGroup id="grpRadio" Name="sex" @bind-Value="FormModel.FormInputs.Sex">
-                        <label class="d-block">
-                            <InputRadio Name="sex" Value="Sexes.Male" @onclick="HandleSubmitAsync" />Male<br>
-                        </label>
-                        <label class="d-block">
-                            <InputRadio Name="sex" Value="Sexes.Female" @onclick="HandleSubmitAsync" />Female<br>
-                        </label>
-                    </InputRadioGroup>
+                <label class="col-form-label">Sex</label>
+                <div class="col-md-4 mb-2">
+                    <label for="grpRadio" class="col-form-label">Sex</label>
+                    <div class="form-group">
+                        <InputRadioGroup id="grpRadio" Name="sex" @bind-Value="FormModel.FormInputs.Sex">
+                            <label class="d-block">
+                                <InputRadio Name="sex" TValue="Sexes" Value="Sexes.Female" />Female<br>
+                            </label>
+                            <label class="d-block">
+                                <InputRadio Name="sex" TValue="Sexes" Value="Sexes.Male" />Male<br>
+                            </label>
+                        </InputRadioGroup>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 mb-2">
@@ -72,10 +74,10 @@
                     <label class="d-block">
                         <InputRadioGroup id="grpStanding" Name="measured" @bind-Value="FormModel.FormInputs.Measured">
                             <label class="d-block">
-                                <InputRadio Name="measured" Value="MeasurementTypes.Recumbent" @onclick="HandleSubmitAsync" />Recumbent<br>
+                                <InputRadio Name="measured" Value="MeasurementTypes.Recumbent" />Recumbent<br>
                             </label>
                             <label class="d-block">
-                                <InputRadio Name="measured" Value="MeasurementTypes.Standing" @onclick="HandleSubmitAsync" />Standing<br>
+                                <InputRadio Name="measured" Value="MeasurementTypes.Standing" />Standing<br>
                             </label>
                         </InputRadioGroup>
                     </label>
@@ -111,13 +113,13 @@
                 <div class="form-group row">
                     <label for="validationDefault02" class="col-sm-5 col-form-label">Head Circumference (cm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="HeadCircumference" @bind-value="@FormModel.FormInputs.HeadCircumference" @onclick="HandleHcaAsync" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>
+                        <input asp-for="HeadCircumference" @bind-value="@FormModel.FormInputs.HeadCircumference" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="validationDefault03" class="col-sm-5 col-form-label">MUAC (cm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="MUAC" @bind-value="@FormModel.FormInputs.MUAC" @onclick="HandleMuacAsync" class="form-control text-center" type="number" MIN="6.0" MAX="35.0" STEP=".1" id="validationDefault03" required>
+                        <input asp-for="MUAC" @bind-value="@FormModel.FormInputs.MUAC" class="form-control text-center" type="number" MIN="6.0" MAX="35.0" STEP=".1" id="validationDefault03" required>
                     </div>
                 </div>
             </div>
@@ -140,13 +142,13 @@
                 <div class="form-group row">
                     <label for="validationDefault05" class="col-sm-5 col-form-label">Triceps skinfold (mm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="TricepsSkinFold" @bind-value="FormModel.FormInputs.TricepsSkinFold" @onclick="HandleTsfAsync" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault05" required>
+                        <input asp-for="TricepsSkinFold" @bind-value="FormModel.FormInputs.TricepsSkinFold" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault05" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="validationDefault06" class="col-sm-5 col-form-label">Subscapular skinfold (mm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="SubscapularSkinFold" @bind-value="FormModel.FormInputs.SubscapularSkinFold" @onclick="HandleSsfAsync" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault06" required>
+                        <input asp-for="SubscapularSkinFold" @bind-value="FormModel.FormInputs.SubscapularSkinFold" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault06" required>
                     </div>
                 </div>
             </div>
@@ -214,16 +216,16 @@
                         }
                         else
                         {
-                            <input type="text" aria-label="WflPercentile"  asp-for="WflPercentile" value="@SetPercentileRange(FormModel.FormOutputs.WflPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
-                            <input type="text" aria-label="WfhZscore"  asp-for="WflZscore" value="@FormModel.FormOutputs.WflZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.WflZscore)" readonly>
+                            <input type="text" aria-label="WflPercentile" asp-for="WflPercentile" value="@SetPercentileRange(FormModel.FormOutputs.WflPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
+                            <input type="text" aria-label="WfhZscore" asp-for="WflZscore" value="@FormModel.FormOutputs.WflZscore.ToString(" 0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.WflZscore)" readonly>
 
                             <button @onclick="@(() => ShowGrowthChart(GrowthTypes.WFL,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormInputs.LengthHeight,
                                                 FormModel.FormInputs.Weight,
-                                                "Weight-for-length"
-                                                ))"
+                                                " Weight-for-length"
+                        ))"
                                     class="btn btn-outline-secondary col-md-1 mr-1"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -235,8 +237,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormInputs.LengthHeight,
                                                 FormModel.FormInputs.Weight,
-                                                "Weight-for-length"
-                                                ))"
+                                                " Weight-for-length"
+                        ))"
                                     class="btn btn-outline-secondary col-md-1 mr-1"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -268,14 +270,14 @@
                         else
                         {
                             <input type="text" aria-label="WfhPercentile" asp-for="WfhPercentile" value="@SetPercentileRange(FormModel.FormOutputs.WfhPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
-                            <input type="text" aria-label="WfhZscore" asp-for="WfhZscore" value="@FormModel.FormOutputs.WfhZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.WfhZscore)" readonly>
+                            <input type="text" aria-label="WfhZscore" asp-for="WfhZscore" value="@FormModel.FormOutputs.WfhZscore.ToString(" 0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.WfhZscore)" readonly>
                             <button @onclick="@(() => ShowGrowthChart(GrowthTypes.WFH,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormInputs.LengthHeight,
                                                 FormModel.FormInputs.Weight,
-                                                "Weight-for-height"
-                                                ))"
+                                                " Weight-for-height"
+                        ))"
                                     class="btn btn-outline-secondary col-md-1 mr-1"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -287,8 +289,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormInputs.LengthHeight,
                                                 FormModel.FormInputs.Weight,
-                                                "Weight-for-height"
-                                                ))"
+                                                " Weight-for-height"
+                        ))"
                                     class="btn btn-outline-secondary col-md-1 mr-1"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -304,14 +306,14 @@
                     <label class="col-md-3 mt-1 mr-1">HC-for-age</label>
                     <input id="HcaPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="HcaPercentile" type="range" min="0" max="100" step=".1" title="@FormModel.FormOutputs.HcaPercentile" value="@FormModel.FormOutputs.HcaPercentile" list="tickmarks" disabled />
                     <input aria-label="HcaPercentile" type="text" asp-for="HcaPercentile" value="@SetPercentileRange(FormModel.FormOutputs.HcaPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
-                    <input aria-label="HcaZscore" type="text" asp-for="HcaZscore" value="@FormModel.FormOutputs.HcaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.HcaZscore)" readonly>
+                    <input aria-label="HcaZscore" type="text" asp-for="HcaZscore" value="@FormModel.FormOutputs.HcaZscore.ToString(" 0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.HcaZscore)" readonly>
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.HCA,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.HeadCircumference,
-                                                "Head Circumference"
-                                                ))"
+                                                " Head Circumference"
+                        ))"
                             class="btn btn-outline-secondary col-md-1 mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -323,8 +325,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.HeadCircumference,
-                                                "Head Circumference"
-                                                ))"
+                                                " Head Circumference"
+                        ))"
                             class="btn btn-outline-secondary col-md-1 mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -352,14 +354,14 @@
                     else
                     {
                         <input aria-label="WfaPercentile" class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaPercentile" value="@SetPercentileRange(FormModel.FormOutputs.WfaPercentile)" readonly>
-                        <input aria-label="WfaZscore" class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaZscore" value="@FormModel.FormOutputs.WfaZscore.ToString("0.00")" style="background-color: @SetColor(FormModel.FormOutputs.WfaZscore)" readonly>
+                        <input aria-label="WfaZscore" class="form-control col-md-2 mr-1 text-center" type="text" asp-for="WfaZscore" value="@FormModel.FormOutputs.WfaZscore.ToString(" 0.00")" style="background-color: @SetColor(FormModel.FormOutputs.WfaZscore)" readonly>
                         <button @onclick="@(() => ShowGrowthChart(GrowthTypes.WFA,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.Weight,
-                                                "Weight-for-age"
-                                                ))"
+                                                " Weight-for-age"
+                        ))"
                                 class="btn btn-outline-secondary col-md-1 mr-1"
                                 data-toggle="tooltip"
                                 data-placement="top"
@@ -371,8 +373,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.Weight,
-                                                "Weight-for-age"
-                                                ))"
+                                                " Weight-for-age"
+                        ))"
                                 class="btn btn-outline-secondary col-md-1 mr-1"
                                 data-toggle="tooltip"
                                 data-placement="top"
@@ -393,8 +395,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.MUAC,
-                                                "MUAC-for-age"
-                                                ))"
+                                                " MUAC-for-age"
+                        ))"
                             class="btn btn-outline-secondary col-md-1 mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -406,8 +408,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.MUAC,
-                                                "MUAC-for-age"
-                                                ))"
+                                                " MUAC-for-age"
+                        ))"
                             class="btn btn-outline-secondary col-md-1 mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -422,14 +424,14 @@
                     <label class="text-nowrap col-md-3 mt-1 mr-1">Length-for-Age</label>
                     <input id="LfaPercentileRange" class="form-control-range  col-md-2 mr-1 ml-1" asp-for="LfaPercentile" type="range" min="0" max="100" step=".1" title="@FormModel.FormOutputs.LfaPercentile" value="@FormModel.FormOutputs.LfaPercentile" list="tickmarks" disabled />
                     <input aria-label="LfaPercentile" type="text" asp-for="LfaPercentile" value="@SetPercText(FormModel.FormOutputs.LfaPercentile,FormModel.FormOutputs.AgeInYears, FormModel.FormOutputs.AgeInMonths)" class="form-control col-md-2 mr-1 text-center" readonly>
-                    <input aria-label="LfaZscore" type="text" asp-for="LfaZscore" value="@FormModel.FormOutputs.LfaZscore.ToString("0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.LfaZscore)" readonly>
+                    <input aria-label="LfaZscore" type="text" asp-for="LfaZscore" value="@FormModel.FormOutputs.LfaZscore.ToString(" 0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.LfaZscore)" readonly>
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.LHFA,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.LengthHeight,
-                                                "Length/Height-for-age"
-                                                ))"
+                                                " Length /Height-for-age"
+                        ))"
                             class="btn btn-outline-secondary col-md-1 mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -441,8 +443,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.LengthHeight,
-                                                "Length/Height-for-age"
-                                                ))"
+                                                " Length /Height-for-age"
+                        ))"
                             class="btn btn-outline-secondary col-md-1 mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -462,8 +464,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.TricepsSkinFold,
-                                                "Triceps Skinfold"
-                                                ))"
+                                                " Triceps Skinfold"
+                        ))"
                             class="btn btn-outline-secondary col-md-1 mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -475,8 +477,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.TricepsSkinFold,
-                                                "Triceps Skinfold"
-                                                ))"
+                                                " Triceps Skinfold"
+                        ))"
                             class="btn btn-outline-secondary col-md-1 mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -504,14 +506,14 @@
                     else
                     {
                         <input type="text" aria-label="BfaPercentile" asp-for="BfaPercentile" value="@SetPercText(FormModel.FormOutputs.BfaPercentile,FormModel.FormOutputs.AgeInYears, FormModel.FormOutputs.AgeInMonths)" class="form-control col-md-2 mr-1 text-center" readonly>
-                        <input type="text" aria-label="BfaZscore" asp-for="BfaZscore" class="form-control col-md-2 mr-1 text-center" value="@FormModel.FormOutputs.BfaZscore.ToString("0.00")" style="background-color: @SetColor(FormModel.FormOutputs.BfaZscore)" readonly>
+                        <input type="text" aria-label="BfaZscore" asp-for="BfaZscore" class="form-control col-md-2 mr-1 text-center" value="@FormModel.FormOutputs.BfaZscore.ToString(" 0.00")" style="background-color: @SetColor(FormModel.FormOutputs.BfaZscore)" readonly>
                         <button @onclick="@(() => ShowGrowthChart(GrowthTypes.BFA,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormOutputs.Bmi,
-                                                "BMI-for-Age"
-                                                ))"
+                                                " BMI-for-Age"
+                        ))"
                                 class="btn btn-outline-secondary col-md-1 mr-1"
                                 data-toggle="tooltip"
                                 data-placement="top"
@@ -523,8 +525,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormOutputs.Bmi,
-                                                "BMI-for-Age"
-                                                ))"
+                                                " BMI-for-Age"
+                        ))"
                                 class="btn btn-outline-secondary col-md-1 mr-1"
                                 data-toggle="tooltip"
                                 data-placement="top"
@@ -545,8 +547,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.SubscapularSkinFold,
-                                                "Subscapular Skinfold"
-                                                ))"
+                                                " Subscapular Skinfold"
+                        ))"
                             class="btn btn-outline-secondary col-md-1 mr-1"
                             data-toggle="tooltip"
                             data-placement="top"
@@ -558,8 +560,8 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormOutputs.AgeInMonths,
                                                 FormModel.FormInputs.SubscapularSkinFold,
-                                                "Subscapular Skinfold"
-                                                ))"
+                                                " Subscapular Skinfold"
+                        ))"
                             class="btn btn-outline-secondary col-md-1 mr-1"
                             data-toggle="tooltip"
                             data-placement="top"

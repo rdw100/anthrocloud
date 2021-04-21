@@ -34,7 +34,6 @@ namespace AnthroCloud.UI.Blazor.Components
         protected EditContext EditContext { get; set; }
 
         public FormViewModel FormModel { get; set; }
-        //private FormViewModel FormModel = new();
 
         public bool LoadFailed { get; set; }
 
@@ -52,7 +51,7 @@ namespace AnthroCloud.UI.Blazor.Components
         {
             FormModel = new FormViewModel();
             EditContext = new EditContext(FormModel);
-            //EditContext.OnFieldChanged += HandleFieldChanged;
+            EditContext.OnFieldChanged += HandleFieldChanged;
         }
 
         private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
@@ -66,185 +65,185 @@ namespace AnthroCloud.UI.Blazor.Components
             EditContext.OnFieldChanged -= HandleFieldChanged;
         }
 
-        protected async Task HandleHcaAsync()
-        {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+        //protected async Task HandleHcaAsync()
+        //{
+        //    var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            var isValid = EditContext.Validate();
+        //    //var isValid = EditContext.Validate();
 
-            try
-            {
-                LoadFailed = false;
+        //    try
+        //    {
+        //        LoadFailed = false;
 
-                if (isValid)
-                {
-                    IsCalculating = true;
+        //        if (isValid)
+        //        {
+        //            IsCalculating = true;
 
-                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+        //            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+        //            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+        //            //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+        //            //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+        //            //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
-                    FormModel.FormOutputs = await AnthroService.GetHcaScores(FormModel.FormInputs).ConfigureAwait(false);
+        //            FormModel.FormOutputs = await AnthroService.GetHcaScores(FormModel.FormInputs).ConfigureAwait(false);
 
-                    //Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(
-                    //    FormModel.FormInputs.HeadCircumference,
-                    //    FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"),
-                    //    FormModel.FormInputs.Sex).ConfigureAwait(false);
+        //            //Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(
+        //            //    FormModel.FormInputs.HeadCircumference,
+        //            //    FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"),
+        //            //    FormModel.FormInputs.Sex).ConfigureAwait(false);
 
-                    //FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;
-                    //FormModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
+        //            //FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;
+        //            //FormModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
 
-                    IsCalculating = false;
-                }
-                else
-                {
-                    LoadFailed = true;
-                }
-            }
-            catch (ApplicationException ex)
-            {
-                LoadFailed = true;
-                Error.ProcessError(ex);
-                ErrorMessage = ex.Message;
-                Logger.LogWarning(ex.Message);
-            }
+        //            IsCalculating = false;
+        //        }
+        //        else
+        //        {
+        //            LoadFailed = true;
+        //        }
+        //    }
+        //    catch (ApplicationException ex)
+        //    {
+        //        LoadFailed = true;
+        //        Error.ProcessError(ex);
+        //        ErrorMessage = ex.Message;
+        //        Logger.LogWarning(ex.Message);
+        //    }
 
-            watch.Stop();
-            ExecutionTime = "- HCA Click - " + watch.ElapsedMilliseconds + "ms";
-        }
+        //    watch.Stop();
+        //    ExecutionTime = "- HCA Click - " + watch.ElapsedMilliseconds + "ms";
+        //}
 
-        protected async Task HandleMuacAsync()
-        {
-            var isValid = EditContext.Validate();
+        //protected async Task HandleMuacAsync()
+        //{
+        //    //var isValid = EditContext.Validate();
 
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+        //    var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            try
-            {
-                LoadFailed = false;
+        //    try
+        //    {
+        //        LoadFailed = false;
 
-                if (isValid)
-                {
-                    IsCalculating = true;
+        //        //if (isValid)
+        //        //{
+        //            IsCalculating = true;
 
-                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+        //            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+        //            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+        //            //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+        //            //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+        //            //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
-                    FormModel.FormOutputs = await AnthroService.GetMuacScores(FormModel.FormInputs).ConfigureAwait(false);
+        //            FormModel.FormOutputs = await AnthroService.GetMuacScores(FormModel.FormInputs).ConfigureAwait(false);
 
-                    IsCalculating = false;
-                }
-                else
-                {
-                    LoadFailed = true;
-                }
-            }
-            catch (ApplicationException ex)
-            {
-                LoadFailed = true;
-                Error.ProcessError(ex);
-                ErrorMessage = ex.Message;
-                Logger.LogWarning(ex.Message);
-            }
+        //            IsCalculating = false;
+        //        //}
+        //        //else
+        //        //{
+        //        //    LoadFailed = true;
+        //        //}
+        //    }
+        //    catch (ApplicationException ex)
+        //    {
+        //        LoadFailed = true;
+        //        Error.ProcessError(ex);
+        //        ErrorMessage = ex.Message;
+        //        Logger.LogWarning(ex.Message);
+        //    }
 
-            watch.Stop();
-            ExecutionTime = "- MUAC Click - " + watch.ElapsedMilliseconds + "ms";
-        }
+        //    watch.Stop();
+        //    ExecutionTime = "- MUAC Click - " + watch.ElapsedMilliseconds + "ms";
+        //}
 
-        protected async Task HandleTsfAsync()
-        {
-            var isValid = EditContext.Validate();
+        //protected async Task HandleTsfAsync()
+        //{
+        //    var isValid = EditContext.Validate();
 
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+        //    var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            try
-            {
-                LoadFailed = false;
+        //    try
+        //    {
+        //        LoadFailed = false;
 
-                if (isValid)
-                {
-                    IsCalculating = true;
+        //        if (isValid)
+        //        {
+        //            IsCalculating = true;
 
-                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+        //            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+        //            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+        //            //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+        //            //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+        //            //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
-                    FormModel.FormOutputs = await AnthroService.GetTsfScores(FormModel.FormInputs).ConfigureAwait(false);
+        //            FormModel.FormOutputs = await AnthroService.GetTsfScores(FormModel.FormInputs).ConfigureAwait(false);
 
-                    IsCalculating = false;
-                }
-                else
-                {
-                    LoadFailed = true;
-                }
-            }
-            catch (ApplicationException ex)
-            {
-                LoadFailed = true;
-                Error.ProcessError(ex);
-                ErrorMessage = ex.Message;
-                Logger.LogWarning(ex.Message);
-            }
+        //            IsCalculating = false;
+        //        }
+        //        else
+        //        {
+        //            LoadFailed = true;
+        //        }
+        //    }
+        //    catch (ApplicationException ex)
+        //    {
+        //        LoadFailed = true;
+        //        Error.ProcessError(ex);
+        //        ErrorMessage = ex.Message;
+        //        Logger.LogWarning(ex.Message);
+        //    }
 
-            watch.Stop();
-            ExecutionTime = "- TSF Click - " + watch.ElapsedMilliseconds + "ms";
-        }
+        //    watch.Stop();
+        //    ExecutionTime = "- TSF Click - " + watch.ElapsedMilliseconds + "ms";
+        //}
 
-        protected async Task HandleSsfAsync()
-        {
-            var isValid = EditContext.Validate();
+        //protected async Task HandleSsfAsync()
+        //{
+        //    var isValid = EditContext.Validate();
 
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+        //    var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            try
-            {
-                LoadFailed = false;
+        //    try
+        //    {
+        //        LoadFailed = false;
 
-                if (isValid)
-                {
-                    IsCalculating = true;
+        //        if (isValid)
+        //        {
+        //            IsCalculating = true;
 
-                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+        //            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+        //            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+        //            //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+        //            //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+        //            //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
-                    FormModel.FormOutputs = await AnthroService.GetSsfScores(FormModel.FormInputs).ConfigureAwait(false);
+        //            FormModel.FormOutputs = await AnthroService.GetSsfScores(FormModel.FormInputs).ConfigureAwait(false);
 
-                    IsCalculating = false;
-                }
-                else
-                {
-                    LoadFailed = true;
-                }
-            }
-            catch (ApplicationException ex)
-            {
-                LoadFailed = true;
-                Error.ProcessError(ex);
-                ErrorMessage = ex.Message;
-                Logger.LogWarning(ex.Message);
-            }
+        //            IsCalculating = false;
+        //        }
+        //        else
+        //        {
+        //            LoadFailed = true;
+        //        }
+        //    }
+        //    catch (ApplicationException ex)
+        //    {
+        //        LoadFailed = true;
+        //        Error.ProcessError(ex);
+        //        ErrorMessage = ex.Message;
+        //        Logger.LogWarning(ex.Message);
+        //    }
 
-            watch.Stop();
-            ExecutionTime = "- SSF Click - " + watch.ElapsedMilliseconds + "ms";
-        }
+        //    watch.Stop();
+        //    ExecutionTime = "- SSF Click - " + watch.ElapsedMilliseconds + "ms";
+        //}
 
         //protected async Task HandleMeasuredAsync()
         //{
@@ -291,8 +290,6 @@ namespace AnthroCloud.UI.Blazor.Components
 
         protected async Task HandleSubmitAsync()
         {
-            LocalLogger = new MarkupString(LocalLogger + $"<br />valid submit on {DateTime.Now}");
-
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
             var isValid = EditContext.Validate();
@@ -304,8 +301,8 @@ namespace AnthroCloud.UI.Blazor.Components
                 if (isValid)
                 {
                     IsCalculating = true;
-                    //StateHasChanged();
-                    FormModel.FormOutputs = await AnthroService.GetScores(FormModel.FormInputs).ConfigureAwait(false);
+
+                    FormModel.FormOutputs = await AnthroService.GetScores(FormModel.FormInputs).ConfigureAwait(true);
 
                     IsCalculating = false;
                 }

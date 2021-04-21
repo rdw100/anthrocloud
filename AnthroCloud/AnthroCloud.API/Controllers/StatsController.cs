@@ -47,7 +47,11 @@ namespace AnthroCloud.API.Controllers
             outputs.AgeInMonths = age.TotalMonths;
             outputs.AgeInYears = age.Years;
             outputs.SetLengthHeightAdjusted(age.Years, inputs.LengthHeight, inputs.Measured);
-            
+
+            Business.Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit);
+            ageClinic = await ageClinic.Calculate(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
+            outputs.Age = ageClinic.ToReadableString();
+
             BMI bmi = new(inputs.Weight, outputs.GetLengthHeightAdjusted());
             outputs.Bmi = bmi.Bmi;
 
@@ -86,15 +90,15 @@ namespace AnthroCloud.API.Controllers
 
             Tuple<double, double> hfaTuple = await Stats.GetScore(
                 Indicator.HeightForAge, 
-                inputs.LengthHeight, 
+                outputs.GetLengthHeightAdjusted(),//inputs.LengthHeight, 
                 age.TotalDays, 
                 (Sex)inputs.Sex);
             outputs.HfaZscore = hfaTuple.Item1;
             outputs.HfaPercentile = hfaTuple.Item2;
 
             Tuple<double, double> lfaTuple = await Stats.GetScore(
-                Indicator.LengthForAge, 
-                inputs.LengthHeight, 
+                Indicator.LengthForAge,
+                outputs.GetLengthHeightAdjusted(),//inputs.LengthHeight,  
                 age.TotalDays, 
                 (Sex)inputs.Sex);
             outputs.LfaZscore = lfaTuple.Item1;
@@ -118,16 +122,16 @@ namespace AnthroCloud.API.Controllers
 
             Tuple<double, double> wfhTuple = await Stats.GetScore(
                 Indicator.WeightForHeight, 
-                inputs.Weight, 
-                inputs.LengthHeight, 
+                inputs.Weight,
+                outputs.GetLengthHeightAdjusted(),//inputs.LengthHeight, 
                 (Sex)inputs.Sex);
             outputs.WfhZscore = wfhTuple.Item1;
             outputs.WfhPercentile = wfhTuple.Item2;
 
             Tuple<double, double> wflTuple = await Stats.GetScore(
                 Indicator.WeightForLength, 
-                inputs.Weight, 
-                inputs.LengthHeight, 
+                inputs.Weight,
+                outputs.GetLengthHeightAdjusted(),//inputs.LengthHeight, 
                 (Sex)inputs.Sex);
             outputs.WflZscore = wflTuple.Item1;
             outputs.WflPercentile = wflTuple.Item2;
