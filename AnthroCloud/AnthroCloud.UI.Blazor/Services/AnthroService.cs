@@ -48,43 +48,12 @@ namespace AnthroCloud.UI.Blazor.Services
             return result;
         }
 
-        // https://localhost:5001/api/anthro/AgeObjectAsync/2016-12-01T00:00:00/2019-12-01T23:59:59
-        public async Task<Age> GetAge(string birth, string visit)
-        {
-            Age result = new();
-            Uri newUri = new(httpClient.BaseAddress + $"anthro/AgeObjectAsync/{birth}/{visit}");
-            try
-            {                
-                var response = await httpClient.GetAsync(newUri).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
-
-                using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-
-                result = await JsonSerializer.DeserializeAsync
-                    <Age>(responseStream).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
-                throw;
-            }
-            return result;
-        }
-
         public async Task<Outputs> GetScores(Inputs inputs)
         {
             Outputs results;
             Uri newUri = new(httpClient.BaseAddress + $"STATS");
             try
             {
-                //string BirthDateString = FormattableString.Invariant($"{inputs.DateOfBirth:yyyy-MM-dd}");
-                //string VisitDateString = FormattableString.Invariant($"{inputs.DateOfVisit:yyyy-MM-dd}");
-
-                //inputs.Age = await GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                //inputs.AgeString = inputs.Age.ToReadableString().ToString();
-
-                //inputs.BMI = await GetBMI(inputs.Weight, inputs.LengthHeight).ConfigureAwait(false);
-
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(
                     newUri, inputs).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();

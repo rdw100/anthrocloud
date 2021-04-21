@@ -52,7 +52,5 @@ namespace AnthroCloud.Entities
         public OedemaTypes Oedema { get; set; } = OedemaTypes.No;
 
         public MeasurementTypes Measured { get; set; } = MeasurementTypes.Recumbent;
-
-        public Age Age { get; set; }
     }
 }

@@ -40,15 +40,14 @@ namespace AnthroCloud.API.Controllers
         public async Task<Outputs> GetScores([FromBody] Inputs inputs)
         {
             Outputs outputs = new();
-
-            Business.Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
+            Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
             age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
             outputs.Age = age.ToReadableString();
             outputs.AgeInMonths = age.TotalMonths;
             outputs.AgeInYears = age.Years;
             outputs.SetLengthHeightAdjusted(age.Years, inputs.LengthHeight, inputs.Measured);
 
-            Business.Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit);
+            Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit);
             ageClinic = await ageClinic.Calculate(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
             outputs.Age = ageClinic.ToReadableString();
 
@@ -188,7 +187,10 @@ namespace AnthroCloud.API.Controllers
         {
             Outputs outputs = new();
 
-            Tuple<double, double> hcaTuple = await Stats.GetScore(Indicator.HeadCircumferenceForAge, inputs.HeadCircumference, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
+            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
+
+            Tuple<double, double> hcaTuple = await Stats.GetScore(Indicator.HeadCircumferenceForAge, inputs.HeadCircumference, age.TotalDays, (Sex)inputs.Sex);
             outputs.HcaZscore = hcaTuple.Item1;
             outputs.HcaPercentile = hcaTuple.Item2;
 
@@ -205,7 +207,10 @@ namespace AnthroCloud.API.Controllers
         {
             Outputs outputs = new();
 
-            Tuple<double, double> muacTuple = await Stats.GetScore(Indicator.ArmCircumferenceForAge, inputs.MUAC, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
+            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
+
+            Tuple<double, double> muacTuple = await Stats.GetScore(Indicator.ArmCircumferenceForAge, inputs.MUAC, age.TotalDays, (Sex)inputs.Sex);
             outputs.MuacZscore = muacTuple.Item1;
             outputs.MuacPercentile = muacTuple.Item2;
 
@@ -222,7 +227,10 @@ namespace AnthroCloud.API.Controllers
         {
             Outputs outputs = new();
 
-            Tuple<double, double> tfaTuple = await Stats.GetScore(Indicator.TricepsSkinfoldForAge, inputs.TricepsSkinFold, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
+            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
+
+            Tuple<double, double> tfaTuple = await Stats.GetScore(Indicator.TricepsSkinfoldForAge, inputs.TricepsSkinFold, age.TotalDays, (Sex)inputs.Sex);
             outputs.TsfZscore = tfaTuple.Item1;
             outputs.TsfPercentile = tfaTuple.Item2;
 
@@ -239,7 +247,10 @@ namespace AnthroCloud.API.Controllers
         {
             Outputs outputs = new();
 
-            Tuple<double, double> sfaTuple = await Stats.GetScore(Indicator.SubscapularSkinfoldForAge, inputs.SubscapularSkinFold, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
+            Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
+            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
+
+            Tuple<double, double> sfaTuple = await Stats.GetScore(Indicator.SubscapularSkinfoldForAge, inputs.SubscapularSkinFold, age.TotalDays, (Sex)inputs.Sex);
             outputs.SsfZscore = sfaTuple.Item1;
             outputs.SsfPercentile = sfaTuple.Item2;
 
