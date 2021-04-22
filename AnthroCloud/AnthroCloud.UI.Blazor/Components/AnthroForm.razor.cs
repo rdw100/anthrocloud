@@ -288,6 +288,15 @@ namespace AnthroCloud.UI.Blazor.Components
         //    ExecutionTime = "- Measured (HT/WT) Click - " + watch.ElapsedMilliseconds + "ms";
         //}
 
+        public async Task OnRadioChanged(Sexes value)
+        {
+            FormModel.FormInputs.Sex = value;
+
+            await HandleSubmitAsync().ConfigureAwait(false);
+
+            _ = Task.CompletedTask;
+        }
+
         protected async Task HandleSubmitAsync()
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();

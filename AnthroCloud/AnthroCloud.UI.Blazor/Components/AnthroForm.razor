@@ -53,8 +53,23 @@
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-2">
-                <label class="col-form-label">Sex</label>
                 <div class="col-md-4 mb-2">
+                    <label for="grpRadio" class="col-form-label">Sex</label>
+                    <div class="form-group">
+                        <InputRadioGroup Value="@FormModel.FormInputs.Sex"
+                                         ValueExpression="@(()=>FormModel.FormInputs.Sex)"
+                                         ValueChanged="@((Sexes value) => OnRadioChanged(value))">
+                            @foreach (var item in (Sexes[])Enum.GetValues(typeof(Sexes)))
+                            {
+                                <label class="d-block">
+                                    <InputRadio Value="item" />
+                                    @item
+                                    <br>
+                                </label>
+                            }
+                        </InputRadioGroup>
+                    </div>
+                        @*
                     <label for="grpRadio" class="col-form-label">Sex</label>
                     <div class="form-group">
                         <InputRadioGroup id="grpRadio" Name="sex" @bind-Value="FormModel.FormInputs.Sex">
@@ -66,8 +81,9 @@
                             </label>
                         </InputRadioGroup>
                     </div>
+                        *@
+                    </div>
                 </div>
-            </div>
             <div class="col-md-4 mb-2">
                 <label for="grpStanding" class="col-form-label">Standing</label>
                 <div class="form-group">
