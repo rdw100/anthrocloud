@@ -297,6 +297,15 @@ namespace AnthroCloud.UI.Blazor.Components
             _ = Task.CompletedTask;
         }
 
+        public async Task OnMeasuredChanged(MeasurementTypes value)
+        {
+            FormModel.FormInputs.Measured = value;
+
+            await HandleSubmitAsync().ConfigureAwait(false);
+
+            _ = Task.CompletedTask;
+        }
+
         protected async Task HandleSubmitAsync()
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();

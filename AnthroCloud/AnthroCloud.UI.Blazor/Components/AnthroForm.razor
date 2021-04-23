@@ -69,34 +69,23 @@
                             }
                         </InputRadioGroup>
                     </div>
-                        @*
-                    <label for="grpRadio" class="col-form-label">Sex</label>
-                    <div class="form-group">
-                        <InputRadioGroup id="grpRadio" Name="sex" @bind-Value="FormModel.FormInputs.Sex">
-                            <label class="d-block">
-                                <InputRadio Name="sex" TValue="Sexes" Value="Sexes.Female" />Female<br>
-                            </label>
-                            <label class="d-block">
-                                <InputRadio Name="sex" TValue="Sexes" Value="Sexes.Male" />Male<br>
-                            </label>
-                        </InputRadioGroup>
-                    </div>
-                        *@
-                    </div>
                 </div>
+            </div>
             <div class="col-md-4 mb-2">
                 <label for="grpStanding" class="col-form-label">Standing</label>
                 <div class="form-group">
-                    <label class="d-block">
-                        <InputRadioGroup id="grpStanding" Name="measured" @bind-Value="FormModel.FormInputs.Measured">
-                            <label class="d-block">
-                                <InputRadio Name="measured" Value="MeasurementTypes.Recumbent" />Recumbent<br>
-                            </label>
-                            <label class="d-block">
-                                <InputRadio Name="measured" Value="MeasurementTypes.Standing" />Standing<br>
-                            </label>
-                        </InputRadioGroup>
-                    </label>
+                    <InputRadioGroup Value="@FormModel.FormInputs.Measured"
+                                     ValueExpression="@(()=>FormModel.FormInputs.Measured)"
+                                     ValueChanged="@((MeasurementTypes value) => OnMeasuredChanged(value))">
+                        @foreach (var item in (MeasurementTypes[])Enum.GetValues(typeof(MeasurementTypes)))
+                            {
+                        <label class="d-block">
+                            <InputRadio Value="item" />
+                            @item
+                            <br>
+                        </label>
+                            }
+                    </InputRadioGroup>
                 </div>
             </div>
             <div class="col-md-4 mb-2">
