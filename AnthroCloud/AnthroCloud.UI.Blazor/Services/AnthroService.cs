@@ -1,7 +1,6 @@
 ﻿using AnthroCloud.Entities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -29,42 +28,30 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<double> GetBMI(double weight, double height)
         {
             double result = 0D;
-            Uri newUri = new(httpClient.BaseAddress + $"anthro/BMIAsync/{weight}/{height}");
-            try
-            {                
-                var response = await httpClient.GetAsync(newUri).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
+            System.Uri newUri = new(httpClient.BaseAddress + $"anthro/BMIAsync/{weight}/{height}");
+            
+            var response = await httpClient.GetAsync(newUri).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
 
-                using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
-                result = await JsonSerializer.DeserializeAsync
-                    <double>(responseStream).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
-                throw;
-            }
+            result = await JsonSerializer.DeserializeAsync
+                <double>(responseStream).ConfigureAwait(false);
+
             return result;
         }
 
         public async Task<Outputs> GetScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new(httpClient.BaseAddress + $"STATS");
-            try
-            {
-                HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    newUri, inputs).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
+            System.Uri newUri = new(httpClient.BaseAddress + $"STATS");
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
-                throw;
-            }
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                newUri, inputs).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+
+            results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
+
             return results;
         }
 
@@ -99,112 +86,88 @@ namespace AnthroCloud.UI.Blazor.Services
         public async Task<Outputs> GetHcaScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new(httpClient.BaseAddress + $"STATS/HCA");
-            try
-            {
-                //string BirthDateString = FormattableString.Invariant($"{inputs.DateOfBirth:yyyy-MM-dd}");
-                //string VisitDateString = FormattableString.Invariant($"{inputs.DateOfVisit:yyyy-MM-dd}");
+            System.Uri newUri = new(httpClient.BaseAddress + $"STATS/HCA");
 
-                //inputs.Age = await GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                //inputs.AgeString = inputs.Age.ToReadableString().ToString();
+            //string BirthDateString = FormattableString.Invariant($"{inputs.DateOfBirth:yyyy-MM-dd}");
+            //string VisitDateString = FormattableString.Invariant($"{inputs.DateOfVisit:yyyy-MM-dd}");
 
-                //inputs.BMI = await GetBMI(inputs.Weight, inputs.LengthHeight).ConfigureAwait(false);
+            //inputs.Age = await GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+            //inputs.AgeString = inputs.Age.ToReadableString().ToString();
 
-                HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    newUri, inputs).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
+            //inputs.BMI = await GetBMI(inputs.Weight, inputs.LengthHeight).ConfigureAwait(false);
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
-                throw;
-            }
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                newUri, inputs).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+
+            results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
+
             return results;
         }
 
         public async Task<Outputs> GetMuacScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new(httpClient.BaseAddress + $"STATS/MUAC");
-            try
-            {
-                //string BirthDateString = FormattableString.Invariant($"{inputs.DateOfBirth:yyyy-MM-dd}");
-                //string VisitDateString = FormattableString.Invariant($"{inputs.DateOfVisit:yyyy-MM-dd}");
+            System.Uri newUri = new(httpClient.BaseAddress + $"STATS/MUAC");
 
-                //inputs.Age = await GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                //inputs.AgeString = inputs.Age.ToReadableString().ToString();
+            //string BirthDateString = FormattableString.Invariant($"{inputs.DateOfBirth:yyyy-MM-dd}");
+            //string VisitDateString = FormattableString.Invariant($"{inputs.DateOfVisit:yyyy-MM-dd}");
 
-                //inputs.BMI = await GetBMI(inputs.Weight, inputs.LengthHeight).ConfigureAwait(false);
+            //inputs.Age = await GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+            //inputs.AgeString = inputs.Age.ToReadableString().ToString();
 
-                HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    newUri, inputs).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
+            //inputs.BMI = await GetBMI(inputs.Weight, inputs.LengthHeight).ConfigureAwait(false);
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
-                throw;
-            }
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                newUri, inputs).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+
+            results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
+
             return results;
         }
 
         public async Task<Outputs> GetTsfScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new(httpClient.BaseAddress + $"STATS/TSF");
-            try
-            {
-                //string BirthDateString = FormattableString.Invariant($"{inputs.DateOfBirth:yyyy-MM-dd}");
-                //string VisitDateString = FormattableString.Invariant($"{inputs.DateOfVisit:yyyy-MM-dd}");
+            System.Uri newUri = new(httpClient.BaseAddress + $"STATS/TSF");
 
-                //inputs.Age = await GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                //inputs.AgeString = inputs.Age.ToReadableString().ToString();
+            //string BirthDateString = FormattableString.Invariant($"{inputs.DateOfBirth:yyyy-MM-dd}");
+            //string VisitDateString = FormattableString.Invariant($"{inputs.DateOfVisit:yyyy-MM-dd}");
 
-                //inputs.BMI = await GetBMI(inputs.Weight, inputs.LengthHeight).ConfigureAwait(false);
+            //inputs.Age = await GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+            //inputs.AgeString = inputs.Age.ToReadableString().ToString();
 
-                HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    newUri, inputs).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
+            //inputs.BMI = await GetBMI(inputs.Weight, inputs.LengthHeight).ConfigureAwait(false);
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
-                throw;
-            }
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                newUri, inputs).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+
+            results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
+
             return results;
         }
 
         public async Task<Outputs> GetSsfScores(Inputs inputs)
         {
             Outputs results;
-            Uri newUri = new(httpClient.BaseAddress + $"STATS/SSF");
-            try
-            {
-                //string BirthDateString = FormattableString.Invariant($"{inputs.DateOfBirth:yyyy-MM-dd}");
-                //string VisitDateString = FormattableString.Invariant($"{inputs.DateOfVisit:yyyy-MM-dd}");
+            System.Uri newUri = new(httpClient.BaseAddress + $"STATS/SSF");
 
-                //inputs.Age = await GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                //inputs.AgeString = inputs.Age.ToReadableString().ToString();
+            //string BirthDateString = FormattableString.Invariant($"{inputs.DateOfBirth:yyyy-MM-dd}");
+            //string VisitDateString = FormattableString.Invariant($"{inputs.DateOfVisit:yyyy-MM-dd}");
 
-                //inputs.BMI = await GetBMI(inputs.Weight, inputs.LengthHeight).ConfigureAwait(false);
+            //inputs.Age = await GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+            //inputs.AgeString = inputs.Age.ToReadableString().ToString();
 
-                HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                    newUri, inputs).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
+            //inputs.BMI = await GetBMI(inputs.Weight, inputs.LengthHeight).ConfigureAwait(false);
 
-                results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogWarning(ex, $"Failed to retrieve data {newUri}.", newUri);
-                throw;
-            }
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                newUri, inputs).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+
+            results = await response.Content.ReadFromJsonAsync<Outputs>().ConfigureAwait(false);
+
             return results;
         }
     }
