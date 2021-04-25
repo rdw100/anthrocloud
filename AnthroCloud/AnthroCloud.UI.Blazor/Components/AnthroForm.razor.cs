@@ -57,6 +57,18 @@ namespace AnthroCloud.UI.Blazor.Components
         private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
         {
             formInvalid = !EditContext.Validate();
+
+            if (e.FieldIdentifier.FieldName == "DateOfVisit")
+            {
+                string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+
+                //await HandleSubmitAsync().ConfigureAwait(false);
+
+                //FormModel.FormOutputs.A.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+                //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+            }
+
             StateHasChanged();
         }
 
@@ -65,56 +77,56 @@ namespace AnthroCloud.UI.Blazor.Components
             EditContext.OnFieldChanged -= HandleFieldChanged;
         }
 
-        //protected async Task HandleHcaAsync()
-        //{
-        //    var watch = System.Diagnostics.Stopwatch.StartNew();
+        protected async Task HandleHcaAsync()
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
 
-        //    //var isValid = EditContext.Validate();
+            var isValid = EditContext.Validate();
 
-        //    try
-        //    {
-        //        LoadFailed = false;
+            try
+            {
+                LoadFailed = false;
 
-        //        if (isValid)
-        //        {
-        //            IsCalculating = true;
+                if (isValid)
+                {
+                    IsCalculating = true;
 
-        //            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-        //            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
-        //            //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-        //            //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
 
-        //            //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
 
-        //            FormModel.FormOutputs = await AnthroService.GetHcaScores(FormModel.FormInputs).ConfigureAwait(false);
+                    //FormModel.FormOutputs = await AnthroService.GetHcaScores(FormModel.FormInputs).ConfigureAwait(false);
 
-        //            //Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(
-        //            //    FormModel.FormInputs.HeadCircumference,
-        //            //    FormattableString.Invariant($"{FormModel.FormInputs.Age.TotalDays}"),
-        //            //    FormModel.FormInputs.Sex).ConfigureAwait(false);
+                    Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(
+                        FormModel.FormInputs.HeadCircumference,
+                        FormattableString.Invariant($"{FormModel.FormOutputs.AgeInDays}"),
+                        FormModel.FormInputs.Sex).ConfigureAwait(false);
 
-        //            //FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;
-        //            //FormModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
+                    FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;
+                    FormModel.FormOutputs.HcaPercentile = hcaTuple.Item2;
 
-        //            IsCalculating = false;
-        //        }
-        //        else
-        //        {
-        //            LoadFailed = true;
-        //        }
-        //    }
-        //    catch (ApplicationException ex)
-        //    {
-        //        LoadFailed = true;
-        //        Error.ProcessError(ex);
-        //        ErrorMessage = ex.Message;
-        //        Logger.LogWarning(ex.Message);
-        //    }
+                    IsCalculating = false;
+                }
+                else
+                {
+                    LoadFailed = true;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                LoadFailed = true;
+                Error.ProcessError(ex);
+                ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
+            }
 
-        //    watch.Stop();
-        //    ExecutionTime = "- HCA Click - " + watch.ElapsedMilliseconds + "ms";
-        //}
+            watch.Stop();
+            ExecutionTime = "- HCA Click - " + watch.ElapsedMilliseconds + "ms";
+        }
 
         //protected async Task HandleMuacAsync()
         //{

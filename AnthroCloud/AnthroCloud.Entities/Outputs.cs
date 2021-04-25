@@ -5,9 +5,11 @@
     /// </summary>
     public class Outputs
     {
-        public string Age { get; set; } = "11mo";
+        //public Age Age { get; set; }
+        public string AgeString { get; set; } = "11mo";
+        public int AgeInDays { get; set; } = 365;
         public int AgeInMonths { get; set; } = 11;
-        public int AgeInYears { get; set; } = 0;        
+        public int AgeInYears { get; set; } = 0;
         public double Bmi { get; set; } = 16.9;
         public double WflPercentile { get; set; } = 61.4;
         public double WflZscore { get; set; } = 0.29;
@@ -54,4 +56,12 @@
             return LengthHeightAdjusted;
         }
     }
+
+    //public class Age
+    //{
+    //    public string AgeString { get; set; } = "11mo";
+    //    public int AgeInDays { get; set; } = 365;
+    //    public int AgeInMonths { get; set; } = 11;
+    //    public int AgeInYears { get; set; } = 0;
+    //}
 }

@@ -42,14 +42,15 @@ namespace AnthroCloud.API.Controllers
             Outputs outputs = new();
             Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
             age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
-            outputs.Age = age.ToReadableString();
+            outputs.AgeString = age.ToReadableString();
+            outputs.AgeInDays = age.TotalDays;
             outputs.AgeInMonths = age.TotalMonths;
             outputs.AgeInYears = age.Years;
             outputs.SetLengthHeightAdjusted(age.Years, inputs.LengthHeight, inputs.Measured);
 
             Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit);
             ageClinic = await ageClinic.Calculate(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
-            outputs.Age = ageClinic.ToReadableString();
+            outputs.AgeString = ageClinic.ToReadableString();
 
             BMI bmi = new(inputs.Weight, outputs.GetLengthHeightAdjusted());
             outputs.Bmi = bmi.Bmi;

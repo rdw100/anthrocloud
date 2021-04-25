@@ -47,7 +47,7 @@
                 <label for="DateOfVisit">Visit Date</label>
                 <InputDate id="DateOfVisit" @bind-Value="@FormModel.FormInputs.DateOfVisit"
                            ParsingErrorMessage="Must be a valid date."
-                           @onchange="HandleSubmitAsync"
+                            @onchange="HandleSubmitAsync"
                            class="form-control text-center" />
             </div>
         </div>
@@ -118,7 +118,7 @@
                 <div class="form-group row">
                     <label for="validationDefault02" class="col-sm-5 col-form-label">Head Circumference (cm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="HeadCircumference" @bind-value="@FormModel.FormInputs.HeadCircumference" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>
+                        <input asp-for="HeadCircumference" @bind-value="@FormModel.FormInputs.HeadCircumference" @onclick="HandleHcaAsync" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -179,7 +179,7 @@
         <div class="form-row">
             <div class="col-md-6 mb-2">
                 <label for="Age">Age:</label>
-                <input id="Age" asp-for="Age" value="@FormModel.FormOutputs.Age" class="form-control text-center" type="text" readonly />
+                <input id="Age" asp-for="Age" value="@FormModel.FormOutputs.AgeString" class="form-control text-center" type="text" readonly />
             </div>
             <div class="col-md-6 mb-2">
                 <label for="BMI">BMI:</label>
