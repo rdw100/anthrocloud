@@ -24,6 +24,23 @@ namespace AnthroCloud.UI.Blazor.Services
             this.httpClient = httpClient;
         }
 
+        // https://localhost:5001/api/anthro/AgeObjectAsync/2016-12-01T00:00:00/2019-12-01T23:59:59
+        public async Task<AgeView> GetAge(string birth, string visit)
+        {
+            AgeView result = new();
+            System.Uri newUri = new(httpClient.BaseAddress + $"anthro/AgeObjectAsync/{birth}/{visit}");
+
+            var response = await httpClient.GetAsync(newUri).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+
+            using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+            result = await JsonSerializer.DeserializeAsync
+                <AgeView>(responseStream).ConfigureAwait(false);
+
+            return result;
+        }
+
         // https://localhost:5001/api/anthro/BMIAsync/9.00/73.00
         public async Task<double> GetBMI(double weight, double height)
         {

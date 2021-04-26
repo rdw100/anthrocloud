@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using AnthroCloud.Business;
 using Microsoft.AspNetCore.Mvc;
-using AnthroCloud.Business;
+using System;
+using System.Threading.Tasks;
 
 namespace AnthroCloud.API.Controllers
 {

@@ -51,6 +51,7 @@ namespace AnthroCloud.Entities
         [Required, EnumDataType(typeof(OedemaTypes))]
         public OedemaTypes Oedema { get; set; } = OedemaTypes.No;
 
+        [Required, EnumDataType(typeof(MeasurementTypes))]
         public MeasurementTypes Measured { get; set; } = MeasurementTypes.Recumbent;
     }
 }

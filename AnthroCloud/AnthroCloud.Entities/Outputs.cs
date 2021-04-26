@@ -1,15 +1,14 @@
-﻿namespace AnthroCloud.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace AnthroCloud.Entities
 {
     /// <summary>
     /// Represents all calculator outputs from computed statistics.
     /// </summary>
     public class Outputs
     {
-        //public Age Age { get; set; }
-        public string AgeString { get; set; } = "11mo";
-        public int AgeInDays { get; set; } = 365;
-        public int AgeInMonths { get; set; } = 11;
-        public int AgeInYears { get; set; } = 0;
+        private double LengthHeightAdjusted = 73.00;
+        public AgeView Age { get; set; } = new();
         public double Bmi { get; set; } = 16.9;
         public double WflPercentile { get; set; } = 61.4;
         public double WflZscore { get; set; } = 0.29;
@@ -31,12 +30,10 @@
         public double WfhZscore { get; set; }
         public double HfaPercentile { get; set; } = 53.1;
         public double HfaZscore { get; set; } = 0.08;
-
-        private double LengthHeightAdjusted = 73.00;
-
-        public double GetLengthHeightAdjusted () {
+        public double GetLengthHeightAdjusted()
+        {
             return LengthHeightAdjusted;
-        } 
+        }
 
         public double SetLengthHeightAdjusted(int AgeInYears, double LengthHeight, MeasurementTypes Measured)
         {
@@ -57,11 +54,60 @@
         }
     }
 
-    //public class Age
-    //{
-    //    public string AgeString { get; set; } = "11mo";
-    //    public int AgeInDays { get; set; } = 365;
-    //    public int AgeInMonths { get; set; } = 11;
-    //    public int AgeInYears { get; set; } = 0;
-    //}
+    public class AgeView
+    {
+        private string ageString;
+
+        public string AgeString
+        {
+            get
+            {
+                if (Years < 1)
+                {
+                    ageString = string.Format("{0}mo", Months);
+                }
+                else
+                {
+                    ageString = string.Format("{0}yr {1}mo ({2}mo)", Years, Months, TotalMonths);
+                }
+
+                return ageString;
+            }
+
+            set 
+            { 
+                ageString = value; 
+            }
+        }
+
+        /// <summary>
+        /// Age in remaining days.
+        /// </summary>
+        [JsonPropertyName("days")]
+        public int Days { get; set; } = 365;
+
+        /// <summary>
+        /// Age in remaining months.
+        /// </summary>
+        [JsonPropertyName("months")]
+        public int Months { get; set; } = 11;
+        
+        /// <summary>
+        /// Age in years.
+        /// </summary>
+        [JsonPropertyName("years")]        
+        public int Years { get; set; } = 0;
+
+        /// <summary>
+        /// Age in total days.
+        /// </summary>
+        [JsonPropertyName("totalDays")]
+        public int TotalDays { get; set; }
+
+        /// <summary>
+        /// Age in total months.
+        /// </summary>
+        [JsonPropertyName("totalMonths")]
+        public int TotalMonths { get; set; }
+    }
 }

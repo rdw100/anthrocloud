@@ -60,12 +60,12 @@ namespace AnthroCloud.UI.Blazor.Components
 
             if (e.FieldIdentifier.FieldName == "DateOfVisit")
             {
-                string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+                //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
 
                 //await HandleSubmitAsync().ConfigureAwait(false);
 
-                //FormModel.FormOutputs.A.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+                //FormModel.FormOutputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
                 //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
             }
 
@@ -91,19 +91,9 @@ namespace AnthroCloud.UI.Blazor.Components
                 {
                     IsCalculating = true;
 
-                    //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                    //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
-
-                    //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                    //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
-
-                    //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
-
-                    //FormModel.FormOutputs = await AnthroService.GetHcaScores(FormModel.FormInputs).ConfigureAwait(false);
-
                     Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(
                         FormModel.FormInputs.HeadCircumference,
-                        FormattableString.Invariant($"{FormModel.FormOutputs.AgeInDays}"),
+                        FormattableString.Invariant($"{FormModel.FormOutputs.Age.Days}"),
                         FormModel.FormInputs.Sex).ConfigureAwait(false);
 
                     FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;
@@ -300,7 +290,7 @@ namespace AnthroCloud.UI.Blazor.Components
         //    ExecutionTime = "- Measured (HT/WT) Click - " + watch.ElapsedMilliseconds + "ms";
         //}
 
-        public async Task OnRadioChanged(Sexes value)
+        public async Task HandleRadioChange(Sexes value)
         {
             FormModel.FormInputs.Sex = value;
 
@@ -309,13 +299,21 @@ namespace AnthroCloud.UI.Blazor.Components
             _ = Task.CompletedTask;
         }
 
-        public async Task OnMeasuredChanged(MeasurementTypes value)
+        public async Task HandleMeasuredChange(MeasurementTypes value)
         {
             FormModel.FormInputs.Measured = value;
 
             await HandleSubmitAsync().ConfigureAwait(false);
 
             _ = Task.CompletedTask;
+        }
+
+        public async Task HandleVisitChange(DateTime dt)//(ChangeEventArgs evt)
+        {
+            FormModel.FormInputs.DateOfVisit = dt;
+            string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+            string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+            FormModel.FormOutputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
         }
 
         protected async Task HandleSubmitAsync()

@@ -38,16 +38,19 @@
         <div class="form-row">
             <div class="col-md-6 mb-2">
                 <label for="DateOfBirth">Date of Birth</label>
-                <InputDate id="DateOfBirth" @bind-Value="@FormModel.FormInputs.DateOfBirth"
+                <InputDate id="DateOfBirth" 
+                           @bind-Value="@FormModel.FormInputs.DateOfBirth"
                            ParsingErrorMessage="Must be a valid date."
                            @onchange="HandleSubmitAsync"
                            class="form-control text-center" />
             </div>
             <div class="col-md-6 mb-2">
                 <label for="DateOfVisit">Visit Date</label>
-                <InputDate id="DateOfVisit" @bind-Value="@FormModel.FormInputs.DateOfVisit"
+                <InputDate id="DateOfVisit"
+                           Value="@FormModel.FormInputs.DateOfVisit"
+                           ValueExpression="@(()=>FormModel.FormInputs.DateOfVisit)"
+                           ValueChanged="@((DateTime value) => HandleVisitChange(value))"
                            ParsingErrorMessage="Must be a valid date."
-                            @onchange="HandleSubmitAsync"
                            class="form-control text-center" />
             </div>
         </div>
@@ -58,7 +61,7 @@
                     <div class="form-group">
                         <InputRadioGroup Value="@FormModel.FormInputs.Sex"
                                          ValueExpression="@(()=>FormModel.FormInputs.Sex)"
-                                         ValueChanged="@((Sexes value) => OnRadioChanged(value))">
+                                         ValueChanged="@((Sexes value) => HandleRadioChange(value))">
                             @foreach (var item in (Sexes[])Enum.GetValues(typeof(Sexes)))
                             {
                                 <label class="d-block">
@@ -76,7 +79,7 @@
                 <div class="form-group">
                     <InputRadioGroup Value="@FormModel.FormInputs.Measured"
                                      ValueExpression="@(()=>FormModel.FormInputs.Measured)"
-                                     ValueChanged="@((MeasurementTypes value) => OnMeasuredChanged(value))">
+                                     ValueChanged="@((MeasurementTypes value) => HandleMeasuredChange(value))">
                         @foreach (var item in (MeasurementTypes[])Enum.GetValues(typeof(MeasurementTypes)))
                             {
                         <label class="d-block">
@@ -179,7 +182,7 @@
         <div class="form-row">
             <div class="col-md-6 mb-2">
                 <label for="Age">Age:</label>
-                <input id="Age" asp-for="Age" value="@FormModel.FormOutputs.AgeString" class="form-control text-center" type="text" readonly />
+                <input id="Age" asp-for="Age" value="@FormModel.FormOutputs.Age.AgeString" class="form-control text-center" type="text" readonly />
             </div>
             <div class="col-md-6 mb-2">
                 <label for="BMI">BMI:</label>
@@ -201,7 +204,7 @@
                 </div>
             </div>
 
-            @if (FormModel != null && FormModel.FormOutputs.AgeInYears < 2)
+            @if (FormModel != null && FormModel.FormOutputs.Age.Years < 2)
             {
                 <!-- Weight For Length -->
                 <div class="form-group col-md-6">
@@ -315,7 +318,7 @@
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.HCA,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.HeadCircumference,
                                                 " Head Circumference"
                         ))"
@@ -328,7 +331,7 @@
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.HCA,
                                                 GraphTypes.ZScore,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.HeadCircumference,
                                                 " Head Circumference"
                         ))"
@@ -363,7 +366,7 @@
                         <button @onclick="@(() => ShowGrowthChart(GrowthTypes.WFA,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.Weight,
                                                 " Weight-for-age"
                         ))"
@@ -376,7 +379,7 @@
                         <button @onclick="@(() => ShowGrowthChart(GrowthTypes.WFA,
                                                 GraphTypes.ZScore,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.Weight,
                                                 " Weight-for-age"
                         ))"
@@ -392,13 +395,13 @@
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">MUAC-for-age</label>
-                    <input id="MuacPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="MuacPercentile" type="range" min="0" max="100" step=".1" title="@SetRangeControl(FormModel.FormOutputs.MuacPercentile,FormModel.FormOutputs.AgeInYears,FormModel.FormOutputs.AgeInMonths)" value="@SetRangeControl(FormModel.FormOutputs.MuacPercentile, FormModel.FormOutputs.AgeInYears, FormModel.FormOutputs.AgeInMonths)" list="tickmarks" disabled />
-                    <input aria-label="MuacPercentile" class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacPercentile" value="@SetPercText(FormModel.FormOutputs.MuacPercentile,FormModel.FormOutputs.AgeInYears,FormModel.FormOutputs.AgeInMonths)" readonly>
-                    <input aria-label="MuacZscore" class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacZscore" value="@SetZscoreText(FormModel.FormOutputs.MuacZscore,FormModel.FormOutputs.AgeInYears, FormModel.FormOutputs.AgeInMonths)" style="background-color: @SetColor(FormModel.FormOutputs.MuacZscore)" readonly>
+                    <input id="MuacPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="MuacPercentile" type="range" min="0" max="100" step=".1" title="@SetRangeControl(FormModel.FormOutputs.MuacPercentile,FormModel.FormOutputs.Age.Years,FormModel.FormOutputs.Age.Months)" value="@SetRangeControl(FormModel.FormOutputs.MuacPercentile, FormModel.FormOutputs.Age.Years, FormModel.FormOutputs.Age.Months)" list="tickmarks" disabled />
+                    <input aria-label="MuacPercentile" class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacPercentile" value="@SetPercText(FormModel.FormOutputs.MuacPercentile,FormModel.FormOutputs.Age.Years,FormModel.FormOutputs.Age.Months)" readonly>
+                    <input aria-label="MuacZscore" class="form-control col-md-2 mr-1 text-center" type="text" asp-for="MuacZscore" value="@SetZscoreText(FormModel.FormOutputs.MuacZscore,FormModel.FormOutputs.Age.Years, FormModel.FormOutputs.Age.Months)" style="background-color: @SetColor(FormModel.FormOutputs.MuacZscore)" readonly>
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.MUAC,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.MUAC,
                                                 " MUAC-for-age"
                         ))"
@@ -411,7 +414,7 @@
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.MUAC,
                                                 GraphTypes.ZScore,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.MUAC,
                                                 " MUAC-for-age"
                         ))"
@@ -428,12 +431,12 @@
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">Length-for-Age</label>
                     <input id="LfaPercentileRange" class="form-control-range  col-md-2 mr-1 ml-1" asp-for="LfaPercentile" type="range" min="0" max="100" step=".1" title="@FormModel.FormOutputs.LfaPercentile" value="@FormModel.FormOutputs.LfaPercentile" list="tickmarks" disabled />
-                    <input aria-label="LfaPercentile" type="text" asp-for="LfaPercentile" value="@SetPercText(FormModel.FormOutputs.LfaPercentile,FormModel.FormOutputs.AgeInYears, FormModel.FormOutputs.AgeInMonths)" class="form-control col-md-2 mr-1 text-center" readonly>
+                    <input aria-label="LfaPercentile" type="text" asp-for="LfaPercentile" value="@SetPercText(FormModel.FormOutputs.LfaPercentile,FormModel.FormOutputs.Age.Years, FormModel.FormOutputs.Age.Months)" class="form-control col-md-2 mr-1 text-center" readonly>
                     <input aria-label="LfaZscore" type="text" asp-for="LfaZscore" value="@FormModel.FormOutputs.LfaZscore.ToString(" 0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.LfaZscore)" readonly>
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.LHFA,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.LengthHeight,
                                                 " Length /Height-for-age"
                         ))"
@@ -446,7 +449,7 @@
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.LHFA,
                                                 GraphTypes.ZScore,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.LengthHeight,
                                                 " Length /Height-for-age"
                         ))"
@@ -461,13 +464,13 @@
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">TSF-for-age</label>
-                    <input id="TsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="TsfPercentile" type="range" min="0" max="100" step=".1" title="@SetRangeControl(FormModel.FormOutputs.TsfPercentile,FormModel.FormOutputs.AgeInYears,FormModel.FormOutputs.AgeInMonths)" value="@SetRangeControl(FormModel.FormOutputs.TsfPercentile,FormModel.FormOutputs.AgeInYears,FormModel.FormOutputs.AgeInMonths)" list="tickmarks" disabled />
-                    <input type="text" aria-label="TsfPercentile" asp-for="TsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@SetPercText(FormModel.FormOutputs.TsfPercentile,FormModel.FormOutputs.AgeInYears,FormModel.FormOutputs.AgeInMonths)" readonly>
-                    <input type="text" aria-label="TsfZscore" asp-for="TsfZscore" class="form-control col-md-2 mr-1 text-center" value="@SetZscoreText(FormModel.FormOutputs.TsfZscore,FormModel.FormOutputs.AgeInYears,FormModel.FormOutputs.AgeInMonths)" style="background-color: @SetColor(FormModel.FormOutputs.TsfZscore)" readonly>
+                    <input id="TsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="TsfPercentile" type="range" min="0" max="100" step=".1" title="@SetRangeControl(FormModel.FormOutputs.TsfPercentile,FormModel.FormOutputs.Age.Years,FormModel.FormOutputs.Age.Months)" value="@SetRangeControl(FormModel.FormOutputs.TsfPercentile,FormModel.FormOutputs.Age.Years,FormModel.FormOutputs.Age.Months)" list="tickmarks" disabled />
+                    <input type="text" aria-label="TsfPercentile" asp-for="TsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@SetPercText(FormModel.FormOutputs.TsfPercentile,FormModel.FormOutputs.Age.Years,FormModel.FormOutputs.Age.Months)" readonly>
+                    <input type="text" aria-label="TsfZscore" asp-for="TsfZscore" class="form-control col-md-2 mr-1 text-center" value="@SetZscoreText(FormModel.FormOutputs.TsfZscore,FormModel.FormOutputs.Age.Years,FormModel.FormOutputs.Age.Months)" style="background-color: @SetColor(FormModel.FormOutputs.TsfZscore)" readonly>
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.TSF,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.TricepsSkinFold,
                                                 " Triceps Skinfold"
                         ))"
@@ -480,7 +483,7 @@
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.TSF,
                                                 GraphTypes.ZScore,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.TricepsSkinFold,
                                                 " Triceps Skinfold"
                         ))"
@@ -510,12 +513,12 @@
                     }
                     else
                     {
-                        <input type="text" aria-label="BfaPercentile" asp-for="BfaPercentile" value="@SetPercText(FormModel.FormOutputs.BfaPercentile,FormModel.FormOutputs.AgeInYears, FormModel.FormOutputs.AgeInMonths)" class="form-control col-md-2 mr-1 text-center" readonly>
+                        <input type="text" aria-label="BfaPercentile" asp-for="BfaPercentile" value="@SetPercText(FormModel.FormOutputs.BfaPercentile,FormModel.FormOutputs.Age.Years, FormModel.FormOutputs.Age.Months)" class="form-control col-md-2 mr-1 text-center" readonly>
                         <input type="text" aria-label="BfaZscore" asp-for="BfaZscore" class="form-control col-md-2 mr-1 text-center" value="@FormModel.FormOutputs.BfaZscore.ToString(" 0.00")" style="background-color: @SetColor(FormModel.FormOutputs.BfaZscore)" readonly>
                         <button @onclick="@(() => ShowGrowthChart(GrowthTypes.BFA,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormOutputs.Bmi,
                                                 " BMI-for-Age"
                         ))"
@@ -528,7 +531,7 @@
                         <button @onclick="@(() => ShowGrowthChart(GrowthTypes.BFA,
                                                 GraphTypes.ZScore,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormOutputs.Bmi,
                                                 " BMI-for-Age"
                         ))"
@@ -544,13 +547,13 @@
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">SSF-for-age</label>
-                    <input id="SsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="SsfPercentile" type="range" min="0" max="100" step="25" title="@SetRangeControl(FormModel.FormOutputs.SsfPercentile,FormModel.FormOutputs.AgeInYears, FormModel.FormOutputs.AgeInMonths)" value="@SetRangeControl(FormModel.FormOutputs.SsfPercentile,FormModel.FormOutputs.AgeInYears,FormModel.FormOutputs.AgeInMonths)" list="tickmarks" disabled />
-                    <input type="text" aria-label="SsfPercentile" asp-for="SsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@SetPercText(FormModel.FormOutputs.SsfPercentile,FormModel.FormOutputs.AgeInYears,FormModel.FormOutputs.AgeInMonths)" readonly>
-                    <input type="text" aria-label="SsfZscore" asp-for="SsfZscore" class="form-control col-md-2 mr-1 text-center" value="@SetZscoreText(FormModel.FormOutputs.SsfZscore,FormModel.FormOutputs.AgeInYears,FormModel.FormOutputs.AgeInMonths)" style="background-color: @SetColor(FormModel.FormOutputs.SsfZscore)" readonly>
+                    <input id="SsfPercentileRange" class="form-control-range col-md-2 mr-1" asp-for="SsfPercentile" type="range" min="0" max="100" step="25" title="@SetRangeControl(FormModel.FormOutputs.SsfPercentile,FormModel.FormOutputs.Age.Years, FormModel.FormOutputs.Age.Months)" value="@SetRangeControl(FormModel.FormOutputs.SsfPercentile,FormModel.FormOutputs.Age.Years,FormModel.FormOutputs.Age.Months)" list="tickmarks" disabled />
+                    <input type="text" aria-label="SsfPercentile" asp-for="SsfPercentile" class="form-control col-md-2 mr-1 text-center" value="@SetPercText(FormModel.FormOutputs.SsfPercentile,FormModel.FormOutputs.Age.Years,FormModel.FormOutputs.Age.Months)" readonly>
+                    <input type="text" aria-label="SsfZscore" asp-for="SsfZscore" class="form-control col-md-2 mr-1 text-center" value="@SetZscoreText(FormModel.FormOutputs.SsfZscore,FormModel.FormOutputs.Age.Years,FormModel.FormOutputs.Age.Months)" style="background-color: @SetColor(FormModel.FormOutputs.SsfZscore)" readonly>
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.SSF,
                                                 GraphTypes.PValue,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.SubscapularSkinFold,
                                                 " Subscapular Skinfold"
                         ))"
@@ -563,7 +566,7 @@
                     <button @onclick="@(() => ShowGrowthChart(GrowthTypes.SSF,
                                                 GraphTypes.ZScore,
                                                 FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.AgeInMonths,
+                                                FormModel.FormOutputs.Age.Months,
                                                 FormModel.FormInputs.SubscapularSkinFold,
                                                 " Subscapular Skinfold"
                         ))"

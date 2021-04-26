@@ -5,6 +5,7 @@ namespace AnthroCloud.UI.Blazor.Services
 {
     public interface IAnthroService
     {
+        Task<AgeView> GetAge(string birth, string visit);
         Task<double> GetBMI(double weight, double height);
         Task<Outputs> GetScores(Inputs inputs);
         // Task<Outputs> GetMeasuredScores(Inputs inputs);
