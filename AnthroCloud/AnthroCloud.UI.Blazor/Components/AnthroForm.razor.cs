@@ -60,13 +60,6 @@ namespace AnthroCloud.UI.Blazor.Components
 
             if (e.FieldIdentifier.FieldName == "DateOfVisit")
             {
-                //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-                //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
-
-                //await HandleSubmitAsync().ConfigureAwait(false);
-
-                //FormModel.FormOutputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-                //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
             }
 
             StateHasChanged();
@@ -308,9 +301,17 @@ namespace AnthroCloud.UI.Blazor.Components
             _ = Task.CompletedTask;
         }
 
-        public async Task HandleVisitChange(DateTime dt)//(ChangeEventArgs evt)
+        public async Task HandleVisitChange(DateTime dt)
         {
             FormModel.FormInputs.DateOfVisit = dt;
+            string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+            string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+            FormModel.FormOutputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+        }
+
+        public async Task HandleBirthChange(DateTime dt)
+        {
+            FormModel.FormInputs.DateOfBirth = dt;
             string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
             string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
             FormModel.FormOutputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);

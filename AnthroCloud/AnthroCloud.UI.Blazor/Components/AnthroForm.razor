@@ -39,19 +39,24 @@
             <div class="col-md-6 mb-2">
                 <label for="DateOfBirth">Date of Birth</label>
                 <InputDate id="DateOfBirth" 
-                           @bind-Value="@FormModel.FormInputs.DateOfBirth"
+                    Value="@FormModel.FormInputs.DateOfBirth"
+                    ValueExpression="@(()=>FormModel.FormInputs.DateOfBirth)"
+                    ValueChanged="@((DateTime value) => HandleBirthChange(value))"
+                    ParsingErrorMessage="Must be a valid date."
+                    class="form-control text-center" />
+                           @*@bind-Value="@FormModel.FormInputs.DateOfBirth"
                            ParsingErrorMessage="Must be a valid date."
                            @onchange="HandleSubmitAsync"
-                           class="form-control text-center" />
+                           class="form-control text-center" />*@
             </div>
             <div class="col-md-6 mb-2">
                 <label for="DateOfVisit">Visit Date</label>
                 <InputDate id="DateOfVisit"
-                           Value="@FormModel.FormInputs.DateOfVisit"
-                           ValueExpression="@(()=>FormModel.FormInputs.DateOfVisit)"
-                           ValueChanged="@((DateTime value) => HandleVisitChange(value))"
-                           ParsingErrorMessage="Must be a valid date."
-                           class="form-control text-center" />
+                    Value="@FormModel.FormInputs.DateOfVisit"
+                    ValueExpression="@(()=>FormModel.FormInputs.DateOfVisit)"
+                    ValueChanged="@((DateTime value) => HandleVisitChange(value))"
+                    ParsingErrorMessage="Must be a valid date."
+                    class="form-control text-center" />
             </div>
         </div>
         <div class="form-row">
