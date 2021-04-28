@@ -44,10 +44,6 @@
                     ValueChanged="@((DateTime value) => HandleBirthChange(value))"
                     ParsingErrorMessage="Must be a valid date."
                     class="form-control text-center" />
-                           @*@bind-Value="@FormModel.FormInputs.DateOfBirth"
-                           ParsingErrorMessage="Must be a valid date."
-                           @onchange="HandleSubmitAsync"
-                           class="form-control text-center" />*@
             </div>
             <div class="col-md-6 mb-2">
                 <label for="DateOfVisit">Visit Date</label>
@@ -237,8 +233,7 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormInputs.LengthHeight,
                                                 FormModel.FormInputs.Weight,
-                                                " Weight-for-length"
-                        ))"
+                                                " Weight-for-length"))"
                                     class="btn btn-outline-secondary col-md-1 mr-1"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -250,8 +245,7 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormInputs.LengthHeight,
                                                 FormModel.FormInputs.Weight,
-                                                " Weight-for-length"
-                        ))"
+                                                " Weight-for-length"))"
                                     class="btn btn-outline-secondary col-md-1 mr-1"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -289,8 +283,7 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormInputs.LengthHeight,
                                                 FormModel.FormInputs.Weight,
-                                                " Weight-for-height"
-                        ))"
+                                                " Weight-for-height"))"
                                     class="btn btn-outline-secondary col-md-1 mr-1"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -302,8 +295,7 @@
                                                 FormModel.FormInputs.Sex,
                                                 FormModel.FormInputs.LengthHeight,
                                                 FormModel.FormInputs.Weight,
-                                                " Weight-for-height"
-                        ))"
+                                                " Weight-for-height"))"
                                     class="btn btn-outline-secondary col-md-1 mr-1"
                                     data-toggle="tooltip"
                                     data-placement="top"
@@ -431,41 +423,83 @@
                     </button>
                 </div>
             </div>
-            <!-- Length For Age -->
-            <div class="form-group col-md-6">
-                <div class="form-group row mb-0">
-                    <label class="text-nowrap col-md-3 mt-1 mr-1">Length-for-Age</label>
-                    <input id="LfaPercentileRange" class="form-control-range  col-md-2 mr-1 ml-1" asp-for="LfaPercentile" type="range" min="0" max="100" step=".1" title="@FormModel.FormOutputs.LfaPercentile" value="@FormModel.FormOutputs.LfaPercentile" list="tickmarks" disabled />
-                    <input aria-label="LfaPercentile" type="text" asp-for="LfaPercentile" value="@SetPercText(FormModel.FormOutputs.LfaPercentile,FormModel.FormOutputs.Age.Years, FormModel.FormOutputs.Age.Months)" class="form-control col-md-2 mr-1 text-center" readonly>
-                    <input aria-label="LfaZscore" type="text" asp-for="LfaZscore" value="@FormModel.FormOutputs.LfaZscore.ToString(" 0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.LfaZscore)" readonly>
-                    <button @onclick="@(() => ShowGrowthChart(GrowthTypes.LHFA,
-                                                GraphTypes.PValue,
-                                                FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.Age.Months,
-                                                FormModel.FormInputs.LengthHeight,
-                                                " Length /Height-for-age"
-                        ))"
-                            class="btn btn-outline-secondary col-md-1 mr-1"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Length/Height-for-age Percentile">
-                        <span class="oi oi-graph" aria-hidden="true"></span>
-                    </button>
-                    <button @onclick="@(() => ShowGrowthChart(GrowthTypes.LHFA,
-                                                GraphTypes.ZScore,
-                                                FormModel.FormInputs.Sex,
-                                                FormModel.FormOutputs.Age.Months,
-                                                FormModel.FormInputs.LengthHeight,
-                                                " Length /Height-for-age"
-                        ))"
-                            class="btn btn-outline-secondary col-md-1 mr-1"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Length/Height-for-age Z-score">
-                        <span class="oi oi-graph" aria-hidden="true"></span>
-                    </button>
+            @if (FormModel != null && FormModel.FormOutputs.Age.Years < 2)
+            {
+                <!-- Length For Age -->
+                <div class="form-group col-md-6">
+                    <div class="form-group row mb-0">
+                        <label class="text-nowrap col-md-3 mt-1 mr-1">Length-for-Age</label>
+                        <input id="LfaPercentileRange" class="form-control-range  col-md-2 mr-1 ml-1" asp-for="LfaPercentile" type="range" min="0" max="100" step=".1" title="@FormModel.FormOutputs.LfaPercentile" value="FormModel.FormOutputs.LfaPercentile" list="tickmarks" disabled />
+                        <input aria-label="LfaPercentile" type="text" asp-for="LfaPercentile" value="@SetPercentileRange(FormModel.FormOutputs.LfaPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
+                        <input aria-label="LfaZscore" type="text" asp-for="LfaZscore" value="@FormModel.FormOutputs.LfaZscore.ToString(" 0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.LfaZscore)" readonly>
+                        <button @onclick="@(() => ShowGrowthChart(GrowthTypes.LHFA,
+                                                    GraphTypes.PValue,
+                                                    FormModel.FormInputs.Sex,
+                                                    FormModel.FormOutputs.Age.Months,
+                                                    FormModel.FormInputs.LengthHeight,
+                                                    " Length /Height-for-age"
+                            ))"
+                                class="btn btn-outline-secondary col-md-1 mr-1"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="Length/Height-for-age Percentile">
+                            <span class="oi oi-graph" aria-hidden="true"></span>
+                        </button>
+                        <button @onclick="@(() => ShowGrowthChart(GrowthTypes.LHFA,
+                                                    GraphTypes.ZScore,
+                                                    FormModel.FormInputs.Sex,
+                                                    FormModel.FormOutputs.Age.Months,
+                                                    FormModel.FormInputs.LengthHeight,
+                                                    " Length /Height-for-age"
+                            ))"
+                                class="btn btn-outline-secondary col-md-1 mr-1"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="Length/Height-for-age Z-score">
+                            <span class="oi oi-graph" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <!-- Height For Age -->
+                <div class="form-group col-md-6">
+                    <div class="form-group row mb-0">
+                        <label class="text-nowrap col-md-3 mt-1 mr-1">Height-for-Age</label>
+                        <input id="HfaPercentileRange" class="form-control-range  col-md-2 mr-1 ml-1" asp-for="HfaPercentile" type="range" min="0" max="100" step=".1" title="@FormModel.FormOutputs.HfaPercentile" value="FormModel.FormOutputs.HfaPercentile" list="tickmarks" disabled />
+                        <input aria-label="HfaPercentile" type="text" asp-for="HfaPercentile" value="@SetPercentileRange(FormModel.FormOutputs.HfaPercentile)" class="form-control col-md-2 mr-1 text-center" readonly>
+                        <input aria-label="HfaZscore" type="text" asp-for="HfaZscore" value="@FormModel.FormOutputs.HfaZscore.ToString(" 0.00")" class="form-control col-md-2 mr-1 text-center" style="background-color: @SetColor(FormModel.FormOutputs.HfaZscore)" readonly>
+                        <button @onclick="@(() => ShowGrowthChart(GrowthTypes.LHFA,
+                                                    GraphTypes.PValue,
+                                                    FormModel.FormInputs.Sex,
+                                                    FormModel.FormOutputs.Age.Months,
+                                                    FormModel.FormInputs.LengthHeight,
+                                                    " Length /Height-for-age"
+                            ))"
+                                class="btn btn-outline-secondary col-md-1 mr-1"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="Length/Height-for-age Percentile">
+                            <span class="oi oi-graph" aria-hidden="true"></span>
+                        </button>
+                        <button @onclick="@(() => ShowGrowthChart(GrowthTypes.LHFA,
+                                                    GraphTypes.ZScore,
+                                                    FormModel.FormInputs.Sex,
+                                                    FormModel.FormOutputs.Age.Months,
+                                                    FormModel.FormInputs.LengthHeight,
+                                                    " Length /Height-for-age"
+                            ))"
+                                class="btn btn-outline-secondary col-md-1 mr-1"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="Length/Height-for-age Z-score">
+                            <span class="oi oi-graph" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            }
+
             <div class="form-group col-md-6">
                 <div class="form-group row mb-0">
                     <label class="text-nowrap col-md-3 mt-1 mr-1">TSF-for-age</label>

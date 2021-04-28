@@ -41,22 +41,30 @@ namespace AnthroCloud.API.Controllers
         {
             Outputs outputs = new();
             Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
-            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
-            outputs.Age.Days = age.TotalDays;
-            outputs.Age.Months = age.TotalMonths;
+            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);            
+            outputs.Age.Days = age.Days;
+            outputs.Age.Months = age.Months;
             outputs.Age.Years = age.Years;
-            outputs.SetLengthHeightAdjusted(age.Years, inputs.LengthHeight, inputs.Measured);
+            outputs.Age.TotalDays = age.TotalDays;
+            outputs.Age.TotalMonths = age.TotalMonths;
+            //outputs.SetLengthHeightAdjusted(age.Years, inputs.LengthHeight, inputs.Measured);
 
-            Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit);
+            Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
             ageClinic = await ageClinic.Calculate(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
+            outputs.Age.Days = ageClinic.Days;
+            outputs.Age.Months = ageClinic.Months;
+            outputs.Age.Years = ageClinic.Years;
+            outputs.Age.TotalDays = ageClinic.TotalDays;
+            outputs.Age.TotalMonths = ageClinic.TotalMonths;
             outputs.Age.AgeString = ageClinic.ToReadableString();
+            outputs.SetLengthHeightAdjusted(ageClinic.Years, inputs.LengthHeight, inputs.Measured);
 
             BMI bmi = new(inputs.Weight, outputs.GetLengthHeightAdjusted());
             outputs.Bmi = bmi.Bmi;
 
             Tuple<double, double> wfaTuple = await Stats.GetScore(
                 Indicator.WeightForAge, 
-                inputs.Weight, 
+                inputs.Weight,
                 age.TotalDays, 
                 (Sex)inputs.Sex
                 );
@@ -88,8 +96,8 @@ namespace AnthroCloud.API.Controllers
             outputs.HcaPercentile = hcaTuple.Item2;
 
             Tuple<double, double> hfaTuple = await Stats.GetScore(
-                Indicator.HeightForAge, 
-                outputs.GetLengthHeightAdjusted(),//inputs.LengthHeight, 
+                Indicator.HeightForAge,
+                outputs.GetLengthHeightAdjusted(), //inputs.LengthHeight, 
                 age.TotalDays, 
                 (Sex)inputs.Sex);
             outputs.HfaZscore = hfaTuple.Item1;
@@ -97,7 +105,7 @@ namespace AnthroCloud.API.Controllers
 
             Tuple<double, double> lfaTuple = await Stats.GetScore(
                 Indicator.LengthForAge,
-                outputs.GetLengthHeightAdjusted(),//inputs.LengthHeight,  
+                outputs.GetLengthHeightAdjusted(), //inputs.LengthHeight,  
                 age.TotalDays, 
                 (Sex)inputs.Sex);
             outputs.LfaZscore = lfaTuple.Item1;
@@ -122,7 +130,7 @@ namespace AnthroCloud.API.Controllers
             Tuple<double, double> wfhTuple = await Stats.GetScore(
                 Indicator.WeightForHeight, 
                 inputs.Weight,
-                outputs.GetLengthHeightAdjusted(),//inputs.LengthHeight, 
+                outputs.GetLengthHeightAdjusted(), //inputs.LengthHeight, 
                 (Sex)inputs.Sex);
             outputs.WfhZscore = wfhTuple.Item1;
             outputs.WfhPercentile = wfhTuple.Item2;
@@ -130,7 +138,7 @@ namespace AnthroCloud.API.Controllers
             Tuple<double, double> wflTuple = await Stats.GetScore(
                 Indicator.WeightForLength, 
                 inputs.Weight,
-                outputs.GetLengthHeightAdjusted(),//inputs.LengthHeight, 
+                outputs.GetLengthHeightAdjusted(), //inputs.LengthHeight, 
                 (Sex)inputs.Sex);
             outputs.WflZscore = wflTuple.Item1;
             outputs.WflPercentile = wflTuple.Item2;

@@ -26,8 +26,8 @@ namespace AnthroCloud.Entities
         public double TsfZscore { get; set; } = 0.00;
         public double SsfPercentile { get; set; } = 65.0;
         public double SsfZscore { get; set; } = 0.38;
-        public double WfhPercentile { get; set; }
-        public double WfhZscore { get; set; }
+        public double WfhPercentile { get; set; } = 54.8;
+        public double WfhZscore { get; set; } = 0.12;
         public double HfaPercentile { get; set; } = 53.1;
         public double HfaZscore { get; set; } = 0.08;
         public double GetLengthHeightAdjusted()
@@ -43,9 +43,9 @@ namespace AnthroCloud.Entities
             {
                 adjusted += .7;
             }
-            else if (AgeInYears > 2 && Measured == MeasurementTypes.Recumbent)
+            else if (AgeInYears >= 2 && Measured == MeasurementTypes.Recumbent)
             {
-                adjusted += .7;
+                adjusted -= .7;
             }
 
             LengthHeightAdjusted = adjusted;
@@ -84,7 +84,7 @@ namespace AnthroCloud.Entities
         /// Age in remaining days.
         /// </summary>
         [JsonPropertyName("days")]
-        public int Days { get; set; } = 365;
+        public int Days { get; set; } = 0;
 
         /// <summary>
         /// Age in remaining months.
@@ -102,12 +102,12 @@ namespace AnthroCloud.Entities
         /// Age in total days.
         /// </summary>
         [JsonPropertyName("totalDays")]
-        public int TotalDays { get; set; }
+        public int TotalDays { get; set; } = 365;
 
         /// <summary>
         /// Age in total months.
         /// </summary>
         [JsonPropertyName("totalMonths")]
-        public int TotalMonths { get; set; }
+        public int TotalMonths { get; set; } = 11;
     }
 }

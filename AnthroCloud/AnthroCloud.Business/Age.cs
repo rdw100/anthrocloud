@@ -102,6 +102,8 @@ namespace AnthroCloud.Business
                         Years = (visit.Year - 1) - birth.Year;
                         Months = 11;
                         Days = DateTime.DaysInMonth(birth.Year, birth.Month) - (birth.Day - visit.Day);
+                        TotalDays -= 1;
+                        TotalMonths -= 1;
                     }
                 }
                 else

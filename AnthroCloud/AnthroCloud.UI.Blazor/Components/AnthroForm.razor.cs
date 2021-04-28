@@ -304,17 +304,19 @@ namespace AnthroCloud.UI.Blazor.Components
         public async Task HandleVisitChange(DateTime dt)
         {
             FormModel.FormInputs.DateOfVisit = dt;
-            string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-            string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
-            FormModel.FormOutputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+            //FormModel.FormOutputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+            await HandleSubmitAsync().ConfigureAwait(false);
         }
 
         public async Task HandleBirthChange(DateTime dt)
         {
             FormModel.FormInputs.DateOfBirth = dt;
-            string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-            string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
-            FormModel.FormOutputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
+            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+            //FormModel.FormOutputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
+            await HandleSubmitAsync().ConfigureAwait(false);
         }
 
         protected async Task HandleSubmitAsync()
@@ -449,7 +451,7 @@ namespace AnthroCloud.UI.Blazor.Components
         public string SetPercentileRange(double measure)
         {
             string result;
-            if (measure >= 99.9 || measure <= .01)
+            if (measure >= 99.9 || measure <= 0)
             {
                 result = "NA";
             }
