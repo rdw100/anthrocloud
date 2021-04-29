@@ -86,7 +86,7 @@ namespace AnthroCloud.UI.Blazor.Components
 
                     Tuple<double, double> hcaTuple = await AnthroStatsService.GetHCA(
                         FormModel.FormInputs.HeadCircumference,
-                        FormattableString.Invariant($"{FormModel.FormOutputs.Age.Days}"),
+                        FormattableString.Invariant($"{FormModel.FormOutputs.Age.TotalDays}"),
                         FormModel.FormInputs.Sex).ConfigureAwait(false);
 
                     FormModel.FormOutputs.HcaZscore = hcaTuple.Item1;

@@ -47,7 +47,6 @@ namespace AnthroCloud.API.Controllers
             outputs.Age.Years = age.Years;
             outputs.Age.TotalDays = age.TotalDays;
             outputs.Age.TotalMonths = age.TotalMonths;
-            //outputs.SetLengthHeightAdjusted(age.Years, inputs.LengthHeight, inputs.Measured);
 
             Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
             ageClinic = await ageClinic.Calculate(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
