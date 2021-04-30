@@ -7,6 +7,7 @@
     {
         private double LengthHeightAdjusted = 73.00;
         public AgeView Age { get; set; } = new();
+        public AgeView ClinicAge { get; set; } = new();
         public double Bmi { get; set; } = 16.9;
         public double WflPercentile { get; set; } = 61.4;
         public double WflZscore { get; set; } = 0.29;

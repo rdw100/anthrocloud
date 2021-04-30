@@ -122,13 +122,13 @@
                 <div class="form-group row">
                     <label for="validationDefault02" class="col-sm-5 col-form-label">Head Circumference (cm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="HeadCircumference" @bind-value="@FormModel.FormInputs.HeadCircumference" @onclick="HandleSubmitAsync" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>
+                        <input asp-for="HeadCircumference" @bind-value="@FormModel.FormInputs.HeadCircumference" @onclick="HandleHcaAsync" class="form-control text-center" type="number" MIN="25.0" MAX="64.0" STEP=".1" id="validationDefault02" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="validationDefault03" class="col-sm-5 col-form-label">MUAC (cm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="MUAC" @bind-value="@FormModel.FormInputs.MUAC" @onclick="HandleSubmitAsync" class="form-control text-center" type="number" MIN="6.0" MAX="35.0" STEP=".1" id="validationDefault03" required>
+                        <input asp-for="MUAC" @bind-value="@FormModel.FormInputs.MUAC" @onclick="HandleMuacAsync" class="form-control text-center" type="number" MIN="6.0" MAX="35.0" STEP=".1" id="validationDefault03" required>
                     </div>
                 </div>
             </div>
@@ -151,13 +151,13 @@
                 <div class="form-group row">
                     <label for="validationDefault05" class="col-sm-5 col-form-label">Triceps skinfold (mm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="TricepsSkinFold" @bind-value="FormModel.FormInputs.TricepsSkinFold" @onclick="HandleSubmitAsync" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault05" required>
+                        <input asp-for="TricepsSkinFold" @bind-value="FormModel.FormInputs.TricepsSkinFold" @onclick="HandleTsfAsync" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault05" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="validationDefault06" class="col-sm-5 col-form-label">Subscapular skinfold (mm)</label>
                     <div class="col-sm-7">
-                        <input asp-for="SubscapularSkinFold" @bind-value="FormModel.FormInputs.SubscapularSkinFold" @onclick="HandleSubmitAsync" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault06" required>
+                        <input asp-for="SubscapularSkinFold" @bind-value="FormModel.FormInputs.SubscapularSkinFold" @onclick="HandleSsfAsync" class="form-control text-center" type="number" MIN="1.8" MAX="40.0" STEP=".1" id="validationDefault06" required>
                     </div>
                 </div>
             </div>

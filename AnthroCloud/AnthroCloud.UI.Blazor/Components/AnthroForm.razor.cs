@@ -111,134 +111,128 @@ namespace AnthroCloud.UI.Blazor.Components
             ExecutionTime = "- HCA Click - " + watch.ElapsedMilliseconds + "ms";
         }
 
-        //protected async Task HandleMuacAsync()
-        //{
-        //    //var isValid = EditContext.Validate();
+        protected async Task HandleMuacAsync()
+        {
+            var isValid = EditContext.Validate();
 
-        //    var watch = System.Diagnostics.Stopwatch.StartNew();
+            var watch = System.Diagnostics.Stopwatch.StartNew();
 
-        //    try
-        //    {
-        //        LoadFailed = false;
+            try
+            {
+                LoadFailed = false;
 
-        //        //if (isValid)
-        //        //{
-        //            IsCalculating = true;
+                if (isValid)
+                {
+                    IsCalculating = true;
 
-        //            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-        //            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    Tuple<double, double> muacTuple = await AnthroStatsService.GetMUAC(
+                        FormModel.FormInputs.MUAC,
+                        FormattableString.Invariant($"{FormModel.FormOutputs.Age.TotalDays}"),
+                        FormModel.FormInputs.Sex).ConfigureAwait(false);
 
-        //            //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-        //            //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+                    FormModel.FormOutputs.MuacZscore = muacTuple.Item1;
+                    FormModel.FormOutputs.MuacPercentile = muacTuple.Item2;
 
-        //            //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+                    IsCalculating = false;
+                }
+                else
+                {
+                    LoadFailed = true;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                LoadFailed = true;
+                Error.ProcessError(ex);
+                ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
+            }
 
-        //            FormModel.FormOutputs = await AnthroService.GetMuacScores(FormModel.FormInputs).ConfigureAwait(false);
+            watch.Stop();
+            ExecutionTime = "- MUAC Click - " + watch.ElapsedMilliseconds + "ms";
+        }
 
-        //            IsCalculating = false;
-        //        //}
-        //        //else
-        //        //{
-        //        //    LoadFailed = true;
-        //        //}
-        //    }
-        //    catch (ApplicationException ex)
-        //    {
-        //        LoadFailed = true;
-        //        Error.ProcessError(ex);
-        //        ErrorMessage = ex.Message;
-        //        Logger.LogWarning(ex.Message);
-        //    }
+        protected async Task HandleTsfAsync()
+        {
+            var isValid = EditContext.Validate();
 
-        //    watch.Stop();
-        //    ExecutionTime = "- MUAC Click - " + watch.ElapsedMilliseconds + "ms";
-        //}
+            var watch = System.Diagnostics.Stopwatch.StartNew();
 
-        //protected async Task HandleTsfAsync()
-        //{
-        //    var isValid = EditContext.Validate();
+            try
+            {
+                LoadFailed = false;
 
-        //    var watch = System.Diagnostics.Stopwatch.StartNew();
+                if (isValid)
+                {
+                    IsCalculating = true;
 
-        //    try
-        //    {
-        //        LoadFailed = false;
+                    Tuple<double, double> tfaTuple = await AnthroStatsService.GetTFA(
+                        FormModel.FormInputs.TricepsSkinFold,
+                        FormattableString.Invariant($"{FormModel.FormOutputs.Age.TotalDays}"),
+                        FormModel.FormInputs.Sex).ConfigureAwait(false);
 
-        //        if (isValid)
-        //        {
-        //            IsCalculating = true;
+                    FormModel.FormOutputs.TsfZscore = tfaTuple.Item1;
+                    FormModel.FormOutputs.TsfPercentile = tfaTuple.Item2;
 
-        //            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-        //            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
+                    IsCalculating = false;
+                }
+                else
+                {
+                    LoadFailed = true;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                LoadFailed = true;
+                Error.ProcessError(ex);
+                ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
+            }
 
-        //            //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-        //            //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
+            watch.Stop();
+            ExecutionTime = "- TSF Click - " + watch.ElapsedMilliseconds + "ms";
+        }
 
-        //            //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
+        protected async Task HandleSsfAsync()
+        {
+            var isValid = EditContext.Validate();
 
-        //            FormModel.FormOutputs = await AnthroService.GetTsfScores(FormModel.FormInputs).ConfigureAwait(false);
+            var watch = System.Diagnostics.Stopwatch.StartNew();
 
-        //            IsCalculating = false;
-        //        }
-        //        else
-        //        {
-        //            LoadFailed = true;
-        //        }
-        //    }
-        //    catch (ApplicationException ex)
-        //    {
-        //        LoadFailed = true;
-        //        Error.ProcessError(ex);
-        //        ErrorMessage = ex.Message;
-        //        Logger.LogWarning(ex.Message);
-        //    }
+            try
+            {
+                LoadFailed = false;
 
-        //    watch.Stop();
-        //    ExecutionTime = "- TSF Click - " + watch.ElapsedMilliseconds + "ms";
-        //}
+                if (isValid)
+                {
+                    IsCalculating = true;
 
-        //protected async Task HandleSsfAsync()
-        //{
-        //    var isValid = EditContext.Validate();
+                    Tuple<double, double> sfaTuple = await AnthroStatsService.GetSFA(
+                        FormModel.FormInputs.SubscapularSkinFold,
+                        FormattableString.Invariant($"{FormModel.FormOutputs.Age.TotalDays}"),
+                        FormModel.FormInputs.Sex).ConfigureAwait(false);
 
-        //    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    FormModel.FormOutputs.SsfZscore = sfaTuple.Item1;
+                    FormModel.FormOutputs.SsfPercentile = sfaTuple.Item2;
 
-        //    try
-        //    {
-        //        LoadFailed = false;
+                    IsCalculating = false;
+                }
+                else
+                {
+                    LoadFailed = true;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                LoadFailed = true;
+                Error.ProcessError(ex);
+                ErrorMessage = ex.Message;
+                Logger.LogWarning(ex.Message);
+            }
 
-        //        if (isValid)
-        //        {
-        //            IsCalculating = true;
-
-        //            //string BirthDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfBirth:yyyy-MM-dd}");
-        //            //string VisitDateString = FormattableString.Invariant($"{FormModel.FormInputs.DateOfVisit:yyyy-MM-dd}");
-
-        //            //FormModel.FormInputs.Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-        //            //FormModel.FormInputs.AgeString = FormModel.FormInputs.Age.ToReadableString().ToString();
-
-        //            //FormModel.FormInputs.BMI = await AnthroService.GetBMI(FormModel.FormInputs.Weight, FormModel.FormInputs.LengthHeightAdjusted).ConfigureAwait(false);
-
-        //            FormModel.FormOutputs = await AnthroService.GetSsfScores(FormModel.FormInputs).ConfigureAwait(false);
-
-        //            IsCalculating = false;
-        //        }
-        //        else
-        //        {
-        //            LoadFailed = true;
-        //        }
-        //    }
-        //    catch (ApplicationException ex)
-        //    {
-        //        LoadFailed = true;
-        //        Error.ProcessError(ex);
-        //        ErrorMessage = ex.Message;
-        //        Logger.LogWarning(ex.Message);
-        //    }
-
-        //    watch.Stop();
-        //    ExecutionTime = "- SSF Click - " + watch.ElapsedMilliseconds + "ms";
-        //}
+            watch.Stop();
+            ExecutionTime = "- SSF Click - " + watch.ElapsedMilliseconds + "ms";
+        }
 
         //protected async Task HandleMeasuredAsync()
         //{
