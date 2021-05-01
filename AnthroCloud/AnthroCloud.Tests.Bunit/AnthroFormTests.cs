@@ -62,7 +62,7 @@ namespace AnthroCloud.Tests.Bunit
             component.Find("button").Click();
 
             // Assert
-            component.WaitForAssertion(() => Assert.Equal("11mo", component.Instance.FormModel.FormOutputs.AgeString), TimeSpan.FromSeconds(5));
+            component.WaitForAssertion(() => Assert.Equal("11mo", component.Instance.FormModel.FormOutputs.Age.AgeString), TimeSpan.FromSeconds(5));
             component.WaitForAssertion(() => Assert.Equal(16.9, component.Instance.FormModel.FormOutputs.Bmi), TimeSpan.FromSeconds(5));
             component.WaitForAssertion(() => Assert.Equal(61.4, component.Instance.FormModel.FormOutputs.WflPercentile), TimeSpan.FromSeconds(5));
             component.WaitForAssertion(() => Assert.Equal(0.29, component.Instance.FormModel.FormOutputs.WflZscore), TimeSpan.FromSeconds(5));
