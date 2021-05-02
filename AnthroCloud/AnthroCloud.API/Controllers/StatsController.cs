@@ -41,15 +41,13 @@ namespace AnthroCloud.API.Controllers
         {
             Outputs outputs = new();
             Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
-            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);            
             outputs.Age.Days = age.Days;
             outputs.Age.Months = age.Months;
             outputs.Age.Years = age.Years;
             outputs.Age.TotalDays = age.TotalDays;
             outputs.Age.TotalMonths = age.TotalMonths;
 
-            Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
-            ageClinic = await ageClinic.Calculate(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
+            Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));  // new(); // new(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
             outputs.Age.Days = ageClinic.Days;
             outputs.Age.Months = ageClinic.Months;
             outputs.Age.Years = ageClinic.Years;
@@ -96,7 +94,7 @@ namespace AnthroCloud.API.Controllers
 
             Tuple<double, double> hfaTuple = await Stats.GetScore(
                 Indicator.HeightForAge,
-                outputs.GetLengthHeightAdjusted(), //inputs.LengthHeight, 
+                outputs.GetLengthHeightAdjusted(), 
                 age.TotalDays, 
                 (Sex)inputs.Sex);
             outputs.HfaZscore = hfaTuple.Item1;
@@ -104,7 +102,7 @@ namespace AnthroCloud.API.Controllers
 
             Tuple<double, double> lfaTuple = await Stats.GetScore(
                 Indicator.LengthForAge,
-                outputs.GetLengthHeightAdjusted(), //inputs.LengthHeight,  
+                outputs.GetLengthHeightAdjusted(), 
                 age.TotalDays, 
                 (Sex)inputs.Sex);
             outputs.LfaZscore = lfaTuple.Item1;
@@ -129,7 +127,7 @@ namespace AnthroCloud.API.Controllers
             Tuple<double, double> wfhTuple = await Stats.GetScore(
                 Indicator.WeightForHeight, 
                 inputs.Weight,
-                outputs.GetLengthHeightAdjusted(), //inputs.LengthHeight, 
+                outputs.GetLengthHeightAdjusted(),
                 (Sex)inputs.Sex);
             outputs.WfhZscore = wfhTuple.Item1;
             outputs.WfhPercentile = wfhTuple.Item2;
@@ -137,7 +135,7 @@ namespace AnthroCloud.API.Controllers
             Tuple<double, double> wflTuple = await Stats.GetScore(
                 Indicator.WeightForLength, 
                 inputs.Weight,
-                outputs.GetLengthHeightAdjusted(), //inputs.LengthHeight, 
+                outputs.GetLengthHeightAdjusted(),
                 (Sex)inputs.Sex);
             outputs.WflZscore = wflTuple.Item1;
             outputs.WflPercentile = wflTuple.Item2;
@@ -195,7 +193,6 @@ namespace AnthroCloud.API.Controllers
             Outputs outputs = new();
 
             Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
-            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
 
             Tuple<double, double> hcaTuple = await Stats.GetScore(Indicator.HeadCircumferenceForAge, inputs.HeadCircumference, age.TotalDays, (Sex)inputs.Sex);
             outputs.HcaZscore = hcaTuple.Item1;
@@ -215,7 +212,6 @@ namespace AnthroCloud.API.Controllers
             Outputs outputs = new();
 
             Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
-            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
 
             Tuple<double, double> muacTuple = await Stats.GetScore(Indicator.ArmCircumferenceForAge, inputs.MUAC, age.TotalDays, (Sex)inputs.Sex);
             outputs.MuacZscore = muacTuple.Item1;
@@ -235,7 +231,6 @@ namespace AnthroCloud.API.Controllers
             Outputs outputs = new();
 
             Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
-            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
 
             Tuple<double, double> tfaTuple = await Stats.GetScore(Indicator.TricepsSkinfoldForAge, inputs.TricepsSkinFold, age.TotalDays, (Sex)inputs.Sex);
             outputs.TsfZscore = tfaTuple.Item1;
@@ -255,7 +250,6 @@ namespace AnthroCloud.API.Controllers
             Outputs outputs = new();
 
             Age age = new(inputs.DateOfBirth, inputs.DateOfVisit);
-            age = await age.Calculate(inputs.DateOfBirth, inputs.DateOfVisit);
 
             Tuple<double, double> sfaTuple = await Stats.GetScore(Indicator.SubscapularSkinfoldForAge, inputs.SubscapularSkinFold, age.TotalDays, (Sex)inputs.Sex);
             outputs.SsfZscore = sfaTuple.Item1;
