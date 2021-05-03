@@ -15,9 +15,9 @@ namespace AnthroCloud.Unit.Tests
         [Fact]
         public void Age_InstantiateObject_Calculation()
         {
-            DateTime visit = new DateTime(2020, 10, 15);
-            DateTime birth = new DateTime(2018, 10, 15);
-            Age age = new Age(birth, visit);
+            DateTime visit = new(2020, 10, 15);
+            DateTime birth = new(2018, 10, 15);
+            Age age = new(birth, visit);
 
             string ageString = "2yr 0mo (24mo)";
             Assert.Equal(ageString.ToString(), age.ToReadableString());
@@ -29,9 +29,9 @@ namespace AnthroCloud.Unit.Tests
         [Fact]
         public void Age_Days_Calculate()
         {
-            DateTime visit = new DateTime(2020, 11, 15);
-            DateTime birth = new DateTime(2018, 10, 15);
-            Age age = new Age(birth, visit);
+            DateTime visit = new(2020, 11, 15);
+            DateTime birth = new(2018, 10, 15);
+            Age age = new(birth, visit);
 
             int ageInDays = age.TotalDays;
             int expectedAgeInDays = 762;
@@ -44,9 +44,9 @@ namespace AnthroCloud.Unit.Tests
         [Fact]
         public void Age_Months_Calculate()
         {
-            DateTime visit = new DateTime(2020, 10, 15);
-            DateTime birth = new DateTime(2018, 10, 15);
-            Age age = new Age(birth, visit);
+            DateTime visit = new(2020, 10, 15);
+            DateTime birth = new(2018, 10, 15);
+            Age age = new(birth, visit);
 
             int ageInMonths = age.TotalMonths;
             int expectedAgeInMonths = 24;
@@ -59,9 +59,9 @@ namespace AnthroCloud.Unit.Tests
         [Fact]
         public void Age_Year_Calculate()
         {
-            DateTime visit = new DateTime(2020, 10, 15);
-            DateTime birth = new DateTime(2018, 10, 15);
-            Age age = new Age(birth, visit);
+            DateTime visit = new(2020, 10, 15);
+            DateTime birth = new(2018, 10, 15);
+            Age age = new(birth, visit);
 
             Console.WriteLine("It's been {0} years, {1} months, and {2} days since your birthday or {3} in total days or {4} in total months", age.Years, age.Months, age.Days, age.TotalDays, age.TotalMonths);
             Console.WriteLine(age.ToReadableString());
@@ -89,7 +89,7 @@ namespace AnthroCloud.Unit.Tests
             DateTime birth = Convert.ToDateTime(birthString);
             DateTime visit = Convert.ToDateTime(visitString);
 
-            Age age = new Age(birth, visit);
+            Age age = new(birth, visit);
             Assert.Equal(expectedValue, age.ToReadableString());
         }
     }
