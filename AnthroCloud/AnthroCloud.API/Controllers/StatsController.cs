@@ -47,7 +47,7 @@ namespace AnthroCloud.API.Controllers
             outputs.Age.TotalDays = age.TotalDays;
             outputs.Age.TotalMonths = age.TotalMonths;
 
-            Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));  // new(); // new(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
+            Age ageClinic = new(inputs.DateOfBirth, inputs.DateOfVisit.AddDays(-1));
             outputs.Age.Days = ageClinic.Days;
             outputs.Age.Months = ageClinic.Months;
             outputs.Age.Years = ageClinic.Years;
@@ -142,45 +142,6 @@ namespace AnthroCloud.API.Controllers
 
             return outputs;
         }
-
-        /// <summary>
-        /// Gets computed statistics from length & height changes.
-        /// </summary>
-        /// <param name="inputs">Calculator inputs necessary for computed statistics.</param>
-        /// <returns>Returns computed statistics.</returns>
-        /// <remarks>Note that the difference between recumbent length and stature for this calculator is 
-        /// 0.7 cm.</remarks>
-        //[HttpPost("MEASURED")]
-        //public async Task<Outputs> GetMeasuredScores([FromBody] Inputs inputs)
-        //{
-        //    Outputs outputs = new();
-
-        //    Tuple<double, double> wfaTuple = await Stats.GetScore(Indicator.WeightForAge, inputs.Weight, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
-        //    outputs.WfaZscore = wfaTuple.Item1;
-        //    outputs.WfaPercentile = wfaTuple.Item2;
-
-        //    Tuple<double, double> wfhTuple = await Stats.GetScore(Indicator.WeightForHeight, inputs.Weight, inputs.LengthHeightAdjusted, (Sex)inputs.Sex);
-        //    outputs.WfhZscore = wfhTuple.Item1;
-        //    outputs.WfhPercentile = wfhTuple.Item2;
-
-        //    Tuple<double, double> wflTuple = await Stats.GetScore(Indicator.WeightForLength, inputs.Weight, inputs.LengthHeightAdjusted, (Sex)inputs.Sex);
-        //    outputs.WflZscore = wflTuple.Item1;
-        //    outputs.WflPercentile = wflTuple.Item2;
-
-        //    Tuple<double, double> bfaTuple = await Stats.GetScore(Indicator.BodyMassIndexForAge, inputs.BMI, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
-        //    outputs.BfaZscore = bfaTuple.Item1;
-        //    outputs.BfaPercentile = bfaTuple.Item2;
-
-        //    Tuple<double, double> hfaTuple = await Stats.GetScore(Indicator.HeightForAge, inputs.LengthHeightAdjusted, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
-        //    outputs.HfaZscore = hfaTuple.Item1;
-        //    outputs.HfaPercentile = hfaTuple.Item2;
-
-        //    Tuple<double, double> lfaTuple = await Stats.GetScore(Indicator.LengthForAge, inputs.LengthHeightAdjusted, (double)inputs.Age.TotalDays, (Sex)inputs.Sex);
-        //    outputs.LfaZscore = lfaTuple.Item1;
-        //    outputs.LfaPercentile = lfaTuple.Item2;
-
-        //    return outputs;
-        //}
 
         /// <summary>
         /// Gets computed statistics from head circumference changes.

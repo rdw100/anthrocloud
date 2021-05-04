@@ -53,7 +53,6 @@ The AnthroCloud RESTful API is designed to support retrieval operations.  The RE
  | Chart         | GET       | WFL/{id}/{x}/{y}/{z}               | Returns Gets Weight-for-height indicator chart data as a JSON serialized DataTable structure to pass into Chart.js DataTable constructor. |
  | Stats     	 | GET       | STATS/{indicator}/{measurement}/{ageInDays}/{id} | Returns a tuple of both calculated Zscore and Percentile values. |
  | Stats         | POST      | STATS/[FromBody]{inputs} | Returns computed statistics {outputs}. |
- | Stats         | POST      | STATS/MEASURED/[FromBody]{inputs} | Returns computed statistics {outputs}. |
  | Stats         | POST      | STATS/HCA/[FromBody]{inputs} | Returns computed statistics {outputs}. |
  | Stats         | POST      | STATS/MUAC/[FromBody]{inputs} | Returns computed statistics {outputs}. |
  | Stats         | POST      | STATS/TSF/[FromBody]{inputs} | Returns computed statistics {outputs}. |
