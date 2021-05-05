@@ -57,18 +57,14 @@ namespace AnthroCloud.UI.Blazor.Components
 
         public async Task<double> CalculateBMI()
         {
-            //string BirthDateString = FormattableString.Invariant($"{Birth:yyyy-MM-dd}");
-            //string VisitDateString = FormattableString.Invariant($"{Visit:yyyy-MM-dd}");
-
-            //Age = await AnthroService.GetAge(BirthDateString, VisitDateString).ConfigureAwait(false);
-            //AgeString = Age.ToReadableString();
-
             Tuple<double, double> wfaTuple = await AnthroStatsService.GetWFA(Weight, "365", Sex).ConfigureAwait(false);
 
             WfaZscore = wfaTuple.Item1;
             WfaPercentile = wfaTuple.Item2;
 
             BMI = await AnthroService.GetBMI(Weight, Height).ConfigureAwait(false);
+            BMI = Math.Round(BMI, 1);
+
             return BMI;
         }
 

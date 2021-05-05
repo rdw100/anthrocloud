@@ -1,5 +1,4 @@
 using AnthroCloud.UI.Blazor.Components;
-using AnthroCloud.UI.Blazor.Pages;
 using AnthroCloud.UI.Blazor.Services;
 using Bunit;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +6,7 @@ using System;
 using Xunit;
 
 namespace AnthroCloud.Tests.Bunit
-{    
+{
     public class AnthroComponentTests
     {
         private readonly string baseAddressPath;
@@ -33,7 +32,7 @@ namespace AnthroCloud.Tests.Bunit
                 client.BaseAddress = new Uri(baseAddressPath);
             });
 
-            var component = ctx.RenderComponent<Anthro>();
+            var component = ctx.RenderComponent<Anthro>();            
 
             // Act
             component.Find("button").Click();
