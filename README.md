@@ -4,20 +4,20 @@ This is source code for a capstone project.  The second semester capstone course
 ## Project
 
 ### Schedule & Timeline
-The Microsoft Project plan included WBS outline and Gantt chart to visualize tasks.  Sections of work contain tasks and sub-tasks necessary to complete deliverables for this project.  Completion milestones are highlighted by a bold end date.
+The project plan included WBS outline and Gantt chart to visualize tasks.  Sections of work contain tasks and sub-tasks necessary to complete deliverables for this project.  Completed milestones are highlighted by end date.
 ![Microsoft Project Plan Schedule & Timeline](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/mpp.JPG?raw=true)
 
 ### Process Template
-The WBS and Gantt chart for this project was created in Microsoft Project and published to Azure Board as a backlog.  The Agile Process Template available in Azure Boards was used.  Five sprint iterations produced five epics.  
+The WBS and Gantt chart for this project were created in Microsoft Project and published to Azure Board as a backlog.  The Agile Process Template available in Azure Boards was used.  Five sprint iterations produced five epics.  
 ![Azure Boards](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/AB.png?raw=true)
 
 ### Technique
-A forward engineering effort building software from a high-level view of existing software was used.
-AnthroCloud expands beyond the original program's capabilities.
-Reverse engineering tools are used for limited interface & design discovery.
-Interfaces are created to separate layers one at a time.
-A bottom-up horizontal strategy is used create a newly designed, coded, and tested program.
-Product assembly from larger to smaller composition is illustrated.
+A forward engineering effort built software from a high-level view of existing software.
+AnthroCloud expanded the original program's capabilities.
+Reverse engineering tools were used for limited interface & design discovery.
+Interfaces were created to separate layers one at a time.
+A bottom-up horizontal strategy was used create a newly designed, coded, and tested program.
+Product assembly from larger to smaller composition is illustrated below.
 ![Layer Assembly](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/LayerAssembly.png?raw=true)
 
 ## Design
