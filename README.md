@@ -1,6 +1,25 @@
 # AnthroCloud
 This is source code for a capstone project.  The second semester capstone course research topic is Software Modernization for Cloud-based Pediatric Anthropometry.  The software is called AnthroCloud.  This project will create a modern cloud-based WHO 2006 Child Growth Standard-compliant anthropometric calculator designed to provide a more flexible, maintainable, and portable solution to meet the changing needs of users.
 
+## Project
+
+### Schedule & Timeline
+The Microsoft Project plan included WBS outline and Gantt chart to visualize tasks.  Sections of work contain tasks and sub-tasks necessary to complete deliverables for this project.  Completion milestones are highlighted by a bold end date.
+![Microsoft Project Plan Schedule & Timeline](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/mpp.jpg?raw=true)
+
+### Process Template
+The WBS and Gantt chart for this project was created in Microsoft Project and published to Azure Board as a backlog.  The Agile Process Template available in Azure Boards was used.  Five sprint iterations produced five epics.  
+![Azure Boards](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/abb.png?raw=true)
+
+### Technique
+A forward engineering effort building software from a high-level view of existing software was used.
+AnthroCloud expands beyond the original program's capabilities.
+Reverse engineering tools are used for limited interface & design discovery.
+Interfaces are created to separate layers one at a time.
+A bottom-up horizontal strategy is used create a newly designed, coded, and tested program.
+Product assembly from larger to smaller composition is illustrated.
+![Layer Assembly](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/LayerAssembly.png?raw=true)
+
 ## Design
 The section lays out technical design used to create the AnthroCloud solution.
 
