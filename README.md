@@ -5,11 +5,11 @@ This is source code for a capstone project.  The second semester capstone course
 
 ### Schedule & Timeline
 The Microsoft Project plan included WBS outline and Gantt chart to visualize tasks.  Sections of work contain tasks and sub-tasks necessary to complete deliverables for this project.  Completion milestones are highlighted by a bold end date.
-![Microsoft Project Plan Schedule & Timeline](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/mpp.jpg?raw=true)
+![Microsoft Project Plan Schedule & Timeline](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/mpp.JPG?raw=true)
 
 ### Process Template
 The WBS and Gantt chart for this project was created in Microsoft Project and published to Azure Board as a backlog.  The Agile Process Template available in Azure Boards was used.  Five sprint iterations produced five epics.  
-![Azure Boards](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/abb.png?raw=true)
+![Azure Boards](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Web/Documentation/AB.png?raw=true)
 
 ### Technique
 A forward engineering effort building software from a high-level view of existing software was used.
