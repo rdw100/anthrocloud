@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29215.179
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.API", "AnthroCloud.API\AnthroCloud.API.csproj", "{0A3BB53A-9394-4131-A5C0-709DD4880159}"
 EndProject
@@ -25,6 +25,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.UI.Blazor", "AnthroCloud.UI.Blazor\AnthroCloud.UI.Blazor.csproj", "{86ED19C5-9C08-47A7-A960-A3D23DCD05C5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Tests.Bunit", "AnthroCloud.Tests.Bunit\AnthroCloud.Tests.Bunit.csproj", "{2B3741C6-DDA9-4E70-AB81-6727ED30DA40}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0A3BB53A-9394-4131-A5C0-709DD4880159} = {0A3BB53A-9394-4131-A5C0-709DD4880159}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

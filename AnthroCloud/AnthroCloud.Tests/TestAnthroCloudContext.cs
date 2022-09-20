@@ -48,9 +48,10 @@ namespace AnthroCloud.Tests
             // Configure context with setting
             DbContextOptionsBuilder<AnthroCloudContext> optionsBuilder = new();
             optionsBuilder.UseMySql(_connectionString,
-                    new MySqlServerVersion(new Version(5, 7, 29)),
-                    mySqlOptions => mySqlOptions
-                        .CharSetBehavior(CharSetBehavior.NeverAppend)
+                    new MySqlServerVersion(new Version(5, 7, 29))
+                    //,
+                    //mySqlOptions => mySqlOptions
+                    //    .CharSetBehavior(CharSetBehavior.NeverAppend)
                     );
 
             // Initialize context with setting
