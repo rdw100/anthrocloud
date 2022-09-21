@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AnthroCloud.UI.Web.Models
+namespace AnthroCloud.UI.Mvc.Models
 {
     public enum Sexes
     {

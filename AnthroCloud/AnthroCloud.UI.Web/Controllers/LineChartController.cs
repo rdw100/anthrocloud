@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace AnthroCloud.UI.Web.Controllers
+namespace AnthroCloud.UI.Mvc.Controllers
 {
     public class LineChartController : Controller
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace AnthroCloud.UI.Web.Models
+namespace AnthroCloud.UI.Mvc.Models
 {
     public class ErrorViewModel
     {

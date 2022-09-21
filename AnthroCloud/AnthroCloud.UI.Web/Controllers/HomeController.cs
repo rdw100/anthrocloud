@@ -1,4 +1,4 @@
-﻿using AnthroCloud.UI.Web.Models;
+﻿using AnthroCloud.UI.Mvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace AnthroCloud.UI.Web.Controllers
+namespace AnthroCloud.UI.Mvc.Controllers
 {
     public class HomeController : Controller
     {

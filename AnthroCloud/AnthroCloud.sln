@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Framework", "An
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Entities", "AnthroCloud.Entities\AnthroCloud.Entities.csproj", "{2C811542-FC11-4136-97B6-7EA09221B555}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.UI.Web", "AnthroCloud.UI.Web\AnthroCloud.UI.Web.csproj", "{541E8CD4-0F08-43DC-8989-B3BD70B430B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.UI.Mvc", "AnthroCloud.UI.Web\AnthroCloud.UI.Mvc.csproj", "{541E8CD4-0F08-43DC-8989-B3BD70B430B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE6B6616-38AF-40C0-9546-B2C6AD51DE7C}"
 	ProjectSection(SolutionItems) = preProject

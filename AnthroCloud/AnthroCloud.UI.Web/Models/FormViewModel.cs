@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AnthroCloud.UI.Web.Models
+namespace AnthroCloud.UI.Mvc.Models
 {
     public class FormViewModel
     {
