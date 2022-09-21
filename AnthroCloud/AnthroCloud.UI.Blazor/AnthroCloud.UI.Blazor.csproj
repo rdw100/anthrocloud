@@ -22,11 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AnthroCloud.Business\AnthroCloud.Business.csproj" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
+    <ProjectReference Include="..\AnthroCloud.Entities\AnthroCloud.Entities.csproj" />
   </ItemGroup>
 
 </Project>
