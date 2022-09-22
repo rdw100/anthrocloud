@@ -1,0 +1,45 @@
+﻿@using Microsoft.Fast.Components.FluentUI
+
+<h3>Fluent UI Web Components</h3>
+
+<FluentCard>
+    <h2>Hello World!</h2>
+    <FluentButton Appearance="@Appearance.Accent">Click Me</FluentButton>
+    <fluent-button appearance="accent">Button</fluent-button>
+</FluentCard>
+
+<fluent-tree-view>
+    <fluent-tree-item>
+        Root item 1
+        <fluent-tree-item>
+            Flowers
+            <fluent-tree-item disabled>Daisy</fluent-tree-item>
+            <fluent-tree-item>Sunflower</fluent-tree-item>
+            <fluent-tree-item>Rose</fluent-tree-item>
+        </fluent-tree-item>
+        <fluent-tree-item>Nested item 2</fluent-tree-item>
+        <fluent-tree-item>Nested item 3</fluent-tree-item>
+    </fluent-tree-item>
+    <fluent-tree-item>
+        Root item 2
+        <fluent-divider></fluent-divider>
+        <fluent-tree-item>
+            Flowers
+            <fluent-tree-item disabled>Daisy</fluent-tree-item>
+            <fluent-tree-item>Sunflower</fluent-tree-item>
+            <fluent-tree-item>Rose</fluent-tree-item>
+        </fluent-tree-item>
+        <fluent-tree-item>Nested item 2</fluent-tree-item>
+        <fluent-tree-item>Nested item 3</fluent-tree-item>
+    </fluent-tree-item>
+    <fluent-tree-item> Root item 3 - Leaf Erikson </fluent-tree-item>
+</fluent-tree-view>
+<fluent-listbox>
+    <fluent-option>This option has no value</fluent-option>
+    <fluent-option disabled>This option is disabled</fluent-option>
+    <fluent-option value="hi">This option has a value</fluent-option>
+    <fluent-option selected>This option is selected by default</fluent-option>
+</fluent-listbox>
+@code {
+
+}
