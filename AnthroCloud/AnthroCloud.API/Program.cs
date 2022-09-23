@@ -11,6 +11,11 @@ builder.Services.AddDbContext<AnthroCloudContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("AnthroCloudDatabaseMsSql")
         ));
+
+builder.Services.AddDbContext<AssessmentContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("AnthroCloudDatabaseMsSql")
+        ));
 //options.UseMySql(builder.Configuration.GetConnectionString("AnthroCloudDatabaseMySql"),
 //    new MySqlServerVersion(new Version(5, 7, 29)),
 //    mySqlOptions => mySqlOptions
