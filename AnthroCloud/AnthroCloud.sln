@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.Tests.Bunit", "
 		{0A3BB53A-9394-4131-A5C0-709DD4880159} = {0A3BB53A-9394-4131-A5C0-709DD4880159}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnthroCloud.UI.Wasm", "AnthroCloud.UI.Wasm\AnthroCloud.UI.Wasm.csproj", "{8D3D089F-3451-478C-BCB8-3ADDBA0F4534}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnthroCloud.UI.Wasm", "AnthroCloud.UI.Wasm\AnthroCloud.UI.Wasm.csproj", "{8D3D089F-3451-478C-BCB8-3ADDBA0F4534}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
