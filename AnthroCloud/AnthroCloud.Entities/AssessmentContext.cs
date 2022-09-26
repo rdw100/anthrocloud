@@ -1,15 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using System.Reflection.Emit;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Net;
 
 namespace AnthroCloud.Entities
 {
@@ -45,7 +39,7 @@ namespace AnthroCloud.Entities
                     new Patient()
                     {
                         PatientId = 2,
-                        FirstName = "Olivia",
+                        FirstName = "Juana",
                         LastName = "Diaz",
                         DateOfBirth = DateTime.Today.AddYears(-2),
                         Sex = Sexes.Female

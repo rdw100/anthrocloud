@@ -2,9 +2,7 @@
 using AnthroCloud.Entities;
 using AnthroCloud.Entities.Charts;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace AnthroCloud.API.Controllers
 {
@@ -37,7 +35,7 @@ namespace AnthroCloud.API.Controllers
         /// GET: api/Chart/BFA/1
         /// GET: api/chart/BFA/1/12/16.9
         /// </example>
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("BFA/{id}")]
         [Route("BFA/{id}/{x}/{y}")]
         public async Task<List<BmiforAge>> GetAllBFA(byte id, byte x, decimal y)
@@ -55,7 +53,7 @@ namespace AnthroCloud.API.Controllers
         /// <param name="y">Y-axis data point</param>
         /// <returns>Returns chart data for the Head circumference-for-age indicator.</returns>
         /// <example>GET: api/Chart/HCFA/1</example>
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("HCFA/{id}")]
         [Route("HCFA/{id}/{x}/{y}")]
         public async Task<List<HcForAge>> GetAllHCFA(byte id, byte x, decimal y)
@@ -73,7 +71,7 @@ namespace AnthroCloud.API.Controllers
         /// <param name="y">Y-axis data point</param>
         /// <returns>Returns chart data for the Length/height-for-age indicator.</returns>
         /// <example>GET: api/Chart/LHFA/1</example>
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("LHFA/{id}")]
         [Route("LHFA/{id}/{x}/{y}")]
         public async Task<List<LengthHeightForAge>> GetAllLHFA(byte id, byte x, decimal y)
@@ -91,7 +89,7 @@ namespace AnthroCloud.API.Controllers
         /// <param name="y">Y-axis data point</param>
         /// <returns>Returns chart data for the Arm circumference-for-age indicator.</returns>
         /// <example>GET: api/Chart/MUAC/1</example>
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("MUAC/{id}")]
         [Route("MUAC/{id}/{x}/{y}")]
         public async Task<List<MuacforAge>> GetAllMUAC(byte id, byte x, decimal y)
@@ -109,7 +107,7 @@ namespace AnthroCloud.API.Controllers
         /// <param name="y">Y-axis data point</param>
         /// <returns>Returns chart data for the Subscapular skinfold-for-age indicator.</returns>
         /// <example>GET: api/Chart/SSFA/1</example>
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("SSFA/{id}")]
         [Route("SSFA/{id}/{x}/{y}")]
         public async Task<List<SsfforAge>> GetAllSSFA(byte id, byte x, decimal y)
@@ -127,7 +125,7 @@ namespace AnthroCloud.API.Controllers
         /// <param name="y">Y-axis data point</param>
         /// <returns>Retrieve chart data for the Triceps skinfold-for-age indicator.</returns>
         /// <example>GET: api/Chart/TSFA/1</example>
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("TSFA/{id}")]
         [Route("TSFA/{id}/{x}/{y}")]
         public async Task<List<TsfforAge>> GetAllTSFA(byte id, byte x, decimal y)
@@ -145,7 +143,7 @@ namespace AnthroCloud.API.Controllers
         /// <param name="y">Y-axis data point</param>
         /// <returns>Returns chart data for the Weight-for-age indicator.</returns>
         /// <example>GET: api/Chart/WFA/1</example>
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("WFA/{id}")]
         [Route("WFA/{id}/{x}/{y}")]
         public async Task<List<WeightForAge>> GetAllWFA(byte id, byte x, decimal y)
@@ -163,7 +161,7 @@ namespace AnthroCloud.API.Controllers
         /// <param name="y">Y-axis data point</param>
         /// <returns>Returns chart data for the Weight-for-height indicator.</returns>
         /// <example>GET: api/Chart/WFH/1</example>
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("WFH/{id}")]
         [Route("WFH/{id}/{x}/{y}")]
         public async Task<List<WeightForHeight>> GetAllWFH(byte id, decimal x, decimal y)
@@ -181,7 +179,7 @@ namespace AnthroCloud.API.Controllers
         /// <param name="y">Y-axis data point</param>
         /// <returns>Returns chart data for the Weight-for-length indicator.</returns>
         /// <example>GET: api/Chart/WFL/1</example>
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("WFL/{id}")]
         [Route("WFL/{id}/{x}/{y}")]
         public async Task<List<WeightForLength>> GetAllWFL(byte id, decimal x, decimal y)
@@ -205,6 +203,7 @@ namespace AnthroCloud.API.Controllers
         /// DataTable constructor.</returns>
         /// <example>GET: api/chart/BFA/2/12/17.5/PValue</example>
         [Route("BFA/{id}/{x}/{y}/{z}")]
+        [HttpGet]
         public async Task<string> GetAllBFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new(_context);
@@ -232,6 +231,7 @@ namespace AnthroCloud.API.Controllers
         /// DataTable constructor.</returns>
         /// <example>GET: api/Chart/HCFA/1/12/73/ZScore</example>
         [Route("HCFA/{id}/{x}/{y}/{z}")]
+        [HttpGet]
         public async Task<string> GetAllHCFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new(_context);
@@ -259,6 +259,7 @@ namespace AnthroCloud.API.Controllers
         /// constructor.</returns>
         /// <example>GET: api/Chart/LHFA/2/12/73/PValue</example>
         [Route("LHFA/{id}/{x}/{y}/{z}")]
+        [HttpGet]
         public async Task<string> GetAllLHFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new(_context);
@@ -286,6 +287,7 @@ namespace AnthroCloud.API.Controllers
         /// DataTable constructor.</returns>
         /// <example>GET: api/Chart/MUAC/1/12/15/ZScore</example>
         [Route("MUAC/{id}/{x}/{y}/{z}")]
+        [HttpGet]
         public async Task<string> GetAllMUACJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new(_context);
@@ -313,6 +315,7 @@ namespace AnthroCloud.API.Controllers
         /// DataTable constructor.</returns>
         /// <example>GET: api/Chart/SSFA/1/12/7/PValue</example>
         [Route("SSFA/{id}/{x}/{y}/{z}")]
+        [HttpGet]
         public async Task<string> GetAllSSFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new(_context);
@@ -340,6 +343,7 @@ namespace AnthroCloud.API.Controllers
         /// constructor.</returns>
         /// <example>GET: api/Chart/TSFA/2/12/8/ZScore</example>
         [Route("TSFA/{id}/{x}/{y}/{z}")]
+        [HttpGet]
         public async Task<string> GetAllTSFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new(_context);
@@ -366,6 +370,7 @@ namespace AnthroCloud.API.Controllers
         /// constructor.</returns>
         /// <example>GET: api/Chart/WFA/1/12/9/PValue</example>
         [Route("WFA/{id}/{x}/{y}/{z}")]
+        [HttpGet]
         public async Task<string> GetAllWFAJson(byte id, byte x, decimal y, GraphTypes z)
         {
             Chart chart = new(_context);
@@ -392,6 +397,7 @@ namespace AnthroCloud.API.Controllers
         /// constructor.</returns>
         /// <example>GET: api/Chart/WFH/1/73/9/PValue</example>
         [Route("WFH/{id}/{x}/{y}/{z}")]
+        [HttpGet]
         public async Task<string> GetAllWFHJson(byte id, decimal x, decimal y, GraphTypes z)
         {
             Chart chart = new(_context);
@@ -418,6 +424,7 @@ namespace AnthroCloud.API.Controllers
         /// constructor.</returns>
         /// <example>GET: api/Chart/WFL/1/73/9/PValue</example>
         [Route("WFL/{id}/{x}/{y}/{z}")]
+        [HttpGet]
         public async Task<string> GetAllWFLJson(byte id, decimal x, decimal y, GraphTypes z)
         {
             Chart chart = new(_context);

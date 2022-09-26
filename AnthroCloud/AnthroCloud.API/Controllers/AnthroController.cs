@@ -1,7 +1,5 @@
 ﻿using AnthroCloud.Business;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 
 namespace AnthroCloud.API.Controllers
 {
@@ -20,6 +18,7 @@ namespace AnthroCloud.API.Controllers
         /// <returns>Returns a human readable string in either Months or Year-Month (TotalMonths) format.</returns>
         /// <example>GET: api/anthro/age/2016-12-01T00:00:00/2019-12-31T23:59:59</example>
         [Route("AGE/{birth}/{visit}")]
+        [HttpGet]
         public string GetAge(DateTime birth, DateTime visit)
         {
             Age age = new Age(birth, visit);
@@ -34,6 +33,7 @@ namespace AnthroCloud.API.Controllers
         /// <returns>Returns string of age in total days.</returns>
         /// <example>GET: api/anthro/age/days/2016-12-01T00:00:00/2019-12-31T23:59:59</example>
         [Route("AGE/DAYS/{birth}/{visit}")]
+        [HttpGet]
         public string GetAgeInDays(DateTime birth, DateTime visit)
         {
             Age age = new Age(birth, visit);
@@ -48,6 +48,7 @@ namespace AnthroCloud.API.Controllers
         /// <returns>Returns string of age in total months.</returns>
         /// <example>GET: api/anthro/age/months/2016-12-01T00:00:00/2019-12-31T23:59:59</example>
         [Route("AGE/MONTHS/{birth}/{visit}")]
+        [HttpGet]
         public string GetAgeInMonths(DateTime birth, DateTime visit)
         {
             Age age = new Age(birth, visit);
@@ -62,6 +63,7 @@ namespace AnthroCloud.API.Controllers
         /// <returns>Returns string of age in years.</returns>
         /// <example>GET: api/anthro/age/years/2016-12-01T00:00:00/2019-12-31T23:59:59</example>
         [Route("AGE/YEARS/{birth}/{visit}")]
+        [HttpGet]
         public string GetAgeInYears(DateTime birth, DateTime visit)
         {
             Age age = new Age(birth, visit);
@@ -76,6 +78,7 @@ namespace AnthroCloud.API.Controllers
         /// <returns>Returns body mass divided by the square of the body height</returns>
         /// <example>GET: api/anthro/bmi/9.00/73.00</example>
         [Route("BMI/{weight}/{height}")]
+        [HttpGet]
         public double GetBMI(double weight, double height)
         {
             BMI bmi = new BMI(weight, height);
@@ -90,6 +93,7 @@ namespace AnthroCloud.API.Controllers
         /// <returns>Returns a human readable string in either Months or Year-Month (TotalMonths) format.</returns>
         /// <example>GET: api/anthro/age/2016-12-01T00:00:00/2019-12-31T23:59:59</example>
         [Route("AgeObjectAsync/{birth}/{visit}")]
+        [HttpGet]
         public async Task<Age> GetAgeObjectAsync(DateTime birth, DateTime visit)
         {
             Age age = new Age(birth, visit);
@@ -105,6 +109,7 @@ namespace AnthroCloud.API.Controllers
         /// <returns>Returns body mass divided by the square of the body height</returns>
         /// <example>GET: api/anthro/bmi/9.00/73.00</example>
         [Route("BMIAsync/{weight}/{height}")]
+        [HttpGet]
         public async Task<double> GetBMIAsync(double weight, double height)
         {
             BMI bmi = new BMI();
