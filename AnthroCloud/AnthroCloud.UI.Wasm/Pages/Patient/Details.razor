@@ -1,0 +1,108 @@
+﻿@page "/Patient/Details"
+@using AnthroCloud.Entities
+@using Microsoft.Fast.Components.FluentUI
+@inject HttpClient httpClient
+
+<h1>Individual Assessment</h1>
+<p>Children</p>
+<div class="row">
+    <div class="col-md-6">
+        <a href='/patient/add' class="btn btn-primary" role="button">
+            <i class="oi oi-plus"></i>
+            Add Child
+        </a>
+    </div>
+    <div class="input-group col">
+        <input type="text" class="form-control" placeholder="Search patient by name"
+               @bind="SearchString" @bind:event="oninput" @onkeyup="FilterPatient" />
+        @if (SearchString.Length > 0)
+        {
+            <div class="input-group-append">
+                <button class="btn btn-danger" @onclick="ResetSearch">
+                    <i class="oi oi-x"></i>
+                </button>
+            </div>
+        }
+    </div>
+</div>
+<br />
+@if (!patientList.Any())
+{
+    <div>
+        <FluentProgressRing style="width: 102px; height: 102px;"></FluentProgressRing>
+    </div>    
+}
+else
+{
+    <table class="table table-striped align-middle table-bordered">
+        <thead class="table-success">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Birth Date</th>
+                <th>Gender</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var patient in patientList)
+            {
+                <tr>
+                    <td>@patient.PatientId</td>
+                    <td>@patient.FirstName</td>
+                    <td>@patient.LastName</td>
+                    <td>@patient.DateOfBirth</td>
+                    <td>@patient.Sex</td>
+                    <td>
+                        <a href='/patient/edit/@patient.PatientId' class="btn btn-outline-dark" role="button">
+                            Edit
+                        </a>
+                        <a href='/patient/delete/@patient.PatientId' class="btn btn-outline-danger" role="button">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+@code {
+    protected List<Patient> patientList = new();
+    protected List<Patient> searchPatientData = new();
+    protected Patient patient = new();
+    protected string SearchString { get; set; } = string.Empty;
+    protected override async Task OnInitializedAsync()
+    {
+        await GetPatient();
+    }
+    protected async Task GetPatient()
+    {
+        patientList = await httpClient.GetFromJsonAsync<List<Patient>>("https://localhost:5001/api/Patients");
+        searchPatientData = patientList;
+    }
+    protected void FilterPatient()
+    {
+        if (!string.IsNullOrEmpty(SearchString))
+        {
+            patientList = searchPatientData
+                .Where(x => x.FirstName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1)
+                .ToList();
+        }
+        else
+        {
+            patientList = searchPatientData;
+        }
+    }
+    protected void DeleteConfirm(int patientID)
+    {
+        patient = patientList.FirstOrDefault(x => x.PatientId == patientID);
+    }
+    public void ResetSearch()
+    {
+        SearchString = string.Empty;
+        patientList = searchPatientData;
+    }
+}

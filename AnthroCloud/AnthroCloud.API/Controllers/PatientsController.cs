@@ -17,7 +17,7 @@ namespace AnthroCloud.API.Controllers
 
         // GET: api/Patients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
+        public async Task<List<Patient>> GetPatients()
         {
             return await _context.Patients.ToListAsync();
         }

@@ -16,4 +16,8 @@
     <Folder Include="wwwroot\script\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AnthroCloud.Entities\AnthroCloud.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

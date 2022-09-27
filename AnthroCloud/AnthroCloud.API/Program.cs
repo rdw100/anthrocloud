@@ -16,6 +16,16 @@ builder.Services.AddDbContext<AssessmentContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("AnthroCloudDatabaseMsSql")
         ));
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder
+            .WithOrigins("https://localhost:7234")
+            .WithHeaders("X-API-Version");
+    });
+});
 //options.UseMySql(builder.Configuration.GetConnectionString("AnthroCloudDatabaseMySql"),
 //    new MySqlServerVersion(new Version(5, 7, 29)),
 //    mySqlOptions => mySqlOptions
@@ -27,19 +37,19 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    //app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-else if (app.Environment.IsDevelopment())
-{
+    //app.UseWebAssemblyDebugging();
     //app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
+} 
+else 
+{
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
-
 //app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -48,6 +58,8 @@ app.UseRouting();
 app.MapControllers();
 
 //app.UseAuthorization();
+
+app.UseCors();
 
 app.MapRazorPages();
 
