@@ -1,4 +1,5 @@
 ﻿@page "/Patient/Add"
+@page "/Patient/Edit/{patientId:int}"
 @using AnthroCloud.Entities
 @using Microsoft.Fast.Components.FluentUI
 @inject HttpClient httpClient
@@ -63,13 +64,13 @@
         {
             Title = "Edit";
             patient = await httpClient.GetFromJsonAsync<Patient>("https://localhost:5001/api/Patients/" + patientId);
-    }
+        }
     }
     protected async Task SavePatient()
     {
         if (patient.PatientId != 0)
         {
-            await httpClient.PutAsJsonAsync("https://localhost:5001/api/Patients/", patient);
+            await httpClient.PutAsJsonAsync("https://localhost:5001/api/Patients/" + patientId, patient);
         }
         else
         {
@@ -79,6 +80,6 @@
     }
     public void Cancel()
     {
-        NavigationManager.NavigateTo("https://localhost:5001/api/Patients/details");
+        NavigationManager.NavigateTo("Patient/details");
     }
 }

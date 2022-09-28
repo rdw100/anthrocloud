@@ -1,5 +1,6 @@
 using AnthroCloud.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,11 +20,15 @@ builder.Services.AddDbContext<AssessmentContext>(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(builder =>
+    options.AddDefaultPolicy(policy =>
     {
-        builder
-            .WithOrigins("https://localhost:7234")
-            .WithHeaders("X-API-Version");
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();           
+            //.WithOrigins("https://localhost:7234")
+            //.AllowAnyMethod()
+            //.WithHeaders(HeaderNames.ContentType);
     });
 });
 //options.UseMySql(builder.Configuration.GetConnectionString("AnthroCloudDatabaseMySql"),

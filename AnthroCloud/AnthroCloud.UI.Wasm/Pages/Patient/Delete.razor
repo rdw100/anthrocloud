@@ -1,5 +1,51 @@
-﻿<h3>Delete</h3>
-
+﻿@page "/patient/delete/{patientId:int}"
+@using AnthroCloud.Entities
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+<h3>Delete Patient</h3>
+<br />
+<div class="form-group">
+    <h4>Do you want to delete this record?</h4>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>First Name</td>
+                <td>@patient.FirstName</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>@patient.LastName</td>
+            </tr>
+            <tr>
+                <td>Birth Date</td>
+                <td>@patient.DateOfBirth</td>
+            </tr>
+            <tr>
+                <td>Sex</td>
+                <td>@patient.Sex</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="form-group">
+    <input type="submit" value="Delete" @onclick="(async () => await RemoveUser(patient.PatientId))" class="btn btn-danger" />
+    <input type="submit" value="Cancel" @onclick="(() => Cancel())" class="btn btn-warning" />
+</div>
 @code {
-
+    [Parameter]
+    public int patientId { get; set; }
+    Patient patient = new Patient();
+    protected override async Task OnInitializedAsync()
+    {
+        patient = await Http.GetFromJsonAsync<Patient>("https://localhost:5001/api/Patients/" + Convert.ToInt32(patientId));
+    }
+    protected async Task RemoveUser(int patientId)
+    {
+        await Http.DeleteAsync("https://localhost:5001/api/Patients/" + patientId);
+        NavigationManager.NavigateTo("/Patient/details");
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/Patient/details");
+    }
 }
