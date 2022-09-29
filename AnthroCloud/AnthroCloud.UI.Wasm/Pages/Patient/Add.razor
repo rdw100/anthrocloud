@@ -1,6 +1,7 @@
 ﻿@page "/Patient/Add"
 @page "/Patient/Edit/{patientId:int}"
 @using AnthroCloud.Entities
+@using AnthroCloud.UI.Wasm.Services
 @using Microsoft.Fast.Components.FluentUI
 @inject HttpClient httpClient
 @inject NavigationManager NavigationManager
@@ -54,6 +55,9 @@
     </div>
 </EditForm>
 @code {
+    [Inject]
+    public IPatientService PatientService{ get; set; }
+
     [Parameter]
     public int patientId { get; set; }
     protected string Title = "Add";
@@ -74,7 +78,7 @@
         }
         else
         {
-            await httpClient.PostAsJsonAsync("https://localhost:5001/api/Patients/", patient);
+            await PatientService.CreatePatient(patient);
         }
         Cancel();
     }
