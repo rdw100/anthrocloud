@@ -67,14 +67,14 @@
         if (patientId != 0)
         {
             Title = "Edit";
-            patient = await httpClient.GetFromJsonAsync<Patient>("https://localhost:5001/api/Patients/" + patientId);
+            patient = await PatientService.GetPatient(patientId);
         }
     }
     protected async Task SavePatient()
     {
         if (patient.PatientId != 0)
         {
-            await httpClient.PutAsJsonAsync("https://localhost:5001/api/Patients/" + patientId, patient);
+            await PatientService.UpdatePatient(patientId, patient);
         }
         else
         {

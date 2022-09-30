@@ -1,5 +1,4 @@
 ﻿using AnthroCloud.Entities;
-using System.Net.Http;
 using System.Net.Http.Json;
 
 namespace AnthroCloud.UI.Wasm.Services
@@ -19,19 +18,24 @@ namespace AnthroCloud.UI.Wasm.Services
             return newPatient;
         }
 
-        public Task<Patient> GetPatient(int patientId)
+        public async Task<Patient> GetPatient(int patientId)
         {
-            throw new NotImplementedException();
+            return await _httpClient.GetFromJsonAsync<Patient>(_httpClient.BaseAddress + "Patients/" + patientId);
+        }
+        
+        public async Task<IEnumerable<Patient>> GetPatients()
+        {
+            return await _httpClient.GetFromJsonAsync<List<Patient>>(_httpClient.BaseAddress + "Patients/");
         }
 
-        public Task<List<Patient>> GetPatients()
+        public async Task<Patient> UpdatePatient(int patientId, Patient updatedPatient)
         {
-            throw new NotImplementedException();
+            await _httpClient.PutAsJsonAsync<Patient>(_httpClient.BaseAddress + "Patients/" + patientId, updatedPatient);
+            return updatedPatient;
         }
-
-        public Task<Patient> UpdatePatient(Patient updatedPatient)
+        public async Task DeletePatient(int patientId)
         {
-            throw new NotImplementedException();
+            await _httpClient.DeleteAsync(_httpClient.BaseAddress + "Patients/" + patientId);
         }
     }
 }

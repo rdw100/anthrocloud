@@ -1,5 +1,6 @@
 ﻿@page "/Patient/Details"
 @using AnthroCloud.Entities
+@using AnthroCloud.UI.Wasm.Services
 @using Microsoft.Fast.Components.FluentUI
 @inject HttpClient httpClient
 
@@ -71,6 +72,9 @@ else
 }
 
 @code {
+    [Inject]
+    public IPatientService PatientService { get; set; }
+
     protected List<Patient> patientList = new();
     protected List<Patient> searchPatientData = new();
     protected Patient patient = new();
@@ -81,7 +85,7 @@ else
     }
     protected async Task GetPatient()
     {
-        patientList = await httpClient.GetFromJsonAsync<List<Patient>>("https://localhost:5001/api/Patients");
+        patientList = (await PatientService.GetPatients()).ToList();
         searchPatientData = patientList;
     }
     protected void FilterPatient()

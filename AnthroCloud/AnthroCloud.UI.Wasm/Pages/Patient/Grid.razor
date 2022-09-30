@@ -1,0 +1,106 @@
+﻿@page "/Patient/Grid"
+@using AnthroCloud.Entities
+@using AnthroCloud.UI.Wasm.Services
+@using Microsoft.Fast.Components.FluentUI
+@inject HttpClient httpClient
+
+<h3>Grid</h3>
+<FluentTextField @oninput="FilterChanged">Filter Child</FluentTextField>
+<FluentDataGrid id="sortingGrid" GridTemplateColumns="1fr 1fr 1fr" 
+    RowsData=SortedRowsGrid 
+    ColumnDefinitions=SortingColumnsGrid>
+    <HeaderCellTemplate>
+        <FluentButton @onclick=@(()=>SortColumn(context))>
+            @context.Title
+            @if (context.Title == lastSortColumn?.Title)
+            {
+                @(isAscending ? " ↑" : " ↓")
+            }
+        </FluentButton>
+    </HeaderCellTemplate>
+</FluentDataGrid>
+
+@code {
+    [Inject]
+    public IPatientService PatientService { get; set; }
+
+    public List<ColumnDefinition<Patient>> SortingColumnsGrid = new();
+    private ColumnDefinition<Patient>? lastSortColumn = null;
+    private bool isAscending = false;
+    public string filterValue = "";
+
+    protected List<Patient> RawSortedRowsGrid = new();
+
+    List<Patient> SortedRowsGrid = new();
+
+    protected async Task GetPatient()
+    {
+        RawSortedRowsGrid = (await PatientService.GetPatients()).ToList();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("First Name", x => x.FirstName));
+        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Last Name", x => x.LastName));
+        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Birth Date", x => x.DateOfBirth));
+
+        await GetPatient();
+
+        SortedRowsGrid = RawSortedRowsGrid;
+
+        base.OnInitialized();
+    }
+
+    private void FilterChanged(ChangeEventArgs args)
+    {
+        var filter = args.Value as string;
+
+        if (string.IsNullOrWhiteSpace(filter))
+        {
+            SortedRowsGrid = RawSortedRowsGrid;
+        }
+        else
+        {
+            SortedRowsGrid = RawSortedRowsGrid.Where(x => x.FirstName.Contains(filter.ToLower())).ToList();
+        }
+        if (lastSortColumn != null)
+        {
+            SortedRowsGrid.Sort(new CustomComparer(lastSortColumn.FieldSelector!, isAscending));
+        }
+    }
+
+    private void SortColumn(ColumnDefinition<Patient> columnDefinition)
+    {
+        if (lastSortColumn?.Title == columnDefinition.Title)
+        {
+            isAscending = !isAscending;
+        }
+        else
+        {
+            lastSortColumn = columnDefinition;
+            isAscending = true;
+        }
+        SortedRowsGrid.Sort(new CustomComparer(columnDefinition.FieldSelector!, isAscending));
+    }
+
+    class CustomComparer : IComparer<Patient>
+    {
+        Func<Patient, object> _selector;
+        bool _isAscending;
+
+        public CustomComparer(Func<Patient, object> selector, bool isAscending)
+        {
+            _selector = selector;
+            _isAscending = isAscending;
+        }
+
+        int IComparer<Patient>.Compare(Patient? x, Patient? y)
+        {
+            var xs = _selector(x!) as string;
+            var ys = _selector(y!) as string;
+            if (xs == null || ys == null)
+                return 0;
+            return string.Compare(xs, ys) * (_isAscending ? 1 : -1);
+        }
+    }
+}

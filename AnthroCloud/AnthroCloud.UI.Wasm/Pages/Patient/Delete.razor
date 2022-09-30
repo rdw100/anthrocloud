@@ -1,5 +1,6 @@
 ﻿@page "/patient/delete/{patientId:int}"
 @using AnthroCloud.Entities
+@using AnthroCloud.UI.Wasm.Services
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 <h3>Delete Patient</h3>
@@ -32,16 +33,19 @@
     <input type="submit" value="Cancel" @onclick="(() => Cancel())" class="btn btn-warning" />
 </div>
 @code {
+    [Inject]
+    public IPatientService PatientService { get; set; }
+
     [Parameter]
     public int patientId { get; set; }
     Patient patient = new Patient();
     protected override async Task OnInitializedAsync()
     {
-        patient = await Http.GetFromJsonAsync<Patient>("https://localhost:5001/api/Patients/" + Convert.ToInt32(patientId));
+        patient = await PatientService.GetPatient(Convert.ToInt32(patientId));
     }
     protected async Task RemoveUser(int patientId)
     {
-        await Http.DeleteAsync("https://localhost:5001/api/Patients/" + patientId);
+        await PatientService.DeletePatient(patientId);
         NavigationManager.NavigateTo("/Patient/details");
     }
     void Cancel()
