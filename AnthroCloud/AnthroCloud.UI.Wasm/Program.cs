@@ -7,12 +7,16 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-//builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-string baseAddressPath = builder.Configuration.GetValue<string>("ConfigurationSettings:baseApiAddressPath");
+string patientApiPath = builder.Configuration.GetValue<string>("ConfigurationSettings:patientApiPath");
+string visitApiPath = builder.Configuration.GetValue<string>("ConfigurationSettings:visitApiPath");
 
 builder.Services.AddHttpClient<IPatientService, PatientService>(client =>
 {
-    client.BaseAddress = new Uri(baseAddressPath);
+    client.BaseAddress = new Uri(patientApiPath);
+});
+builder.Services.AddHttpClient<IPatientService, PatientService>(client =>
+{
+    client.BaseAddress = new Uri(visitApiPath);
 });
 
 await builder.Build().RunAsync();
