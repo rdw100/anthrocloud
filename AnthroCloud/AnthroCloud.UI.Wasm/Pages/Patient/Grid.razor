@@ -19,13 +19,16 @@
         </FluentButton>
     </HeaderCellTemplate>
 </FluentDataGrid>
-@*<FluentDataGrid id="visitGrid" 
-    RowsData=RowsGrid2 
-    ColumnDefinitions=ColumnsGrid2 onselect="" />*@
+<FluentDataGrid id="visitGrid" GridTemplateColumns="1fr 1fr 1fr 1fr"
+                RowsData=VisitRowsGrid
+                ColumnDefinitions=VisitColumnsGrid />
 
 @code {
     [Inject]
     public IPatientService PatientService { get; set; }
+
+    [Inject]
+    public IVisitService VisitService { get; set; }
 
     public List<ColumnDefinition<Patient>> SortingColumnsGrid = new();
     private ColumnDefinition<Patient>? lastSortColumn = null;
@@ -33,12 +36,20 @@
     public string filterValue = "";
 
     protected List<Patient> RawSortedRowsGrid = new();
-
     List<Patient> SortedRowsGrid = new();
+
+    public List<ColumnDefinition<Visit>> VisitColumnsGrid = new();
+    protected List<Visit> RawVisitGrid = new();
+    List<Visit> VisitRowsGrid = new();
 
     protected async Task GetPatient()
     {
         RawSortedRowsGrid = (await PatientService.GetPatients()).ToList();
+    }
+
+    protected async Task GetVisit()
+    {
+        RawVisitGrid = (await VisitService.GetVisits(1)).ToList();
     }
 
     protected override async Task OnInitializedAsync()
@@ -46,10 +57,16 @@
         SortingColumnsGrid.Add(new ColumnDefinition<Patient>("First Name", x => x.FirstName));
         SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Last Name", x => x.LastName));
         SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Birth Date", x => x.DateOfBirth));
-
         await GetPatient();
+                
+        VisitColumnsGrid.Add(new ColumnDefinition<Visit>("First Name", x => x.PatientId));
+        VisitColumnsGrid.Add(new ColumnDefinition<Visit>("Last Name", x => x.Weight));
+        VisitColumnsGrid.Add(new ColumnDefinition<Visit>("Birth Date", x => x.LengthHeight));
+        VisitColumnsGrid.Add(new ColumnDefinition<Visit>("Birth Date", x => x.DateOfVisit));
+        await GetVisit();
 
         SortedRowsGrid = RawSortedRowsGrid;
+        VisitRowsGrid = RawVisitGrid;
 
         base.OnInitialized();
     }
@@ -64,7 +81,10 @@
         }
         else
         {
-            SortedRowsGrid = RawSortedRowsGrid.Where(x => x.FirstName.Contains(filter.ToLower())).ToList();
+            SortedRowsGrid = RawSortedRowsGrid.Where(
+                x => x.FirstName.ToLower().Contains(filter.ToLower()) ||
+                     x.LastName.ToLower().Contains(filter.ToLower())
+            ).ToList();
         }
         if (lastSortColumn != null)
         {

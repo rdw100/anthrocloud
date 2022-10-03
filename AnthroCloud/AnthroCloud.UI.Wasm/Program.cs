@@ -14,7 +14,7 @@ builder.Services.AddHttpClient<IPatientService, PatientService>(client =>
 {
     client.BaseAddress = new Uri(patientApiPath);
 });
-builder.Services.AddHttpClient<IPatientService, PatientService>(client =>
+builder.Services.AddHttpClient<IVisitService, VisitService>(client =>
 {
     client.BaseAddress = new Uri(visitApiPath);
 });

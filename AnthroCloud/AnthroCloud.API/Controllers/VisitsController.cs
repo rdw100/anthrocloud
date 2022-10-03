@@ -15,15 +15,15 @@ namespace AnthroCloud.API.Controllers
             _context = context;
         }
 
-        // GET: api/Visits
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Visit>>> GetVisits()
+        // GET: api/Visits/patient/1
+        [HttpGet("patient/{patientId:int}")]
+        public async Task<ActionResult<IEnumerable<Visit>>> GetVisits(int patientId)
         {
-            return await _context.Visits.ToListAsync();
+            return await _context.Visits.Where(p => p.PatientId == patientId).ToListAsync();
         }
 
         // GET: api/Visits/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Visit>> GetVisit(int id)
         {
             var visit = await _context.Visits.FindAsync(id);
