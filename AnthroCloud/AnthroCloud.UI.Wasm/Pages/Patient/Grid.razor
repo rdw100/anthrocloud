@@ -3,10 +3,10 @@
 @using AnthroCloud.UI.Wasm.Services
 @using Microsoft.Fast.Components.FluentUI
 @inject HttpClient httpClient
-
+@inject NavigationManager NavigationManager
 <h3>Grid</h3>
 <FluentTextField @oninput="FilterChanged">Filter Child</FluentTextField>
-<FluentDataGrid id="sortingGrid" GridTemplateColumns="1fr 1fr 1fr" 
+<FluentDataGrid id="sortingGrid" GridTemplateColumns="1fr 1fr 1fr 1fr" 
     RowsData=SortedRowsGrid 
     ColumnDefinitions=SortingColumnsGrid>
     <HeaderCellTemplate>
@@ -18,8 +18,17 @@
             }
         </FluentButton>
     </HeaderCellTemplate>
+    <RowItemTemplate>
+        <FluentDataGridRow TItem=Patient>
+            <FluentDataGridCell GridColumn=1>@context.FirstName</FluentDataGridCell>
+            <FluentDataGridCell GridColumn=2>@context.LastName</FluentDataGridCell>
+            <FluentDataGridCell GridColumn=3>@context.DateOfBirth</FluentDataGridCell>
+            <FluentButton @onclick="() => EditPatient(context.PatientId)">Edit
+            </FluentButton>
+        </FluentDataGridRow>
+    </RowItemTemplate>
 </FluentDataGrid>
-<FluentDataGrid id="visitGrid" GridTemplateColumns="1fr 1fr 1fr 1fr"
+<FluentDataGrid id="visitGrid" GridTemplateColumns="1fr 1fr 1fr"
                 RowsData=VisitRowsGrid
                 ColumnDefinitions=VisitColumnsGrid />
 
@@ -61,8 +70,8 @@
                 
         VisitColumnsGrid.Add(new ColumnDefinition<Visit>("First Name", x => x.PatientId));
         VisitColumnsGrid.Add(new ColumnDefinition<Visit>("Last Name", x => x.Weight));
-        VisitColumnsGrid.Add(new ColumnDefinition<Visit>("Birth Date", x => x.LengthHeight));
-        VisitColumnsGrid.Add(new ColumnDefinition<Visit>("Birth Date", x => x.DateOfVisit));
+        VisitColumnsGrid.Add(new ColumnDefinition<Visit>("Height", x => x.LengthHeight));
+        VisitColumnsGrid.Add(new ColumnDefinition<Visit>("Visit", x => x.DateOfVisit));
         await GetVisit();
 
         SortedRowsGrid = RawSortedRowsGrid;
@@ -104,6 +113,11 @@
             isAscending = true;
         }
         SortedRowsGrid.Sort(new CustomComparer(columnDefinition.FieldSelector!, isAscending));
+    }
+
+    private void EditPatient(int patientId)
+    {
+        NavigationManager.NavigateTo($"/patient/edit/{patientId}");
     }
 
     class CustomComparer : IComparer<Patient>
