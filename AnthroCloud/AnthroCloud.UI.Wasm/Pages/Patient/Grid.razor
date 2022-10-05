@@ -6,8 +6,8 @@
 @inject NavigationManager NavigationManager
 <h3>Grid</h3>
 <FluentTextField @oninput="FilterChanged">Filter Child</FluentTextField>
-<FluentDataGrid id="sortingGrid" GridTemplateColumns="1fr 1fr 1fr 1fr" 
-    RowsData=SortedRowsGrid 
+<FluentDataGrid id="sortingGrid" GridTemplateColumns="104px 104px 104px 50px 50px"
+                RowsData=SortedRowsGrid 
     ColumnDefinitions=SortingColumnsGrid>
     <HeaderCellTemplate>
         <FluentButton @onclick=@(()=>SortColumn(context))>
@@ -22,8 +22,12 @@
         <FluentDataGridRow TItem=Patient>
             <FluentDataGridCell GridColumn=1>@context.FirstName</FluentDataGridCell>
             <FluentDataGridCell GridColumn=2>@context.LastName</FluentDataGridCell>
-            <FluentDataGridCell GridColumn=3>@context.DateOfBirth</FluentDataGridCell>
-            <FluentButton @onclick="() => EditPatient(context.PatientId)">Edit
+            <FluentDataGridCell GridColumn=3>@context.DateOfBirth.ToShortDateString()</FluentDataGridCell>
+            <FluentButton @onclick="() => EditPatient(context.PatientId)">
+                Edit
+            </FluentButton>
+            <FluentButton @onclick="() => DeletePatient(context.PatientId)">
+                Delete
             </FluentButton>
         </FluentDataGridRow>
     </RowItemTemplate>
@@ -63,9 +67,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("First Name", x => x.FirstName));
-        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Last Name", x => x.LastName));
-        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Birth Date", x => x.DateOfBirth));
+        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("First", x => x.FirstName));
+        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Last", x => x.LastName));
+        //SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Birth", x => x.DateOfBirth));
         await GetPatient();
                 
         VisitColumnsGrid.Add(new ColumnDefinition<Visit>("First Name", x => x.PatientId));
@@ -118,6 +122,11 @@
     private void EditPatient(int patientId)
     {
         NavigationManager.NavigateTo($"/patient/edit/{patientId}");
+    }
+
+    private void DeletePatient(int patientId)
+    {
+        NavigationManager.NavigateTo($"/patient/delete/{patientId}");
     }
 
     class CustomComparer : IComparer<Patient>
