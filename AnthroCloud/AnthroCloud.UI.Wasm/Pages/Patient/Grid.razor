@@ -4,11 +4,13 @@
 @using Microsoft.Fast.Components.FluentUI
 @inject HttpClient httpClient
 @inject NavigationManager NavigationManager
-<h3>Grid</h3>
+<h3>Fluent Grid</h3>
 <FluentTextField @oninput="FilterChanged">Filter Child</FluentTextField>
-<FluentDataGrid id="sortingGrid" GridTemplateColumns="104px 104px 104px 50px 50px"
-                RowsData=SortedRowsGrid 
-    ColumnDefinitions=SortingColumnsGrid>
+<FluentDataGrid id="sortingGrid" GridTemplateColumns="1fr 1fr 1fr 75px 75px"
+    RowsData=SortedRowsGrid 
+    ColumnDefinitions=SortingColumnsGrid
+    TItem="Patient"
+>
     <HeaderCellTemplate>
         <FluentButton @onclick=@(()=>SortColumn(context))>
             @context.Title
@@ -19,20 +21,26 @@
         </FluentButton>
     </HeaderCellTemplate>
     <RowItemTemplate>
-        <FluentDataGridRow TItem=Patient>
+        <FluentDataGridRow TItem=Patient >
             <FluentDataGridCell GridColumn=1>@context.FirstName</FluentDataGridCell>
             <FluentDataGridCell GridColumn=2>@context.LastName</FluentDataGridCell>
             <FluentDataGridCell GridColumn=3>@context.DateOfBirth.ToShortDateString()</FluentDataGridCell>
-            <FluentButton @onclick="() => EditPatient(context.PatientId)">
+            <FluentButton Appearance="Appearance.Accent" @onclick="() => EditPatient(context.PatientId)">
                 Edit
             </FluentButton>
-            <FluentButton @onclick="() => DeletePatient(context.PatientId)">
+            <FluentButton Appearance="Appearance.Accent" @onclick="() => DeletePatient(context.PatientId)">
                 Delete
             </FluentButton>
         </FluentDataGridRow>
     </RowItemTemplate>
 </FluentDataGrid>
-<FluentDataGrid id="visitGrid" GridTemplateColumns="1fr 1fr 1fr"
+@if (!RawSortedRowsGrid.Any())
+{
+    <div>
+        <FluentProgressRing></FluentProgressRing>
+    </div>
+}
+<FluentDataGrid id="visitGrid" GridTemplateColumns="1fr 1fr 1fr 1fr"
                 RowsData=VisitRowsGrid
                 ColumnDefinitions=VisitColumnsGrid />
 
@@ -67,11 +75,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("First", x => x.FirstName));
-        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Last", x => x.LastName));
+        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("First Name", x => x.FirstName));
+        SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Last Name", x => x.LastName));
         //SortingColumnsGrid.Add(new ColumnDefinition<Patient>("Birth", x => x.DateOfBirth));
         await GetPatient();
-                
+
         VisitColumnsGrid.Add(new ColumnDefinition<Visit>("First Name", x => x.PatientId));
         VisitColumnsGrid.Add(new ColumnDefinition<Visit>("Last Name", x => x.Weight));
         VisitColumnsGrid.Add(new ColumnDefinition<Visit>("Height", x => x.LengthHeight));
@@ -127,6 +135,11 @@
     private void DeletePatient(int patientId)
     {
         NavigationManager.NavigateTo($"/patient/delete/{patientId}");
+    }
+
+    protected async Task ShowVisits(int patientId)
+    {
+        RawVisitGrid = (await VisitService.GetVisits(patientId)).ToList();
     }
 
     class CustomComparer : IComparer<Patient>

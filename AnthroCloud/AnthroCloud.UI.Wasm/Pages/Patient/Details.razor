@@ -93,7 +93,9 @@ else
         if (!string.IsNullOrEmpty(SearchString))
         {
             patientList = searchPatientData
-                .Where(x => x.FirstName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1)
+                .Where(x => x.FirstName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1 ||
+                            x.LastName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1      
+                )
                 .ToList();
         }
         else
