@@ -6,11 +6,10 @@
 @inject NavigationManager NavigationManager
 <h3>Fluent Grid</h3>
 <FluentTextField @oninput="FilterChanged">Filter Child</FluentTextField>
-<FluentDataGrid id="sortingGrid" GridTemplateColumns="1fr 1fr 1fr 75px 75px"
+<FluentDataGrid id="sortingGrid" GridTemplateColumns="1fr 1fr 1fr 1fr 75px 75px"
     RowsData=SortedRowsGrid 
     ColumnDefinitions=SortingColumnsGrid
-    TItem="Patient"
->
+    TItem="Patient">
     <HeaderCellTemplate>
         <FluentButton @onclick=@(()=>SortColumn(context))>
             @context.Title
@@ -22,9 +21,12 @@
     </HeaderCellTemplate>
     <RowItemTemplate>
         <FluentDataGridRow TItem=Patient >
-            <FluentDataGridCell GridColumn=1>@context.FirstName</FluentDataGridCell>
-            <FluentDataGridCell GridColumn=2>@context.LastName</FluentDataGridCell>
-            <FluentDataGridCell GridColumn=3>@context.DateOfBirth.ToShortDateString()</FluentDataGridCell>
+           <FluentDataGridCell GridColumn=1>
+                <a href="javascript: void(0);" @onclick="@(e => ShowVisits(@context.PatientId))">@context.PatientId</a>
+            </FluentDataGridCell>
+            <FluentDataGridCell GridColumn=2>@context.FirstName</FluentDataGridCell>
+            <FluentDataGridCell GridColumn=3>@context.LastName</FluentDataGridCell>
+            <FluentDataGridCell GridColumn=4>@context.DateOfBirth.ToShortDateString()</FluentDataGridCell>
             <FluentButton Appearance="Appearance.Accent" @onclick="() => EditPatient(context.PatientId)">
                 Edit
             </FluentButton>
@@ -43,7 +45,6 @@
 <FluentDataGrid id="visitGrid" GridTemplateColumns="1fr 1fr 1fr 1fr"
                 RowsData=VisitRowsGrid
                 ColumnDefinitions=VisitColumnsGrid />
-
 @code {
     [Inject]
     public IPatientService PatientService { get; set; }
@@ -71,7 +72,7 @@
     protected async Task GetVisit()
     {
         RawVisitGrid = (await VisitService.GetVisits(1)).ToList();
-    }
+    }    
 
     protected override async Task OnInitializedAsync()
     {
@@ -140,6 +141,7 @@
     protected async Task ShowVisits(int patientId)
     {
         RawVisitGrid = (await VisitService.GetVisits(patientId)).ToList();
+        VisitRowsGrid = RawVisitGrid;
     }
 
     class CustomComparer : IComparer<Patient>

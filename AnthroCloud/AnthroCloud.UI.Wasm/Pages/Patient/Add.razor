@@ -6,7 +6,7 @@
 @inject HttpClient httpClient
 @inject NavigationManager NavigationManager
 
-<h3>Add Child</h3>
+<h3>@Title Child</h3>
 <hr />
 <EditForm Model="@patient" OnValidSubmit="SavePatient">
     <DataAnnotationsValidator />
@@ -50,8 +50,8 @@
         <ValidationMessage For="@(() => patient.Sex)" />
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+        <button type="submit" class="btn btn-outline-success">Save</button>
+        <button class="btn btn-outline-danger" @onclick="Cancel">Cancel</button>
     </div>
 </EditForm>
 @code {

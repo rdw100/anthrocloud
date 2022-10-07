@@ -1,7 +1,6 @@
 ﻿@page "/Patient/Details"
 @using AnthroCloud.Entities
 @using AnthroCloud.UI.Wasm.Services
-@using Microsoft.Fast.Components.FluentUI
 @inject HttpClient httpClient
 
 <h1>Individual Assessment</h1>
@@ -26,18 +25,17 @@
         }
     </div>
 </div>
-
 <br />
 @if (!patientList.Any())
 {
     <div>
-        <FluentProgressRing style="width: 102px; height: 102px;"></FluentProgressRing>
+        <div class="spinner-border text-primary"></div>
     </div>    
 }
 else
 {
     <table class="table table-striped align-middle table-bordered">
-        <thead class="table-success">
+        <thead class="table-primary">
             <tr>
                 <th>ID</th>
                 <th>First Name</th>
@@ -57,7 +55,7 @@ else
                     <td>@patient.DateOfBirth</td>
                     <td>@patient.Sex</td>
                     <td>
-                        <a href='/patient/edit/@patient.PatientId' class="btn btn-outline-dark" role="button">
+                        <a href='/patient/edit/@patient.PatientId' class="btn btn-outline-success" role="button">
                             Edit
                         </a>
                         <a href='/patient/delete/@patient.PatientId' class="btn btn-outline-danger" role="button">
