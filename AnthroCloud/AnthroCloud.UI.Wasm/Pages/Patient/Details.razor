@@ -49,7 +49,9 @@ else
             @foreach (var patient in patientList)
             {
                 <tr>
-                    <td>@patient.PatientId</td>
+                    <td>
+                        <a href="javascript: void(0);" @onclick="@(e => ShowVisits(@patient.PatientId))">@patient.PatientId</a>
+                    </td>
                     <td>@patient.FirstName</td>
                     <td>@patient.LastName</td>
                     <td>@patient.DateOfBirth</td>
@@ -65,17 +67,67 @@ else
                 </tr>
             }
         </tbody>
-
     </table>
+    @if (!visitList.Any())
+    {
+@*        <table class="table table-striped align-middle table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th>Visit</th>
+                    <th>Patient</th>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5">No data.</td>
+                </tr>
+            </tbody>
+        </table>*@
+    }
+    else
+    {
+        <table class="table table-striped align-middle table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th>Visit</th>
+                    <th>Patient</th>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var visit in visitList)
+                {
+                    <tr>
+                        <td>@visit.VisitId</td>
+                        <td>@visit.PatientId</td>
+                        <td>@visit.Weight</td>
+                        <td>@visit.LengthHeight</td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 }
-
 @code {
     [Inject]
     public IPatientService PatientService { get; set; }
+    [Inject]
+    public IVisitService VisitService { get; set; }
 
     protected List<Patient> patientList = new();
     protected List<Patient> searchPatientData = new();
     protected Patient patient = new();
+
+    protected List<Visit> visitList = new();
+    protected List<Visit> searchVisitData = new();
+    protected Visit visit = new();
+
     protected string SearchString { get; set; } = string.Empty;
     protected override async Task OnInitializedAsync()
     {
@@ -85,6 +137,10 @@ else
     {
         patientList = (await PatientService.GetPatients()).ToList();
         searchPatientData = patientList;
+    }
+    protected async Task ShowVisits(int patientId)
+    {
+        visitList = (await VisitService.GetVisits(patientId)).ToList();
     }
     protected void FilterPatient()
     {

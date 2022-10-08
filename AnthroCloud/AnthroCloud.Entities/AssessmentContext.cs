@@ -51,6 +51,12 @@ namespace AnthroCloud.Entities
                         Weight = 16,
                         LengthHeight = 18,
                         DateOfVisit = DateTime.Today.AddMonths(-9),
+                        Oedema = OedemaTypes.No,
+                        Measured = MeasurementTypes.Recumbent,
+                        HeadCircumference = 38.90,
+                        MUAC = 11.2,
+                        TricepsSkinFold = 5.5,
+                        SubscapularSkinFold = 4.6
                     },
                     new Visit()
                     {
@@ -59,6 +65,12 @@ namespace AnthroCloud.Entities
                         Weight = 20,
                         LengthHeight = 23,
                         DateOfVisit = DateTime.Today.AddMonths(-3),
+                        Oedema = OedemaTypes.Yes,
+                        Measured = MeasurementTypes.Recumbent,
+                        HeadCircumference = 40.3,
+                        MUAC = 11.4,
+                        TricepsSkinFold = 5.2,
+                        SubscapularSkinFold = 4.4
                     }, 
                     new Visit()
                     {
@@ -67,6 +79,12 @@ namespace AnthroCloud.Entities
                         Weight = 26,
                         LengthHeight = 25,
                         DateOfVisit = DateTime.Today.AddMonths(-12),
+                        Oedema = OedemaTypes.No,
+                        Measured = MeasurementTypes.Recumbent,
+                        HeadCircumference = 41.6,
+                        MUAC = 11.5,
+                        TricepsSkinFold = 4.8,
+                        SubscapularSkinFold = 4.1
                     },
                     new Visit()
                     {
@@ -75,16 +93,24 @@ namespace AnthroCloud.Entities
                         Weight = 32,
                         LengthHeight = 28,
                         DateOfVisit = DateTime.Today.AddMonths(-18),
+                        Oedema = OedemaTypes.No,
+                        Measured = MeasurementTypes.Recumbent,
+                        HeadCircumference = 42.7,
+                        MUAC = 11.6,
+                        TricepsSkinFold = 4.5,
+                        SubscapularSkinFold = 3.9
                     }
                 );
         }
 
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Visit> Visits { get; set; }
-    }
 
-    public class Animal
-    {
-        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // 
+            //optionsBuilder
+            //    .UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AnthroCloudDB;Trusted_Connection=True;MultipleActiveResultSets=true");
+        }
     }
 }

@@ -28,6 +28,29 @@ namespace AnthroCloud.Entities
         [CheckFutureDateRange]
         public DateTime DateOfVisit { get; set; } = DateTime.Today;
 
+        [Required]
+        [DisplayName("Head Circumference (cm)")]
+        public double HeadCircumference { get; set; } = 45.00;
+
+        [Required]
+        [DisplayName("MUAC (cm)")]
+        public double MUAC { get; set; } = 15.00;
+
+        [Required]
+        [DisplayName("Triceps skinfold (mm)")]
+        public double TricepsSkinFold { get; set; } = 8.00;
+
+        [Required]
+        [DisplayName("Subscapular skinfold (mm)")]
+        public double SubscapularSkinFold { get; set; } = 7.00;
+
+        [Required, EnumDataType(typeof(OedemaTypes))]
+        public OedemaTypes Oedema { get; set; } = OedemaTypes.No;
+
+        [Required, EnumDataType(typeof(MeasurementTypes))]
+        public MeasurementTypes Measured { get; set; } = MeasurementTypes.Recumbent;
+
+
         [ForeignKey("PatientId")]
         public Patient Patient { get; set; }
     }

@@ -4,6 +4,7 @@ using AnthroCloud.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AnthroCloud.Entities.Migrations
 {
     [DbContext(typeof(AssessmentContext))]
-    partial class AssessmentContextModelSnapshot : ModelSnapshot
+    [Migration("20221007184302_AssessmentDB_Visit_New")]
+    partial class AssessmentDB_Visit_New
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,56 +118,56 @@ namespace AnthroCloud.Entities.Migrations
                         {
                             VisitId = 1,
                             DateOfVisit = new DateTime(2022, 1, 7, 0, 0, 0, 0, DateTimeKind.Local),
-                            HeadCircumference = 38.899999999999999,
+                            HeadCircumference = 45.0,
                             LengthHeight = 18.0,
-                            MUAC = 11.199999999999999,
+                            MUAC = 15.0,
                             Measured = 1,
                             Oedema = (byte)1,
                             PatientId = 1,
-                            SubscapularSkinFold = 4.5999999999999996,
-                            TricepsSkinFold = 5.5,
+                            SubscapularSkinFold = 7.0,
+                            TricepsSkinFold = 8.0,
                             Weight = 16.0
                         },
                         new
                         {
                             VisitId = 2,
                             DateOfVisit = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
-                            HeadCircumference = 40.299999999999997,
+                            HeadCircumference = 45.0,
                             LengthHeight = 23.0,
-                            MUAC = 11.4,
+                            MUAC = 15.0,
                             Measured = 1,
-                            Oedema = (byte)0,
+                            Oedema = (byte)1,
                             PatientId = 1,
-                            SubscapularSkinFold = 4.4000000000000004,
-                            TricepsSkinFold = 5.2000000000000002,
+                            SubscapularSkinFold = 7.0,
+                            TricepsSkinFold = 8.0,
                             Weight = 20.0
                         },
                         new
                         {
                             VisitId = 3,
                             DateOfVisit = new DateTime(2021, 10, 7, 0, 0, 0, 0, DateTimeKind.Local),
-                            HeadCircumference = 41.600000000000001,
+                            HeadCircumference = 45.0,
                             LengthHeight = 25.0,
-                            MUAC = 11.5,
+                            MUAC = 15.0,
                             Measured = 1,
                             Oedema = (byte)1,
                             PatientId = 2,
-                            SubscapularSkinFold = 4.0999999999999996,
-                            TricepsSkinFold = 4.7999999999999998,
+                            SubscapularSkinFold = 7.0,
+                            TricepsSkinFold = 8.0,
                             Weight = 26.0
                         },
                         new
                         {
                             VisitId = 4,
                             DateOfVisit = new DateTime(2021, 4, 7, 0, 0, 0, 0, DateTimeKind.Local),
-                            HeadCircumference = 42.700000000000003,
+                            HeadCircumference = 45.0,
                             LengthHeight = 28.0,
-                            MUAC = 11.6,
+                            MUAC = 15.0,
                             Measured = 1,
                             Oedema = (byte)1,
                             PatientId = 2,
-                            SubscapularSkinFold = 3.8999999999999999,
-                            TricepsSkinFold = 4.5,
+                            SubscapularSkinFold = 7.0,
+                            TricepsSkinFold = 8.0,
                             Weight = 32.0
                         });
                 });

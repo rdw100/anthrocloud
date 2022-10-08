@@ -21,7 +21,7 @@
     </HeaderCellTemplate>
     <RowItemTemplate>
         <FluentDataGridRow TItem=Patient >
-           <FluentDataGridCell GridColumn=1>
+            <FluentDataGridCell GridColumn=1>
                 <a href="javascript: void(0);" @onclick="@(e => ShowVisits(@context.PatientId))">@context.PatientId</a>
             </FluentDataGridCell>
             <FluentDataGridCell GridColumn=2>@context.FirstName</FluentDataGridCell>
