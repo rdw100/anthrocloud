@@ -1,5 +1,6 @@
 ﻿@page "/Patient/Details"
 @using AnthroCloud.Entities
+@using AnthroCloud.Entities.Charts
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient httpClient
 
@@ -68,26 +69,7 @@ else
             }
         </tbody>
     </table>
-    @if (!visitList.Any())
-    {
-@*        <table class="table table-striped align-middle table-bordered">
-            <thead class="table-primary">
-                <tr>
-                    <th>Visit</th>
-                    <th>Patient</th>
-                    <th>Weight</th>
-                    <th>Height</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="5">No data.</td>
-                </tr>
-            </tbody>
-        </table>*@
-    }
-    else
+    @if (visitList.Any())
     {
         <table class="table table-striped align-middle table-bordered">
             <thead class="table-primary">
@@ -113,6 +95,24 @@ else
             </tbody>
         </table>
     }
+    @if (measureList != null)
+    {
+        <table>
+            <tr>
+                <th>Measure</th>
+                <th>Percentile</th>
+                <th>Z-score</th>
+            </tr>
+            @foreach (var measure in measureList)
+            {
+                <tr>
+                    <td>@measure.Name</td>
+                    <td>@measure.Percentile</td>
+                    <td>@measure.Zscore</td>
+                </tr>
+            }
+        </table>
+    }
 }
 @code {
     [Inject]
@@ -128,10 +128,20 @@ else
     protected List<Visit> searchVisitData = new();
     protected Visit visit = new();
 
+    protected List<Measure> measureList = new();
+
     protected string SearchString { get; set; } = string.Empty;
     protected override async Task OnInitializedAsync()
     {
         await GetPatient();
+
+        measureList.AddRange(new List<Measure>
+        {
+            new Measure {Name=GrowthTypes.WFL,Percentile=32.9,Zscore=-.44},
+            new Measure {Name=GrowthTypes.WFA,Percentile=.9,Zscore=-2.37},
+            new Measure {Name=GrowthTypes.LHFA,Percentile=0,Zscore=-3.54},
+            new Measure {Name=GrowthTypes.BFA,Percentile=37.6,Zscore=-.32}
+        });
     }
     protected async Task GetPatient()
     {
@@ -165,5 +175,12 @@ else
     {
         SearchString = string.Empty;
         patientList = searchPatientData;
+    }
+
+    public class Measure
+    {
+        public GrowthTypes Name { get; set; }
+        public double Percentile { get; set; }
+        public double Zscore { get; set; }
     }
 }
