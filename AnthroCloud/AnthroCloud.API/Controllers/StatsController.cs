@@ -1,5 +1,6 @@
 ﻿using AnthroCloud.Business;
 using AnthroCloud.Entities;
+using AnthroCloud.Entities.Charts;
 using AnthStat.Statistics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,72 +59,72 @@ namespace AnthroCloud.API.Controllers
             outputs.Bmi = bmi.Bmi;
 
             Tuple<double, double> wfaTuple = await Stats.GetScore(
-                Indicator.WeightForAge, 
+                Indicator.WeightForAge,
                 inputs.Weight,
-                age.TotalDays, 
+                age.TotalDays,
                 (Sex)inputs.Sex
                 );
             outputs.WfaZscore = wfaTuple.Item1;
             outputs.WfaPercentile = wfaTuple.Item2;
 
             Tuple<double, double> muacTuple = await Stats.GetScore(
-                Indicator.ArmCircumferenceForAge, 
-                inputs.MUAC, 
-                age.TotalDays, 
+                Indicator.ArmCircumferenceForAge,
+                inputs.MUAC,
+                age.TotalDays,
                 (Sex)inputs.Sex);
             outputs.MuacZscore = muacTuple.Item1;
             outputs.MuacPercentile = muacTuple.Item2;
 
             Tuple<double, double> bfaTuple = await Stats.GetScore(
-                Indicator.BodyMassIndexForAge, 
-                outputs.Bmi, 
-                age.TotalDays, 
+                Indicator.BodyMassIndexForAge,
+                outputs.Bmi,
+                age.TotalDays,
                 (Sex)inputs.Sex);
             outputs.BfaZscore = bfaTuple.Item1;
             outputs.BfaPercentile = bfaTuple.Item2;
 
             Tuple<double, double> hcaTuple = await Stats.GetScore(
-                Indicator.HeadCircumferenceForAge, 
-                inputs.HeadCircumference, 
-                age.TotalDays, 
+                Indicator.HeadCircumferenceForAge,
+                inputs.HeadCircumference,
+                age.TotalDays,
                 (Sex)inputs.Sex);
             outputs.HcaZscore = hcaTuple.Item1;
             outputs.HcaPercentile = hcaTuple.Item2;
 
             Tuple<double, double> hfaTuple = await Stats.GetScore(
                 Indicator.HeightForAge,
-                outputs.GetLengthHeightAdjusted(), 
-                age.TotalDays, 
+                outputs.GetLengthHeightAdjusted(),
+                age.TotalDays,
                 (Sex)inputs.Sex);
             outputs.HfaZscore = hfaTuple.Item1;
             outputs.HfaPercentile = hfaTuple.Item2;
 
             Tuple<double, double> lfaTuple = await Stats.GetScore(
                 Indicator.LengthForAge,
-                outputs.GetLengthHeightAdjusted(), 
-                age.TotalDays, 
+                outputs.GetLengthHeightAdjusted(),
+                age.TotalDays,
                 (Sex)inputs.Sex);
             outputs.LfaZscore = lfaTuple.Item1;
             outputs.LfaPercentile = lfaTuple.Item2;
 
             Tuple<double, double> sfaTuple = await Stats.GetScore(
-                Indicator.SubscapularSkinfoldForAge, 
-                inputs.SubscapularSkinFold, 
-                age.TotalDays, 
+                Indicator.SubscapularSkinfoldForAge,
+                inputs.SubscapularSkinFold,
+                age.TotalDays,
                 (Sex)inputs.Sex);
             outputs.SsfZscore = sfaTuple.Item1;
             outputs.SsfPercentile = sfaTuple.Item2;
 
             Tuple<double, double> tfaTuple = await Stats.GetScore(
-                Indicator.TricepsSkinfoldForAge, 
-                inputs.TricepsSkinFold, 
-                age.TotalDays, 
+                Indicator.TricepsSkinfoldForAge,
+                inputs.TricepsSkinFold,
+                age.TotalDays,
                 (Sex)inputs.Sex);
             outputs.TsfZscore = tfaTuple.Item1;
             outputs.TsfPercentile = tfaTuple.Item2;
 
             Tuple<double, double> wfhTuple = await Stats.GetScore(
-                Indicator.WeightForHeight, 
+                Indicator.WeightForHeight,
                 inputs.Weight,
                 outputs.GetLengthHeightAdjusted(),
                 (Sex)inputs.Sex);
@@ -131,7 +132,7 @@ namespace AnthroCloud.API.Controllers
             outputs.WfhPercentile = wfhTuple.Item2;
 
             Tuple<double, double> wflTuple = await Stats.GetScore(
-                Indicator.WeightForLength, 
+                Indicator.WeightForLength,
                 inputs.Weight,
                 outputs.GetLengthHeightAdjusted(),
                 (Sex)inputs.Sex);
@@ -139,6 +140,21 @@ namespace AnthroCloud.API.Controllers
             outputs.WflPercentile = wflTuple.Item2;
 
             return outputs;
+        }
+
+
+        [HttpPost]
+        public async Task<List<Tuple<GrowthTypes, double, double>>> GetVisitScores([FromBody] Visit visit)
+        {
+            var listMeasures = new List<Tuple<GrowthTypes, double, double>>
+            {
+                Tuple.Create(GrowthTypes.WFL, 32.9, .44),
+                Tuple.Create(GrowthTypes.WFA, .9, -2.37),
+                Tuple.Create(GrowthTypes.LHFA, 0.0, 3.54),
+                Tuple.Create(GrowthTypes.BFA, 37.6, .32)
+            };
+
+            return listMeasures;
         }
 
         /// <summary>

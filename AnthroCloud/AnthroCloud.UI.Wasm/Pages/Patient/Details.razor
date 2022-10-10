@@ -97,12 +97,15 @@ else
     }
     @if (measureList != null)
     {
-        <table>
+        <table class="table table-striped align-middle table-bordered">
+            <thead class="table-primary">
             <tr>
                 <th>Measure</th>
                 <th>Percentile</th>
                 <th>Z-score</th>
             </tr>
+            </thead>
+            <tbody>
             @foreach (var measure in measureList)
             {
                 <tr>
@@ -111,6 +114,7 @@ else
                     <td>@measure.Zscore</td>
                 </tr>
             }
+            </tbody>
         </table>
     }
 }
