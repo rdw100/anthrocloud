@@ -9,6 +9,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 string patientApiPath = builder.Configuration.GetValue<string>("ConfigurationSettings:patientApiPath");
 string visitApiPath = builder.Configuration.GetValue<string>("ConfigurationSettings:visitApiPath");
+string statApiPath = builder.Configuration.GetValue<string>("ConfigurationSettings:statApiPath");
 
 builder.Services.AddHttpClient<IPatientService, PatientService>(client =>
 {
@@ -18,5 +19,10 @@ builder.Services.AddHttpClient<IVisitService, VisitService>(client =>
 {
     client.BaseAddress = new Uri(visitApiPath);
 });
+builder.Services.AddHttpClient<IAnthroStatsService, AnthroStatsService>(client =>
+{
+    client.BaseAddress = new Uri(statApiPath);
+});
+
 
 await builder.Build().RunAsync();

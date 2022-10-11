@@ -142,16 +142,16 @@ namespace AnthroCloud.API.Controllers
             return outputs;
         }
 
-
-        [HttpPost]
-        public async Task<List<Tuple<GrowthTypes, double, double>>> GetVisitScores([FromBody] Visit visit)
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<List<Measure>> GetVisitScores(int visitId)
         {
-            var listMeasures = new List<Tuple<GrowthTypes, double, double>>
+            var listMeasures = new List<Measure> 
             {
-                Tuple.Create(GrowthTypes.WFL, 32.9, .44),
-                Tuple.Create(GrowthTypes.WFA, .9, -2.37),
-                Tuple.Create(GrowthTypes.LHFA, 0.0, 3.54),
-                Tuple.Create(GrowthTypes.BFA, 37.6, .32)
+                new Measure {Name=GrowthTypes.WFL,Percentile=32.9,Zscore=-.44},
+                new Measure {Name=GrowthTypes.WFA,Percentile=.9,Zscore=-2.37},
+                new Measure {Name=GrowthTypes.LHFA,Percentile=0,Zscore=-3.54},
+                new Measure {Name=GrowthTypes.BFA,Percentile=37.6,Zscore=-.32}
             };
 
             return listMeasures;

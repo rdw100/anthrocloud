@@ -123,6 +123,8 @@ else
     public IPatientService PatientService { get; set; }
     [Inject]
     public IVisitService VisitService { get; set; }
+    [Inject]
+    public IAnthroStatsService StatService {get; set; }
 
     protected List<Patient> patientList = new();
     protected List<Patient> searchPatientData = new();
@@ -138,14 +140,16 @@ else
     protected override async Task OnInitializedAsync()
     {
         await GetPatient();
+        Inputs inputs = new();
+        measureList = (await StatService.GetVisitScores(2)).ToList();
 
-        measureList.AddRange(new List<Measure>
-        {
-            new Measure {Name=GrowthTypes.WFL,Percentile=32.9,Zscore=-.44},
-            new Measure {Name=GrowthTypes.WFA,Percentile=.9,Zscore=-2.37},
-            new Measure {Name=GrowthTypes.LHFA,Percentile=0,Zscore=-3.54},
-            new Measure {Name=GrowthTypes.BFA,Percentile=37.6,Zscore=-.32}
-        });
+        //measureList.AddRange(new List<Measure>
+        //{
+        //    new Measure {Name=GrowthTypes.WFL,Percentile=32.9,Zscore=-.44},
+        //    new Measure {Name=GrowthTypes.WFA,Percentile=.9,Zscore=-2.37},
+        //    new Measure {Name=GrowthTypes.LHFA,Percentile=0,Zscore=-3.54},
+        //    new Measure {Name=GrowthTypes.BFA,Percentile=37.6,Zscore=-.32}
+        //});
     }
     protected async Task GetPatient()
     {
@@ -179,12 +183,5 @@ else
     {
         SearchString = string.Empty;
         patientList = searchPatientData;
-    }
-
-    public class Measure
-    {
-        public GrowthTypes Name { get; set; }
-        public double Percentile { get; set; }
-        public double Zscore { get; set; }
-    }
+    } 
 }
