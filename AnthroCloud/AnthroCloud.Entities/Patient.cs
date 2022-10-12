@@ -24,6 +24,6 @@ namespace AnthroCloud.Entities
         [CheckPresentDateRange]
         public DateTime DateOfBirth { get; set; } = DateTime.Today.AddYears(-1);
 
-        public ICollection<Visit> Visits { get; set; } = new List<Visit>();
+        public virtual ICollection<Visit> Visits { get; set; } = new List<Visit>();
     }
 }

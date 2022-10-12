@@ -143,7 +143,7 @@ namespace AnthroCloud.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{visitId}")]
         public async Task<List<Measure>> GetVisitScores(int visitId)
         {
             var listMeasures = new List<Measure> 

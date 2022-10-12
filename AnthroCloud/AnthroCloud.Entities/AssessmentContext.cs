@@ -15,12 +15,39 @@ namespace AnthroCloud.Entities
             Database.EnsureCreated();
         }
 
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Visit> Visits { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AnthroCloudDB;Trusted_Connection=True;MultipleActiveResultSets=true");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Patient>()
-                .HasMany(c => c.Visits)
-                .WithOne(e => e.Patient)
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Patient>(entity =>
+            {
+                entity.Property(e => e.FirstName).IsRequired();
+
+                entity.Property(e => e.LastName).IsRequired();
+            });
+
+            modelBuilder.Entity<Visit>(entity =>
+            {
+                entity.HasIndex(e => e.PatientId, "IX_Visits_PatientId");
+
+                entity.HasOne(d => d.Patient)
+                    .WithMany(p => p.Visits)
+                    .HasForeignKey(d => d.PatientId);
+            });
+
+            modelBuilder.Entity<Visit>()
+                .HasOne(p => p.Patient)
+                .WithMany(v => v.Visits);
 
             modelBuilder.Entity<Patient>()
                 .HasData(
@@ -71,7 +98,7 @@ namespace AnthroCloud.Entities
                         MUAC = 11.4,
                         TricepsSkinFold = 5.2,
                         SubscapularSkinFold = 4.4
-                    }, 
+                    },
                     new Visit()
                     {
                         VisitId = 3,
@@ -101,16 +128,6 @@ namespace AnthroCloud.Entities
                         SubscapularSkinFold = 3.9
                     }
                 );
-        }
-
-        public DbSet<Patient> Patients { get; set; }
-        public DbSet<Visit> Visits { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            // 
-            //optionsBuilder
-            //    .UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AnthroCloudDB;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
     }
 }

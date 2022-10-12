@@ -19,7 +19,10 @@ namespace AnthroCloud.API.Controllers
         [HttpGet("patient/{patientId:int}")]
         public async Task<ActionResult<IEnumerable<Visit>>> GetVisits(int patientId)
         {
-            return await _context.Visits.Where(p => p.PatientId == patientId).ToListAsync();
+            return await _context.Visits
+                .Include(p => p.Patient)
+                .Where(x => x.PatientId == patientId)
+                .ToListAsync();
         }
 
         // GET: api/Visits/5

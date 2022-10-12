@@ -11,6 +11,7 @@ namespace AnthroCloud.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VisitId { get; set; }
 
+        //[ForeignKey("PatientId")]
         public int PatientId { get; set; }
 
         [Required]
@@ -50,8 +51,7 @@ namespace AnthroCloud.Entities
         [Required, EnumDataType(typeof(MeasurementTypes))]
         public MeasurementTypes Measured { get; set; } = MeasurementTypes.Recumbent;
 
-
         [ForeignKey("PatientId")]
-        public Patient Patient { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }
