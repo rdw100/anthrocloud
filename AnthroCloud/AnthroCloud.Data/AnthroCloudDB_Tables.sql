@@ -4,6 +4,29 @@
 -- The following data is used to construct charts.
 -- ***************************************************
 
+USE MASTER;  
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- *****************
+-- Create Database
+-- *****************
+IF EXISTS 
+   (SELECT name FROM master.dbo.sysdatabases 
+    WHERE name = N'AnthroCloudDB')
+	
+	BEGIN
+		SELECT 'Database Name already Exist' AS Message
+	END;
+ELSE
+	BEGIN
+		CREATE DATABASE AnthroCloudDB
+		SELECT 'New Database is Created'
+	END;
+GO
+
 USE [AnthroCloudDB]
 GO
 
