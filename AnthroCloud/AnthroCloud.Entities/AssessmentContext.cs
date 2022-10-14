@@ -17,6 +17,7 @@ namespace AnthroCloud.Entities
 
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Visit> Visits { get; set; }
+        public DbSet<Measure> Measures { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,9 +46,15 @@ namespace AnthroCloud.Entities
                     .HasForeignKey(d => d.PatientId);
             });
 
+            modelBuilder.Entity<Measure>()
+                .HasKey(m => new { m.MeasureId, m.Name });
+
             modelBuilder.Entity<Visit>()
                 .HasOne(p => p.Patient)
                 .WithMany(v => v.Visits);
+
+            modelBuilder.Entity<Visit>()
+                .HasMany(m => m.Measures);
 
             modelBuilder.Entity<Patient>()
                 .HasData(
