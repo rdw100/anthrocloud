@@ -15,6 +15,13 @@ namespace AnthroCloud.API.Controllers
             _context = context;
         }
 
+        // GET: api/Visits
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Visit>>> GetVisits()
+        {
+            return await _context.Visits.ToListAsync();
+        }
+
         // GET: api/Visits/patient/1
         [HttpGet("patient/{patientId:int}")]
         public async Task<ActionResult<IEnumerable<Visit>>> GetVisits(int patientId)
@@ -22,6 +29,17 @@ namespace AnthroCloud.API.Controllers
             return await _context.Visits
                 .Include(p => p.Patient)
                 .Where(x => x.PatientId == patientId)
+                .ToListAsync();
+        }
+
+        // GET: api/Visits/measures/1
+        [HttpGet("measures/{visitId:int}")]
+        public async Task<ActionResult<IEnumerable<Measure>>> GetVisitMeasures(int visitId)
+        {
+            return await _context.Measures
+                //.Include(p => p.Patient)
+                //.Include(m => m.Measures)
+                .Where(x => x.VisitId == visitId)
                 .ToListAsync();
         }
 
