@@ -69,8 +69,17 @@ else
             }
         </tbody>
     </table>
-    @if (visitList != null)
+    @if (visitList.Any())
     {
+        <div class="row">
+            <div class="col-md-6">
+                <a href='/visit/add/@visitList[0].PatientId' class="btn btn-primary" role="button">
+                    <i class="oi oi-plus"></i>
+                    Add Visit
+                </a>
+            </div>
+        </div>
+        <br />
         <table class="table table-striped align-middle table-bordered">
             <thead class="table-primary">
                 <tr>
@@ -93,9 +102,9 @@ else
                     </tr>
                 }
             </tbody>
-        </table>
+        </table>        
     }
-    @if (measureList != null)
+    @if (measureList.Any())
     {
         <table class="table table-striped align-middle table-bordered">
             <thead class="table-primary">

@@ -1,0 +1,159 @@
+﻿@page "/Visit/Add/{patientId:int}"
+@page "/Visit/Edit/{visitId:int}"
+@using AnthroCloud.Entities
+@using AnthroCloud.UI.Wasm.Services
+@using Microsoft.Fast.Components.FluentUI
+@inject HttpClient httpClient
+@inject NavigationManager NavigationManager
+
+<h3>@Title Visit</h3>
+<hr />
+<EditForm Model="@visit" OnValidSubmit="SaveVisit">
+    <DataAnnotationsValidator />
+    <div class="mb-3">
+        <label for="Weight" class="form-label">Weight</label>
+        <div class="col-md-4">
+            <InputNumber id="Weight" @bind-Value="visit.Weight"
+                class="form-control text-center"
+                MIN=".9" MAX="58" STEP=".1"
+                data-error-msg="Must be .9 and 58"
+                placeholder="Weight (kg)" />
+        </div>
+        <ValidationMessage For="@(() => visit.Weight)" />
+    </div>
+    <div class="mb-3">
+        <label for="LengthHeight" class="form-label">Length</label>
+        <div class="col-md-4">
+            <input id="LengthHeight"
+                   asp-for="LengthHeight"
+                   class="form-control text-center"
+                   type="number"
+                   MIN="45.0" MAX="120.0" STEP=".1"
+                   placeholder="Length/Height (cm)"
+                   required
+                   data-error-msg="Must be 45.0 and 120.0"
+                   @bind-value="visit.LengthHeight" />
+        </div>
+        <ValidationMessage For="@(() => visit.LengthHeight)" />
+    </div>
+    <div class="mb-3">
+        <label for="DateOfVisit" class="form-label">Visit Date</label>
+        <div class="col-md-4">
+            <InputDate id="DateOfVisit"
+                       Value="visit.DateOfVisit"
+                       ValueExpression="@(()=>visit.DateOfVisit)"
+                       ParsingErrorMessage="Must be a valid date."
+                       class="form-control text-center" />
+        </div>
+        <ValidationMessage For="@(() => visit.DateOfVisit)" />
+    </div>
+    <div class="mb-3">
+        <label for="HeadCircumference" class="form-label">Head Circumference (cm)</label>
+        <div class="col-md-4">
+            <input asp-for="HeadCircumference" 
+                @bind-value="visit.HeadCircumference"
+                class="form-control text-center" type="number" 
+                MIN="25.0" MAX="64.0" STEP=".1" id="HeadCircumference" 
+                required>
+        </div>
+        <ValidationMessage For="@(() => visit.HeadCircumference)" />
+    </div>
+    <div class="mb-3">
+        <label for="MUAC" class="col-form-label">MUAC (cm)</label>
+        <div class="col-md-4">
+            <input asp-for="MUAC" @bind-value="@visit.MUAC" 
+                class="form-control text-center" type="number" 
+                MIN="6.0" MAX="35.0" STEP=".1" 
+                id="MUAC" required>
+        </div>
+        <ValidationMessage For="@(() => visit.MUAC)" />
+    </div>
+    <div class="mb-3">
+        <label for="Measured" class="col-form-label">Standing</label>
+        <div class="col-md-4">
+            <InputRadioGroup Value="visit.Measured"
+                             ValueExpression="@(()=>visit.Measured)">
+                @foreach (var item in (MeasurementTypes[])Enum.GetValues(typeof(MeasurementTypes)))
+                {
+                    <label class="d-block">
+                        <InputRadio Value="item" />
+                        @item
+                        <br>
+                    </label>
+                }
+            </InputRadioGroup>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="Oedema" class="col-form-label">Oedema</label>
+        <div class="col-md-4">
+            <InputRadioGroup id="Oedema" Name="oedema" @bind-Value="visit.Oedema">
+                <label class="d-block">
+                    <InputRadio Name="oedema" Value="OedemaTypes.Yes" />Yes<br>
+                </label>
+                <label class="d-block">
+                    <InputRadio Name="oedema" Value="OedemaTypes.No" />No<br>
+                </label>
+            </InputRadioGroup>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="SubscapularSkinFold" class="col-form-label">Subscapular skinfold (mm)</label>
+        <div class="col-md-4">
+            <input asp-for="SubscapularSkinFold" @bind-value="visit.SubscapularSkinFold" 
+                class="form-control text-center" type="number" 
+                MIN="1.8" MAX="40.0" STEP=".1" 
+                id="SubscapularSkinFold" required>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="TricepsSkinFold" class="col-form-label">Triceps skinfold (mm)</label>
+        <div class="col-md-4">
+            <input asp-for="TricepsSkinFold" @bind-value="visit.TricepsSkinFold" 
+                class="form-control text-center" type="number" 
+                MIN="1.8" MAX="40.0" STEP=".1"
+                id="TricepsSkinFold" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-outline-success">Save</button>
+        <button class="btn btn-outline-danger" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
+@code {
+    [Inject]
+    public IVisitService VisitService { get; set; }
+
+    [Parameter]
+    public int visitId { get; set; }
+    
+    [Parameter]
+    public int patientId { get; set; }
+    
+    protected string Title = "Add";
+    protected Visit visit = new();
+    protected override async Task OnParametersSetAsync()
+    {
+        if (visitId != 0)
+        {
+            Title = "Edit";
+            visit = await VisitService.GetVisit(visitId);
+        }
+    }
+    protected async Task SaveVisit()
+    {
+        if (visit.VisitId != 0)
+        {
+            await VisitService.UpdateVisit(visitId, visit);
+        }
+        else
+        {
+            await VisitService.CreateVisit(visit);
+        }
+        Cancel();
+    }
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("Patient/details");
+    }
+}
