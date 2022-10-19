@@ -126,14 +126,19 @@
 
     [Parameter]
     public int visitId { get; set; }
-    
+
     [Parameter]
     public int patientId { get; set; }
-    
+
     protected string Title = "Add";
     protected Visit visit = new();
+
     protected override async Task OnParametersSetAsync()
     {
+        if (patientId != 0)
+        {
+            visit.PatientId = patientId;
+        }
         if (visitId != 0)
         {
             Title = "Edit";
