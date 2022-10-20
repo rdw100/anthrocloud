@@ -1,6 +1,8 @@
 ﻿using AnthroCloud.Entities;
+using AnthroCloud.Entities.Charts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.X86;
 
 namespace AnthroCloud.API.Controllers
 {
@@ -93,8 +95,30 @@ namespace AnthroCloud.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Visit>> PostVisit(Visit visit)
         {
+            visit.Patient = null;
             _context.Visits.Add(visit);
             await _context.SaveChangesAsync();
+
+            /* START Add Measures manually */
+            var listMeasures = new List<Measure>
+            {
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.BFA,Percentile=37.6,Zscore=-.32},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.LHFA,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.HCA,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.MUAC,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.SSF,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.TSF,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFA,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFA,Percentile=.9,Zscore=-2.37},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFL,Percentile=32.9,Zscore=-.44},
+            };
+
+            foreach (Measure measure in listMeasures)
+            {
+                _context.Measures.Add(measure);
+            }
+            await _context.SaveChangesAsync();
+            /* END Add Measures manually */
 
             return CreatedAtAction("GetVisit", new { id = visit.VisitId }, visit);
         }

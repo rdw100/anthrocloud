@@ -124,6 +124,9 @@
     [Inject]
     public IVisitService VisitService { get; set; }
 
+    [Inject]
+    public IPatientService PatientService { get; set; }
+
     [Parameter]
     public int visitId { get; set; }
 
@@ -138,6 +141,7 @@
         if (patientId != 0)
         {
             visit.PatientId = patientId;
+            visit.Patient = await PatientService.GetPatient(patientId);
         }
         if (visitId != 0)
         {

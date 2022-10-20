@@ -7,6 +7,7 @@ namespace AnthroCloud.Entities
     public class Measure
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MeasureId { get; set; }
         [Key]
         [Required, EnumDataType(typeof(GrowthTypes))]

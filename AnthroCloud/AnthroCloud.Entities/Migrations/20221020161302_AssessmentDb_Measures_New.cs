@@ -5,31 +5,72 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AnthroCloud.Entities.Migrations
 {
-    public partial class AssessmentDb_Measures : Migration
+    public partial class AssessmentDb_Measures_New : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Measures",
-                columns: table => new
-                {
-                    MeasureId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<int>(type: "int", nullable: false),
-                    VisitId = table.Column<int>(type: "int", nullable: false),
-                    Percentile = table.Column<double>(type: "float", nullable: false),
-                    Zscore = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Measures", x => new { x.MeasureId, x.Name });
-                    table.ForeignKey(
-                        name: "FK_Measures_Visits_VisitId",
-                        column: x => x.VisitId,
-                        principalTable: "Visits",
-                        principalColumn: "VisitId",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.AlterColumn<int>(
+                name: "MeasureId",
+                table: "Measures",
+                type: "int",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "int")
+                .Annotation("SqlServer:Identity", "1, 1");
+
+            migrationBuilder.UpdateData(
+                table: "Patients",
+                keyColumn: "PatientId",
+                keyValue: 1,
+                column: "DateOfBirth",
+                value: new DateTime(2021, 10, 20, 0, 0, 0, 0, DateTimeKind.Local));
+
+            migrationBuilder.UpdateData(
+                table: "Patients",
+                keyColumn: "PatientId",
+                keyValue: 2,
+                column: "DateOfBirth",
+                value: new DateTime(2020, 10, 20, 0, 0, 0, 0, DateTimeKind.Local));
+
+            migrationBuilder.UpdateData(
+                table: "Visits",
+                keyColumn: "VisitId",
+                keyValue: 1,
+                column: "DateOfVisit",
+                value: new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Local));
+
+            migrationBuilder.UpdateData(
+                table: "Visits",
+                keyColumn: "VisitId",
+                keyValue: 2,
+                column: "DateOfVisit",
+                value: new DateTime(2022, 7, 20, 0, 0, 0, 0, DateTimeKind.Local));
+
+            migrationBuilder.UpdateData(
+                table: "Visits",
+                keyColumn: "VisitId",
+                keyValue: 3,
+                column: "DateOfVisit",
+                value: new DateTime(2021, 10, 20, 0, 0, 0, 0, DateTimeKind.Local));
+
+            migrationBuilder.UpdateData(
+                table: "Visits",
+                keyColumn: "VisitId",
+                keyValue: 4,
+                column: "DateOfVisit",
+                value: new DateTime(2021, 4, 20, 0, 0, 0, 0, DateTimeKind.Local));
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AlterColumn<int>(
+                name: "MeasureId",
+                table: "Measures",
+                type: "int",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "int")
+                .OldAnnotation("SqlServer:Identity", "1, 1");
 
             migrationBuilder.UpdateData(
                 table: "Patients",
@@ -72,59 +113,6 @@ namespace AnthroCloud.Entities.Migrations
                 keyValue: 4,
                 column: "DateOfVisit",
                 value: new DateTime(2021, 4, 14, 0, 0, 0, 0, DateTimeKind.Local));
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Measures_VisitId",
-                table: "Measures",
-                column: "VisitId");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Measures");
-
-            migrationBuilder.UpdateData(
-                table: "Patients",
-                keyColumn: "PatientId",
-                keyValue: 1,
-                column: "DateOfBirth",
-                value: new DateTime(2021, 10, 7, 0, 0, 0, 0, DateTimeKind.Local));
-
-            migrationBuilder.UpdateData(
-                table: "Patients",
-                keyColumn: "PatientId",
-                keyValue: 2,
-                column: "DateOfBirth",
-                value: new DateTime(2020, 10, 7, 0, 0, 0, 0, DateTimeKind.Local));
-
-            migrationBuilder.UpdateData(
-                table: "Visits",
-                keyColumn: "VisitId",
-                keyValue: 1,
-                column: "DateOfVisit",
-                value: new DateTime(2022, 1, 7, 0, 0, 0, 0, DateTimeKind.Local));
-
-            migrationBuilder.UpdateData(
-                table: "Visits",
-                keyColumn: "VisitId",
-                keyValue: 2,
-                column: "DateOfVisit",
-                value: new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local));
-
-            migrationBuilder.UpdateData(
-                table: "Visits",
-                keyColumn: "VisitId",
-                keyValue: 3,
-                column: "DateOfVisit",
-                value: new DateTime(2021, 10, 7, 0, 0, 0, 0, DateTimeKind.Local));
-
-            migrationBuilder.UpdateData(
-                table: "Visits",
-                keyColumn: "VisitId",
-                keyValue: 4,
-                column: "DateOfVisit",
-                value: new DateTime(2021, 4, 7, 0, 0, 0, 0, DateTimeKind.Local));
         }
     }
 }
