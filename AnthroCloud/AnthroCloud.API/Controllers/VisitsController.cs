@@ -100,18 +100,7 @@ namespace AnthroCloud.API.Controllers
             await _context.SaveChangesAsync();
 
             /* START Add Measures manually */
-            var listMeasures = new List<Measure>
-            {
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.BFA,Percentile=37.6,Zscore=-.32},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.LHFA,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.HCA,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.MUAC,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.SSF,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.TSF,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFA,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFA,Percentile=.9,Zscore=-2.37},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFL,Percentile=32.9,Zscore=-.44},
-            };
+            var listMeasures = GetMeasures(visit);
 
             foreach (Measure measure in listMeasures)
             {
@@ -142,6 +131,24 @@ namespace AnthroCloud.API.Controllers
         private bool VisitExists(int id)
         {
             return _context.Visits.Any(e => e.VisitId == id);
+        }
+
+        private List<Measure> GetMeasures(Visit visit)
+        {
+            List<Measure> scores = new List<Measure>
+            {
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.BFA,Percentile=37.6,Zscore=-.32},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.LHFA,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.HCA,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.MUAC,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.SSF,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.TSF,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFA,Percentile=0,Zscore=-3.54},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFA,Percentile=.9,Zscore=-2.37},
+                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFL,Percentile=32.9,Zscore=-.44},
+            };
+
+            return scores;
         }
     }
 }
