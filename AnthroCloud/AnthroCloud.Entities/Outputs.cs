@@ -1,4 +1,6 @@
-﻿namespace AnthroCloud.Entities
+﻿using System.Collections.Generic;
+
+namespace AnthroCloud.Entities
 {
     /// <summary>
     /// Represents all calculator outputs from computed statistics.
@@ -29,6 +31,8 @@
         public double WfhZscore { get; set; } = 0.12;
         public double HfaPercentile { get; set; } = 53.1;
         public double HfaZscore { get; set; } = 0.08;
+        public List<Measure> Measures = new List<Measure>();
+
         public double GetLengthHeightAdjusted()
         {
             return LengthHeightAdjusted;

@@ -141,7 +141,6 @@
         if (patientId != 0)
         {
             visit.PatientId = patientId;
-            visit.Patient = await PatientService.GetPatient(patientId);
         }
         if (visitId != 0)
         {

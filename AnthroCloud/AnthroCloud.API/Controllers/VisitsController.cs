@@ -1,8 +1,9 @@
-﻿using AnthroCloud.Entities;
+﻿using AnthroCloud.Business;
+using AnthroCloud.Entities;
 using AnthroCloud.Entities.Charts;
+using AnthStat.Statistics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.Intrinsics.X86;
 
 namespace AnthroCloud.API.Controllers
 {
@@ -39,8 +40,6 @@ namespace AnthroCloud.API.Controllers
         public async Task<ActionResult<IEnumerable<Measure>>> GetVisitMeasures(int visitId)
         {
             return await _context.Measures
-                //.Include(p => p.Patient)
-                //.Include(m => m.Measures)
                 .Where(x => x.VisitId == visitId)
                 .ToListAsync();
         }
@@ -95,19 +94,21 @@ namespace AnthroCloud.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Visit>> PostVisit(Visit visit)
         {
-            visit.Patient = null;
             _context.Visits.Add(visit);
             await _context.SaveChangesAsync();
 
-            /* START Add Measures manually */
-            var listMeasures = GetMeasures(visit);
+            // Get patient specific data for calculation
+            visit.Patient = await _context.Patients.FindAsync(visit.PatientId);
+            
+            /* Add measures automatically */
+            var listMeasures = await GetMeasuresAsync(visit);
 
             foreach (Measure measure in listMeasures)
             {
                 _context.Measures.Add(measure);
             }
+
             await _context.SaveChangesAsync();
-            /* END Add Measures manually */
 
             return CreatedAtAction("GetVisit", new { id = visit.VisitId }, visit);
         }
@@ -133,22 +134,105 @@ namespace AnthroCloud.API.Controllers
             return _context.Visits.Any(e => e.VisitId == id);
         }
 
-        private List<Measure> GetMeasures(Visit visit)
+        /// <summary>
+        /// Retrieves the calculated scored measures for a visit.
+        /// </summary>
+        /// <param name="visit">The patient's visit</param>
+        /// <returns>A list of score measures for a patient's visit.</returns>
+        private async Task<List<Measure>> GetMeasuresAsync(Visit visit)
         {
-            List<Measure> scores = new List<Measure>
-            {
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.BFA,Percentile=37.6,Zscore=-.32},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.LHFA,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.HCA,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.MUAC,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.SSF,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.TSF,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFA,Percentile=0,Zscore=-3.54},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFA,Percentile=.9,Zscore=-2.37},
-                new Measure {VisitId=visit.VisitId,Name=GrowthTypes.WFL,Percentile=32.9,Zscore=-.44},
-            };
+            Outputs outputs = new();
+            Age age = new(visit.Patient.DateOfBirth, visit.DateOfVisit);
+            outputs.Age.Days = age.Days;
+            outputs.Age.Months = age.Months;
+            outputs.Age.Years = age.Years;
+            outputs.Age.TotalDays = age.TotalDays;
+            outputs.Age.TotalMonths = age.TotalMonths;
 
-            return scores;
+            Age ageClinic = new(visit.Patient.DateOfBirth, visit.DateOfVisit.AddDays(-1));
+            outputs.Age.Days = ageClinic.Days;
+            outputs.Age.Months = ageClinic.Months;
+            outputs.Age.Years = ageClinic.Years;
+            outputs.Age.TotalDays = ageClinic.TotalDays;
+            outputs.Age.TotalMonths = ageClinic.TotalMonths;
+            outputs.Age.AgeString = ageClinic.ToReadableString();
+            outputs.SetLengthHeightAdjusted(ageClinic.Years, visit.LengthHeight, visit.Measured);
+
+            BMI bmi = new(visit.Weight, outputs.GetLengthHeightAdjusted());
+            outputs.Bmi = bmi.Bmi;
+
+            Tuple<double, double> wfaTuple = await Stats.GetScore(
+                Indicator.WeightForAge,
+                visit.Weight,
+                age.TotalDays,
+                (Sex)visit.Patient.Sex
+                );
+            outputs.Measures.Add(new Measure { VisitId = visit.VisitId, Name = GrowthTypes.WFA, Zscore=wfaTuple.Item1, Percentile= wfaTuple.Item2 });
+
+            Tuple<double, double> muacTuple = await Stats.GetScore(
+                Indicator.ArmCircumferenceForAge,
+                visit.MUAC,
+                age.TotalDays,
+                (Sex)visit.Patient.Sex);
+            outputs.Measures.Add(new Measure { VisitId = visit.VisitId, Name = GrowthTypes.MUAC, Zscore = muacTuple.Item1, Percentile = muacTuple.Item2 });
+
+            Tuple<double, double> bfaTuple = await Stats.GetScore(
+                Indicator.BodyMassIndexForAge,
+                outputs.Bmi,
+                age.TotalDays,
+                (Sex)visit.Patient.Sex);
+            outputs.Measures.Add(new Measure { VisitId = visit.VisitId, Name = GrowthTypes.BFA, Zscore = bfaTuple.Item1, Percentile = bfaTuple.Item2 });
+
+            Tuple<double, double> hcaTuple = await Stats.GetScore(
+                Indicator.HeadCircumferenceForAge,
+                visit.HeadCircumference,
+                age.TotalDays,
+                (Sex)visit.Patient.Sex);
+            outputs.Measures.Add(new Measure { VisitId = visit.VisitId, Name = GrowthTypes.HCA, Zscore = hcaTuple.Item1, Percentile = hcaTuple.Item2 });
+
+            Tuple<double, double> hfaTuple = await Stats.GetScore(
+                Indicator.HeightForAge,
+                outputs.GetLengthHeightAdjusted(),
+                age.TotalDays,
+                (Sex)visit.Patient.Sex);
+            outputs.Measures.Add(new Measure { VisitId = visit.VisitId, Name = GrowthTypes.LHFA, Zscore = hfaTuple.Item1, Percentile = hfaTuple.Item2 });
+
+            Tuple<double, double> lfaTuple = await Stats.GetScore(
+                Indicator.LengthForAge,
+                outputs.GetLengthHeightAdjusted(),
+                age.TotalDays,
+                (Sex)visit.Patient.Sex);
+            outputs.Measures.Add(new Measure { VisitId = visit.VisitId, Name = GrowthTypes.LHFA, Zscore = lfaTuple.Item1, Percentile = lfaTuple.Item2 });
+
+            Tuple<double, double> sfaTuple = await Stats.GetScore(
+                Indicator.SubscapularSkinfoldForAge,
+                visit.SubscapularSkinFold,
+                age.TotalDays,
+                (Sex)visit.Patient.Sex);
+            outputs.Measures.Add(new Measure { VisitId = visit.VisitId, Name = GrowthTypes.SSF, Zscore = sfaTuple.Item1, Percentile = sfaTuple.Item2 });
+
+            Tuple<double, double> tfaTuple = await Stats.GetScore(
+                Indicator.TricepsSkinfoldForAge,
+                visit.TricepsSkinFold,
+                age.TotalDays,
+                (Sex)visit.Patient.Sex);
+            outputs.Measures.Add(new Measure { VisitId = visit.VisitId, Name = GrowthTypes.TSF, Zscore = tfaTuple.Item1, Percentile = tfaTuple.Item2 });
+
+            Tuple<double, double> wfhTuple = await Stats.GetScore(
+                Indicator.WeightForHeight,
+                visit.Weight,
+                outputs.GetLengthHeightAdjusted(),
+                (Sex)visit.Patient.Sex);
+            outputs.Measures.Add(new Measure { VisitId = visit.VisitId, Name = GrowthTypes.WFH, Zscore = wfhTuple.Item1, Percentile = wfhTuple.Item2 });
+
+            Tuple<double, double> wflTuple = await Stats.GetScore(
+                Indicator.WeightForLength,
+                visit.Weight,
+                outputs.GetLengthHeightAdjusted(),
+                (Sex)visit.Patient.Sex);
+            outputs.Measures.Add(new Measure { VisitId = visit.VisitId, Name = GrowthTypes.WFL, Zscore = wflTuple.Item1, Percentile = wflTuple.Item2 });
+
+            return outputs.Measures;
         }
     }
 }
