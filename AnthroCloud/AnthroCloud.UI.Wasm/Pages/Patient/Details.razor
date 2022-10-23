@@ -3,6 +3,7 @@
 @using AnthroCloud.Entities.Charts
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient httpClient
+@inject NavigationManager NavigationManager
 
 <h1>Individual Assessment</h1>
 <p>Children</p>
@@ -87,6 +88,7 @@ else
                     <th>Patient</th>
                     <th>Weight</th>
                     <th>Height</th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
@@ -99,6 +101,11 @@ else
                         <td>@visit.PatientId</td>
                         <td>@visit.Weight</td>
                         <td>@visit.LengthHeight</td>
+                        <td>
+                            <a href='/visit/delete/@visit.VisitId' class="btn btn-outline-danger" role="button">
+                                Delete
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -177,10 +184,6 @@ else
         {
             patientList = searchPatientData;
         }
-    }
-    protected void DeleteConfirm(int patientID)
-    {
-        patient = patientList.FirstOrDefault(x => x.PatientId == patientID);
     }
     public void ResetSearch()
     {

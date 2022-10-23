@@ -1,0 +1,54 @@
+﻿@page "/visit/delete/{visitId:int}"
+@using AnthroCloud.Entities
+@using AnthroCloud.UI.Wasm.Services
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+<h3>Delete Visit</h3>
+<div class="form-group">
+    <h4>Do you want to delete this record?</h4>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>Visit</td>
+                <td>@visit.VisitId</td>
+            </tr>
+            <tr>
+                <td>Patient</td>
+                <td>@visit.PatientId</td>
+            </tr>
+            <tr>
+                <td>Weight</td>
+                <td>@visit.Weight</td>
+            </tr>
+            <tr>
+                <td>Height</td>
+                <td>@visit.LengthHeight</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="form-group">
+    <input type="submit" value="Delete" @onclick="(async () => await DeleteVisit(visit.VisitId))" class="btn btn-danger" />
+    <input type="submit" value="Cancel" @onclick="(() => Cancel())" class="btn btn-warning" />
+</div>
+@code {
+    [Inject]
+    public IVisitService VisitService { get; set; }
+
+    [Parameter]
+    public int visitId { get; set; }
+    Visit visit = new Visit();
+    protected override async Task OnInitializedAsync()
+    {
+        visit = await VisitService.GetVisit(Convert.ToInt32(visitId));
+    }
+    protected async Task DeleteVisit(int visitId)
+    {
+        await VisitService.DeleteVisit(visitId);
+        NavigationManager.NavigateTo("/Patient/details");
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/Patient/details");
+    }
+}

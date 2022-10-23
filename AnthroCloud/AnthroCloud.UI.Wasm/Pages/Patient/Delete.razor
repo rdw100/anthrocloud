@@ -29,7 +29,7 @@
     </table>
 </div>
 <div class="form-group">
-    <input type="submit" value="Delete" @onclick="(async () => await RemoveUser(patient.PatientId))" class="btn btn-danger" />
+    <input type="submit" value="Delete" @onclick="(async () => await RemovePatient(patient.PatientId))" class="btn btn-danger" />
     <input type="submit" value="Cancel" @onclick="(() => Cancel())" class="btn btn-warning" />
 </div>
 @code {
@@ -43,7 +43,7 @@
     {
         patient = await PatientService.GetPatient(Convert.ToInt32(patientId));
     }
-    protected async Task RemoveUser(int patientId)
+    protected async Task RemovePatient(int patientId)
     {
         await PatientService.DeletePatient(patientId);
         NavigationManager.NavigateTo("/Patient/details");
