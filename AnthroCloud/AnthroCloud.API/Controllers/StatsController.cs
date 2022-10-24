@@ -142,21 +142,6 @@ namespace AnthroCloud.API.Controllers
             return outputs;
         }
 
-        [HttpGet]
-        [Route("{visitId}")]
-        public async Task<List<Measure>> GetVisitScores(int visitId)
-        {
-            var listMeasures = new List<Measure> 
-            {
-                new Measure {Name=GrowthTypes.WFL,Percentile=32.9,Zscore=-.44},
-                new Measure {Name=GrowthTypes.WFA,Percentile=.9,Zscore=-2.37},
-                new Measure {Name=GrowthTypes.LHFA,Percentile=0,Zscore=-3.54},
-                new Measure {Name=GrowthTypes.BFA,Percentile=37.6,Zscore=-.32}
-            };
-
-            return listMeasures;
-        }
-
         /// <summary>
         /// Gets computed statistics from head circumference changes.
         /// </summary>
