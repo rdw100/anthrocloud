@@ -126,8 +126,10 @@ else
             {
                 <tr>
                     <td>@measure.Name</td>
-                    <td>@measure.Percentile</td>
-                    <td>@measure.Zscore</td>
+                    <td>
+                            <input type="range" min="0" max="100" value="@measure.Percentile">&nbsp;@measure.Percentile
+                    </td>
+                    <td style="background-color: @SetColor(measure.Zscore)">@measure.Zscore</td>
                 </tr>
             }
             </tbody>
@@ -189,5 +191,17 @@ else
     {
         SearchString = string.Empty;
         patientList = searchPatientData;
-    } 
+    }
+    public string SetColor(double zscore)
+    {
+        var colorCode = zscore switch
+        {
+            double n when (n <= 1 && n >= -1) => "#008000", //GREEN
+            double n when (n <= -1 && n >= -2) || (n <= 2 && n > 1) => "#FFA500", //GOLD
+            double n when (n < -2 && n >= -3) || (n <= 3 && n > 2) => "#FF0000", //RED
+            double n when (n > 3 || n < -3) => "#808080", //BLACK
+            _ => string.Empty,
+        };
+        return colorCode;
+    }
 }
