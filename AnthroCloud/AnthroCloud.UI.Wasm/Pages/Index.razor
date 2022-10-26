@@ -1,14 +1,8 @@
 ﻿@page "/"
 @using Microsoft.Fast.Components.FluentUI
 
-<body style="max-width:400px;margin:16px;border:1px solid #ccc">
-
-    <header class="w3-container w3-card-4 w3-theme">
-        <h1>Patients</h1>
-    </header>
-
     <div class="w3-panel">
-        <h2>Visit List</h2>
+        <h2>Patient List</h2>
         <p>You can combine w3-ul and the w3-bar classes to create an avatar list:</p>
         <ul class="w3-ul w3-card-4">
             <li class="w3-bar">
@@ -19,7 +13,6 @@
                     <span>Web Designer</span>
                 </div>
             </li>
-
             <li class="w3-bar">
                 <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
                 <img src="img/img_avatar5.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
@@ -28,7 +21,6 @@
                     <span>Support</span>
                 </div>
             </li>
-
             <li class="w3-bar">
                 <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
                 <img src="img/img_avatar6.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
@@ -38,16 +30,5 @@
                 </div>
             </li>
         </ul>
-
     </div>
-
-    <footer class="w3-container w3-theme-l2" style="position:relative">
-        <a class="w3-btn w3-xlarge w3-circle w3-theme-action w3-right" style="position:absolute;top:-28px;right:16px;">+</a>
-        <p>Copyright 2016</p>
-    </footer>
-
-    <div class="w3-container w3-theme-dark w3-xlarge">«<span class="w3-right">»</span></div>
-
-</body>
-
 @*<AnthroCloud.UI.Wasm.Components.MyFluentCard/>*@

@@ -1,0 +1,44 @@
+﻿<div class="w3-container w3-padding-small w3-theme-d3">
+  <div class="w3-right">
+    <i class="fa fa-volume-up"></i>
+    <i class="fa fa-wifi"></i>
+    <i class="fa fa-battery-2"></i>
+    12:30
+  </div>
+</div>
+<header class="w3-bar w3-card w3-theme">
+    <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme"
+            @onclick="ToggleNavSideMenu">
+        &#9776;
+    </button>
+    <h1 class="w3-bar-item">AnthroCloud</h1>
+</header>
+
+<nav class="@NavSideMenuCssClass w3-sidebar w3-bar-block w3-card w3-animate-left" style="width:200px;">
+    <div class="w3-red">
+        <button @onclick="ToggleNavSideMenu"
+                class="w3-button w3-display-topright w3-xlarge">
+            X
+        </button>
+    </div>
+    <NavLink @onclick="ToggleNavSideMenu" class="w3-bar-item w3-button" href="" Match="NavLinkMatch.All">
+        <span class="oi oi-home" aria-hidden="true"></span> Home
+    </NavLink>
+    <NavLink @onclick="ToggleNavSideMenu" class="w3-bar-item w3-button" href="patient/grid">
+        <span class="oi oi-list-rich" aria-hidden="true"></span> Fluent Grid
+    </NavLink>
+    <NavLink @onclick="ToggleNavSideMenu" class="w3-bar-item w3-button" href="patient/details">
+        <span class="oi oi-people" aria-hidden="true"></span> Child Details
+    </NavLink>
+</nav>
+
+@code {
+    private bool collapseNavSideMenu = true;
+
+    private string? NavSideMenuCssClass => collapseNavSideMenu ? "closeSidebar" : null;
+
+    private void ToggleNavSideMenu()
+    {
+        collapseNavSideMenu = !collapseNavSideMenu;
+    }
+}
