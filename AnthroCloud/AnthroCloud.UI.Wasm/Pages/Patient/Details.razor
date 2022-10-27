@@ -7,15 +7,15 @@
 
 <h1>Individual Assessment</h1>
 <p>Children</p>
-<div class="row">
-    <div class="col-md-6">
-        <a href='/patient/add' class="btn btn-primary" role="button">
-            <i class="oi oi-plus"></i>
+<div class="w3-container">
+    <p>
+        <a href='/patient/add' class="w3-button w3-blue" role="button">
+            +
             Add Child
         </a>
-    </div>
+    </p>
     <div class="input-group col">
-        <input type="text" class="form-control" placeholder="Search patient by name"
+        <input type="text" class="w3-input w3-border w3-padding" placeholder="Search patient by name"
                @bind="SearchString" @bind:event="oninput" @onkeyup="FilterPatient" />
         @if (SearchString.Length > 0)
         {
@@ -26,17 +26,17 @@
             </div>
         }
     </div>
-</div>
+
 <br />
 @if (!patientList.Any())
 {
     <div>
-        <div class="spinner-border text-primary"></div>
+        <div class="w3-spin"></div>
     </div>    
 }
 else
 {
-    <table class="table table-striped align-middle table-bordered">
+    <table class="w3-table-all">
         <thead class="table-primary">
             <tr>
                 <th>ID</th>
@@ -72,16 +72,15 @@ else
     </table>
     @if (visitList.Any())
     {
-        <div class="row">
-            <div class="col-md-6">
-                <a href='/visit/add/@visitList[0].PatientId' class="btn btn-primary" role="button">
+        <div class="w3-row">
+            <p>
+                <a href='/visit/add/@visitList[0].PatientId' class="w3-button w3-blue" role="button">
                     <i class="oi oi-plus"></i>
                     Add Visit
                 </a>
-            </div>
+            </p>
         </div>
-        <br />
-        <table class="table table-striped align-middle table-bordered">
+        <table class="w3-table-all">
             <thead class="table-primary">
                 <tr>
                     <th>Visit</th>
@@ -113,7 +112,8 @@ else
     }
     @if (measureList.Any())
     {
-        <table class="table table-striped align-middle table-bordered">
+        <br />
+        <table class="w3-table-all">
             <thead class="table-primary">
             <tr>
                 <th>Measure</th>
@@ -136,6 +136,8 @@ else
         </table>
     }
 }
+</div>
+<br />
 @code {
     [Inject]
     public IPatientService PatientService { get; set; }
