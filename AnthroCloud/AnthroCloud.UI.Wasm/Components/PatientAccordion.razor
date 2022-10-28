@@ -1,0 +1,44 @@
+﻿@using AnthroCloud.Entities
+@using AnthroCloud.UI.Wasm.Services
+@inject HttpClient httpClient
+<div class="w3-container w3-margin">
+    <ul class="w3-ul w3-card">
+        <li class="w3-bar">
+            <FluentAccordion ExpandMode="AccordionExpandMode.Single">
+                @foreach (Patient Item in patientList)
+                {
+                    <FluentAccordionItem Heading=@(Item.FirstName + " " + Item.LastName) Expanded="false">
+                        <div class="w3-container w3-cell">
+                            <img src="@GetNextAvatar()" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+                        </div>
+                        <div class="w3-container w3-cell">
+                            <div class=""><b>Patient ID: </b>@Item.PatientId</div>
+                            <div class=""><b>Sex: </b>@Item.Sex</div>
+                            <div class=""><b>Date of Birth: </b>@Item.DateOfBirth.ToShortDateString()</div>
+                        </div>
+                    </FluentAccordionItem>
+                }
+            </FluentAccordion>
+        </li>
+    </ul>
+</div>
+@code {
+    [Inject]
+    public IPatientService PatientService { get; set; }
+    protected List<Patient> patientList = new();
+    Random rand = new Random();
+    protected string GetNextAvatar()
+    {        
+        int imgVersion = rand.Next(1, 7);
+        string path = $"img/img_avatar{imgVersion}.png";
+        return path;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await GetPatient();
+    }
+    protected async Task GetPatient()
+    {
+        patientList = (await PatientService.GetPatients()).ToList();
+    }
+}
