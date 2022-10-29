@@ -1,0 +1,11 @@
+﻿@page "/Measure/View/{visitId:int}"
+@inject HttpClient httpClient
+@inject NavigationManager NavigationManager
+@using AnthroCloud.UI.Wasm.Components
+
+<MeasureAccordion VisitId="@visitId" />
+
+@code {
+    [Parameter]
+    public int visitId { get; set; }
+}

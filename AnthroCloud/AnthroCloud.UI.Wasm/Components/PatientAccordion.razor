@@ -12,9 +12,11 @@
                             <img src="@GetNextAvatar()" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
                         </div>
                         <div class="w3-container w3-cell">
-                            <div class=""><b>Patient ID: </b>@Item.PatientId</div>
-                            <div class=""><b>Sex: </b>@Item.Sex</div>
-                            <div class=""><b>Date of Birth: </b>@Item.DateOfBirth.ToShortDateString()</div>
+                            <div><b>Patient ID: </b>                                
+                                <a href="/visit/view/@Item.PatientId">@Item.PatientId</a>
+                            </div>
+                            <div><b>Sex: </b>@Item.Sex</div>
+                            <div><b>Date of Birth: </b>@Item.DateOfBirth.ToShortDateString()</div>
                         </div>
                     </FluentAccordionItem>
                 }

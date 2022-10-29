@@ -1,0 +1,11 @@
+﻿@page "/Visit/View/{patientId:int}"
+@inject HttpClient httpClient
+@inject NavigationManager NavigationManager
+@using AnthroCloud.UI.Wasm.Components
+
+<VisitAccordion PatientId="@patientId" />
+
+@code {
+    [Parameter]
+    public int patientId { get; set; }
+}
