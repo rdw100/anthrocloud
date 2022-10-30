@@ -5,39 +5,42 @@
 @inject HttpClient httpClient
 @inject NavigationManager NavigationManager
 
-<h1>Individual Assessment</h1>
-<p>Children</p>
+
 <div class="w3-container">
+    <h1>Individual Assessment</h1>
+    <p>Children</p>
     <p>
         <a href='/patient/add' class="w3-button w3-blue" role="button">
             +
             Add Child
         </a>
     </p>
-    <div class="input-group col">
-        <input type="text" class="w3-input w3-border w3-padding" placeholder="Search patient by name"
-               @bind="SearchString" @bind:event="oninput" @onkeyup="FilterPatient" />
-        @if (SearchString.Length > 0)
-        {
-            <div class="input-group-append">
-                <button class="btn btn-danger" @onclick="ResetSearch">
+    <div class="w3-row">
+        <div class="w3-col w3-right w3-container" style="width:75px">
+            @if (SearchString.Length > 0)
+            {
+                <button class="w3-button w3-red" @onclick="ResetSearch">
                     <i class="oi oi-x"></i>
                 </button>
-            </div>
-        }
+            }
+        </div>
+        <div class="w3-rest">
+            <input type="text" class="w3-input w3-border w3-padding" placeholder="Search patient by name"
+                @bind="SearchString" @bind:event="oninput" @onkeyup="FilterPatient" />
+        </div>
     </div>
 
 <br />
 @if (!patientList.Any())
 {
     <div>
-        <div class="w3-spin"></div>
+        <div class="w3-spin">Loading ...</div>
     </div>    
 }
 else
 {
-    <table class="w3-table-all">
-        <thead class="table-primary">
+    <table class="w3-table-all w3-centered">
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>First Name</th>
@@ -58,11 +61,11 @@ else
                     <td>@patient.LastName</td>
                     <td>@patient.DateOfBirth</td>
                     <td>@patient.Sex</td>
-                    <td>
-                        <a href='/patient/edit/@patient.PatientId' class="btn btn-outline-success" role="button">
+                    <td class="w3-right-align">
+                            <a href='/patient/edit/@patient.PatientId' class="w3-button w3-green" role="button">
                             Edit
                         </a>
-                        <a href='/patient/delete/@patient.PatientId' class="btn btn-outline-danger" role="button">
+                            <a href='/patient/delete/@patient.PatientId' class="w3-button w3-red"role="button">
                             Delete
                         </a>
                     </td>
@@ -80,8 +83,8 @@ else
                 </a>
             </p>
         </div>
-        <table class="w3-table-all">
-            <thead class="table-primary">
+            <table class="w3-table-all w3-centered">
+            <thead>
                 <tr>
                     <th>Visit</th>
                     <th>Patient</th>
@@ -100,8 +103,8 @@ else
                         <td>@visit.PatientId</td>
                         <td>@visit.Weight</td>
                         <td>@visit.LengthHeight</td>
-                        <td>
-                            <a href='/visit/delete/@visit.VisitId' class="btn btn-outline-danger" role="button">
+                        <td class="w3-right-align">
+                                <a href='/visit/delete/@visit.VisitId' class="w3-button w3-red" role="button">
                                 Delete
                             </a>
                         </td>
@@ -113,8 +116,8 @@ else
     @if (measureList.Any())
     {
         <br />
-        <table class="w3-table-all">
-            <thead class="table-primary">
+            <table class="w3-table-all w3-centered">
+            <thead>
             <tr>
                 <th>Measure</th>
                 <th>Percentile</th>
