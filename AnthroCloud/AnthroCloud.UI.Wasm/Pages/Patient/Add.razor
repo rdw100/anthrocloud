@@ -38,13 +38,12 @@
                     <InputRadio class="w3-radio" Value="item" />
                     @item
                 </p>
-
             }
         </InputRadioGroup>
         <ValidationMessage For="@(() => patient.Sex)" />
     </p>  
     <p> 
-        <button type="submit" class="w3-btn w3-blue">Save</button>
+        <button class="w3-btn w3-blue" type="submit">Save</button>
         <button class="w3-btn w3-red" @onclick="Cancel">Cancel</button>
     </p>
 </EditForm>
