@@ -1,29 +1,44 @@
 ﻿@using AnthroCloud.Entities
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient httpClient
-<div class="w3-container w3-margin">
-    <ul class="w3-ul w3-card">
-        <li class="w3-bar">
-            <FluentAccordion ExpandMode="AccordionExpandMode.Single">
-                @foreach (Patient Item in patientList)
-                {
-                    <FluentAccordionItem Heading=@(Item.FirstName + " " + Item.LastName) Expanded="false">
-                        <div class="w3-container w3-cell">
-                            <img src="@GetNextAvatar()" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
-                        </div>
-                        <div class="w3-container w3-cell">
-                            <div><b>Patient ID: </b>                                
-                                <a href="/visit/view/@Item.PatientId">@Item.PatientId</a>
+
+<div class="w3-container w3-margin">    
+    @if (!patientList.Any())
+    {
+        <ul class="w3-ul w3-card">
+            <li class="w3-bar">
+                <div class="w3-container w3-center">
+                    <p><i class="fa fa-spinner w3-spin" style="font-size:64px"></i></p>
+                </div>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <ul class="w3-ul w3-card">
+            <li class="w3-bar">
+                <FluentAccordion ExpandMode="AccordionExpandMode.Single">
+                    @foreach (Patient Item in patientList)
+                    {
+                        <FluentAccordionItem Heading=@(Item.FirstName + " " + Item.LastName) Expanded="false">
+                            <div class="w3-container w3-cell">
+                                <img src="@GetNextAvatar()" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
                             </div>
-                            <div><b>Sex: </b>@Item.Sex</div>
-                            <div><b>Date of Birth: </b>@Item.DateOfBirth.ToShortDateString()</div>
-                        </div>
-                    </FluentAccordionItem>
-                }
-            </FluentAccordion>
-        </li>
-    </ul>
+                            <div class="w3-container w3-cell">
+                                <div><b>Patient ID: </b>                                
+                                    <a href="/visit/view/@Item.PatientId">@Item.PatientId</a>
+                                </div>
+                                <div><b>Sex: </b>@Item.Sex</div>
+                                <div><b>Date of Birth: </b>@Item.DateOfBirth.ToShortDateString()</div>
+                            </div>
+                        </FluentAccordionItem>
+                    }
+                </FluentAccordion>
+            </li>
+        </ul>
+    }
 </div>
+
 @code {
     [Inject]
     public IPatientService PatientService { get; set; }

@@ -2,7 +2,6 @@
 @using AnthroCloud.Entities.Charts
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient httpClient
-@inject NavigationManager NavigationManager
 
 @*<ul class="w3-ul w3-small">
     @foreach (Visit Item in visitList)
@@ -22,25 +21,40 @@
         </li>
     }
 </ul>*@
-
-<div class="w3-container w3-margin">
-    <FluentAccordion ExpandMode="AccordionExpandMode.Single">
-        @foreach (Visit Item in visitList)
-        {
-            <FluentAccordionItem Heading=@(Item.Patient.FirstName + " " + Item.Patient.LastName + " " + Item.VisitId) Expanded="false">
-                <div class="w3-container w3-cell">
-                    <div>
-                        <b>Visit ID: </b>
-                        <a href="/measure/view/@Item.VisitId">@Item.VisitId</a>
-                    </div>
-                    <div><b>Patient Id: </b>@Item.PatientId</div>
-                    <div><b>Weight: </b>@Item.Weight</div>
-                    <div><b>Length/Height: </b>@Item.LengthHeight</div>
+<div class="w3-container w3-margin">    
+    @if (!visitList.Any())
+    {
+        <ul class="w3-ul w3-card">
+            <li class="w3-bar">
+                <div class="w3-container w3-center">
+                    <p><i class="fa fa-spinner w3-spin" style="font-size:64px"></i></p>
                 </div>
-            </FluentAccordionItem>
-        }
-    </FluentAccordion>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <div class="w3-container w3-margin">
+            <FluentAccordion ExpandMode="AccordionExpandMode.Single">
+                @foreach (Visit Item in visitList)
+                {
+                    <FluentAccordionItem Heading=@(Item.Patient.FirstName + " " + Item.Patient.LastName + " " + Item.VisitId) Expanded="false">
+                        <div class="w3-container w3-cell">
+                            <div>
+                                <b>Visit ID: </b>
+                                <a href="/measure/view/@Item.VisitId">@Item.VisitId</a>
+                            </div>
+                            <div><b>Patient Id: </b>@Item.PatientId</div>
+                            <div><b>Weight: </b>@Item.Weight</div>
+                            <div><b>Length/Height: </b>@Item.LengthHeight</div>
+                        </div>
+                    </FluentAccordionItem>
+                }
+            </FluentAccordion>
+        </div>
+    }
 </div>
+
 @code {
 
     [Inject]
