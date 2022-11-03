@@ -3,24 +3,6 @@
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient httpClient
 
-@*<ul class="w3-ul w3-small">
-    @foreach (Visit Item in visitList)
-    {
-        <li class="w3-bar">
-            <div class="w3-bar-item">
-                <div class="w3-container w3-cell">
-                    <div>
-                        <b>Visit ID: </b>
-                        <a href="/measure/view/@Item.VisitId">@Item.VisitId</a>
-                    </div>
-                    <div><b>Patient Id: </b>@Item.PatientId</div>
-                    <div><b>Weight: </b>@Item.Weight</div>
-                    <div><b>Length/Height: </b>@Item.LengthHeight</div>
-                </div>
-            </div>
-        </li>
-    }
-</ul>*@
 <div class="w3-container w3-margin">    
     @if (!visitList.Any())
     {
@@ -40,15 +22,41 @@
                 @foreach (Visit Item in visitList)
                 {
                     <FluentAccordionItem Heading=@(Item.Patient.FirstName + " " + Item.Patient.LastName + " " + Item.VisitId) Expanded="false">
-                        <div class="w3-container w3-cell">
-                            <div>
+                        <div class="w3-cell-row">
+                            <div class="w3-container w3-col">
                                 <b>Visit ID: </b>
                                 <a href="/measure/view/@Item.VisitId">@Item.VisitId</a>
                             </div>
-                            <div><b>Patient Id: </b>@Item.PatientId</div>
-                            <div><b>Weight: </b>@Item.Weight</div>
-                            <div><b>Length/Height: </b>@Item.LengthHeight</div>
+                            <div class="w3-container w3-col">
+                                <b>Patient Id: </b>
+                                <a href="/patient/view/@Item.PatientId">@Item.PatientId</a>
+                            </div>
+                            <div class="w3-container w3-col"><b>Weight: </b>@Item.Weight</div>
+                            <div class="w3-container w3-col"><b>Length/Height: </b>@Item.LengthHeight</div>
                         </div>
+                        <hr style="border:3px solid #f1f1f1">
+                        @foreach (Measure Item in Item.Measures)
+                        {
+                            <div class="w3-cell-row">
+                                <div class="w3-cell w3-mobile" style="width:75px;">
+                                    <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                    @Item.Name
+                                </div>
+                                <div class="w3-cell w3-mobile" style="width:100px;margin:2px;">
+                                    <b>Percentile: </b>
+                                    <div class="w3-light-grey w3-round" style="width:100px;">
+                                        <div class="w3-round w3-blue w3-text-black" style="width:@Item.Percentile%">@Item.Percentile%</div>
+                                    </div>
+                                </div>
+                                <div class="w3-cell w3-mobile" style="margin:2px;">
+                                    <b>Zscore: </b>
+                                    <div class="" style="width:100px;background-color: @SetColor(@Item.Zscore);">
+                                        @Item.Zscore
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                        }
                     </FluentAccordionItem>
                 }
             </FluentAccordion>
@@ -63,11 +71,25 @@
     public IVisitService VisitService { get; set; }
     [Parameter]
     public int PatientId { get; set; }
+    [Parameter]
+    public int VisitId { get; set; }
+    protected List<Measure> measureList = new();
     protected List<Visit> visitList = new();
-    protected Visit visit = new();
-
     protected override async Task OnInitializedAsync()
     {
-        visitList = (await VisitService.GetVisits(PatientId)).ToList();
+        visitList = (await VisitService.GetVisitsMeasures(PatientId)).ToList();
+        measureList = (await VisitService.GetVisitMeasures(VisitId)).ToList();
+    }
+    public string SetColor(double zscore)
+    {
+        var colorCode = zscore switch
+        {
+            double n when (n <= 1 && n >= -1) => "#008000", //GREEN
+            double n when (n <= -1 && n >= -2) || (n <= 2 && n > 1) => "#FFA500", //GOLD
+            double n when (n < -2 && n >= -3) || (n <= 3 && n > 2) => "#FF0000", //RED
+            double n when (n > 3 || n < -3) => "#808080", //BLACK
+            _ => string.Empty,
+        };
+        return colorCode;
     }
 }
