@@ -3,35 +3,36 @@
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
-<h3>Delete Patient</h3>
+
+<br/>
+<div class="w3-container w3-card">
+    <h3>Delete Patient</h3>
+    <hr />   
+    <form>
+        <p>
+            <label class="w3-text">First Name</label>
+            <input class="w3-input w3-border w3-round" type="text" value="@patient.FirstName" readonly />
+        </p>
+        <p>
+            <label class="w3-text">Last Name</label>
+            <input class="w3-input w3-border w3-round" type="text" value="@patient.LastName" readonly />
+        </p>
+        <p>
+            <label class="w3-text">Birth Date</label>
+            <input class="w3-input w3-border w3-round" type="text" value="@patient.DateOfBirth.ToShortDateString()" readonly />
+        </p>
+        <p>
+            <label class="w3-text">Sex</label>
+            <input class="w3-input w3-border w3-round" type="text" value="@patient.Sex" readonly />
+        </p>
+        <p>
+            <button class="w3-btn w3-blue" type="submit" @onclick="(async () => await RemovePatient(patient.PatientId))">Delete</button>
+            <button class="w3-btn w3-red" @onclick="(() => Cancel())">Cancel</button>
+        </p>
+    </form>     
+</div>
 <br />
-<div class="form-group">
-    <h4>Do you want to delete this record?</h4>
-    <table class="table">
-        <tbody>
-            <tr>
-                <td>First Name</td>
-                <td>@patient.FirstName</td>
-            </tr>
-            <tr>
-                <td>Last Name</td>
-                <td>@patient.LastName</td>
-            </tr>
-            <tr>
-                <td>Birth Date</td>
-                <td>@patient.DateOfBirth</td>
-            </tr>
-            <tr>
-                <td>Sex</td>
-                <td>@patient.Sex</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div class="form-group">
-    <input type="submit" value="Delete" @onclick="(async () => await RemovePatient(patient.PatientId))" class="btn btn-danger" />
-    <input type="submit" value="Cancel" @onclick="(() => Cancel())" class="btn btn-warning" />
-</div>
+
 @code {
     [Inject]
     public IPatientService PatientService { get; set; }

@@ -6,48 +6,52 @@
 @inject HttpClient httpClient
 @inject NavigationManager NavigationManager
 
-<h3>@Title Child</h3>
-<hr />
-<EditForm class="w3-container w3-card" Model="@patient" OnValidSubmit="SavePatient">
-    <DataAnnotationsValidator />
-    <p>
-        <label for="FirstName" class="w3-text">First Name</label>
-        <InputText class="w3-input w3-border w3-round" @bind-Value="patient.FirstName" />
-        <ValidationMessage For="@(() => patient.FirstName)" />
-    </p>
-    <p>
-        <label for="LastName" class="w3-text">Last Name</label>
-        <div class="col-md-4">
-            <InputText class="w3-input w3-border w3-round" @bind-Value="patient.LastName" />
-        </div>
-        <ValidationMessage For="@(() => patient.LastName)" />
-    </p>
-    <p> 
-        <label for="DateOfBirth" class="w3-text">Birth Date</label>
-        <InputDate id="DateOfBirth"
-            @bind-Value="patient.DateOfBirth"
-            class="w3-input w3-border w3-round" />
-        <ValidationMessage For="@(() => patient.DateOfBirth)" />
-    </p>
-    <p>
-        <label for="Cellnumber" class="w3-text">Sex</label>
-        <InputRadioGroup @bind-Value="patient.Sex">
-            @foreach (var item in (Sexes[])Enum.GetValues(typeof(Sexes)))
-            {
-                <p>
-                    <InputRadio class="w3-radio" Value="item" />
-                    @item
-                </p>
-            }
-        </InputRadioGroup>
-        <ValidationMessage For="@(() => patient.Sex)" />
-    </p>  
-    <p> 
-        <button class="w3-btn w3-blue" type="submit">Save</button>
-        <button class="w3-btn w3-red" @onclick="Cancel">Cancel</button>
-    </p>
-</EditForm>
 <br />
+<div class="w3-container w3-card">
+    <h3>@Title Patient</h3>
+    <hr />
+    <EditForm Model="@patient" on OnValidSubmit="SavePatient">
+        <DataAnnotationsValidator />
+        <p>
+            <label for="FirstName" class="w3-text">First Name</label>
+            <InputText class="w3-input w3-border w3-round" @bind-Value="patient.FirstName" />
+            <ValidationMessage For="@(() => patient.FirstName)" />
+        </p>
+        <p>
+            <label for="LastName" class="w3-text">Last Name</label>
+            <div class="col-md-4">
+                <InputText class="w3-input w3-border w3-round" @bind-Value="patient.LastName" />
+            </div>
+            <ValidationMessage For="@(() => patient.LastName)" />
+        </p>
+        <p> 
+            <label for="DateOfBirth" class="w3-text">Birth Date</label>
+            <InputDate id="DateOfBirth"
+                @bind-Value="patient.DateOfBirth"
+                class="w3-input w3-border w3-round" />
+            <ValidationMessage For="@(() => patient.DateOfBirth)" />
+        </p>
+        <p>
+            <label for="Cellnumber" class="w3-text">Sex</label>
+            <InputRadioGroup @bind-Value="patient.Sex">
+                @foreach (var item in (Sexes[])Enum.GetValues(typeof(Sexes)))
+                {
+                    <p>
+                        <InputRadio class="w3-radio" Value="item" />
+                        @item
+                    </p>
+                }
+            </InputRadioGroup>
+            <ValidationMessage For="@(() => patient.Sex)" />
+        </p>  
+        <p> 
+            <button class="w3-btn w3-blue" type="submit">Save</button>
+            <button class="w3-btn w3-red" @onclick="Cancel">Cancel</button>
+        </p>
+    </EditForm>
+</div>
+<br />
+
 @code {
     [Inject]
     public IPatientService PatientService{ get; set; }

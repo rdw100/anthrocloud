@@ -7,7 +7,6 @@
 
 <div class="w3-container">
     <h1>Individual Assessment</h1>
-    <p>Children</p>
     <p>
         <a href='/patient/add' class="w3-button w3-blue" role="button">
             <i class="oi oi-plus"></i>
@@ -28,116 +27,115 @@
                 @bind="SearchString" @bind:event="oninput" @onkeyup="FilterPatient" />
         </div>
     </div>
-
-<br />
-@if (!patientList.Any())
-{
-    <div>
-        <div class="w3-spin">Loading ...</div>
-    </div>    
-}
-else
-{
-    <table class="w3-table-all w3-centered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Birth Date</th>
-                <th>Gender</th>
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var patient in patientList)
-            {
-                <tr>
-                    <td>
-                        <a href="javascript: void(0);" @onclick="@(e => ShowVisits(@patient.PatientId))">@patient.PatientId</a>
-                    </td>
-                    <td>@patient.FirstName</td>
-                    <td>@patient.LastName</td>
-                    <td>@patient.DateOfBirth</td>
-                    <td>@patient.Sex</td>
-                    <td class="w3-right-align">
-                            <a href='/patient/edit/@patient.PatientId' class="w3-button w3-green" role="button">
-                            Edit
-                        </a>
-                            <a href='/patient/delete/@patient.PatientId' class="w3-button w3-red"role="button">
-                            Delete
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    @if (visitList.Any())
+    <br />
+    @if (!patientList.Any())
     {
-        <div class="w3-row">
-            <p>
-                <a href='/visit/add/@visitList[0].PatientId' class="w3-button w3-blue" role="button">
-                    <i class="oi oi-plus"></i>
-                    Add Visit
-                </a>
-            </p>
-        </div>
-            <table class="w3-table-all w3-centered">
+        <div>
+            <div class="w3-spin">Loading ...</div>
+        </div>    
+    }
+    else
+    {
+        <table class="w3-table-all w3-centered">
             <thead>
                 <tr>
-                    <th>Visit</th>
-                    <th>Patient</th>
-                    <th>Weight</th>
-                    <th>Height</th>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Birth Date</th>
+                    <th>Gender</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var visit in visitList)
+                @foreach (var patient in patientList)
                 {
                     <tr>
                         <td>
-                            <a href="javascript: void(0);" @onclick="@(e => ShowMeasures(@visit.VisitId))">@visit.VisitId</a>
+                            <a href="javascript: void(0);" @onclick="@(e => ShowVisits(@patient.PatientId))">@patient.PatientId</a>
                         </td>
-                        <td>@visit.PatientId</td>
-                        <td>@visit.Weight</td>
-                        <td>@visit.LengthHeight</td>
+                        <td>@patient.FirstName</td>
+                        <td>@patient.LastName</td>
+                        <td>@patient.DateOfBirth</td>
+                        <td>@patient.Sex</td>
                         <td class="w3-right-align">
-                                <a href='/visit/delete/@visit.VisitId' class="w3-button w3-red" role="button">
+                                <a href='/patient/edit/@patient.PatientId' class="w3-button w3-green" role="button">
+                                Edit
+                            </a>
+                                <a href='/patient/delete/@patient.PatientId' class="w3-button w3-red"role="button">
                                 Delete
                             </a>
                         </td>
                     </tr>
                 }
             </tbody>
-        </table>        
-    }
-    @if (measureList.Any())
-    {
-        <br />
-            <table class="w3-table-all w3-centered">
-            <thead>
-            <tr>
-                <th>Measure</th>
-                <th>Percentile</th>
-                <th>Z-score</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var measure in measureList)
-            {
-                <tr>
-                    <td>@measure.Name</td>
-                    <td>
-                            <input type="range" min="0" max="100" value="@measure.Percentile">&nbsp;@measure.Percentile
-                    </td>
-                    <td style="background-color: @SetColor(measure.Zscore)">@measure.Zscore</td>
-                </tr>
-            }
-            </tbody>
         </table>
+        @if (visitList.Any())
+        {
+            <div class="w3-row">
+                <p>
+                    <a href='/visit/add/@visitList[0].PatientId' class="w3-button w3-blue" role="button">
+                        <i class="oi oi-plus"></i>
+                        Add Visit
+                    </a>
+                </p>
+            </div>
+                <table class="w3-table-all w3-centered">
+                <thead>
+                    <tr>
+                        <th>Visit</th>
+                        <th>Patient</th>
+                        <th>Weight</th>
+                        <th>Height</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var visit in visitList)
+                    {
+                        <tr>
+                            <td>
+                                <a href="javascript: void(0);" @onclick="@(e => ShowMeasures(@visit.VisitId))">@visit.VisitId</a>
+                            </td>
+                            <td>@visit.PatientId</td>
+                            <td>@visit.Weight</td>
+                            <td>@visit.LengthHeight</td>
+                            <td class="w3-right-align">
+                                    <a href='/visit/delete/@visit.VisitId' class="w3-button w3-red" role="button">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>        
+        }
+        @if (measureList.Any())
+        {
+            <br />
+                <table class="w3-table-all w3-centered">
+                <thead>
+                <tr>
+                    <th>Measure</th>
+                    <th>Percentile</th>
+                    <th>Z-score</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var measure in measureList)
+                {
+                    <tr>
+                        <td>@measure.Name</td>
+                        <td>
+                                <input type="range" min="0" max="100" value="@measure.Percentile">&nbsp;@measure.Percentile
+                        </td>
+                        <td style="background-color: @SetColor(measure.Zscore)">@measure.Zscore</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
     }
-}
 </div>
 <br />
 @code {
