@@ -6,97 +6,98 @@
 @inject HttpClient httpClient
 @inject NavigationManager NavigationManager
 
-<h3>@Title Visit</h3>
-<hr />
-<EditForm class="w3-container w3-card" Model="@visit" OnValidSubmit="SaveVisit">
-    <DataAnnotationsValidator />
-    <div class="w3-row-padding">
-        <div class="w3-half">
-            <p>
-                <label for="Weight" class="w3-text">Weight</label>
-                <InputNumber id="Weight" @bind-Value="visit.Weight"
-                    class="w3-input w3-border w3-round"
-                    MIN=".9" MAX="58" STEP=".1"
-                    data-error-msg="Must be .9 and 58"
-                    placeholder="Weight (kg)" />
-                <ValidationMessage For="@(() => visit.Weight)" />
-            </p>
-            <p>
-                <label for="LengthHeight" class="w3-text">Length</label>
-                <input id="LengthHeight"
-                    asp-for="LengthHeight"
-                    class="w3-input w3-border w3-round"
-                    type="number"
-                    MIN="45.0" MAX="120.0" STEP=".1"
-                    placeholder="Length/Height (cm)"
-                    required
-                    data-error-msg="Must be 45.0 and 120.0"
-                    @bind-value="visit.LengthHeight" />
-                <ValidationMessage For="@(() => visit.LengthHeight)" />
-            </p>
-            <p>
-                <label for="DateOfVisit" class="w3-text">Visit Date</label>
-                <InputDate id="DateOfVisit"
-                    Value="visit.DateOfVisit"
-                    ValueExpression="@(()=>visit.DateOfVisit)"
-                    ParsingErrorMessage="Must be a valid date."
-                    class="w3-input w3-border w3-round" />
-                <ValidationMessage For="@(() => visit.DateOfVisit)" />
-            </p>
-            <p>
-                <label for="HeadCircumference" class="w3-text">Head Circumference (cm)</label>
-                <input asp-for="HeadCircumference" 
-                    @bind-value="visit.HeadCircumference"
-                    class="w3-input w3-border w3-round" type="number"
-                    MIN="25.0" MAX="64.0" STEP=".1" id="HeadCircumference" 
-                    required>
-                <ValidationMessage For="@(() => visit.HeadCircumference)" />
-            </p>
-            <p>
-                <label for="MUAC" class="w3-text">MUAC (cm)</label>
-                <input asp-for="MUAC" @bind-value="@visit.MUAC"
-                    class="w3-input w3-border w3-round" type="number"
-                    MIN="6.0" MAX="35.0" STEP=".1" 
-                    id="MUAC" required>
-                <ValidationMessage For="@(() => visit.MUAC)" />
-            </p>
-        </div>
-        <div class="w3-half">
-            <p>
-                <label for="SubscapularSkinFold" class="w3-text">Subscapular skinfold (mm)</label>
-                <input asp-for="SubscapularSkinFold" @bind-value="visit.SubscapularSkinFold"
-                       class="w3-input w3-border w3-round" type="number"
-                       MIN="1.8" MAX="40.0" STEP=".1"
-                       id="SubscapularSkinFold" required>
-            </p>
-            <p>
-                <label for="TricepsSkinFold" class="w3-text">Triceps skinfold (mm)</label>
-                <input asp-for="TricepsSkinFold" @bind-value="visit.TricepsSkinFold"
-                       class="w3-input w3-border w3-round" type="number"
-                       MIN="1.8" MAX="40.0" STEP=".1"
-                       id="TricepsSkinFold" required>
-            </p>
+<br />
+<div class="w3-container w3-card">
+    <h3>@Title Visit</h3>
+    <hr />
+    <EditForm Model="@visit" OnValidSubmit="SaveVisit">
+        <DataAnnotationsValidator />
+        <div class="w3-half w3-row-padding">
+                <p>
+                    <label for="Weight" class="w3-text">Weight</label>
+                    <InputNumber id="Weight" @bind-Value="visit.Weight"
+                        class="w3-input w3-border w3-round"
+                        MIN=".9" MAX="58" STEP=".1"
+                        data-error-msg="Must be .9 and 58"
+                        placeholder="Weight (kg)" />
+                    <ValidationMessage For="@(() => visit.Weight)" />
+                </p>
+                <p>
+                    <label for="LengthHeight" class="w3-text">Length</label>
+                    <input id="LengthHeight"
+                        asp-for="LengthHeight"
+                        class="w3-input w3-border w3-round"
+                        type="number"
+                        MIN="45.0" MAX="120.0" STEP=".1"
+                        placeholder="Length/Height (cm)"
+                        required
+                        data-error-msg="Must be 45.0 and 120.0"
+                        @bind-value="visit.LengthHeight" />
+                    <ValidationMessage For="@(() => visit.LengthHeight)" />
+                </p>
+                <p>
+                    <label for="DateOfVisit" class="w3-text">Visit Date</label>
+                    <InputDate id="DateOfVisit"
+                        Value="visit.DateOfVisit"
+                        ValueExpression="@(()=>visit.DateOfVisit)"
+                        ParsingErrorMessage="Must be a valid date."
+                        class="w3-input w3-border w3-round" />
+                    <ValidationMessage For="@(() => visit.DateOfVisit)" />
+                </p>
+                <p>
+                    <label for="HeadCircumference" class="w3-text">Head Circumference (cm)</label>
+                    <input asp-for="HeadCircumference" 
+                        @bind-value="visit.HeadCircumference"
+                        class="w3-input w3-border w3-round" type="number"
+                        MIN="25.0" MAX="64.0" STEP=".1" id="HeadCircumference" 
+                        required>
+                    <ValidationMessage For="@(() => visit.HeadCircumference)" />
+                </p>
+                <p>
+                    <label for="MUAC" class="w3-text">MUAC (cm)</label>
+                    <input asp-for="MUAC" @bind-value="@visit.MUAC"
+                        class="w3-input w3-border w3-round" type="number"
+                        MIN="6.0" MAX="35.0" STEP=".1" 
+                        id="MUAC" required>
+                    <ValidationMessage For="@(() => visit.MUAC)" />
+                </p>
+            </div>
+            <div class="w3-half">
+                <p>
+                    <label for="SubscapularSkinFold" class="w3-text">Subscapular skinfold (mm)</label>
+                    <input asp-for="SubscapularSkinFold" @bind-value="visit.SubscapularSkinFold"
+                           class="w3-input w3-border w3-round" type="number"
+                           MIN="1.8" MAX="40.0" STEP=".1"
+                           id="SubscapularSkinFold" required>
+                </p>
+                <p>
+                    <label for="TricepsSkinFold" class="w3-text">Triceps skinfold (mm)</label>
+                    <input asp-for="TricepsSkinFold" @bind-value="visit.TricepsSkinFold"
+                           class="w3-input w3-border w3-round" type="number"
+                           MIN="1.8" MAX="40.0" STEP=".1"
+                           id="TricepsSkinFold" required>
+                </p>
             
-            <h3 for="Measured">Standing</h3>
-            <InputRadioGroup id="Measured" Name="measured" @bind-Value="visit.Measured">
-                <InputRadio Name="measured" class="w3-radio" type="radio" Value="MeasurementTypes.Standing" />Standing
-                <InputRadio Name="measured" class="w3-radio" type="radio" Value="MeasurementTypes.Recumbent" />Recumbent
-            </InputRadioGroup>
+                <h3 for="Measured">Standing</h3>
+                <InputRadioGroup id="Measured" Name="measured" @bind-Value="visit.Measured">
+                    <InputRadio Name="measured" class="w3-radio" type="radio" Value="MeasurementTypes.Standing" />Standing
+                    <InputRadio Name="measured" class="w3-radio" type="radio" Value="MeasurementTypes.Recumbent" />Recumbent
+                </InputRadioGroup>
 
-            <h3 for="Oedema">Oedema</h3>
-            <InputRadioGroup id="Oedema" Name="oedema" @bind-Value="visit.Oedema">
-                <InputRadio Name="oedema" class="w3-radio" type="radio" Value="OedemaTypes.Yes" />Yes
-                <InputRadio Name="oedema" class="w3-radio" type="radio" Value="OedemaTypes.No" />No
-            </InputRadioGroup>
+                <h3 for="Oedema">Oedema</h3>
+                <InputRadioGroup id="Oedema" Name="oedema" @bind-Value="visit.Oedema">
+                    <InputRadio Name="oedema" class="w3-radio" type="radio" Value="OedemaTypes.Yes" />Yes
+                    <InputRadio Name="oedema" class="w3-radio" type="radio" Value="OedemaTypes.No" />No
+                </InputRadioGroup>
+            </div>
+        <div class="w3-row"> 
+            <p>
+                <button type="submit" class="w3-btn w3-blue">Save</button>
+                <button class="w3-btn w3-red" @onclick="Cancel">Cancel</button>
+            </p>
         </div>
-    </div>
-    <div class="w3-container"> 
-        <p>
-            <button type="submit" class="w3-btn w3-blue">Save</button>
-            <button class="w3-btn w3-red" @onclick="Cancel">Cancel</button>
-        </p>
-    </div>
-</EditForm>
+    </EditForm>
+</div>
 <br />
 @code {
     [Inject]
