@@ -84,3 +84,5 @@ The AnthroCloud RESTful API is designed to support retrieval operations.  The RE
 
  The animated gif below demonstrates Blazor Server application execution.
  ![Blazor Server App Demo](https://github.com/rdw100/AnthroCloud/blob/master/AnthroCloud/AnthroCloud.UI.Blazor/wwwroot/img/stp0eKMSiY.gif?raw=true)
+
+ The animated gif below demonstrates Blazor WebAssembly application execution.

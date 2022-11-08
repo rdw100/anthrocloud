@@ -13,9 +13,9 @@
     </button>
     <h1 class="w3-bar-item">AnthroCloud</h1>
     <div class="w3-bar-item w3-right">
-        <a href="" class="w3-button w3-xxxlarge"><i class="oi oi-home"></i></a>
-        <a href="patient/grid" class="w3-button w3-xxxlarge"><i class="oi oi-list-rich"></i></a>
-        <a href="patient/details" class="w3-button w3-xxxlarge"><i class="oi oi-people"></i></a>
+        <a href="" class="w3-button w3-xxxlarge w3-hide-small"><i class="oi oi-home"></i></a>
+        <a href="patient/grid" class="w3-button w3-xxxlarge w3-hide-small"><i class="oi oi-list-rich"></i></a>
+        <a href="patient/details" class="w3-button w3-xxxlarge w3-hide-small"><i class="oi oi-people"></i></a>
     </div>
 </header>
 
@@ -30,10 +30,10 @@
         <span class="oi oi-home" aria-hidden="true"></span> Home
     </NavLink>
     <NavLink @onclick="ToggleNavSideMenu" class="w3-bar-item w3-button" href="patient/grid">
-        <span class="oi oi-list-rich" aria-hidden="true"></span> Fluent Grid
+        <span class="oi oi-list-rich" aria-hidden="true"></span> Grid
     </NavLink>
     <NavLink @onclick="ToggleNavSideMenu" class="w3-bar-item w3-button" href="patient/details">
-        <span class="oi oi-people" aria-hidden="true"></span> Child Details
+        <span class="oi oi-people" aria-hidden="true"></span> Assessment
     </NavLink>
 </nav>
 

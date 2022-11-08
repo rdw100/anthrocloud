@@ -2,7 +2,7 @@
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient httpClient
 
-<div class="w3-container w3-margin">    
+<div class=""> @*w3-container w3-margin*@   
     @if (!patientList.Any())
     {
         <ul class="w3-ul w3-card">
@@ -25,9 +25,9 @@
                 <FluentAccordion ExpandMode="AccordionExpandMode.Single">
                     @foreach (Patient Item in patientList)
                     {
-                        <FluentAccordionItem Heading=@(Item.FirstName + " " + Item.LastName) Expanded="false">
+                        <FluentAccordionItem Heading=@(Item.FirstName + " " + Item.LastName + " - " + Item.PatientId) Expanded="false">
                             <div class="w3-container w3-cell">
-                                <img src="@GetNextAvatar()" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+                                <img src="@GetNextAvatar()" class="w3-bar-item w3-circle" style="width:85px">
                             </div>
                             <div class="w3-container w3-cell">
                                 <div><b>Patient ID: </b>                                
@@ -35,6 +35,12 @@
                                 </div>
                                 <div><b>Sex: </b>@Item.Sex</div>
                                 <div><b>Date of Birth: </b>@Item.DateOfBirth.ToShortDateString()</div>
+                                <div>
+                                    <div class="w3-cell w3-mobile" style="width:75px;">
+                                        <i class="fa fa-folder-o" aria-hidden="true"><b>:</b></i>
+                                        <a href="/visit/view/@Item.PatientId">Visits</a>
+                                    </div>
+                                </div>
                             </div>
                         </FluentAccordionItem>
                     }

@@ -3,8 +3,8 @@
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient httpClient
 
-<div class="w3-container w3-margin">    
-    @if (!measureList.Any())
+<div>
+     @if (!measureList.Any())
     {
         <ul class="w3-ul w3-card">
             <li class="w3-bar">

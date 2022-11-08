@@ -3,7 +3,7 @@
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient httpClient
 
-<div class="w3-container w3-margin">    
+<div>
     @if (!visitList.Any())
     {
         <ul class="w3-ul w3-card">
@@ -31,42 +31,44 @@
             <FluentAccordion ExpandMode="AccordionExpandMode.Single">
                 @foreach (Visit Item in visitList)
                 {
-                    <FluentAccordionItem Heading=@(Item.Patient.FirstName + " " + Item.Patient.LastName + " " + Item.VisitId) Expanded="false">
-                        <div class="w3-cell-row">
+                    <FluentAccordionItem Heading=@(Item.Patient.FirstName + " " + Item.Patient.LastName + " - " + Item.VisitId) Expanded="false">
+                        <div class="w3-row">
                             <div class="w3-container w3-col">
                                 <b>Visit ID: </b>
                                 <a href="/measure/view/@Item.VisitId">@Item.VisitId</a>
                             </div>
                             <div class="w3-container w3-col">
-                                <b>Patient Id: </b>
+                                <b>Patient ID: </b>
                                 <a href="/patient/edit/@Item.PatientId">@Item.PatientId</a>
                             </div>
                             <div class="w3-container w3-col"><b>Weight: </b>@Item.Weight</div>
                             <div class="w3-container w3-col"><b>Length/Height: </b>@Item.LengthHeight</div>
                         </div>
                         <hr style="border:3px solid #f1f1f1">
-                        <div class="w3-cell-row">
+                        <div class="w3-cell-row">                            
                             @foreach (Measure Item in Item.Measures)
                             {
-                                <div class="w3-quarter w3-container"> 
-                                    <div class="w3-cell w3-mobile" style="width:75px;">
-                                        <i class="fa fa-folder-o" aria-hidden="true"></i>
-                                        @Item.Name
-                                    </div>
-                                    <div class="w3-cell w3-mobile" style="width:100px;">
-                                        <b>Percentile: </b>
-                                        <div class="w3-light-grey w3-round" style="width:100px;">
-                                        <div class="w3-round w3-blue w3-text-black" style="width:@Item.Percentile%">@Item.Percentile%</div>
+                                <div class="w3-cell w3-mobile">
+                                    <div class="w3-card w3-padding w3-margin">
+                                        <div class="w3-large">
+                                            <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                            @Item.Name
                                         </div>
-                                    </div>
-                                    <div class="w3-cell w3-mobile" >
-                                        <b>Zscore: </b>
-                                        <div class="w3-round" style="width:100px;background-color: @SetColor(@Item.Zscore);">
-                                            @Item.Zscore
+                                        <div >
+                                            <b>Percentile: </b>
+                                                <div class="w3-light-grey w3-round w3-center" >
+                                                <div class="w3-round w3-blue w3-text-black" style="width:@Item.Percentile%">@Item.Percentile%</div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <b>Zscore: </b>
+                                            <div class="w3-round w3-center" style="width:100px;background-color: @SetColor(@Item.Zscore);">
+                                                @Item.Zscore
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            }                            
                         </div>
                         <br />
                         
