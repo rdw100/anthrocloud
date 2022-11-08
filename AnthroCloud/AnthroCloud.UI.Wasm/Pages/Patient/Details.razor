@@ -17,9 +17,13 @@
         <div class="w3-col w3-right w3-container" style="width:75px">
             @if (SearchString.Length > 0)
             {
-                <button class="w3-button w3-red" @onclick="ResetSearch">
+                <button class="w3-bar-item w3-button w3-red" @onclick="ResetSearch">
                     <i class="oi oi-x"></i>
                 </button>
+            }
+            else
+            {
+                <button class="w3-bar-item w3-button w3-right" href="#"><i class="fa fa-search"></i></button>
             }
         </div>
         <div class="w3-rest">

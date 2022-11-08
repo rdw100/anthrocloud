@@ -12,9 +12,13 @@
         &#9776;
     </button>
     <h1 class="w3-bar-item">AnthroCloud</h1>
+    <div class="w3-bar-item w3-right">
+        <a href="patient/grid" class="w3-button w3-xxxlarge"><i class="oi oi-list-rich"></i></a>
+        <a href="patient/details" class="w3-button w3-xxxlarge"><i class="oi oi-people"></i></a>
+    </div>
 </header>
 
-<nav class="@NavSideMenuCssClass w3-sidebar w3-bar-block w3-card w3-animate-left" style="width:200px;">
+<nav class="@NavSideMenuCssClass w3-sidebar w3-bar-block w3-card w3-animate-left" style="width:200px;z-index:5;">
     <div class="w3-red">
         <button @onclick="ToggleNavSideMenu"
                 class="w3-button w3-display-topright w3-xlarge">
@@ -32,13 +36,18 @@
     </NavLink>
 </nav>
 
+<div class="@NavOverlayMenuCssClass w3-overlay" onclick="w3_close()" style="cursor:pointer;" id="myOverlay"></div>
+
 @code {
     private bool collapseNavSideMenu = true;
+    private bool overlayNavSideMenu = true;
 
     private string? NavSideMenuCssClass => collapseNavSideMenu ? "closeSidebar" : null;
+    private string? NavOverlayMenuCssClass => overlayNavSideMenu ?  null : "openOverlay";
 
     private void ToggleNavSideMenu()
     {
         collapseNavSideMenu = !collapseNavSideMenu;
+        overlayNavSideMenu = !overlayNavSideMenu;
     }
 }

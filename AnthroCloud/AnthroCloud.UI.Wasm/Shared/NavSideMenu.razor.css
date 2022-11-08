@@ -1,3 +1,6 @@
 ﻿.closeSidebar {
     display: none;
 }
+.openOverlay {
+    display: block;
+}

@@ -8,9 +8,19 @@
     {
         <ul class="w3-ul w3-card">
             <li class="w3-bar">
-                <div class="w3-container w3-center">
-                    <p><i class="fa fa-spinner w3-spin" style="font-size:64px"></i></p>
-                </div>
+                <FluentCard class="w3-left card-padding">
+                    <FluentSkeleton style="border-radius: 4px; height: 30px; margin-top: 20px;margin-bottom: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px; width:200px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px; width:200px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px; width:200px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; height: 3px; margin-top: 20px;margin-bottom: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; height: 30px; margin-top: 20px;margin-bottom: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                </FluentCard>
             </li>
         </ul>
     }
@@ -67,7 +77,11 @@
         </ul>
     }
 </div>
-
+<style>
+    .card-padding {
+        padding: 16px;
+    }
+</style>
 @code {
 
     [Inject]
