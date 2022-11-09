@@ -35,8 +35,8 @@
     @if (!patientList.Any())
     {
         <div>
-            <div class="w3-spin">Loading ...</div>
-        </div>    
+            <p><i class="fa fa-spinner w3-spin" style="font-size:64px"></i></p>
+        </div>
     }
     else
     {
@@ -60,7 +60,7 @@
                         </td>
                         <td>@patient.FirstName</td>
                         <td>@patient.LastName</td>
-                        <td>@patient.DateOfBirth</td>
+                        <td>@patient.DateOfBirth.ToShortDateString()</td>
                         <td>@patient.Sex</td>
                         <td class="w3-right-align">
                                 <a href='/patient/edit/@patient.PatientId' class="w3-button w3-green" role="button">
