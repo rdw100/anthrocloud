@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>AnthroCloud.UI.Wasm</title>
-    <base href="/" />    
+    <base href="/" />
     <link rel="stylesheet" href="css/w3css/4/w3.css">
     <link rel="stylesheet" href="css/w3css/lib/w3-theme-indigo.css">
     <!--<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />-->
@@ -16,6 +16,25 @@
 
 <body>
     <div id="app">
+        <div class="w3-container w3-padding-small w3-theme-d3">
+            <div class="w3-right">
+                <i class="fa fa-volume-up"></i>
+                <i class="fa fa-wifi"></i>
+                <i class="fa fa-battery-2"></i>
+                12:30
+            </div>
+        </div>
+        <header class="w3-bar w3-card w3-theme">
+            <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme">
+                &#9776;
+            </button>
+            <h1 class="w3-bar-item">AnthroCloud</h1>
+            <div class="w3-bar-item w3-right">
+                <a href="" class="w3-button w3-xxxlarge w3-hide-small"><i class="oi oi-home"></i></a>
+                <a href="" class="w3-button w3-xxxlarge w3-hide-small"><i class="oi oi-list-rich"></i></a>
+                <a href="" class="w3-button w3-xxxlarge w3-hide-small"><i class="oi oi-people"></i></a>
+            </div>
+        </header>
         <div class="w3-center">
             <!--w3-theme-->
             <h4>
@@ -27,7 +46,18 @@
             <h1 class="w3-xxxlarge w3-animate-bottom">BUILT WITH W3.CSS</h1>
         </div>
     </div>
+    <div style="width: 100%;bottom: 0;position: fixed;">
+        <footer class="w3-container w3-theme-l2">
+            <a class="w3-btn w3-xlarge w3-circle w3-theme-action w3-right"
+               style="position:relative;top:-24px;right:2px;"
+               href="patient/add">
+                +
+            </a>
+            <p>Copyright 2022</p>
+        </footer>
 
+        <div class="w3-container w3-theme-dark w3-xlarge">&laquo;<span class="w3-right">&raquo;</span></div>
+    </div>
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
