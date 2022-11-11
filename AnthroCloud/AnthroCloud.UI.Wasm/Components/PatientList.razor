@@ -1,0 +1,44 @@
+﻿@using AnthroCloud.Entities
+@using AnthroCloud.UI.Wasm.Services
+@inject HttpClient httpClient
+
+<div class="w3-panel">
+    <h2>Patient List</h2>
+    <p>You can combine w3-ul and the w3-bar classes to create an avatar list:</p>
+    <ul class="w3-ul w3-card-4">
+        @foreach (Patient Item in patientList)
+        {
+            <li class="w3-bar">
+                <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+                <a href="https://localhost:7234/patient/edit/@Item.PatientId">
+                    <img src="@GetNextAvatar()" class="w3-bar-item w3-circle" style="width:85px">
+                </a>
+                <div class="w3-bar-item">
+                    <span class="w3-large">@Item.FirstName @Item.LastName</span><br>
+                    <span>@Item.DateOfBirth.ToShortDateString()</span>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+@code {
+    [Inject]
+    public IPatientService PatientService { get; set; }
+    protected List<Patient> patientList = new();
+    Random rand = new Random();
+    protected string GetNextAvatar()
+    {
+        int imgVersion = rand.Next(1, 7);
+        string path = $"img/img_avatar{imgVersion}.png";
+        return path;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await GetPatient();
+    }
+    protected async Task GetPatient()
+    {
+        patientList = (await PatientService.GetPatients()).ToList();
+    }
+}
