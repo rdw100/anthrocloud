@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-builder.RootComponents.Add<App>("#app");
-builder.RootComponents.Add<HeadOutlet>("head::after");
+    builder.RootComponents.Add<App>("#app");
+    builder.RootComponents.Add<HeadOutlet>("head::after");
 
 string patientApiPath = builder.Configuration.GetValue<string>("ConfigurationSettings:patientApiPath");
 string visitApiPath = builder.Configuration.GetValue<string>("ConfigurationSettings:visitApiPath");
@@ -23,6 +23,5 @@ builder.Services.AddHttpClient<IAnthroStatsService, AnthroStatsService>(client =
 {
     client.BaseAddress = new Uri(statApiPath);
 });
-
 
 await builder.Build().RunAsync();

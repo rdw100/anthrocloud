@@ -1,0 +1,30 @@
+﻿@using AnthroCloud.Entities
+@using AnthroCloud.UI.Wasm.Services
+@inject HttpClient httpClient
+
+<fluent-tree-view>
+    @foreach (Patient Item in patientList)
+    {
+        <fluent-tree-item>
+            @Item.FirstName @Item.LastName
+            @foreach (Visit Visit in Item.Visits)
+            {
+                <fluent-tree-item>Visit - @Visit.VisitId @Visit.Weight @Visit.LengthHeight</fluent-tree-item>
+            }
+        </fluent-tree-item>
+    }
+</fluent-tree-view>
+
+@code {
+    [Inject]
+    public IPatientService PatientService { get; set; }
+    protected List<Patient> patientList = new();
+    protected override async Task OnInitializedAsync()
+    {
+        await GetPatientsVisits();
+    }
+    protected async Task GetPatientsVisits()
+    {
+        patientList = (await PatientService.GetPatientsVisits()).ToList();
+    }
+}

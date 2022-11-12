@@ -5,6 +5,7 @@ namespace AnthroCloud.UI.Wasm.Services
     public interface IPatientService
     {
         Task<IEnumerable<Patient>> GetPatients();
+        Task<IEnumerable<Patient>> GetPatientsVisits();
         Task<Patient> GetPatient(int patientId);
         Task<Patient> UpdatePatient(int patientId, Patient updatedPatient);
         Task<Patient> CreatePatient(Patient newPatient);
