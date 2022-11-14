@@ -4,6 +4,8 @@
 @using Microsoft.Fast.Components.FluentUI
 @inject HttpClient httpClient
 @inject NavigationManager NavigationManager
+@layout IconLayout
+
 <h3>Fluent Grid</h3>
 <FluentTextField @oninput="FilterChanged">Filter Child</FluentTextField>
 <FluentDataGrid id="sortingGrid" GridTemplateColumns="1fr 1fr 1fr 1fr 75px 75px"
