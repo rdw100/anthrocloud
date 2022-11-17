@@ -62,3 +62,42 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.loading-progress {
+    width: 8rem;
+    height: 8rem;
+}
+
+    .loading-progress circle {
+        fill: none;
+        stroke: #e0e0e0;
+        stroke-width: 0.6rem;
+        transform-origin: 50% 50%;
+        transform: rotate(-90deg);
+    }
+
+        .loading-progress circle:last-child {
+            stroke: #1b6ec2;
+            stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
+            transition: stroke-dasharray 0.05s ease-in-out;
+        }
+
+.loading-progress-block {
+    position: absolute;
+    top: 45%;
+    width: 100%;
+}
+
+.loading-progress-text {
+    font-weight: bold;
+    font-size: 14pt;
+    width: 90px;
+    position: absolute;
+    top: calc(50% - 15px);
+    left: calc(50% - 45px);
+    text-align: center;
+}
+
+    .loading-progress-text:after {
+        content: var(--blazor-load-percentage-text, "Loading");
+    }
