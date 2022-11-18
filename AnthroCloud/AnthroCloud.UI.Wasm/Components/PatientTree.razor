@@ -2,18 +2,22 @@
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient httpClient
 
-<fluent-tree-view>
+<FluentTreeView >
     @foreach (Patient Item in patientList)
     {
-        <fluent-tree-item>
+        <FluentTreeItem >
+            <FluentIcon Name="@FluentIcons.PersonNote" Size="IconSize.Size24" Filled=false />
             @Item.FirstName @Item.LastName
             @foreach (Visit Visit in Item.Visits)
             {
-                <fluent-tree-item>Visit - @Visit.VisitId @Visit.Weight @Visit.LengthHeight</fluent-tree-item>
+                <FluentTreeItem>
+                    <FluentIcon Name="@FluentIcons.Ruler" Size="IconSize.Size24" Filled=false />
+                    Visit - @Visit.VisitId @Visit.Weight @Visit.LengthHeight
+                </FluentTreeItem>
             }
-        </fluent-tree-item>
+        </FluentTreeItem>
     }
-</fluent-tree-view>
+</FluentTreeView>
 
 @code {
     [Inject]

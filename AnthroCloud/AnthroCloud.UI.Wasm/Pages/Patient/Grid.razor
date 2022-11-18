@@ -6,47 +6,66 @@
 @inject NavigationManager NavigationManager
 @layout IconLayout
 
-<h3>Fluent Grid</h3>
-<FluentTextField @oninput="FilterChanged">Filter Child</FluentTextField>
-<FluentDataGrid id="sortingGrid" GridTemplateColumns="1fr 1fr 1fr 1fr 75px 75px"
-    RowsData=SortedRowsGrid 
-    ColumnDefinitions=SortingColumnsGrid
-    TItem="Patient">
-    <HeaderCellTemplate>
-        <FluentButton @onclick=@(()=>SortColumn(context))>
-            @context.Title
-            @if (context.Title == lastSortColumn?.Title)
-            {
-                @(isAscending ? " ↑" : " ↓")
-            }
-        </FluentButton>
-    </HeaderCellTemplate>
-    <RowItemTemplate>
-        <FluentDataGridRow TItem=Patient >
-            <FluentDataGridCell GridColumn=1>
-                <a href="javascript: void(0);" @onclick="@(e => ShowVisits(@context.PatientId))">@context.PatientId</a>
-            </FluentDataGridCell>
-            <FluentDataGridCell GridColumn=2>@context.FirstName</FluentDataGridCell>
-            <FluentDataGridCell GridColumn=3>@context.LastName</FluentDataGridCell>
-            <FluentDataGridCell GridColumn=4>@context.DateOfBirth.ToShortDateString()</FluentDataGridCell>
-            <FluentButton Appearance="Appearance.Accent" @onclick="() => EditPatient(context.PatientId)">
-                Edit
-            </FluentButton>
-            <FluentButton Appearance="Appearance.Accent" @onclick="() => DeletePatient(context.PatientId)">
-                Delete
-            </FluentButton>
-        </FluentDataGridRow>
-    </RowItemTemplate>
-</FluentDataGrid>
-@if (!RawSortedRowsGrid.Any())
-{
-    <div>
-        <FluentProgressRing></FluentProgressRing>
+<div class="w3-row">
+    <div class="w3-half" style="width:200px;height:100vh;background-color:#fbfbfb;">
+        <AnthroCloud.UI.Wasm.Components.PatientTree />
     </div>
-}
-<FluentDataGrid id="visitGrid" GridTemplateColumns="1fr 1fr 1fr 1fr"
-                RowsData=VisitRowsGrid
-                ColumnDefinitions=VisitColumnsGrid />
+    <div class="w3-half w3-container">
+        <h3>Fluent Grid</h3>
+
+        <FluentTextField @oninput="FilterChanged">Filter Child</FluentTextField>
+        <FluentDataGrid id="sortingGrid" GridTemplateColumns="1fr 1fr 1fr 1fr 75px 75px"
+            RowsData=SortedRowsGrid 
+            ColumnDefinitions=SortingColumnsGrid
+            TItem="Patient">
+            <HeaderCellTemplate>
+                <FluentButton @onclick=@(()=>SortColumn(context))>
+                    @context.Title
+                    @if (context.Title == lastSortColumn?.Title)
+                    {
+                        @(isAscending ? " ↑" : " ↓")
+                    }
+                </FluentButton>
+            </HeaderCellTemplate>
+            <RowItemTemplate>
+                <FluentDataGridRow TItem=Patient >
+                    <FluentDataGridCell GridColumn=1>
+                        <a href="javascript: void(0);" @onclick="@(e => ShowVisits(@context.PatientId))">@context.PatientId</a>
+                    </FluentDataGridCell>
+                    <FluentDataGridCell GridColumn=2>@context.FirstName</FluentDataGridCell>
+                    <FluentDataGridCell GridColumn=3>@context.LastName</FluentDataGridCell>
+                    <FluentDataGridCell GridColumn=4>@context.DateOfBirth.ToShortDateString()</FluentDataGridCell>
+                    <FluentButton Appearance="Appearance.Accent" @onclick="() => EditPatient(context.PatientId)">
+                        Edit
+                    </FluentButton>
+                    <FluentButton Appearance="Appearance.Accent" @onclick="() => DeletePatient(context.PatientId)">
+                        Delete
+                    </FluentButton>
+                </FluentDataGridRow>
+            </RowItemTemplate>
+        </FluentDataGrid>
+        @if (!RawSortedRowsGrid.Any())
+        {
+            <div>
+                <FluentProgressRing></FluentProgressRing>
+            </div>
+        }
+        <FluentDataGrid id="visitGrid" GridTemplateColumns="1fr 1fr 1fr 1fr"
+                        RowsData=VisitRowsGrid
+                        ColumnDefinitions=VisitColumnsGrid />
+    </div>
+</div>
+@*<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+
+    .full-height {
+        height: 100%;
+        background: yellow;
+    }
+</style>*@
 @code {
     [Inject]
     public IPatientService PatientService { get; set; }
