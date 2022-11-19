@@ -7,7 +7,7 @@
 @layout IconLayout
 
 <div class="w3-row">
-    <div class="w3-half" style="width:200px;height:100vh;background-color:#fbfbfb;">
+    <div class="w3-half grid-col-tree">
         <AnthroCloud.UI.Wasm.Components.PatientTree />
     </div>
     <div class="w3-half w3-container">
@@ -54,6 +54,12 @@
                         ColumnDefinitions=VisitColumnsGrid />
     </div>
 </div>
+<style>
+    .grid-col-tree {
+        width: 200px;
+        background-color: #fbfbfb;
+    }
+</style>
 @code {
     [Inject]
     public IPatientService PatientService { get; set; }
