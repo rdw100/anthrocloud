@@ -2,15 +2,15 @@
 @using AnthroCloud.UI.Wasm.Services
 @inject HttpClient httpClient
 
-<FluentTreeView >
+<FluentTreeView @bind-CurrentSelected=MyCurrentSelectedValue OnExpandedChange="HandleOnExpandedChanged">
     @foreach (Patient Item in patientList)
     {
-        <FluentTreeItem >
+        <FluentTreeItem Text="@Item.PatientId.ToString()" >
             <FluentIcon Name="@FluentIcons.PersonNote" Size="IconSize.Size24" Filled=false />
             @Item.FirstName @Item.LastName
             @foreach (Visit Visit in Item.Visits)
             {
-                <FluentTreeItem>
+                <FluentTreeItem Text="@Visit.VisitId.ToString()">
                     <FluentIcon Name="@FluentIcons.Ruler" Size="IconSize.Size24" Filled=false />
                     Visit - @Visit.VisitId @Visit.Weight @Visit.LengthHeight
                 </FluentTreeItem>
@@ -18,10 +18,17 @@
         </FluentTreeItem>
     }
 </FluentTreeView>
-
+<p>Selected item @MyCurrentSelectedValue?.Text</p>
+<p>Expance item @currentAffected?.Text</p>
 @code {
     [Inject]
     public IPatientService PatientService { get; set; }
+
+    [Parameter]
+    public FluentTreeItem? MyCurrentSelectedValue { get; set; }
+
+    FluentTreeItem? currentAffected;
+
     protected List<Patient> patientList = new();
     protected override async Task OnInitializedAsync()
     {
@@ -30,5 +37,9 @@
     protected async Task GetPatientsVisits()
     {
         patientList = (await PatientService.GetPatientsVisits()).ToList();
+    }
+    private void HandleOnExpandedChanged(FluentTreeItem item)
+    {
+        currentAffected = item;
     }
 }
