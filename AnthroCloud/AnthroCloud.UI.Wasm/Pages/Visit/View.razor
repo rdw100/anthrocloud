@@ -3,8 +3,8 @@
 @inject NavigationManager NavigationManager
 @using AnthroCloud.UI.Wasm.Components
 
-<VisitAccordion PatientId="@patientId" />
-
+@*<VisitAccordion PatientId="@patientId" />*@
+<VisitHorizontalScroll PatientId="@patientId" />
 @code {
     [Parameter]
     public int patientId { get; set; }
