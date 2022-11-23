@@ -7,9 +7,9 @@
     @if (!visitList.Any())
     {
         <ul class="w3-ul w3-card">
-            <li class="w3-bar">
-                <FluentCard class="w3-left card-padding">
-                    <FluentSkeleton style="border-radius: 4px; height: 30px; margin-top: 20px;margin-bottom: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+            <li class="w3-bar w3-padding">
+                <FluentCard class="w3-left w3-padding">
+                    <FluentSkeleton style="border-radius: 4px; height: 20px; margin-top: 20px;margin-bottom: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
                     <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px; width:200px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
                     <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px; width:200px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
                     <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px; width:200px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
@@ -19,7 +19,7 @@
                     <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
                     <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
                     <FluentSkeleton style="border-radius: 4px; margin-top: 10px; height: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
-                    <FluentSkeleton style="border-radius: 4px; height: 30px; margin-top: 20px;margin-bottom: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
+                    <FluentSkeleton style="border-radius: 4px; height: 20px; margin-top: 20px;margin-bottom: 10px;" Shape="SkeletonShape.Rect"></FluentSkeleton>
                 </FluentCard>
             </li>
         </ul>
@@ -28,64 +28,55 @@
     {
         <ul class="w3-ul w3-card">
             <li class="w3-bar">
-                <FluentAccordion ExpandMode="AccordionExpandMode.Single">
+                <FluentTabs Orientation="Orientation.Horizontal">
                     @foreach (Visit Item in visitList)
                     {
-                        <FluentAccordionItem Heading=@(Item.Patient.FirstName + " " + Item.Patient.LastName + " - " + Item.VisitId) Expanded="false">
-                            <div class="w3-row">
-                                <div class="w3-container w3-col">
-                                    <b>Visit ID: </b>
-                                    <a href="/measure/view/@Item.VisitId">@Item.VisitId</a>
+                        <FluentTab>@Item.Patient.FirstName @Item.Patient.LastName @Item.VisitId</FluentTab>
+                        <FluentTabPanel>
+                            <div class="w3-row">                                
+                                <div class="w3-cell w3-mobile">
+                                    <FluentHorizontalScroll Speed="600" Easing="ScrollEasing.EaseInOut" View="HorizontalScrollView.Default">
+                                        @foreach (Measure Item in Item.Measures)
+                                        {
+                                            <FluentCard>
+                                                <div class="w3-large">
+                                                    <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                                    @Item.Name
+                                                </div>
+                                                <div>
+                                                    <b>Percentile: </b>
+                                                    <div class="w3-light-grey w3-round w3-center">
+                                                        <div class="w3-round w3-blue w3-text-black" style="width:@Item.Percentile%">@Item.Percentile%</div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <b>Zscore: </b>
+                                                    <div class="w3-round w3-center" style="width:100px;background-color: @SetColor(@Item.Zscore);">
+                                                        @Item.Zscore
+                                                    </div>
+                                                </div>
+                                            </FluentCard>
+                                        }
+                                    </FluentHorizontalScroll>
                                 </div>
-                                <div class="w3-container w3-col">
-                                    <b>Patient ID: </b>
-                                    <a href="/patient/edit/@Item.PatientId">@Item.PatientId</a>
-                                </div>
-                                <div class="w3-container w3-col"><b>Weight: </b>@Item.Weight</div>
-                                <div class="w3-container w3-col"><b>Length/Height: </b>@Item.LengthHeight</div>
                             </div>
-                            <hr style="border:3px solid #f1f1f1">
-                            <FluentHorizontalScroll Speed="600" Easing="ScrollEasing.EaseInOut" View="HorizontalScrollView.Default">
-                                @foreach (Measure Item in Item.Measures)
-                                {
-                                    <FluentCard>
-                                        <div class="w3-large">
-                                            <i class="fa fa-folder-o" aria-hidden="true"></i>
-                                            @Item.Name
-                                        </div>
-                                        <div>
-                                            <b>Percentile: </b>
-                                            <div class="w3-light-grey w3-round w3-center">
-                                                <div class="w3-round w3-blue w3-text-black" style="width:@Item.Percentile%">@Item.Percentile%</div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <b>Zscore: </b>
-                                            <div class="w3-round w3-center" style="width:100px;background-color: @SetColor(@Item.Zscore);">
-                                                @Item.Zscore
-                                            </div>
-                                        </div>
-                                    </FluentCard>
-                                }
-                            </FluentHorizontalScroll>
-                        </FluentAccordionItem>
+                        </FluentTabPanel>
                     }
-                </FluentAccordion>
+                </FluentTabs>
             </li>
         </ul>
     }
+    <br />
 </div>
 <style>
     fluent-card {
-        padding: 16px;
-        margin: 10px;
+        padding: 8px;
         width: 100px;
         height: 100px
     }
 
     fluent-horizontal-scroll {
-        max-width: 320px;
-        margin: 16px
+        max-width: 100%;
     }
 </style>
 @code {
