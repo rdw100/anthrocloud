@@ -35,8 +35,8 @@ namespace AnthroCloud.API.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/Visits/Patient/Visits/Measures/1
-        [HttpGet("patient/visits/measures/{patientId:int}")]
+        // GET: api/Visits/Patients/1/Measures
+        [HttpGet("patients/{patientId:int}/measures")]
         public async Task<ActionResult<IEnumerable<Visit>>> GetVisitsMeasures(int patientId)
         {
             return await _context.Visits
