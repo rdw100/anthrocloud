@@ -26,7 +26,7 @@ namespace AnthroCloud.API.Controllers
         }
 
         // GET: api/Visits/patient/1
-        [HttpGet("patient/{patientId:int}")]
+        [HttpGet("Patients/{patientId:int}")]
         public async Task<ActionResult<IEnumerable<Visit>>> GetVisits(int patientId)
         {
             return await _context.Visits
@@ -36,7 +36,7 @@ namespace AnthroCloud.API.Controllers
         }
 
         // GET: api/Visits/Patients/1/Measures
-        [HttpGet("patients/{patientId:int}/measures")]
+        [HttpGet("Patients/{patientId:int}/measures")]
         public async Task<ActionResult<IEnumerable<Visit>>> GetVisitsMeasures(int patientId)
         {
             return await _context.Visits
@@ -47,7 +47,7 @@ namespace AnthroCloud.API.Controllers
         }
 
         // GET: api/Visits/measures/1
-        [HttpGet("measures/{visitId:int}")]
+        [HttpGet("{visitId:int}/Measures")]
         public async Task<ActionResult<IEnumerable<Measure>>> GetVisitMeasures(int visitId)
         {
             return await _context.Measures

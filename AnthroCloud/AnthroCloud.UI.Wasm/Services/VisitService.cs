@@ -25,17 +25,17 @@ namespace AnthroCloud.UI.Wasm.Services
 
         public async Task<IEnumerable<Visit>> GetVisits(int patientId)
         {
-            return await _httpClient.GetFromJsonAsync<List<Visit>>(_httpClient.BaseAddress + "patient/" + patientId);
+            return await _httpClient.GetFromJsonAsync<List<Visit>>(_httpClient.BaseAddress + "Patients/" + patientId);
         }
 
         public async Task<IEnumerable<Measure>> GetVisitMeasures(int visitId)
         {
-            return await _httpClient.GetFromJsonAsync<List<Measure>>(_httpClient.BaseAddress + "measures/" + visitId);
+            return await _httpClient.GetFromJsonAsync<List<Measure>>($"{_httpClient.BaseAddress}{visitId}/Measures");
         }
                 
         public async Task<IEnumerable<Visit>> GetVisitsMeasures(int patientId)
         {
-            return await _httpClient.GetFromJsonAsync<List<Visit>>(_httpClient.BaseAddress + "patients/" + patientId + "/measures");
+            return await _httpClient.GetFromJsonAsync<List<Visit>>(_httpClient.BaseAddress + "Patients/" + patientId + "/Measures");
         }
 
         public async Task<Visit> UpdateVisit(int visitId, Visit updatedVisit)
