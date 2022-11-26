@@ -150,7 +150,7 @@ namespace AnthroCloud.API.Controllers
         /// </summary>
         /// <param name="visit">The patient's visit</param>
         /// <returns>A list of score measures for a patient's visit.</returns>
-        private async Task<List<Measure>> GetMeasuresAsync(Visit visit)
+        private static async Task<List<Measure>> GetMeasuresAsync(Visit visit)
         {
             Outputs outputs = new();
             Age age = new(visit.Patient.DateOfBirth, visit.DateOfVisit);
