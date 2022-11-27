@@ -11,13 +11,15 @@ namespace AnthroCloud.UI.Blazor.Pages
     [IgnoreAntiforgeryToken]
     public class ErrorModel : PageModel
     {
-        public string RequestId { get; set; }
+        public string RequestId { get => requestId; set => requestId = value; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
-        public string ExceptionMessage { get; set; }
+        public string ExceptionMessage { get => exceptionMessage; set => exceptionMessage = value; }
 
         private readonly ILogger<ErrorModel> _logger;
+        private string requestId = "9999";
+        private string exceptionMessage = "A modal exception occurred.";
 
         public ErrorModel(ILogger<ErrorModel> logger)
         {
